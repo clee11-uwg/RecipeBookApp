@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Controller\RecipeController.cs" />
     <Compile Include="DAL\DBConnection.cs" />
+    <Compile Include="DAL\RecipeDAL.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
