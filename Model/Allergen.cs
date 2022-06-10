@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecipeBookApp.Model
 {
-    public  class Recipe
+    class Allergen
     {
     }
 }

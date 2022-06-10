@@ -54,6 +54,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Allergen.cs" />
+    <Compile Include="Model\Cookware.cs" />
+    <Compile Include="Model\Ethnic.cs" />
+    <Compile Include="Model\FoodType.cs" />
+    <Compile Include="Model\Image.cs" />
+    <Compile Include="Model\Ingredient.cs" />
+    <Compile Include="Model\MealType.cs" />
+    <Compile Include="Model\Nutrition.cs" />
     <Compile Include="Model\Recipe.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
