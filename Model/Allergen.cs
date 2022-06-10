@@ -8,5 +8,12 @@ namespace RecipeBookApp.Model
 {
     public class Allergen
     {
+
+        /// <summary>
+        /// Allergen  attributes.
+        /// </summary>
+        public int AllergenId { get; set; }
+        public string AllergenDetails { get; set; }
+       
     }
 }

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace RecipeBookApp.Model
 {
-    class Image
+    public class Image
     {
+
+        /// <summary>
+        /// Image  attributes.
+        /// </summary>
+        public int RecipeID { get; set; }
     }
 }

@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace RecipeBookApp.Model
 {
-    class Ingredient
+    public class Ingredient
     {
+
+        /// <summary>
+        /// Ingredient  attributes.
+        /// </summary>
+        public int IngredientId { get; set; }
+        public string IngredientName { get; set; }
+        public int FoodId { get; set; }
+        public int NutritionId { get; set; }
     }
 }

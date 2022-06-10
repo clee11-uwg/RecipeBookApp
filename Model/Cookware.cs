@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace RecipeBookApp.Model
 {
-    class Cookware
+    public class Cookware
     {
+
+        /// <summary>
+        /// Cookware  attributes.
+        /// </summary>
+        public int CookwareId { get; set; }
+        public string CookwareDetails { get; set; }
+       
     }
 }
