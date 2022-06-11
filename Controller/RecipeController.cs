@@ -23,16 +23,16 @@ namespace RecipeBookApp.Controller
         /// <param name="newUpdateRecipe">The new update recipe.</param>
         /// <param name="oldUpdateRecipe">The old update recipe.</param>
         /// <returns></returns>
-        public List<Recipe> UpdateRecipe(List<Recipe> newUpdateRecipe, List<Recipe> oldUpdateRecipe)
+        public void UpdateRecipe(Recipe newUpdateRecipe, Recipe oldUpdateRecipe)
         {
-            return RecipeDAL.UpdateRecipe(newUpdateRecipe, oldUpdateRecipe);
+             RecipeDAL.UpdateRecipe(newUpdateRecipe, oldUpdateRecipe);
         }
 
         /// <summary>
         /// Adds the recipe.
         /// </summary>
         /// <param name="newRecipe">The new recipe.</param>
-        public void AddRecipe(List<Recipe> newRecipe)
+        public void AddRecipe(Recipe newRecipe)
         {
              RecipeDAL.AddRecipe(newRecipe);
         }
