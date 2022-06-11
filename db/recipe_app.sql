@@ -388,6 +388,66 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getAllergensOfIngredient` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllergensOfIngredient`(ingredientID int)
+BEGIN
+    IF ingredientID < 1 THEN
+		SIGNAL SQLSTATE '42000'
+			SET MESSAGE_TEXT = 'Invalid ingredientID. Cannot be negative number.',
+		mysql_errno = 1231;
+	END IF;
+    
+	SELECT allergen.id, allergen.allergen
+    FROM ingredient
+		JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID
+        JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
+    WHERE ingredient.id = ingredientID;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getAllergensOfRecipe` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllergensOfRecipe`(recipeID int)
+BEGIN
+    IF recipeID < 1 THEN
+		SIGNAL SQLSTATE '42000'
+			SET MESSAGE_TEXT = 'Invalid recipeID. Cannot be negative number.',
+		mysql_errno = 1231;
+	END IF;
+    
+	SELECT allergen.id, allergen.allergen
+    FROM recipe
+		JOIN recipe_has_ingredient ON recipe.id = recipe_has_ingredient.recipeID
+        JOIN ingredient ON ingredient.id = recipe_has_ingredient.ingredientID
+        JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID
+        JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
+    WHERE recipe.id = recipeID;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getEthnicOrigins` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -402,6 +462,34 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getEthnicOrigins`()
 BEGIN
 	SELECT ethnic_origin.id, ethnic_origin.Ethnicity
     FROM ethnic_origin;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getImageOfrecipe` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getImageOfrecipe`(recipeID int)
+BEGIN
+    IF recipeID < 1 THEN
+		SIGNAL SQLSTATE '42000'
+			SET MESSAGE_TEXT = 'Invalid recipeID. Cannot be negative number.',
+		mysql_errno = 1231;
+	END IF;
+    
+	SELECT image.image
+    FROM recipe
+		JOIN image ON recipe.id = image.recipeID
+    WHERE recipe.id = recipeID;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -482,6 +570,35 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getKitchenwareOfRecipe` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getKitchenwareOfRecipe`(recipeID int)
+BEGIN
+    IF recipeID < 1 THEN
+		SIGNAL SQLSTATE '42000'
+			SET MESSAGE_TEXT = 'Invalid recipeID. Cannot be negative number.',
+		mysql_errno = 1231;
+	END IF;
+    
+	SELECT kitchenware.id, kitchenware.kitchenware
+    FROM recipe
+		JOIN recipe_uses_kitchenware ON recipe.id = recipe_uses_kitchenware.recipeID
+        JOIN kitchenware ON kitchenware.id = recipe_uses_kitchenware.kitchenwareID
+    WHERE recipe.id = recipeID;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getNutrition` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -496,6 +613,37 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getNutrition`()
 BEGIN
 	SELECT nutrition.id, nutrition.Stub
 	FROM nutrition;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getRecipe` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getRecipe`(recipeID int)
+BEGIN
+    IF recipeID < 1 THEN
+		SIGNAL SQLSTATE '42000'
+			SET MESSAGE_TEXT = 'Invalid recipeID. Cannot be negative number.',
+		mysql_errno = 1231;
+	END IF;
+    
+	SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
+		recipe.cooktime, nutrition.stub,
+		ethnic_origin.ethnicity
+	FROM recipe
+		JOIN nutrition ON nutrition.id = recipe.nutritionID
+		JOIN ethnic_origin ON recipe.ethnicOriginID = ethnic_origin.id
+    WHERE recipe.id = recipeID;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -520,6 +668,50 @@ BEGIN
 	FROM recipe
 		JOIN nutrition ON nutrition.id = recipe.nutritionID
 		JOIN ethnic_origin ON recipe.ethnicOriginID = ethnic_origin.id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getRecipesWithoutAllergen` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getRecipesWithoutAllergen`(allergenID int)
+BEGIN
+    IF allergenID < 1 THEN
+		SIGNAL SQLSTATE '42000'
+			SET MESSAGE_TEXT = 'Invalid allergenID. Cannot be negative number.',
+		mysql_errno = 1231;
+	END IF;
+    
+	DROP TEMPORARY TABLE IF EXISTS tempAllergicRecipes;
+	CREATE TEMPORARY TABLE tempAllergicRecipes
+    SELECT recipe.id AS `id`
+    FROM recipe
+		JOIN nutrition ON nutrition.id = recipe.nutritionID
+		JOIN ethnic_origin ON recipe.ethnicOriginID = ethnic_origin.id
+		JOIN recipe_has_ingredient ON recipe.id = recipe_has_ingredient.recipeID
+		JOIN ingredient ON ingredient.id = recipe_has_ingredient.ingredientID
+		JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID
+		JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
+	WHERE allergen.id = allergenID;
+    
+	SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
+		recipe.cooktime, nutrition.stub,
+		ethnic_origin.ethnicity
+	FROM recipe
+		JOIN nutrition ON recipe.nutritionID = nutrition.id
+		JOIN ethnic_origin ON recipe.ethnicOriginID = ethnic_origin.id
+		LEFT JOIN tempAllergicRecipes ON recipe.id = tempAllergicRecipes.id
+	WHERE tempAllergicRecipes.id IS NULL;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -576,4 +768,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-11 15:04:06
+-- Dump completed on 2022-06-11 16:03:34
