@@ -43,9 +43,9 @@ namespace RecipeBookApp.Controller
         /// </summary>
         /// <param name="deleteRecipeId">The delete recipe identifier.</param>
         /// <returns></returns>
-        public List<Recipe> DeleteRecipes(int deleteRecipeId)
+        public void DeleteRecipe(int deleteRecipeId)
         {
-            return RecipeDAL.DeleteRecipe(deleteRecipeId);
+           // return RecipeDAL.DeleteRecipe(deleteRecipeId);
         }
     }
 }
