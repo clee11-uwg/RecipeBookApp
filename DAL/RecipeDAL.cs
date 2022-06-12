@@ -16,7 +16,7 @@ namespace RecipeBookApp.DAL
     /// </summary>
     public class RecipeDAL
     {
-        public static List<Recipe> GetRecipes()
+        public List<Recipe> GetRecipes()
         {
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = "SELECT * from recipe";

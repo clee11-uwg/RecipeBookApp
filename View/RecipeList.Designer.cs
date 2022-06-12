@@ -1,6 +1,6 @@
 ﻿namespace RecipeBookApp
 {
-    partial class Form1
+    partial class RecipeList
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.tempRecipeList = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -40,11 +41,20 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Digital Recipe App";
             // 
+            // tempRecipeList
+            // 
+            this.tempRecipeList.FormattingEnabled = true;
+            this.tempRecipeList.Location = new System.Drawing.Point(227, 165);
+            this.tempRecipeList.Name = "tempRecipeList";
+            this.tempRecipeList.Size = new System.Drawing.Size(252, 21);
+            this.tempRecipeList.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tempRecipeList);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Digital Recipe App";
@@ -56,6 +66,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox tempRecipeList;
     }
 }
 

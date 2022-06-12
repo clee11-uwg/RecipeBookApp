@@ -7,13 +7,20 @@ namespace RecipeBookApp.Controller
 {
     public class RecipeController
     {
+        private readonly RecipeDAL recipeDAL;
+
+        public RecipeController()
+        {
+            this.recipeDAL = new RecipeDAL();
+        }
+
         /// <summary>
         /// Gets all Recipe  Recipe table.
         /// </summary>
         /// <returns>List of RentMe employees</returns>
         public List<Recipe> GetRecipes()
         {
-            return RecipeDAL.GetRecipes();
+            return this.recipeDAL.GetRecipes();
         }
 
 
