@@ -49,11 +49,11 @@
     <Compile Include="Controller\RecipeController.cs" />
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\RecipeDAL.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="View\RecipeList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="View\RecipeList.Designer.cs">
+      <DependentUpon>RecipeList.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\Cookware.cs" />
@@ -72,8 +72,8 @@
     <Compile Include="View\RecipeDetails.Designer.cs">
       <DependentUpon>RecipeDetails.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="View\RecipeList.resx">
+      <DependentUpon>RecipeList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

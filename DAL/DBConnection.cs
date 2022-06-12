@@ -17,7 +17,7 @@ namespace RecipeBookApp.DAL
         public static SqlConnection GetConnection()
         {
             string connectionString =
-                "Data Source=localhost;Initial Catalog=cs6232-g3;" +
+                "Data Source=localhost;Initial Catalog=recipe_app;" +
                 "Integrated Security=True";
 
 
