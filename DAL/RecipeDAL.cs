@@ -19,7 +19,7 @@ namespace RecipeBookApp.DAL
         public static List<Recipe> GetRecipes()
         {
             List<Recipe> recipes = new List<Recipe>();
-            string selectStatement = "SELECT * from RECIPES";
+            string selectStatement = "SELECT * from recipe";
 
             using (SqlConnection connection = DBConnection.GetConnection())
             {
@@ -32,12 +32,12 @@ namespace RecipeBookApp.DAL
                         {
                             Recipe recipe = new Recipe
                             {
-                                RecipeId = Convert.ToInt32(reader["RecipeId"]),
-                                RecipeName = reader["Fname"].ToString(),
-                                RecipeInstructions = reader["Lname"].ToString(),
-                                CookingTime = Convert.ToInt32(reader["CookingTime"]),
-                                NutritionId = Convert.ToInt32(reader["NutritionId"]),
-                                EthnicId = Convert.ToInt32(reader["EthnicId"])
+                                RecipeId = Convert.ToInt32(reader["id"]),
+                                RecipeName = reader["Name"].ToString(),
+                                RecipeInstructions = reader["Instructions"].ToString(),
+                                CookingTime = Convert.ToInt32(reader["cooktime"]),
+                                NutritionId = Convert.ToInt32(reader["nutritionID"]),
+                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"])
                             };
 
                             recipes.Add(recipe);
