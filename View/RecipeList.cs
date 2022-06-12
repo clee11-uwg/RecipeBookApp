@@ -27,8 +27,8 @@ namespace RecipeBookApp
             List<Recipe> recipeList = new List<Recipe>();
             recipeList = this.recipeController.GetRecipes();
             this.tempRecipeList.DataSource = recipeList;
-            this.tempRecipeList.DisplayMember = "Name";
-            this.tempRecipeList.ValueMember = "ID";
+            this.tempRecipeList.DisplayMember = "RecipeName";
+            this.tempRecipeList.ValueMember = "RecipeId";
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace RecipeBookApp.DAL
 {
@@ -14,15 +14,23 @@ namespace RecipeBookApp.DAL
         /// Get a connection object.
         /// </summary>
         /// <returns>SQLConnection to cs6232-g3 DB</returns>
-        public static SqlConnection GetConnection()
+        public static MySqlConnection GetConnection()
         {
+            MySqlConnection conn;
             string connectionString =
-                "Data Source=localhost;Initial Catalog=recipe_app;" +
-                "Integrated Security=True";
+                "Data Source=localhost;uid=root;" +
+                "pwd=test1234!;database=recipe_app";
+            conn = new MySqlConnection();
 
-
-            SqlConnection connection = new SqlConnection(connectionString);
-            return connection;
+            try
+            {
+                conn.ConnectionString = connectionString;
+                conn.Open();
+            } catch (MySqlException ex)
+            {
+                
+            }
+            return conn;
         }
     }
 }
