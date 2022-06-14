@@ -92,6 +92,12 @@
     <Compile Include="Controller\RecipeController.cs" />
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\RecipeDAL.cs" />
+    <Compile Include="UserControls\RecipeListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\RecipeListItem.Designer.cs">
+      <DependentUpon>RecipeListItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\RecipeList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     <Compile Include="View\RecipeDetails.Designer.cs">
       <DependentUpon>RecipeDetails.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\RecipeListItem.resx">
+      <DependentUpon>RecipeListItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\RecipeList.resx">
       <DependentUpon>RecipeList.cs</DependentUpon>
     </EmbeddedResource>
