@@ -21,7 +21,7 @@ BEGIN
 		JOIN ingredient ON ingredient.id = recipe_has_ingredient.ingredientID
 		JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID
 		JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
-	WHERE allergen.id = 3;
+	WHERE allergen.id = allergenID;
     
 	SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
 		recipe.cooktime, nutrition.stub,
