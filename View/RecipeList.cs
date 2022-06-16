@@ -15,8 +15,12 @@ namespace RecipeBookApp
 {
     public partial class RecipeList : Form
     {
-       private RecipeController recipeController;
+        private RecipeController recipeController;
         List<Recipe> recipeList;
+
+        /// <summary>
+        /// 0 parameter constructor for the RecipeList
+        /// </summary>
         public RecipeList()
         {
             InitializeComponent();
@@ -27,8 +31,7 @@ namespace RecipeBookApp
         }
 
         private void FillTempComboBox()
-        {
-            
+        {            
             this.recipeList = this.recipeController.GetRecipes();
             this.tempRecipeList.DataSource = recipeList;
             this.tempRecipeList.DisplayMember = "RecipeName";
@@ -39,6 +42,7 @@ namespace RecipeBookApp
         {
             RecipeListItem[] recipeListItems = new RecipeListItem[this.recipeList.Count];
 
+            // Create new list item and add to the flow layout panel
             for (int i = 0; i < recipeListItems.Length; i++)
             {
                 recipeListItems[i] = new RecipeListItem();
@@ -51,6 +55,7 @@ namespace RecipeBookApp
                 flowLayoutPanel1.Controls.Add(recipeListItems[i]);
             }
 
+            // Removing the first one in the list since this is the one that was manually and statically added to UI
             flowLayoutPanel1.Controls.RemoveAt(0);
         }
     }
