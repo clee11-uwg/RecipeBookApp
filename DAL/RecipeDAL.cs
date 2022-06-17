@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+using System.Data;
+using System.Data.SQLite;
 using RecipeBookApp.Model;
 
 namespace RecipeBookApp.DAL
@@ -18,14 +19,14 @@ namespace RecipeBookApp.DAL
         public List<Recipe> GetRecipes()
         {
             List<Recipe> recipes = new List<Recipe>();
-            string selectStatement = "SELECT recipe.id, recipe.`Name`, recipe.Instructions, " +
-                "recipe.cooktime, recipe.nutritionID,		recipe.ethnicOriginID     FROM recipe; ";
+            string selectStatement = "SELECT public_recipe.id, public_recipe.`Name`, public_recipe.Instructions, " +
+                "public_recipe.cooktime, public_recipe.nutritionID,		public_recipe.ethnicOriginID     FROM public_recipe; ";
 
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -58,14 +59,13 @@ namespace RecipeBookApp.DAL
            string selectStatement = "	SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID" +
                      "FROM recipe    WHERE recipe.id = recipeID;";
 
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
-
-                        recipe=     new Recipe
+                        recipe = new Recipe
                             {
                                 RecipeId = Convert.ToInt32(reader["id"]),
                                 RecipeName = reader["Name"].ToString(),
@@ -92,23 +92,23 @@ namespace RecipeBookApp.DAL
         string addRecipeStatement = "INSERT INTO Recipe (RecipeName,RecipeInstructions,CookingTime,NutritionId, EthnicId) " +
                                      "VALUES(@RecipeName, @RecipeInstructions, @CookingTime, @NutritionId  , @EthnicId)";
             
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(addRecipeStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
                 {
-                    selectCommand.Parameters.Add("@RecipeName", MySqlDbType.VarChar);
+                    selectCommand.Parameters.Add("@RecipeName", DbType.String);
                     selectCommand.Parameters["@RecipeName"].Value = addRecipe.RecipeName;
 
-                    selectCommand.Parameters.Add("@RecipeInstructions", MySqlDbType.VarChar);
-                    selectCommand.Parameters.Add("@RecipeInstructions", MySqlDbType.VarChar).Value = addRecipe.RecipeInstructions;
+                    selectCommand.Parameters.Add("@RecipeInstructions", DbType.String);
+                    selectCommand.Parameters.Add("@RecipeInstructions", DbType.String).Value = addRecipe.RecipeInstructions;
 
-                    selectCommand.Parameters.Add("@CookingTime", MySqlDbType.Int32);
-                    selectCommand.Parameters.Add("@CookingTime", MySqlDbType.Int32).Value = addRecipe.CookingTime;
-                    selectCommand.Parameters.Add("@NutritionId", MySqlDbType.VarChar);
-                    selectCommand.Parameters.Add("@NutritionId", MySqlDbType.VarChar).Value = addRecipe.NutritionId;
+                    selectCommand.Parameters.Add("@CookingTime", DbType.Int32);
+                    selectCommand.Parameters.Add("@CookingTime", DbType.Int32).Value = addRecipe.CookingTime;
+                    selectCommand.Parameters.Add("@NutritionId", DbType.String);
+                    selectCommand.Parameters.Add("@NutritionId", DbType.String).Value = addRecipe.NutritionId;
 
-                    selectCommand.Parameters.Add("@EthnicId", MySqlDbType.Int32);
-                    selectCommand.Parameters.Add("@EthnicId", MySqlDbType.Int32).Value = addRecipe.EthnicId;
+                    selectCommand.Parameters.Add("@EthnicId", DbType.Int32);
+                    selectCommand.Parameters.Add("@EthnicId", DbType.Int32).Value = addRecipe.EthnicId;
 
                     selectCommand.ExecuteNonQuery();
 
@@ -133,34 +133,34 @@ namespace RecipeBookApp.DAL
                                             "AND CookingTime = @OldCookingTime AND " +
                                         "NutritionId = @OldNutritionId AND EthnicId = @OldEthnicId ";
 
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     // Old Recipe details Mappings
-                    selectCommand.Parameters.Add("@OldRecipeName", MySqlDbType.VarChar);
+                    selectCommand.Parameters.Add("@OldRecipeName", DbType.String);
                     selectCommand.Parameters["@OldRecipeName"].Value = oldRecipe.RecipeName;
 
-                    selectCommand.Parameters.Add("@OldRecipeInstructions", MySqlDbType.VarChar);
+                    selectCommand.Parameters.Add("@OldRecipeInstructions", DbType.String);
                     selectCommand.Parameters["@OldRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
 
-                    selectCommand.Parameters.Add("@OldCookingTime", MySqlDbType.Int32);
+                    selectCommand.Parameters.Add("@OldCookingTime", DbType.Int32);
                     selectCommand.Parameters["@OldCookingTime"].Value = oldRecipe.CookingTime;
-                    selectCommand.Parameters.Add("@OldNutritionId", MySqlDbType.Int32);
+                    selectCommand.Parameters.Add("@OldNutritionId", DbType.Int32);
                     selectCommand.Parameters["@OldNutritionId"].Value = oldRecipe.NutritionId;
-                    selectCommand.Parameters.Add("@OldEthnicId", MySqlDbType.Int32);
+                    selectCommand.Parameters.Add("@OldEthnicId", DbType.Int32);
                     selectCommand.Parameters["@OldEthnicId"].Value = oldRecipe.EthnicId;
 
                     // New Recipe details Mappings
-                    selectCommand.Parameters.Add("@NewRecipeName", MySqlDbType.VarChar);
+                    selectCommand.Parameters.Add("@NewRecipeName", DbType.String);
                     selectCommand.Parameters["@NewRecipeName"].Value = newRecipe.RecipeName;
-                    selectCommand.Parameters.Add("@NewRecipeInstructions", MySqlDbType.VarChar);
+                    selectCommand.Parameters.Add("@NewRecipeInstructions", DbType.String);
                     selectCommand.Parameters["@NewRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
-                    selectCommand.Parameters.Add("@NewCookingTime", MySqlDbType.Int32);
+                    selectCommand.Parameters.Add("@NewCookingTime", DbType.Int32);
                     selectCommand.Parameters["@NewCookingTime"].Value = oldRecipe.CookingTime;
-                    selectCommand.Parameters.Add("@NewNutritionId", MySqlDbType.Int32);
+                    selectCommand.Parameters.Add("@NewNutritionId", DbType.Int32);
                     selectCommand.Parameters["@NewNutritionId"].Value = oldRecipe.NutritionId;
-                    selectCommand.Parameters.Add("@EthnicId", MySqlDbType.Int32);
+                    selectCommand.Parameters.Add("@EthnicId", DbType.Int32);
                     selectCommand.Parameters["@NewEthnicId"].Value = oldRecipe.EthnicId;
 
                     

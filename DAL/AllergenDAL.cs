@@ -1,10 +1,8 @@
-﻿using MySql.Data.MySqlClient;
-using RecipeBookApp.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.SQLite;
+using RecipeBookApp.Model;
 
 namespace RecipeBookApp.DAL
 {
@@ -24,11 +22,11 @@ namespace RecipeBookApp.DAL
             List<Allergen> allergenList  = new List<Allergen>();
             string selectStatement = "SELECT allergen.id, allergen.allergen FROM allergen; ";
 
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -60,11 +58,11 @@ namespace RecipeBookApp.DAL
         "JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID " +
        " JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID WHERE recipe.id = @recipeID; ";
 
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
 
                          allergen = new Allergen
