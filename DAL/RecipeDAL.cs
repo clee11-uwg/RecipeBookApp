@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using RecipeBookApp.Model;
 
@@ -16,10 +11,15 @@ namespace RecipeBookApp.DAL
     /// </summary>
     public class RecipeDAL
     {
+        /// <summary>
+        /// This method to get the list of recipes avilable in the recipe database
+        /// </summary>
+        /// <returns></returns>
         public List<Recipe> GetRecipes()
         {
             List<Recipe> recipes = new List<Recipe>();
-            string selectStatement = "SELECT * from recipe;";
+            string selectStatement = "SELECT recipe.id, recipe.`Name`, recipe.Instructions, " +
+                "recipe.cooktime, recipe.nutritionID,		recipe.ethnicOriginID     FROM recipe; ";
 
             using (MySqlConnection connection = DBConnection.GetConnection())
             {
@@ -49,11 +49,45 @@ namespace RecipeBookApp.DAL
         }
 
         /// <summary>
-        /// Adds the recipe.
+        /// This method to get the recipe based on the  search ID
+        /// </summary>
+        /// <returns></returns>
+        public Recipe GetRecipe(int recipeID)
+        {
+            Recipe recipe = null;
+           string selectStatement = "	SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID" +
+                     "FROM recipe    WHERE recipe.id = recipeID;";
+
+            using (MySqlConnection connection = DBConnection.GetConnection())
+            {
+                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                {
+                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    {
+
+                        recipe=     new Recipe
+                            {
+                                RecipeId = Convert.ToInt32(reader["id"]),
+                                RecipeName = reader["Name"].ToString(),
+                                RecipeInstructions = reader["Instructions"].ToString(),
+                                CookingTime = Convert.ToInt32(reader["cooktime"]),
+                                NutritionId = Convert.ToInt32(reader["nutritionID"]),
+                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"])
+                            };
+
+                    }
+                }
+            }
+
+            return recipe;
+        }
+
+
+        /// <summary>
+        /// Adds the new recipe.
         /// </summary>
         /// <param name="addRecipe">The add recipe.</param>
         public static void AddRecipe(Recipe addRecipe){
-
 
         string addRecipeStatement = "INSERT INTO Recipe (RecipeName,RecipeInstructions,CookingTime,NutritionId, EthnicId) " +
                                      "VALUES(@RecipeName, @RecipeInstructions, @CookingTime, @NutritionId  , @EthnicId)";
@@ -83,7 +117,7 @@ namespace RecipeBookApp.DAL
         }
 
         /// <summary>
-        /// Updates the employee details.
+        /// Updates the Recipe details.
         /// </summary>
         /// <param name="oldRecipe">The old recipe.</param>
         /// <param name="newRecipe">The new recipe.</param>
@@ -120,10 +154,8 @@ namespace RecipeBookApp.DAL
                     // New Recipe details Mappings
                     selectCommand.Parameters.Add("@NewRecipeName", MySqlDbType.VarChar);
                     selectCommand.Parameters["@NewRecipeName"].Value = newRecipe.RecipeName;
-
                     selectCommand.Parameters.Add("@NewRecipeInstructions", MySqlDbType.VarChar);
                     selectCommand.Parameters["@NewRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
-
                     selectCommand.Parameters.Add("@NewCookingTime", MySqlDbType.Int32);
                     selectCommand.Parameters["@NewCookingTime"].Value = oldRecipe.CookingTime;
                     selectCommand.Parameters.Add("@NewNutritionId", MySqlDbType.Int32);
@@ -146,9 +178,14 @@ namespace RecipeBookApp.DAL
         }
 
 
-
-
-
+        /// <summary>
+        /// Delete the Recipe details.
+        ///
+        public  bool DeleteRecipe(Recipe deleteRecipe)
+        {
+            return true;
+            
+        }
 
     }
 }

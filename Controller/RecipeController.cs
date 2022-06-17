@@ -1,10 +1,17 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using RecipeBookApp.DAL;
 using RecipeBookApp.Model;
 
 namespace RecipeBookApp.Controller
 {
+    /// <summary>
+    /// This class serves as the controller,
+    /// mediator between the Recipe application
+    /// and the RecipeDAL.
+    /// </summary>
     public class RecipeController
     {
         private readonly RecipeDAL recipeDAL;
@@ -17,11 +24,33 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Gets all Recipe  Recipe table.
         /// </summary>
-        /// <returns>List of RentMe employees</returns>
+        /// <returns>List of all Recipes from database </returns>
         public List<Recipe> GetRecipes()
         {
+
+            if (!this.recipeDAL.GetRecipes().Any())
+            {
+                throw new ArgumentNullException("No Recipes found on the database");
+
+            }
             return this.recipeDAL.GetRecipes();
         }
+
+        /// <summary>
+        /// Gets the recipe for the search ID.
+        /// </summary>
+        /// <returns>Recipe found in the database</returns>
+        public Recipe GetRecipes(int searchRecipeID)
+        {
+            Recipe foundRecipe = this.recipeDAL.GetRecipe(searchRecipeID);
+            if (foundRecipe == null)
+            {
+                throw new ArgumentNullException("No Recipe found on the database");
+
+            }
+            return foundRecipe;
+        }
+
 
 
         /// <summary>
@@ -32,7 +61,12 @@ namespace RecipeBookApp.Controller
         /// <returns></returns>
         public void UpdateRecipe(Recipe newUpdateRecipe, Recipe oldUpdateRecipe)
         {
-             RecipeDAL.UpdateRecipe(newUpdateRecipe, oldUpdateRecipe);
+            if (newUpdateRecipe == null || oldUpdateRecipe == null)
+            {
+                throw new ArgumentNullException("Recipe cannot be updated , as current or new data is not found or updated");
+
+            }
+            RecipeDAL.UpdateRecipe(newUpdateRecipe, oldUpdateRecipe);
         }
 
         /// <summary>
@@ -50,9 +84,15 @@ namespace RecipeBookApp.Controller
         /// </summary>
         /// <param name="deleteRecipeId">The delete recipe identifier.</param>
         /// <returns></returns>
-        public void DeleteRecipe(int deleteRecipeId)
+        public bool DeleteRecipe(Recipe deleteRecipe)
         {
-           // return RecipeDAL.DeleteRecipe(deleteRecipeId);
+            if (deleteRecipe == null)
+            {
+                throw new ArgumentNullException("Delete of a recipe or restore cannot be performed ");
+            }
+
+             return this.recipeDAL.DeleteRecipe(deleteRecipe);
+            // return RecipeDAL.DeleteRecipe(deleteRecipeId);
         }
     }
 }

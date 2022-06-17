@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace RecipeBookApp.Model
 {
+    /// <summary>
+    /// This is a DB model class for Recipe
+    /// </summary>
     public  class Recipe
     {
         /// <summary>

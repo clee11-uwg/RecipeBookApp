@@ -89,7 +89,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\AllergenController.cs" />
     <Compile Include="Controller\RecipeController.cs" />
+    <Compile Include="DAL\AllergenDAL.cs" />
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\RecipeDAL.cs" />
     <Compile Include="UserControls\RecipeListItem.cs">
