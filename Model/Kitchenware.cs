@@ -9,6 +9,7 @@ namespace RecipeBookApp.Model
         /// </summary>
         public int KitchenwareId { get; set; }
         public string KitchenwareDetails { get; set; }
-       
+        public int NutritionId { get; internal set; }
+        public string NutritionDetails { get; internal set; }
     }
 }
