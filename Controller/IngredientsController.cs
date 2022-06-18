@@ -23,25 +23,25 @@ namespace RecipeBookApp.Controller
         }
 
         /// <summary>
-        /// Gets all Recipe  Recipe table.
+        /// Gets all Ingredient from the database table.
         /// </summary>
         /// <returns>List of all Recipes from database </returns>
-        public List<Ingredient> GetRecipes()
+        public List<Ingredient> GetIngredients()
         {
             List<Ingredient> ingredientsList = this.ingredientsDAL.GetIngredients();
 
             if (!ingredientsList.Any())
             {
-                throw new ArgumentNullException("No Recipes found on the database");
+                throw new ArgumentNullException("No Ingredients found on the database");
 
             }
             return ingredientsList;
         }
 
         /// <summary>
-        /// Gets the recipe for the search ID.
+        /// Gets the Ingredient for the search ID.
         /// </summary>
-        /// <returns>Recipe found in the database</returns>
+        /// <returns>Ingredient found in the database</returns>
         public Ingredient GetIngredient(int searchRecipeID)
         {
             Ingredient foundIngredient = this.ingredientsDAL.GetIngredient(searchRecipeID);
