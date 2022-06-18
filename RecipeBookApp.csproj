@@ -90,9 +90,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AllergenController.cs" />
+    <Compile Include="Controller\KitchenwareController.cs" />
+    <Compile Include="Controller\IngredientsController.cs" />
     <Compile Include="Controller\RecipeController.cs" />
     <Compile Include="DAL\AllergenDAL.cs" />
+    <Compile Include="DAL\KitchenwareDAL.cs" />
     <Compile Include="DAL\DBConnection.cs" />
+    <Compile Include="DAL\IngredientsDAL.cs" />
     <Compile Include="DAL\RecipeDAL.cs" />
     <Compile Include="UserControls\RecipeListItem.cs">
       <SubType>UserControl</SubType>
@@ -107,7 +111,7 @@
       <DependentUpon>RecipeList.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Allergen.cs" />
-    <Compile Include="Model\Cookware.cs" />
+    <Compile Include="Model\Kitchenware.cs" />
     <Compile Include="Model\Ethnic.cs" />
     <Compile Include="Model\FoodType.cs" />
     <Compile Include="Model\Image.cs" />
