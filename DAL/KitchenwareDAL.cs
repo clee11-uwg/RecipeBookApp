@@ -1,14 +1,10 @@
-﻿using MySql.Data.MySqlClient;
-using RecipeBookApp.Model;
+﻿using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
-
+using System.Data.SQLite;
 
 namespace RecipeBookApp.DAL
 {
-
-
-
     /// <summary>
     /// This class serves as the Data Access Layer
     /// for the  DB Recipe table.
@@ -25,11 +21,11 @@ namespace RecipeBookApp.DAL
             List<Kitchenware> cookwareList = new List<Kitchenware>();
             string selectStatement = "SELECT kitchenware.id, kitchenware.Kitchenware  FROM kitchenware; ";
 
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -60,29 +56,23 @@ namespace RecipeBookApp.DAL
                      "JOIN kitchenware ON kitchenware.id = recipe_uses_kitchenware.kitchenwareID " +
                      "WHERE recipe.id = recipeID;";
 
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
 
                         kitchen = new Kitchenware
                         {
                             KitchenwareId = Convert.ToInt32(reader["id"]),
-                            KitchenwareDetails = reader["Name"].ToString()
+                            KitchenwareDetails = reader["kitchenware"].ToString()
                         };
 
                     }
                 }
             }
-
             return kitchen;
         }
-
-
-
-
-
     }
 }

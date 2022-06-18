@@ -1,49 +1,88 @@
-﻿using MySql.Data.MySqlClient;
+﻿
 using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace RecipeBookApp.DAL
 {
     public class IngredientsDAL
     {
 
-        
+
         /// <summary>
-        /// This method to get the recipe based on the  search ID
+        /// This method to get the Ingredients
         /// </summary>
         /// <returns></returns>
-        public Recipe GetRecipe(int recipeID)
+        public List<Ingredient> GetIngredients()
         {
-            Recipe recipe = null;
-            string selectStatement = "	SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID" +
-                      "FROM recipe    WHERE recipe.id = recipeID;";
+            //Ingredient ingredient = null;
+            List<Ingredient> ingredientDetails = new List<Ingredient>();
+            string selectStatement = "SELECT ingredient.id, ingredient.ingredient,ingredient.typeOfFoodID, " +
+                "ingredient.nutritionID FROM ingredient; ";
 
-            using (MySqlConnection connection = DBConnection.GetConnection())
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                using (MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection))
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
-
-                        recipe = new Recipe
+                        while (reader.Read())
                         {
-                            RecipeId = Convert.ToInt32(reader["id"]),
-                            RecipeName = reader["Name"].ToString(),
-                            RecipeInstructions = reader["Instructions"].ToString(),
-                            CookingTime = Convert.ToInt32(reader["cooktime"]),
-                            NutritionId = Convert.ToInt32(reader["nutritionID"]),
-                            EthnicId = Convert.ToInt32(reader["ethnicOriginID"])
-                        };
+
+                            Ingredient ingredient = new Ingredient
+                            {
+                                IngredientId = Convert.ToInt32(reader["id"]),
+                                IngredientName = reader["ingredient"].ToString(),
+                                FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
+                                NutritionId = Convert.ToInt32(reader["nutritionID"])
+
+                            };
+                            ingredientDetails.Add(ingredient);
+                        }
 
                     }
                 }
             }
 
-            return recipe;
+            return ingredientDetails;
+        }
+
+        /// <summary>
+        /// This method to get the Ingredients based on the recipe ID
+        /// </summary>
+        /// <returns>Ingredients </returns>
+        public Ingredient GetIngredient(int recipeID)
+        {
+            Ingredient ingredient = null;
+            string selectStatement = "SELECT ingredient.id, ingredient.Ingredient, type_of_food.`Type`, nutrition.stub " +
+                     " FROM recipe JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id " +
+                 " JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id " +
+                 " JOIN type_of_food ON ingredient.typeOfFoodID = type_of_food.id " +
+                "JOIN nutrition ON ingredient.nutritionID = nutrition.id " +
+                " WHERE recipe.id = recipeID; ";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        ingredient = new Ingredient
+                        {
+                            IngredientId = Convert.ToInt32(reader["id"]),
+                            IngredientName = reader["ingredient"].ToString(),
+                            FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
+                            NutritionId = Convert.ToInt32(reader["nutritionID"])
+
+                        };
+
+
+                    }
+                }
+            }
+
+            return ingredient;
         }
 
 
