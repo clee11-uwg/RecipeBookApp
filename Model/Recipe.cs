@@ -14,6 +14,8 @@ namespace RecipeBookApp.Model
         public string RecipeInstructions { get; set; }
         public int CookingTime { get; set; }
         public int NutritionId { get; set; }
-        public int EthnicId { get; set; }
+        public int EthnicId { get; set;
+
+            public int RecipeImage { get; set; }
     }
 }

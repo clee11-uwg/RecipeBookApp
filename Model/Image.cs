@@ -13,5 +13,8 @@ namespace RecipeBookApp.Model
         /// Image  attributes.
         /// </summary>
         public int RecipeID { get; set; }
+
+
+
     }
 }

@@ -56,7 +56,7 @@ namespace RecipeBookApp
             }
 
             // Removing the first one in the list since this is the one that was manually and statically added to UI
-            flowLayoutPanel1.Controls.RemoveAt(0);
+          //  flowLayoutPanel1.Controls.RemoveAt(0);
         }
     }
 }
