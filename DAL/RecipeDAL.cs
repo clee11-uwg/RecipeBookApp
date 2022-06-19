@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Drawing;
+using System.IO;
 using RecipeBookApp.Model;
 
 namespace RecipeBookApp.DAL
@@ -18,9 +20,12 @@ namespace RecipeBookApp.DAL
         /// <returns></returns>
         public List<Recipe> GetRecipes()
         {
+
+            string workingDirectory = Environment.CurrentDirectory;
+            string path = Path.Combine(Directory.GetParent(workingDirectory).Parent.FullName, @"Data\", "sampleimage.jpg");
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = "SELECT public_recipe.id, public_recipe.`Name`, public_recipe.Instructions, " +
-                "public_recipe.cooktime, public_recipe.nutritionID,		public_recipe.ethnicOriginID     FROM public_recipe; ";
+                "public_recipe.cooktime, public_recipe.nutritionID,	public_recipe.ethnicOriginID     FROM public_recipe; ";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -37,7 +42,8 @@ namespace RecipeBookApp.DAL
                                 RecipeInstructions = reader["Instructions"].ToString(),
                                 CookingTime = Convert.ToInt32(reader["cooktime"]),
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
-                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"])
+                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                RecipeImage = Image.FromFile(path)
                             };
 
                             recipes.Add(recipe);

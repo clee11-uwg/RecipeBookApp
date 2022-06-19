@@ -47,7 +47,8 @@ namespace RecipeBookApp
             {
                 recipeListItems[i] = new RecipeListItem();
                 recipeListItems[i].RecipeName = this.recipeList[i].RecipeName;
-
+                recipeListItems[i].RecipeImage=this.recipeList[i].RecipeImage;
+                
                 if (flowLayoutPanel1.Controls.Count < 0)
                 {
                     flowLayoutPanel1.Controls.Clear();

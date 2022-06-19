@@ -37,11 +37,12 @@
             // picBoxRecipeImage
             // 
             this.picBoxRecipeImage.Location = new System.Drawing.Point(45, 17);
-            this.picBoxRecipeImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picBoxRecipeImage.Margin = new System.Windows.Forms.Padding(4);
             this.picBoxRecipeImage.Name = "picBoxRecipeImage";
             this.picBoxRecipeImage.Size = new System.Drawing.Size(264, 122);
             this.picBoxRecipeImage.TabIndex = 0;
             this.picBoxRecipeImage.TabStop = false;
+            this.picBoxRecipeImage.Click += new System.EventHandler(this.picBoxRecipeImage_Click);
             // 
             // lblTile
             // 
@@ -58,7 +59,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(360, 161);
             this.panel1.TabIndex = 3;
@@ -71,7 +72,7 @@
             this.Controls.Add(this.lblTile);
             this.Controls.Add(this.picBoxRecipeImage);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RecipeListItem";
             this.Size = new System.Drawing.Size(342, 203);
             ((System.ComponentModel.ISupportInitialize)(this.picBoxRecipeImage)).EndInit();

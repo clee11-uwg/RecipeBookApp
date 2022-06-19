@@ -34,10 +34,14 @@ namespace RecipeBookApp.UserControls
         {
             get { return _image; }
             set { _image = value; picBoxRecipeImage.Image = value;  }
-        } 
+        }
+
 
         #endregion
 
+        private void picBoxRecipeImage_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

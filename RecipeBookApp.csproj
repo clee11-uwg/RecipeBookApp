@@ -128,6 +128,7 @@
     <Compile Include="View\RecipeDetails.Designer.cs">
       <DependentUpon>RecipeDetails.cs</DependentUpon>
     </Compile>
+    <Content Include="sampleimage.jpg" />
     <EmbeddedResource Include="UserControls\RecipeListItem.resx">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
     </EmbeddedResource>

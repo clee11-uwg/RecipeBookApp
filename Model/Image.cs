@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RecipeBookApp.Model
 {
-    public class Image
+    public class Filestream
     {
 
         /// <summary>
@@ -14,7 +15,7 @@ namespace RecipeBookApp.Model
         /// </summary>
         public int RecipeID { get; set; }
 
-
-
+       
     }
+        
 }

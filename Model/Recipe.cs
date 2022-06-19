@@ -1,10 +1,14 @@
 ﻿
+using System;
+using System.Drawing;
+using System.IO;
+
 namespace RecipeBookApp.Model
 {
     /// <summary>
     /// This is a DB model class for Recipe
     /// </summary>
-    public  class Recipe
+    public class Recipe
     {
         /// <summary>
         /// Recipe  attributes.
@@ -14,8 +18,10 @@ namespace RecipeBookApp.Model
         public string RecipeInstructions { get; set; }
         public int CookingTime { get; set; }
         public int NutritionId { get; set; }
-        public int EthnicId { get; set;
+        public int EthnicId { get; set; }
 
-            public int RecipeImage { get; set; }
+        public Image RecipeImage  { get; set;}
+
+    
     }
 }
