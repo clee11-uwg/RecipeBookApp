@@ -1,0 +1,20 @@
+ITERATION 1
+	CREATING SQL
+		Test to see if .sql file creates database properly, with 
+		schema, data, and stored procedures.
+	CREATING STORED PROCEDURES
+		Tested calling image.image. Does not work nicely.
+		Pushed calling of image.image to its own stored procedure.
+		Otherwise, tested the queries in stored procedures to insure validity
+		
+		Extensive testing especially done on the stored procedure
+		"getRecipesWithoutAllergen" to insure that the temporary table
+		creates the write "not these recipes", and that the query itself
+		actually returns the desired "here's safe recipes".
+	MIGRATING OVER TO SQLITE
+		Migrated over to Sqlite in order to keep database embedded in 
+		the application. Used a nice tool to help translate the MySql
+		database over to a sqlite script.
+		
+		Re-verified Stored Procedure logic will work in sqlite, even 
+		if the queries must now be done in the app itself.
