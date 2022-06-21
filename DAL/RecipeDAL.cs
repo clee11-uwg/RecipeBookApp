@@ -24,8 +24,10 @@ namespace RecipeBookApp.DAL
             string workingDirectory = Environment.CurrentDirectory;
             string path = Path.Combine(Directory.GetParent(workingDirectory).Parent.FullName, @"Data\", "sampleimage.jpg");
             List<Recipe> recipes = new List<Recipe>();
-            string selectStatement = "SELECT recipe.id, recipe.`Name`, recipe.Instructions, " +
-                "recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID FROM recipe; ";
+            string selectStatement = "SELECT r.id, r.`Name`, r.Instructions, " +
+                "r.cooktime, r.nutritionID, r.ethnicOriginID, i.image FROM recipe r JOIN image i " +
+                "ON r.ID = i.recipeID";
+                
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -35,6 +37,9 @@ namespace RecipeBookApp.DAL
                     {
                         while (reader.Read())
                         {
+                            // Set up byte array and stream to convert BLOB image from db into something readable and can be displayed
+                            byte[] image_byte = (byte[])reader["image"];
+                            MemoryStream ms = new MemoryStream(image_byte);
                             Recipe recipe = new Recipe
                             {
                                 RecipeId = Convert.ToInt32(reader["id"]),
@@ -43,7 +48,7 @@ namespace RecipeBookApp.DAL
                                 CookingTime = Convert.ToInt32(reader["cooktime"]),
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
                                 EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
-                                RecipeImage = Image.FromFile(path)
+                                RecipeImage = Image.FromStream(ms)
                             };
 
                             recipes.Add(recipe);

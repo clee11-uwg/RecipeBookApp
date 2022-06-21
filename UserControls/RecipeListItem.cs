@@ -39,9 +39,5 @@ namespace RecipeBookApp.UserControls
 
         #endregion
 
-        private void picBoxRecipeImage_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
