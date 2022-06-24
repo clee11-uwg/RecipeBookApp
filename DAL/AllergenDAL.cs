@@ -120,9 +120,5 @@ namespace RecipeBookApp.DAL
 
             return allergenList;
         }
-
-
-
-
     }
 }

@@ -41,7 +41,7 @@ namespace RecipeBookApp.Controller
         {
             if (int < 1)
             {
-                throw new ArgumentOutOfRangeException("Recipe ID cannot be less than 1")
+                throw new ArgumentOutOfRangeException("Recipe ID cannot be less than 1");
             }
             return this.allergenDAL.GetRecipeAllergen(searchRecipeID);
         }
@@ -55,9 +55,9 @@ namespace RecipeBookApp.Controller
         {
             if (int < 1)
             {
-                throw new ArgumentOutOfRangeException("Ingredient ID cannot be less than 1")
+                throw new ArgumentOutOfRangeException("Ingredient ID cannot be less than 1");
             }
-            return this.allergenDAL.GetAllergensOfIngredient(ingredientID)
+            return this.allergenDAL.GetAllergensOfIngredient(ingredientID);
         }
     }
 }

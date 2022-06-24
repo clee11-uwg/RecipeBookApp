@@ -21,7 +21,7 @@ namespace RecipeBookApp.DAL
         public List<Recipe> GetRecipes()
         {
 
-            string workingDirectory = Environment.CurrentDirectory;
+            //string workingDirectory = Environment.CurrentDirectory;
             //string path = Path.Combine(Directory.GetParent(workingDirectory).Parent.FullName, @"Data\", "sampleimage.jpg");
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = "SELECT r.id, r.`Name`, r.Instructions, " +
