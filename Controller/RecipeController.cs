@@ -41,7 +41,7 @@ namespace RecipeBookApp.Controller
         /// Gets the recipe for the search ID.
         /// </summary>
         /// <returns>Recipe found in the database</returns>
-        public Recipe GetRecipes(int searchRecipeID)
+        public Recipe GetRecipe(int searchRecipeID)
         {
             Recipe foundRecipe = this.recipeDAL.GetRecipe(searchRecipeID);
             if (foundRecipe == null)

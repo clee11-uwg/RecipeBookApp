@@ -38,6 +38,7 @@ namespace RecipeBookApp
             for (int i = 0; i < recipeListItems.Length; i++)
             {
                 recipeListItems[i] = new RecipeListItem();
+                recipeListItems[i].RecipeId = this.recipeList[i].RecipeId;
                 recipeListItems[i].RecipeName = this.recipeList[i].RecipeName;
                 recipeListItems[i].RecipeImage = this.recipeList[i].RecipeImage;
                 

@@ -7,20 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RecipeBookApp.Controller;
+using RecipeBookApp.Model;
 
 namespace RecipeBookApp.UserControls
 {
     public partial class RecipeListItem : UserControl
     {
+        private RecipeController recipeController;
+
         public RecipeListItem()
         {
             InitializeComponent();
+            this.recipeController = new RecipeController();
         }
 
         #region Properties
 
         private string _name;
         private Image _image;
+
+        [Category("Custom Props")]
+        public int RecipeId { get; set; }
 
         [Category("Custom Props")]
         public string RecipeName
@@ -39,5 +47,16 @@ namespace RecipeBookApp.UserControls
 
         #endregion
 
+        private void LblTile_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Id is " + RecipeId);
+            Recipe selectedRecipe = this.recipeController.GetRecipe(RecipeId);
+            MessageBox.Show(selectedRecipe.RecipeInstructions);
+        }
+
+        private void PicBoxRecipeImage_Click(object sender, EventArgs e)
+        {
+           // MessageBox.Show("Id is " + RecipeId);
+        }
     }
 }

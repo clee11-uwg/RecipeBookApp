@@ -37,15 +37,18 @@
             // 
             // picBoxRecipeImage
             // 
+            this.picBoxRecipeImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picBoxRecipeImage.Location = new System.Drawing.Point(0, 0);
             this.picBoxRecipeImage.Name = "picBoxRecipeImage";
             this.picBoxRecipeImage.Size = new System.Drawing.Size(266, 149);
             this.picBoxRecipeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBoxRecipeImage.TabIndex = 0;
             this.picBoxRecipeImage.TabStop = false;
+            this.picBoxRecipeImage.Click += new System.EventHandler(this.PicBoxRecipeImage_Click);
             // 
             // lblTile
             // 
+            this.lblTile.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblTile.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTile.Location = new System.Drawing.Point(2, 160);
             this.lblTile.Name = "lblTile";
@@ -53,6 +56,7 @@
             this.lblTile.TabIndex = 1;
             this.lblTile.Text = "Title";
             this.lblTile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTile.Click += new System.EventHandler(this.LblTile_Click);
             // 
             // panel1
             // 
