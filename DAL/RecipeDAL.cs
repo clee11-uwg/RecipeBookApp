@@ -68,7 +68,7 @@ namespace RecipeBookApp.DAL
         {
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = "SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID " +
-                     "FROM recipe    WHERE recipe.id = recipeID;";
+                     "FROM recipe    WHERE recipe.id = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -115,7 +115,7 @@ namespace RecipeBookApp.DAL
                                         JOIN ingredient ON ingredient.id = recipe_has_ingredient.ingredientID
                                         JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID
                                         JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
-                                    WHERE allergen.id = allergenID;
+                                    WHERE allergen.id = @allergenID;
 
                                             SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
 		                                recipe.cooktime, nutrition.stub,
