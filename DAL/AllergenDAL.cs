@@ -79,7 +79,41 @@ namespace RecipeBookApp.DAL
             return allergen;
         }
 
+        /// <summary>
+        /// This method to get the list of Allergen avilable in the recipe database
+        /// </summary>
+        /// <returns></returns>
+        public List<Allergen> GetAllergensOfIngredient(int ingredientID)
+        {
+            List<Allergen> allergenList = new List<Allergen>();
+            string selectStatement = "	SELECT allergen.id, allergen.allergen" +
+    "FROM ingredient" +
+        "JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID" +
+        "JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID" +
+    "WHERE ingredient.id = @ingredientID; ";
 
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Allergen allergen = new Allergen
+                            {
+                                AllergenId = Convert.ToInt32(reader["id"]),
+                                AllergenDetails = reader["allergen"].ToString()
+                            };
+
+                            allergenList.Add(allergen);
+                        }
+                    }
+                }
+            }
+
+            return allergenList;
+        }
 
 
 

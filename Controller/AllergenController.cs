@@ -30,12 +30,6 @@ namespace RecipeBookApp.Controller
         /// <returns>List of all allergens from database </returns>
         public List<Allergen> GetAllergens()
         {
-
-            if (!this.allergenDAL.GetAllergens().Any())
-            {
-                throw new ArgumentNullException("No Allergen found on the database");
-
-            }
             return this.allergenDAL.GetAllergens();
         }
 
@@ -45,15 +39,25 @@ namespace RecipeBookApp.Controller
         /// <returns>Allergen found in the database</returns>
         public Allergen GetAllergen(int searchRecipeID)
         {
-            Allergen allergenDetails = this.allergenDAL.GetRecipeAllergen(searchRecipeID);
-            if (allergenDetails == null)
+            if (int < 1)
             {
-                throw new ArgumentNullException("No allergen deatils found on the database");
-
+                throw new ArgumentOutOfRangeException("Recipe ID cannot be less than 1")
             }
-            return allergenDetails;
+            return this.allergenDAL.GetRecipeAllergen(searchRecipeID);
         }
 
-
+        /// <summary>
+        /// Gets all Allergens for this ingredient ID
+        /// </summary>
+        /// <param name="ingredientID">ID of the ingredient</param>
+        /// <returns>List of Allergens for this ingredient</returns>
+        public List<Allergen> getAllergensOfIngredient(int ingredientID)
+        {
+            if (int < 1)
+            {
+                throw new ArgumentOutOfRangeException("Ingredient ID cannot be less than 1")
+            }
+            return this.allergenDAL.GetAllergensOfIngredient(ingredientID)
+        }
     }
 }
