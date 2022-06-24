@@ -67,8 +67,11 @@ namespace RecipeBookApp.DAL
         public Recipe GetRecipe(int recipeID)
         {
             List<Recipe> recipes = new List<Recipe>();
-            string selectStatement = "SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID " +
-                     "FROM recipe    WHERE recipe.id = @recipeID;";
+            string selectStatement = @"SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, 
+                                        recipe.nutritionID, recipe.ethnicOriginID, image.image
+                                    FROM recipe    
+                                        JOIN image ON recipe.id = image.recipeID
+                                    WHERE recipe.id = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -79,6 +82,8 @@ namespace RecipeBookApp.DAL
                     {
                         while (reader.Read())
                         {
+                            byte[] image_byte = (byte[])reader["image"];
+                            MemoryStream ms = new MemoryStream(image_byte);
                             recipe = new Recipe
                             {
                                 RecipeId = Convert.ToInt32(reader["id"]),
@@ -86,7 +91,8 @@ namespace RecipeBookApp.DAL
                                 RecipeInstructions = reader["Instructions"].ToString(),
                                 CookingTime = Convert.ToInt32(reader["cooktime"]),
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
-                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"])
+                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                RecipeImage = Image.FromStream(ms)
                             };
                             recipes.Add(recipe);
                         }
@@ -104,7 +110,7 @@ namespace RecipeBookApp.DAL
         /// <returns>List of Recipes</returns>
         public List<Recipe> GetRecipesWithoutAllergen(int allergenID)
         {
-            Recipe recipe = null;
+            List<Recipe> recipes = new List<Recipe>();
             string selectStatement = @"	DROP TABLE IF EXISTS tempAllergicRecipes;
 
                                     CREATE TEMPORARY TABLE tempAllergicRecipes AS
@@ -118,12 +124,10 @@ namespace RecipeBookApp.DAL
                                         JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
                                     WHERE allergen.id = @allergenID;
 
-                                            SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
-		                                recipe.cooktime, nutrition.stub,
-		                                ethnic_origin.ethnicity
+                                    SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
+		                                recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID, image.image
                                     FROM recipe
-                                        JOIN nutrition ON recipe.nutritionID = nutrition.id
-                                        JOIN ethnic_origin ON recipe.ethnicOriginID = ethnic_origin.id
+                                        JOIN image ON recipe.id = image.recipeID
                                     WHERE recipe.id NOT IN tempAllergicRecipes; ";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
@@ -133,16 +137,22 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@allergenID", allergenID);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
-                        recipe = new Recipe
+                        while (reader.Read())
                         {
-                            RecipeId = Convert.ToInt32(reader["id"]),
-                            RecipeName = reader["Name"].ToString(),
-                            RecipeInstructions = reader["Instructions"].ToString(),
-                            CookingTime = Convert.ToInt32(reader["cooktime"]),
-                            NutritionId = Convert.ToInt32(reader["nutritionID"]),
-                            EthnicId = Convert.ToInt32(reader["ethnicOriginID"])
-                        };
-
+                            byte[] image_byte = (byte[])reader["image"];
+                            MemoryStream ms = new MemoryStream(image_byte);
+                            recipe = new Recipe
+                            {
+                                RecipeId = Convert.ToInt32(reader["id"]),
+                                RecipeName = reader["Name"].ToString(),
+                                RecipeInstructions = reader["Instructions"].ToString(),
+                                CookingTime = Convert.ToInt32(reader["cooktime"]),
+                                NutritionId = Convert.ToInt32(reader["nutritionID"]),
+                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                RecipeImage = Image.FromStream(ms)
+                            };
+                            recipes.Add(recipe);
+                        }
                     }
                 }
             }
