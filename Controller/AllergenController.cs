@@ -1,5 +1,4 @@
-﻿
-using RecipeBookApp.DAL;
+﻿using RecipeBookApp.DAL;
 using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
@@ -36,8 +35,9 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Gets the Allergen for the search ID.
         /// </summary>
+        /// <param name="searchRecipeID">ID of the recipe</param>
         /// <returns>Allergen found in the database</returns>
-        public Allergen GetAllergen(int searchRecipeID)
+        public List<Allergen> GetAllergen(int searchRecipeID)
         {
             if (int < 1)
             {
