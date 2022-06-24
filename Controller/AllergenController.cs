@@ -16,7 +16,7 @@ namespace RecipeBookApp.Controller
 
         private readonly AllergenDAL allergenDAL;
         /// <summary>
-        /// Constructor for Allergen
+        /// Constructor for AllergenController
         /// </summary>
         public AllergenController()
         {
