@@ -74,6 +74,7 @@ namespace RecipeBookApp.DAL
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())
@@ -129,6 +130,7 @@ namespace RecipeBookApp.DAL
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
+                    selectCommand.Parameters.AddWithValue("@allergenID", allergenID);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         recipe = new Recipe
