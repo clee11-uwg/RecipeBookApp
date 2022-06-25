@@ -70,6 +70,13 @@ namespace RecipeBookApp.Controller
         }
 
 
+        public List<Recipe> FilterRecipes(List<Allergen> allergens, List<Ethnic> ethnicities, List<FoodType> foodTypes,
+            List<Ingredient> ingredients, List<Kitchenware> kitchenware, List<MealType> mealTypes, List<Nutrition> nutrition)
+        {
+            List<Recipe> recipes = new List<Recipe>();
+            return recipes;
+        }
+
 
         /// <summary>
         /// Updates the recipe.
