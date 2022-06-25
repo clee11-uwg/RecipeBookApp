@@ -18,9 +18,7 @@ namespace RecipeAppTestProject
         {
             List<Recipe> recipetestList  = new List<Recipe>();
             RecipeDAL testRecipeDal = new RecipeDAL();
-            recipetestList = testRecipeDal.GetRecipes();
-
-          
+            recipetestList = testRecipeDal.GetRecipes();          
             Assert.AreEqual(2, recipetestList.Count);
         }
 
