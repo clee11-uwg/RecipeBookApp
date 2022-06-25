@@ -83,11 +83,12 @@ namespace RecipeBookApp.DAL
                             ingredientDetails.Add(ingredient);
                         }
                     }
+                }
+
+                return ingredientDetails;
             }
 
-            return ingredientDetails;
+
         }
-
-
     }
 }

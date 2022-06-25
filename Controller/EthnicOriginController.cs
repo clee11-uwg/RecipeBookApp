@@ -31,3 +31,5 @@ namespace RecipeBookApp.Controller
         {
             return this.ethnicOriginDAL.GetEthnicOrigins();
         }
+    }
+}
