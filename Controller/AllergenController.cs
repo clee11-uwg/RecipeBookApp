@@ -30,13 +30,13 @@ namespace RecipeBookApp.Controller
         /// <returns>List of all allergens from database </returns>
         public List<Allergen> GetAllergens()
         {
-
-            if (!this.allergenDAL.GetAllergens().Any())
+            List<Allergen> allergenList = this.allergenDAL.GetAllergens();
+            if (!allergenList.Any())
             {
                 throw new ArgumentNullException("No Allergen found on the database");
 
             }
-            return this.allergenDAL.GetAllergens();
+            return allergenList;
         }
 
         /// <summary>

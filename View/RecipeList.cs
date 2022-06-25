@@ -17,13 +17,26 @@ namespace RecipeBookApp
     {
         private RecipeController recipeController;
         private List<Recipe> recipeList;
-
+        private List<Allergen> allergenList;
+        private List<Nutrition> nutritionList;
+        private List<Kitchenware> kitchenWareList;
+        private List<MealType> mealTypeList;
+        private List<FoodType> foodTypeList;
+        private List<Ethnic> ethnicList;
+        private List<Ingredient> IngredientList;
+        private readonly AllergenController allergenController;
+        private readonly IngredientsController ingredientsController;
+        private readonly KitchenwareController kitchenController;
+        private readonly NutritionController nutritionController;
+       
         /// <summary>
         /// 0 parameter constructor for the RecipeList
         /// </summary>
         public RecipeList()
         {
             InitializeComponent();
+            this.allergenController = new AllergenController();
+            this.LoadComboBox();
             this.recipeController = new RecipeController();
             this.recipeList = new List<Recipe>();
             this.recipeList = this.recipeController.GetRecipes();
@@ -88,5 +101,28 @@ namespace RecipeBookApp
             this.PopulateItems();
 
         }
+
+        /// <summary>
+        /// Loads the ComboBox for furniture category and style.
+        /// </summary>
+        private void LoadComboBox()
+        {
+            try
+            {
+                this.allergenComboBox.DataSource = null; ;
+                this.allergenList = this.allergenController.GetAllergens();
+                //this.allergenList.Sort();
+                this.allergenComboBox.DataSource = this.allergenList;
+                this.allergenComboBox.Text = "";
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Database transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        
     }
 }
