@@ -41,6 +41,7 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Gets the Nutrition for the search ID.
         /// </summary>
+        /// <param name="searchRecipeID">ID of the recipe</param>
         /// <returns>Nutrition found in the database</returns>
         public Nutrition GetNutrition(int searchRecipeID)
         {

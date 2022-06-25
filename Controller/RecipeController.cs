@@ -17,6 +17,9 @@ namespace RecipeBookApp.Controller
     {
         private readonly RecipeDAL recipeDAL;
 
+        /// <summary>
+        /// Instantiate instance variables
+        /// </summary>
         public RecipeController()
         {
             this.recipeDAL = new RecipeDAL();
@@ -34,6 +37,7 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Gets the recipe for the search ID.
         /// </summary>
+        /// <param name="searchRecipeID">ID of the recipe</param>
         /// <returns>Recipe found in the database</returns>
         public Recipe GetRecipe(int searchRecipeID)
         {
@@ -59,9 +63,10 @@ namespace RecipeBookApp.Controller
         }
 
         /// <summary>
-        /// Gets the recipe for the search ID.
+        /// Gets the recipes matching the search input.
         /// </summary>
-        /// <returns>Recipe found in the database</returns>
+        /// <param name="searchUserInput">Search stirng to find recipes by</param>
+        /// <returns>Recipes found in the database</returns>
         public List<Recipe> GetRecipeSearch(string searchUserInput)
         {
             List<Recipe> foundRecipeList = this.recipeDAL.GetSearchRecipe(searchUserInput);
@@ -69,7 +74,17 @@ namespace RecipeBookApp.Controller
             return foundRecipeList;
         }
 
-
+        /// <summary>
+        /// Returns list of filtered recipes
+        /// </summary>
+        /// <param name="allergens">Undesired allergens</param>
+        /// <param name="ethnicities">Undesired ethnicities</param>
+        /// <param name="foodTypes">Undesired types of food</param>
+        /// <param name="ingredients">Undesired ingredients</param>
+        /// <param name="kitchenware">Undesired kitchenware</param>
+        /// <param name="mealTypes">Undesired types of meal</param>
+        /// <param name="nutrition">Undesired nutrition</param>
+        /// <returns>List of recipes</returns>
         public List<Recipe> FilterRecipes(int[] allergens, int[] ethnicities, int[] foodTypes,
             int[] ingredients, int[] kitchenware, int[] mealTypes, int[] nutrition)
         {
@@ -97,6 +112,7 @@ namespace RecipeBookApp.Controller
         /// Adds the recipe.
         /// </summary>
         /// <param name="newRecipe">The new recipe.</param>
+        /// <returns></returns>
         public void AddRecipe(Recipe newRecipe)
         {
              RecipeDAL.AddRecipe(newRecipe);
