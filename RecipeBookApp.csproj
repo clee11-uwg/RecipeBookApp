@@ -132,6 +132,9 @@
     <EmbeddedResource Include="UserControls\RecipeListItem.resx">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\RecipeDetails.resx">
+      <DependentUpon>RecipeDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\RecipeList.resx">
       <DependentUpon>RecipeList.cs</DependentUpon>
     </EmbeddedResource>
