@@ -17,9 +17,9 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Instantiate variables
         /// </summary>
-        public NutritionController()
+        public TypeOfMealController()
         {
-            this.mealTypeDAL = new mealTypeDAL();
+            this.mealTypeDAL = new TypeOfMealDAL();
         }
 
         /// <summary>
