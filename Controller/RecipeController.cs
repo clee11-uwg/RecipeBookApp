@@ -53,6 +53,22 @@ namespace RecipeBookApp.Controller
         }
 
 
+        /// <summary>
+        /// Gets the recipe for the search ID.
+        /// </summary>
+        /// <returns>Recipe found in the database</returns>
+        public List<Recipe> GetRecipeSearch(string searchUserInput)
+        {
+            List<Recipe> foundRecipeList = this.recipeDAL.GetSearchRecipe(searchUserInput);
+            if (!foundRecipeList.Any())
+            {
+                throw new ArgumentNullException("No Recipe found on the database");
+
+            }
+            return foundRecipeList;
+        }
+
+
 
         /// <summary>
         /// Updates the recipe.

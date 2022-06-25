@@ -95,6 +95,52 @@ namespace RecipeBookApp.DAL
 
 
         /// <summary>
+        /// This method to get the recipe based on the  search ID
+        /// </summary>
+        /// <returns></returns>
+        public List<Recipe> GetSearchRecipe(string userSearch)
+        {
+            List<Recipe> recipes = new List<Recipe>();
+            string selectStatement = "SELECT r.id, r.`Name`, r.Instructions, " +
+                "r.cooktime, r.nutritionID, r.ethnicOriginID, i.image FROM recipe r JOIN image i " +
+                "ON r.ID = i.recipeID where r.Name like '%@userSearch%'";
+
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.Add("@userSearch", DbType.String);
+                    selectCommand.Parameters["@userSearch"].Value = userSearch;
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Set up byte array and stream to convert BLOB image from db into something readable and can be displayed
+                            byte[] image_byte = (byte[])reader["image"];
+                            MemoryStream ms = new MemoryStream(image_byte);
+                            Recipe recipe = new Recipe
+                            {
+                                RecipeId = Convert.ToInt32(reader["id"]),
+                                RecipeName = reader["Name"].ToString(),
+                                RecipeInstructions = reader["Instructions"].ToString(),
+                                CookingTime = Convert.ToInt32(reader["cooktime"]),
+                                NutritionId = Convert.ToInt32(reader["nutritionID"]),
+                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                RecipeImage = Image.FromStream(ms)
+                            };
+
+                            recipes.Add(recipe);
+                        }
+                    }
+                }
+            }
+
+            return recipes;
+        }
+
+
+        /// <summary>
         /// Adds the new recipe.
         /// </summary>
         /// <param name="addRecipe">The add recipe.</param>

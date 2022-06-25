@@ -49,5 +49,17 @@ namespace RecipeBookApp
                 flowLayoutPanel1.Controls.Add(recipeListItems[i]);
             }
         }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            string recipeUserInput = this.searchTextBox.Text;
+
+            this.ProcessUserSearchRecipe(this.searchTextBox.Text);
+        }
+
+        private void ProcessUserSearchRecipe(string recipeUserInput)
+        {
+            this.recipeController.GetRecipeSearch(recipeUserInput);
+        }
     }
 }

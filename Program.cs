@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RecipeBookApp
@@ -14,10 +11,9 @@ namespace RecipeBookApp
         [STAThread]
        public  static void Main()
         {
-            // Application.EnableVisualStyles();
-            // Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new RecipeList());
-            Console.WriteLine("Hello World!");
+             Application.EnableVisualStyles();
+             Application.SetCompatibleTextRenderingDefault(false);
+             Application.Run(new RecipeList());
         }
     }
 }
