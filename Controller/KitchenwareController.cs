@@ -38,7 +38,7 @@ namespace RecipeBookApp.Controller
         {
             if (searchRecipeID < 1)
             {
-                throw new ArgumentOutOfRangeException("Recipe ID must be greater than zero")
+                throw new ArgumentOutOfRangeException("Recipe ID must be greater than zero");
             }
             return this.kitchenwareDAL.GetKitchenware(searchRecipeID);
         }
