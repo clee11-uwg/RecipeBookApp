@@ -63,6 +63,7 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// This method to get the recipe based on the  search ID
         /// </summary>
+        /// <param name="recipeID">ID of the recipe</param>
         /// <returns>The recipe of the given id</returns>
         public Recipe GetRecipe(int recipeID)
         {
@@ -164,6 +165,7 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// This method to get the recipe based on the  search ID
         /// </summary>
+        /// <param name="userSearch">Search string to find recipes by</param>
         /// <returns></returns>
         public List<Recipe> GetSearchRecipe(string userSearch)
         {

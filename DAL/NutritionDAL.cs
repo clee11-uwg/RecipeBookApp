@@ -16,7 +16,7 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// This method to get the list of Kitchenware avilable in the recipe database
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of all nutritional data known to the database</returns>
         public List<Nutrition> GetNutritions()
         {
             List<Nutrition> nutritionList = new List<Nutrition>();
@@ -48,7 +48,8 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// This method to get the nutrition based on the  search ID
         /// </summary>
-        /// <returns></returns>
+        /// <param name="recipeID">ID of the recipe</param>
+        /// <returns>Nutritional data of the given recipe</returns>
         public Nutrition GetNutrition(int recipeID)
         {
             Nutrition nutrition = null;
