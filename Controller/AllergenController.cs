@@ -1,5 +1,4 @@
-﻿
-using RecipeBookApp.DAL;
+﻿using RecipeBookApp.DAL;
 using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace RecipeBookApp.Controller
 
         private readonly AllergenDAL allergenDAL;
         /// <summary>
-        /// Constructor for Allergen
+        /// Constructor for AllergenController
         /// </summary>
         public AllergenController()
         {
@@ -30,30 +29,35 @@ namespace RecipeBookApp.Controller
         /// <returns>List of all allergens from database </returns>
         public List<Allergen> GetAllergens()
         {
-
-            if (!this.allergenDAL.GetAllergens().Any())
-            {
-                throw new ArgumentNullException("No Allergen found on the database");
-
-            }
             return this.allergenDAL.GetAllergens();
         }
 
         /// <summary>
         /// Gets the Allergen for the search ID.
         /// </summary>
+        /// <param name="searchRecipeID">ID of the recipe</param>
         /// <returns>Allergen found in the database</returns>
-        public Allergen GetAllergen(int searchRecipeID)
+        public List<Allergen> GetAllergen(int searchRecipeID)
         {
-            Allergen allergenDetails = this.allergenDAL.GetRecipeAllergen(searchRecipeID);
-            if (allergenDetails == null)
+            if (int < 1)
             {
-                throw new ArgumentNullException("No allergen deatils found on the database");
-
+                throw new ArgumentOutOfRangeException("Recipe ID cannot be less than 1");
             }
-            return allergenDetails;
+            return this.allergenDAL.GetRecipeAllergen(searchRecipeID);
         }
 
-
+        /// <summary>
+        /// Gets all Allergens for this ingredient ID
+        /// </summary>
+        /// <param name="ingredientID">ID of the ingredient</param>
+        /// <returns>List of Allergens for this ingredient</returns>
+        public List<Allergen> getAllergensOfIngredient(int ingredientID)
+        {
+            if (int < 1)
+            {
+                throw new ArgumentOutOfRangeException("Ingredient ID cannot be less than 1");
+            }
+            return this.allergenDAL.GetAllergensOfIngredient(ingredientID);
+        }
     }
 }

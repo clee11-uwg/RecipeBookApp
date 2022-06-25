@@ -7,16 +7,15 @@ using RecipeBookApp.Model;
 namespace RecipeBookApp.DAL
 {
     /// <summary>
-    /// This class serves as the controller,
-    /// mediator between the Recipe application
-    /// and the AllergenDAL.
+    /// This class serves as the Data Access Layer
+    /// for the  DB Allergen table.
     /// </summary>
-    public  class AllergenDAL
+    public class AllergenDAL
     {
         /// <summary>
-        /// This method to get the list of Allergen avilable in the recipe database
+        /// This method to get the list of all Allergens known to the recipe database
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of Allergens known to the recipe database</returns>
         public List<Allergen> GetAllergens()
         {
             List<Allergen> allergenList  = new List<Allergen>();
@@ -46,12 +45,13 @@ namespace RecipeBookApp.DAL
         }
 
         /// <summary>
-        /// This method to get the allergen details of a recipe
+        /// This method to get the list of allergens a recipe may contain
         /// </summary>
-        /// <returns></returns>
-        public Allergen GetRecipeAllergen(int recipeID)
+        /// <param name="recipeID">ID of the recipe</param>
+        /// <returns>List of Allergens a recipe may contain</returns>
+        public List<Allergen> GetRecipeAllergen(int recipeID)
         {
-            Allergen allergen = null;
+            List<Allergen> allergenList = new List<Allergen>();
             string selectStatement = "SELECT allergen.id, allergen.allergen    FROM recipe " +
        " JOIN recipe_has_ingredient ON recipe.id = recipe_has_ingredient.recipeID " +
         "JOIN ingredient ON ingredient.id = recipe_has_ingredient.ingredientID "+
@@ -62,27 +62,63 @@ namespace RecipeBookApp.DAL
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
 
-                         allergen = new Allergen
+                        while (reader.Read())
                         {
-                            AllergenId = Convert.ToInt32(reader["id"]),
-                            AllergenDetails = reader["allergen"].ToString()
-                        };
+                            Allergen allergen = new Allergen
+                            {
+                                AllergenId = Convert.ToInt32(reader["id"]),
+                                AllergenDetails = reader["allergen"].ToString()
+                            };
 
+                            allergenList.Add(allergen);
 
+                        }
+                }
+            }
+
+            return allergenList;
+        }
+
+        /// <summary>
+        /// Returns Allergens of an Ingredient
+        /// </summary>
+        /// <param name="ingredientID">ID of the ingredient</param>
+        /// <returns>List of Allergens of an Ingredient</returns>
+        public List<Allergen> GetAllergensOfIngredient(int ingredientID)
+        {
+            List<Allergen> allergenList = new List<Allergen>();
+            string selectStatement = "	SELECT allergen.id, allergen.allergen" +
+    "FROM ingredient" +
+        "JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID" +
+        "JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID" +
+    "WHERE ingredient.id = @ingredientID; ";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Allergen allergen = new Allergen
+                            {
+                                AllergenId = Convert.ToInt32(reader["id"]),
+                                AllergenDetails = reader["allergen"].ToString()
+                            };
+
+                            allergenList.Add(allergen);
+                        }
                     }
                 }
             }
 
-            return allergen;
+            return allergenList;
         }
-
-
-
-
-
-
     }
 }
