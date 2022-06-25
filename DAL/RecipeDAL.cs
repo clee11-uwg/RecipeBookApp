@@ -66,7 +66,7 @@ namespace RecipeBookApp.DAL
         /// <returns>The recipe of the given id</returns>
         public Recipe GetRecipe(int recipeID)
         {
-            List<Recipe> recipes = new List<Recipe>();
+            Recipe recipe = new Recipe();
             string selectStatement = @"SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, 
                                         recipe.nutritionID, recipe.ethnicOriginID, image.image
                                     FROM recipe    
@@ -75,32 +75,33 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
+
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
+                        
                         while (reader.Read())
                         {
                             byte[] image_byte = (byte[])reader["image"];
                             MemoryStream ms = new MemoryStream(image_byte);
-                            recipe = new Recipe
                             {
-                                RecipeId = Convert.ToInt32(reader["id"]),
-                                RecipeName = reader["Name"].ToString(),
-                                RecipeInstructions = reader["Instructions"].ToString(),
-                                CookingTime = Convert.ToInt32(reader["cooktime"]),
-                                NutritionId = Convert.ToInt32(reader["nutritionID"]),
-                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
-                                RecipeImage = Image.FromStream(ms)
+                                recipe.RecipeId = Convert.ToInt32(reader["id"]);
+                                recipe.RecipeName = reader["Name"].ToString();
+                                recipe.RecipeInstructions = reader["Instructions"].ToString();
+                                recipe.CookingTime = Convert.ToInt32(reader["cooktime"]);
+                                recipe.NutritionId = Convert.ToInt32(reader["nutritionID"]);
+                                recipe.EthnicId = Convert.ToInt32(reader["ethnicOriginID"]);
+                                recipe.RecipeImage = Image.FromStream(ms);
                             };
-                            recipes.Add(recipe);
                         }
                     }
                 }
             }
 
-            return recipes;
+            return recipe;
         }
 
         /// <summary>
@@ -141,7 +142,7 @@ namespace RecipeBookApp.DAL
                         {
                             byte[] image_byte = (byte[])reader["image"];
                             MemoryStream ms = new MemoryStream(image_byte);
-                            recipe = new Recipe
+                            Recipe recipe = new Recipe
                             {
                                 RecipeId = Convert.ToInt32(reader["id"]),
                                 RecipeName = reader["Name"].ToString(),
@@ -157,7 +158,7 @@ namespace RecipeBookApp.DAL
                 }
             }
 
-            return recipe;
+            return recipes;
         }
 
 

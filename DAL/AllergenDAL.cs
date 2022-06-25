@@ -77,6 +77,7 @@ namespace RecipeBookApp.DAL
                             allergenList.Add(allergen);
 
                         }
+                    }
                 }
             }
 
