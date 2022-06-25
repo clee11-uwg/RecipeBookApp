@@ -60,11 +60,7 @@ namespace RecipeBookApp.Controller
         public List<Recipe> GetRecipeSearch(string searchUserInput)
         {
             List<Recipe> foundRecipeList = this.recipeDAL.GetSearchRecipe(searchUserInput);
-            if (!foundRecipeList.Any())
-            {
-                throw new ArgumentNullException("No Recipe found on the database");
-
-            }
+           
             return foundRecipeList;
         }
 

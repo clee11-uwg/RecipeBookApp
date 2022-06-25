@@ -100,18 +100,17 @@ namespace RecipeBookApp.DAL
         /// <returns></returns>
         public List<Recipe> GetSearchRecipe(string userSearch)
         {
+            
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = "SELECT r.id, r.`Name`, r.Instructions, " +
                 "r.cooktime, r.nutritionID, r.ethnicOriginID, i.image FROM recipe r JOIN image i " +
-                "ON r.ID = i.recipeID where r.Name like '%@userSearch%'";
-
+                "ON r.ID = i.recipeID where r.Name LIKE '%'|| @UserSearch ||'%'";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    selectCommand.Parameters.Add("@userSearch", DbType.String);
-                    selectCommand.Parameters["@userSearch"].Value = userSearch;
+                    selectCommand.Parameters.AddWithValue("@UserSearch", userSearch);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())

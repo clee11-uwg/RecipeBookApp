@@ -52,14 +52,41 @@ namespace RecipeBookApp
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            string recipeUserInput = this.searchTextBox.Text;
+          
 
             this.ProcessUserSearchRecipe(this.searchTextBox.Text);
         }
 
         private void ProcessUserSearchRecipe(string recipeUserInput)
         {
-            this.recipeController.GetRecipeSearch(recipeUserInput);
+            try
+            {
+                this.recipeList=this.recipeController.GetRecipeSearch(recipeUserInput);
+                if (!this.recipeList.Any())
+                {
+                    MessageBox.Show("No Recipe found on the database");
+                    return;
+
+                }
+                //flowLayoutPanel1.Controls;
+                this.flowLayoutPanel1.Controls.Clear();
+                this.PopulateItems();
+            }
+
+            catch (Exception exe)
+            {
+                MessageBox.Show("Error occured on - Database transaction -" + exe.Message,
+                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            this.searchTextBox.Text = "";
+            this.recipeList = this.recipeController.GetRecipes();
+            this.flowLayoutPanel1.Controls.Clear();
+            this.PopulateItems();
+
         }
     }
 }
