@@ -70,11 +70,10 @@ namespace RecipeBookApp.Controller
         }
 
 
-        public List<Recipe> FilterRecipes(List<Allergen> allergens, List<Ethnic> ethnicities, List<FoodType> foodTypes,
-            List<Ingredient> ingredients, List<Kitchenware> kitchenware, List<MealType> mealTypes, List<Nutrition> nutrition)
+        public List<Recipe> FilterRecipes(int[] allergens, int[] ethnicities, int[] foodTypes,
+            int[] ingredients, int[] kitchenware, int[] mealTypes, int[] nutrition)
         {
-            List<Recipe> recipes = new List<Recipe>();
-            return recipes;
+            return this.recipeDAL.FilterRecipes(allergens, ethnicities, foodTypes, ingredients, kitchenware, mealTypes, nutrition);
         }
 
 
