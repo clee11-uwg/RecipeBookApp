@@ -26,7 +26,7 @@ namespace RecipeBookApp.DAL
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = "SELECT r.id, r.`Name`, r.Instructions, " +
                 "r.cooktime, r.nutritionID, r.ethnicOriginID, i.image FROM recipe r JOIN image i " +
-                "ON r.ID = i.recipeID";
+                "ON r.ID = i.recipeID;";
                 
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
@@ -67,7 +67,7 @@ namespace RecipeBookApp.DAL
         public Recipe GetRecipe(int recipeID)
         {
             Recipe recipe = null;
-           string selectStatement = "	SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID" +
+           string selectStatement = "SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID " +
                      "FROM recipe    WHERE recipe.id = recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
