@@ -17,6 +17,7 @@ namespace RecipeBookApp.View
         private Recipe selectedRecipe;
         private RecipeController recipeController;
         private IngredientsController ingredientsController;
+        private KitchenwareController kitchenwareController;
 
         /// <summary>
         /// 0 param constructor
@@ -27,6 +28,7 @@ namespace RecipeBookApp.View
             this.selectedRecipe = new Recipe();
             this.recipeController = new RecipeController();
             this.ingredientsController = new IngredientsController();
+            this.kitchenwareController = new KitchenwareController();
         }
 
         /// <summary>
@@ -42,6 +44,13 @@ namespace RecipeBookApp.View
 
         private void GetRecipeDetails(Recipe selectedRecipe)
         {
+            GetIngredients();
+            GetKitchenware();
+            GetInstructions();
+        }
+
+        private void GetIngredients()
+        {
             List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(selectedRecipe.RecipeId);
             for (int i = 0; i < ingredientList.Count; i++)
             {
@@ -49,6 +58,22 @@ namespace RecipeBookApp.View
                 var listViewItem = new ListViewItem(ingredient);
                 ingredientsListView.Items.Add(listViewItem);
             }
+        }
+
+        private void GetKitchenware()
+        {
+            //List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(selectedRecipe.RecipeId);
+            /*for (int i = 0; i < kitchenwareList.Count; i++)
+            {
+                string ingredient = kitchenwareList[i].KitchenwareDetails;
+                var listViewItem = new ListViewItem(ingredient);
+                ingredientsListView.Items.Add(listViewItem);
+            }*/
+        }
+
+        private void GetInstructions()
+        {
+            this.instructionsTxtBx.Text = this.selectedRecipe.RecipeInstructions;
         }
     }
 }
