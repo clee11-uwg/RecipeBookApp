@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RecipeBookApp.Model
+﻿namespace RecipeBookApp.Model
 {
+    /// <summary>
+    /// Type of Meal, with attributes
+    /// </summary>
     class MealType
     {
+        public int MealTypeId { get; set; }
+        public string TypeOfMeal { get; set; }
     }
 }

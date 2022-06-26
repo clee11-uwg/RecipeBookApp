@@ -28,29 +28,21 @@ namespace RecipeBookApp.Controller
         /// <returns>List of all Nutritions from database </returns>
         public List<Nutrition> GetNutritions()
         {
-            List<Nutrition> nutritionList = this.nutritionDAL.GetNutritions();
-
-            if (!nutritionList.Any())
-            {
-                throw new ArgumentNullException("No Nutritions found on the database");
-
-            }
-            return nutritionList;
+            return this.nutritionDAL.GetNutritions();
         }
 
         /// <summary>
-        /// Gets the Nutrition for the search ID.
+        /// Gets the Nutrition data for the search ID.
         /// </summary>
-        /// <returns>Nutrition found in the database</returns>
-        public Nutrition GetNutrition(int searchRecipeID)
+        /// <param name="searchRecipeID">ID of the recipe</param>
+        /// <returns>Nutrition data found in the database</returns>
+        public List<Nutrition> GetNutrition(int searchRecipeID)
         {
-            Nutrition foundNutrition= this.nutritionDAL.GetNutrition(searchRecipeID);
-            if (foundNutrition == null)
+            if (searchRecipeID < 1)
             {
-                throw new ArgumentNullException("No Nutrition found on the database");
-
+                throw new ArgumentOutOfRangeException("Recipe ID must be greater than zero");
             }
-            return foundNutrition;
+            return this.nutritionDAL.GetNutrition(searchRecipeID);
         }
 
 

@@ -36,6 +36,7 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Gets the Ingredient for the search ID.
         /// </summary>
+        /// <param name="searchRecipeID">ID of the recipe</param>
         /// <returns>Ingredient found in the database</returns>
         public List<Ingredient> GetIngredient(int searchRecipeID)
         {

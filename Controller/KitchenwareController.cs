@@ -6,9 +6,16 @@ using System.Linq;
 
 namespace RecipeBookApp.Controller
 {
+    /// <summary>
+    /// Connects the RecipeApp with the database queries for kitchenware
+    /// </summary>
     public class KitchenwareController
     {
         private readonly KitchenwareDAL kitchenwareDAL;
+
+        /// <summary>
+        /// Instantiate instance variables
+        /// </summary>
         public KitchenwareController()
         {
             this.kitchenwareDAL = new KitchenwareDAL();
@@ -20,28 +27,20 @@ namespace RecipeBookApp.Controller
         /// <returns>List of all kitchenware from database </returns>
         public List<Kitchenware> GetKitchenware()
         {
-
-            if (!this.kitchenwareDAL.GetKitchenwares().Any())
-            {
-                throw new ArgumentNullException("No KitchenWares found on the database");
-
-            }
             return kitchenwareDAL.GetKitchenwares();
         }
 
         /// <summary>
-        /// Gets the kitchenware for the search ID.
-        /// </summary>
-        /// <returns>kitchenware found in the database</returns>
-        public Kitchenware GetKitchenware(int searchRecipeID)
+        /// Finds all kitchenware needed to cook said recipe
+        /// <param name="recipeID">Id of recipe</param>
+        /// <returns>Kitchenware associated with recipe</returns>
+        public List<Kitchenware> GetKitchenware(int searchRecipeID)
         {
-            Kitchenware kitchen = this.kitchenwareDAL.GetKitchenware(searchRecipeID);
-            if (kitchen == null)
+            if (searchRecipeID < 1)
             {
-                throw new ArgumentNullException("No kitchenware found on the database");
-
+                throw new ArgumentOutOfRangeException("Recipe ID must be greater than zero");
             }
-            return kitchen;
+            return this.kitchenwareDAL.GetKitchenware(searchRecipeID);
         }
 
     }

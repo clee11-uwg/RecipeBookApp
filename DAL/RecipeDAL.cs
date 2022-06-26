@@ -62,6 +62,7 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// This method to get the recipe based on the  search ID
         /// </summary>
+        /// <param name="recipeID">ID of the recipe</param>
         /// <returns>The recipe of the given id</returns>
         public Recipe GetRecipe(int recipeID)
         {
@@ -164,6 +165,7 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// This method to get the recipe based on the  search ID
         /// </summary>
+        /// <param name="userSearch">Search string to find recipes by</param>
         /// <returns></returns>
         public List<Recipe> GetSearchRecipe(string userSearch)
         {
@@ -178,6 +180,127 @@ namespace RecipeBookApp.DAL
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@UserSearch", userSearch);
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Set up byte array and stream to convert BLOB image from db into something readable and can be displayed
+                            byte[] image_byte = (byte[])reader["image"];
+                            MemoryStream ms = new MemoryStream(image_byte);
+                            Recipe recipe = new Recipe
+                            {
+                                RecipeId = Convert.ToInt32(reader["id"]),
+                                RecipeName = reader["Name"].ToString(),
+                                RecipeInstructions = reader["Instructions"].ToString(),
+                                CookingTime = Convert.ToInt32(reader["cooktime"]),
+                                NutritionId = Convert.ToInt32(reader["nutritionID"]),
+                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                RecipeImage = Image.FromStream(ms)
+                            };
+
+                            recipes.Add(recipe);
+                        }
+                    }
+                }
+            }
+
+            return recipes;
+        }
+
+        /// <summary>
+        /// Returns list of filtered recipes
+        /// </summary>
+        /// <param name="allergens">Undesired allergens</param>
+        /// <param name="ethnicities">Undesired ethnicities</param>
+        /// <param name="foodTypes">Undesired types of food</param>
+        /// <param name="ingredients">Undesired ingredients</param>
+        /// <param name="kitchenware">Undesired kitchenware</param>
+        /// <param name="mealTypes">Undesired types of meal</param>
+        /// <param name="nutrition">Undesired nutrition</param>
+        /// <returns>List of recipes</returns>
+        public List<Recipe> FilterRecipes(int[] allergens, int[] ethnicities, int[] foodTypes,
+            int[] ingredients, int[] kitchenware, int[] mealTypes, int[] nutrition)
+        {
+            List<Recipe> recipes = new List<Recipe>();
+            string selectStatement = @"DROP TABLE IF EXISTS tempFilterAllergen;
+                                    CREATE TEMPORARY TABLE tempFilterAllergen AS
+                                        SELECT recipe.id AS `id`
+                                        FROM recipe
+		                                    JOIN recipe_has_ingredient ON recipe.id = recipe_has_ingredient.recipeID
+			                                    JOIN ingredient ON ingredient.id = recipe_has_ingredient.ingredientID
+		                                    JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID
+			                                    JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
+	                                    WHERE allergen.id IN (@allergens);
+
+                                    DROP TABLE IF EXISTS tempFilterEthnic;
+                                    CREATE TEMPORARY TABLE tempFilterEthnic AS
+                                        SELECT recipe.id AS `id`
+                                        FROM recipe
+		                                    JOIN ethnic_origin ON recipe.ethnicOriginID = ethnic_origin.id
+	                                    WHERE ethnic_origin.id IN (@ethnicities);
+
+                                    DROP TABLE IF EXISTS tempFilterTypeOfFood;
+                                    CREATE TEMPORARY TABLE tempFilterTypeOfFood AS
+                                        SELECT recipe.id AS `id`
+                                        FROM recipe
+		                                    JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
+		                                    JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
+		                                    JOIN type_of_food ON type_of_food.id = ingredient.typeOfFoodID
+	                                    WHERE type_of_food.id IN (@typesOfFood);
+
+                                    DROP TABLE IF EXISTS tempFilterIngredient;
+                                    CREATE TEMPORARY TABLE tempFilterIngredient AS
+                                        SELECT recipe.id AS `id`
+                                        FROM recipe
+		                                    JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
+		                                    JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
+	                                    WHERE ingredient.id IN (@ingredients);
+
+                                    DROP TABLE IF EXISTS tempFilterKitchenware;
+                                    CREATE TEMPORARY TABLE tempFilterKitchenware AS
+                                        SELECT recipe.id AS `id`
+                                        FROM recipe
+		                                    JOIN recipe_uses_kitchenware ON recipe_uses_kitchenware.recipeID = recipe.id
+		                                    JOIN kitchenware ON recipe_uses_kitchenware.kitchenwareID = kitchenware.id
+	                                    WHERE kitchenware.id IN (@kitchenware);
+
+                                    DROP TABLE IF EXISTS tempFilterTypesOfMeal;
+                                    CREATE TEMPORARY TABLE tempFilterTypesOfMeal AS
+                                        SELECT recipe.id AS `id`
+                                        FROM recipe
+		                                    JOIN recipe_is_a_type_of_meal ON recipe_is_a_type_of_meal.recipeID = recipe.id
+		                                    JOIN type_of_meal ON recipe_is_a_type_of_meal.typeOfMealID = type_of_meal.id
+	                                    WHERE type_of_meal.id IN (@typesOfMeal);
+
+                                    DROP TABLE IF EXISTS tempFilterNutrition;
+                                    CREATE TEMPORARY TABLE tempFilterNutrition AS
+                                        SELECT recipe.id AS `id`
+                                        FROM recipe
+		                                    JOIN nutrition ON recipe.nutritionID = nutrition.id
+	                                    WHERE nutrition.id IN (@nutrition);
+
+                                    SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
+	                                    recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID
+                                    FROM recipe
+                                    WHERE recipe.id NOT IN tempFilterAllergen
+	                                    AND recipe.id NOT IN tempFilterEthnic
+	                                    AND recipe.id NOT IN tempFilterTypeOfFood
+	                                    AND recipe.id NOT IN tempFilterIngredient
+	                                    AND recipe.id NOT IN tempFilterKitchenware
+	                                    AND recipe.id NOT IN tempFilterTypesOfMeal
+	                                    AND recipe.id NOT IN tempFilterNutrition;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddRange("@allergens", allergens.ToArray);
+                    selectCommand.Parameters.AddRange("@ethnicities", ethnicities.ToArray);
+                    selectCommand.Parameters.AddRange("@foodTypes", foodTypes.ToArray);
+                    selectCommand.Parameters.AddRange("@ingredients", ingredients.ToArray);
+                    selectCommand.Parameters.AddRange("@kitchenware", kitchenware.ToArray);
+                    selectCommand.Parameters.AddRange("@mealTypes", mealTypes.ToArray);
+                    selectCommand.Parameters.AddRange("@nutrition", nutrition.ToArray);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())
