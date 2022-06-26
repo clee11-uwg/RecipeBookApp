@@ -44,7 +44,7 @@ namespace RecipeBookApp.Controller
             {
                 throw new ArgumentOutOfRangeException("Recipe ID cannot be less than 1");
             }
-            reutrn this.ingredientsDAL.GetIngredient(searchRecipeID);
+            return this.ingredientsDAL.GetIngredient(searchRecipeID);
         }
     }
 }

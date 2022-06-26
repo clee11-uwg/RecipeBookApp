@@ -39,7 +39,7 @@ namespace RecipeBookApp.Controller
         /// <returns>Allergen found in the database</returns>
         public List<Allergen> GetAllergen(int searchRecipeID)
         {
-            if (int < 1)
+            if (searchRecipeID < 1)
             {
                 throw new ArgumentOutOfRangeException("Recipe ID cannot be less than 1");
             }
@@ -53,7 +53,7 @@ namespace RecipeBookApp.Controller
         /// <returns>List of Allergens for this ingredient</returns>
         public List<Allergen> getAllergensOfIngredient(int ingredientID)
         {
-            if (int < 1)
+            if (ingredientID < 1)
             {
                 throw new ArgumentOutOfRangeException("Ingredient ID cannot be less than 1");
             }
