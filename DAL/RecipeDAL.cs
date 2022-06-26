@@ -20,7 +20,6 @@ namespace RecipeBookApp.DAL
         /// <returns>List of all recipes in database</returns>
         public List<Recipe> GetRecipes()
         {
-
             //string workingDirectory = Environment.CurrentDirectory;
             //string path = Path.Combine(Directory.GetParent(workingDirectory).Parent.FullName, @"Data\", "sampleimage.jpg");
             List<Recipe> recipes = new List<Recipe>();
