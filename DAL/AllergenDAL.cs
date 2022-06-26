@@ -82,6 +82,7 @@ namespace RecipeBookApp.DAL
 
                 return allergenList;
             }
+        }
 
             /// <summary>
             /// Returns Allergens of an Ingredient
@@ -120,6 +121,5 @@ namespace RecipeBookApp.DAL
 
                 return allergenList;
             }
-        }
     }
 }
