@@ -184,11 +184,6 @@ namespace RecipeBookApp
             }
             this.mealTypeList.Sort();
 
-            foreach (MealType meal in this.mealController.GetMeals())
-            {
-                this.mealTypeList.Add(meal.type);
-            }
-            this.mealTypeList.Sort();
 
 
 

@@ -88,12 +88,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\EthnicOriginController.cs" />
     <Compile Include="Controller\MealTypeController.cs" />
     <Compile Include="Controller\AllergenController.cs" />
     <Compile Include="Controller\KitchenwareController.cs" />
     <Compile Include="Controller\IngredientsController.cs" />
     <Compile Include="Controller\NutritionController.cs" />
     <Compile Include="Controller\RecipeController.cs" />
+    <Compile Include="Controller\TypeOfFoodController.cs" />
+    <Compile Include="Controller\TypeOfMealController.cs" />
+    <Compile Include="DAL\EthnicOriginDAL.cs" />
     <Compile Include="DAL\MealTypeDAL.cs" />
     <Compile Include="DAL\AllergenDAL.cs" />
     <Compile Include="DAL\KitchenwareDAL.cs" />
@@ -101,6 +105,8 @@
     <Compile Include="DAL\IngredientsDAL.cs" />
     <Compile Include="DAL\NutritionDAL.cs" />
     <Compile Include="DAL\RecipeDAL.cs" />
+    <Compile Include="DAL\TypeOfFoodDAL.cs" />
+    <Compile Include="DAL\TypeOfMealDAL.cs" />
     <Compile Include="UserControls\RecipeListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,6 +136,61 @@
     <Compile Include="View\RecipeDetails.Designer.cs">
       <DependentUpon>RecipeDetails.cs</DependentUpon>
     </Compile>
+    <Content Include="bin\Debug\BouncyCastle.Crypto.dll" />
+    <Content Include="bin\Debug\Dapper.dll" />
+    <Content Include="bin\Debug\Dapper.xml" />
+    <Content Include="bin\Debug\Google.Protobuf.dll" />
+    <Content Include="bin\Debug\Google.Protobuf.pdb" />
+    <Content Include="bin\Debug\Google.Protobuf.xml" />
+    <Content Include="bin\Debug\K4os.Compression.LZ4.dll" />
+    <Content Include="bin\Debug\K4os.Compression.LZ4.Streams.dll" />
+    <Content Include="bin\Debug\K4os.Compression.LZ4.Streams.xml" />
+    <Content Include="bin\Debug\K4os.Compression.LZ4.xml" />
+    <Content Include="bin\Debug\K4os.Hash.xxHash.dll" />
+    <Content Include="bin\Debug\K4os.Hash.xxHash.xml" />
+    <Content Include="bin\Debug\RecipeBookApp.exe" />
+    <Content Include="bin\Debug\RecipeBookApp.pdb" />
+    <Content Include="bin\Debug\System.Buffers.dll" />
+    <Content Include="bin\Debug\System.Buffers.xml" />
+    <Content Include="bin\Debug\System.Data.SQLite.dll" />
+    <Content Include="bin\Debug\System.Data.SQLite.xml" />
+    <Content Include="bin\Debug\System.Memory.dll" />
+    <Content Include="bin\Debug\System.Memory.xml" />
+    <Content Include="bin\Debug\System.Numerics.Vectors.dll" />
+    <Content Include="bin\Debug\System.Numerics.Vectors.xml" />
+    <Content Include="bin\Debug\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\Debug\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="bin\Debug\x64\SQLite.Interop.dll" />
+    <Content Include="bin\Debug\x86\SQLite.Interop.dll" />
+    <Content Include="bin\Release\BouncyCastle.Crypto.dll" />
+    <Content Include="bin\Release\Dapper.dll" />
+    <Content Include="bin\Release\Dapper.xml" />
+    <Content Include="bin\Release\Google.Protobuf.dll" />
+    <Content Include="bin\Release\Google.Protobuf.pdb" />
+    <Content Include="bin\Release\Google.Protobuf.xml" />
+    <Content Include="bin\Release\K4os.Compression.LZ4.dll" />
+    <Content Include="bin\Release\K4os.Compression.LZ4.Streams.dll" />
+    <Content Include="bin\Release\K4os.Compression.LZ4.Streams.xml" />
+    <Content Include="bin\Release\K4os.Compression.LZ4.xml" />
+    <Content Include="bin\Release\K4os.Hash.xxHash.dll" />
+    <Content Include="bin\Release\K4os.Hash.xxHash.xml" />
+    <Content Include="bin\Release\RecipeBookApp.exe" />
+    <Content Include="bin\Release\RecipeBookApp.pdb" />
+    <Content Include="bin\Release\System.Buffers.dll" />
+    <Content Include="bin\Release\System.Buffers.xml" />
+    <Content Include="bin\Release\System.Data.SQLite.dll" />
+    <Content Include="bin\Release\System.Data.SQLite.xml" />
+    <Content Include="bin\Release\System.Memory.dll" />
+    <Content Include="bin\Release\System.Memory.xml" />
+    <Content Include="bin\Release\System.Numerics.Vectors.dll" />
+    <Content Include="bin\Release\System.Numerics.Vectors.xml" />
+    <Content Include="bin\Release\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\Release\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="bin\Release\x64\SQLite.Interop.dll" />
+    <Content Include="bin\Release\x86\SQLite.Interop.dll" />
+    <Content Include="Data\Digital Recipe Book Banner 2.png" />
+    <Content Include="Data\Digital Recipe Book Banner.png" />
+    <Content Include="Data\sampleimage.jpg" />
     <Content Include="sampleimage.jpg" />
     <EmbeddedResource Include="UserControls\RecipeListItem.resx">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
@@ -152,6 +213,10 @@
     <Content Include="db\recipe_app.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="bin\Debug\db\recipe_app.db" />
+    <None Include="bin\Debug\RecipeBookApp.exe.config" />
+    <None Include="bin\Release\db\recipe_app.db" />
+    <None Include="bin\Release\RecipeBookApp.exe.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

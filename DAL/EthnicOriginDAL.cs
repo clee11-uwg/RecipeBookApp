@@ -32,7 +32,7 @@ namespace RecipeBookApp.DAL
                             Ethnic ethnic = new Ethnic
                             {
                                 EthnicId = Convert.ToInt32(reader["id"]),
-                                EthnicEthnicity = reader["Ethnicity"].ToString()
+                                Ethnicity = reader["Ethnicity"].ToString()
                             };
 
                             ethnicList.Add(ethnic);
