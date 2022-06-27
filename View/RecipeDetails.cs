@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RecipeBookApp.Controller;
+using RecipeBookApp.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,66 @@ namespace RecipeBookApp.View
 {
     public partial class RecipeDetails : Form
     {
+        private Recipe selectedRecipe;
+        private RecipeController recipeController;
+        private IngredientsController ingredientsController;
+        private KitchenwareController kitchenwareController;
+
+        /// <summary>
+        /// 0 param constructor
+        /// </summary>
         public RecipeDetails()
         {
             InitializeComponent();
+            this.selectedRecipe = new Recipe();
+            this.recipeController = new RecipeController();
+            this.ingredientsController = new IngredientsController();
+            this.kitchenwareController = new KitchenwareController();
+        }
+
+        /// <summary>
+        /// Method to set the Recipe to the selected recipe
+        /// </summary>
+        /// <param name="userSelectedRecipe">Selected recipe from user</param>
+        public void SetRecipe(Recipe userSelectedRecipe)
+        {
+            this.selectedRecipe = userSelectedRecipe;
+            this.titleLbl.Text = this.selectedRecipe.RecipeName;
+            GetRecipeDetails(this.selectedRecipe);
+        }
+
+        private void GetRecipeDetails(Recipe selectedRecipe)
+        {
+            GetIngredients();
+            GetKitchenware();
+            GetInstructions();
+        }
+
+        private void GetIngredients()
+        {
+            List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(selectedRecipe.RecipeId);
+            for (int i = 0; i < ingredientList.Count; i++)
+            {
+                string ingredient = ingredientList[i].IngredientName;
+                var listViewItem = new ListViewItem(ingredient);
+                ingredientsListView.Items.Add(listViewItem);
+            }
+        }
+
+        private void GetKitchenware()
+        {
+            //List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(selectedRecipe.RecipeId);
+            /*for (int i = 0; i < kitchenwareList.Count; i++)
+            {
+                string ingredient = kitchenwareList[i].KitchenwareDetails;
+                var listViewItem = new ListViewItem(ingredient);
+                ingredientsListView.Items.Add(listViewItem);
+            }*/
+        }
+
+        private void GetInstructions()
+        {
+            this.instructionsTxtBx.Text = this.selectedRecipe.RecipeInstructions;
         }
     }
 }

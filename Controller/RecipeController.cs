@@ -55,11 +55,11 @@ namespace RecipeBookApp.Controller
         /// <returns>List of recipes free of said allergen</returns>
         public List<Recipe> GetRecipesWithoutAllergen(int allergenID)
         {
-            if (searchRecipeID < 1)
+            if (allergenID < 1)
             {
                 throw new ArgumentOutOfRangeException("Recipe ID cannot be less than 1");
             }
-            return this.recipeDAL.GetRecipesWithoutAllergen(allergenID)
+            return this.recipeDAL.GetRecipesWithoutAllergen(allergenID);
         }
 
         /// <summary>

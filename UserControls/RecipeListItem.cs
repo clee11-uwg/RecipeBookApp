@@ -9,17 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RecipeBookApp.Controller;
 using RecipeBookApp.Model;
+using RecipeBookApp.View;
 
 namespace RecipeBookApp.UserControls
 {
     public partial class RecipeListItem : UserControl
     {
         private RecipeController recipeController;
+        private RecipeDetails recipeDetailsScreen;
 
         public RecipeListItem()
         {
             InitializeComponent();
             this.recipeController = new RecipeController();
+            this.recipeDetailsScreen = new RecipeDetails();
         }
 
         #region Properties
@@ -49,14 +52,20 @@ namespace RecipeBookApp.UserControls
 
         private void LblTile_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("Id is " + RecipeId);
             Recipe selectedRecipe = this.recipeController.GetRecipe(RecipeId);
-            MessageBox.Show(selectedRecipe.RecipeInstructions);
+            this.recipeDetailsScreen.SetRecipe(selectedRecipe);
+            this.ParentForm.Hide();
+            this.recipeDetailsScreen.ShowDialog();
+            this.ParentForm.Show();
         }
 
         private void PicBoxRecipeImage_Click(object sender, EventArgs e)
         {
-           // MessageBox.Show("Id is " + RecipeId);
+            Recipe selectedRecipe = this.recipeController.GetRecipe(RecipeId);
+            this.recipeDetailsScreen.SetRecipe(selectedRecipe);
+            this.ParentForm.Hide();
+            this.recipeDetailsScreen.ShowDialog();
+            this.ParentForm.Show();
         }
     }
 }

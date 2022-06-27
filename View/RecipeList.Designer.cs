@@ -36,6 +36,12 @@
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
+            this.nutritionComboBox = new System.Windows.Forms.ComboBox();
+            this.allergenComboBox = new System.Windows.Forms.ComboBox();
+            this.kitchenWareComboBox = new System.Windows.Forms.ComboBox();
+            this.ingredientsComboBox = new System.Windows.Forms.ComboBox();
+            this.mealTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -66,11 +72,11 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 218);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 264);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(20, 12, 13, 12);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1183, 732);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1183, 686);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // searchLabel
@@ -115,12 +121,67 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
+            // nutritionComboBox
+            // 
+            this.nutritionComboBox.FormattingEnabled = true;
+            this.nutritionComboBox.Location = new System.Drawing.Point(42, 221);
+            this.nutritionComboBox.Name = "nutritionComboBox";
+            this.nutritionComboBox.Size = new System.Drawing.Size(121, 24);
+            this.nutritionComboBox.TabIndex = 8;
+            // 
+            // allergenComboBox
+            // 
+            this.allergenComboBox.FormattingEnabled = true;
+            this.allergenComboBox.Location = new System.Drawing.Point(219, 221);
+            this.allergenComboBox.Name = "allergenComboBox";
+            this.allergenComboBox.Size = new System.Drawing.Size(121, 24);
+            this.allergenComboBox.TabIndex = 9;
+            // 
+            // kitchenWareComboBox
+            // 
+            this.kitchenWareComboBox.FormattingEnabled = true;
+            this.kitchenWareComboBox.Location = new System.Drawing.Point(751, 221);
+            this.kitchenWareComboBox.Name = "kitchenWareComboBox";
+            this.kitchenWareComboBox.Size = new System.Drawing.Size(121, 24);
+            this.kitchenWareComboBox.TabIndex = 10;
+            // 
+            // ingredientsComboBox
+            // 
+            this.ingredientsComboBox.FormattingEnabled = true;
+            this.ingredientsComboBox.Location = new System.Drawing.Point(576, 221);
+            this.ingredientsComboBox.Name = "ingredientsComboBox";
+            this.ingredientsComboBox.Size = new System.Drawing.Size(121, 24);
+            this.ingredientsComboBox.TabIndex = 11;
+            // 
+            // mealTypeComboBox
+            // 
+            this.mealTypeComboBox.FormattingEnabled = true;
+            this.mealTypeComboBox.Location = new System.Drawing.Point(402, 221);
+            this.mealTypeComboBox.Name = "mealTypeComboBox";
+            this.mealTypeComboBox.Size = new System.Drawing.Size(121, 24);
+            this.mealTypeComboBox.TabIndex = 12;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(913, 221);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(169, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Apply Filter";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // RecipeList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1183, 956);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.mealTypeComboBox);
+            this.Controls.Add(this.ingredientsComboBox);
+            this.Controls.Add(this.kitchenWareComboBox);
+            this.Controls.Add(this.allergenComboBox);
+            this.Controls.Add(this.nutritionComboBox);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchTextBox);
@@ -147,6 +208,12 @@
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.ComboBox nutritionComboBox;
+        private System.Windows.Forms.ComboBox allergenComboBox;
+        private System.Windows.Forms.ComboBox kitchenWareComboBox;
+        private System.Windows.Forms.ComboBox ingredientsComboBox;
+        private System.Windows.Forms.ComboBox mealTypeComboBox;
+        private System.Windows.Forms.Button button1;
     }
 }
 
