@@ -41,9 +41,20 @@
             this.kitchenWareComboBox = new System.Windows.Forms.ComboBox();
             this.ingredientsComboBox = new System.Windows.Forms.ComboBox();
             this.mealTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.filterButton = new System.Windows.Forms.Button();
+            this.applyFiltertableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.nutritionLabel = new System.Windows.Forms.Label();
+            this.allergenLabel = new System.Windows.Forms.Label();
+            this.mealLabel = new System.Windows.Forms.Label();
+            this.ingredientsLabel = new System.Windows.Forms.Label();
+            this.kitchenLabel = new System.Windows.Forms.Label();
+            this.ethnicLabel = new System.Windows.Forms.Label();
+            this.ethnicComboBox = new System.Windows.Forms.ComboBox();
+            this.foodLabel = new System.Windows.Forms.Label();
+            this.foodComboBox = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.applyFiltertableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,11 +83,11 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 264);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 284);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(20, 12, 13, 12);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1183, 686);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1183, 666);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // searchLabel
@@ -124,7 +135,7 @@
             // nutritionComboBox
             // 
             this.nutritionComboBox.FormattingEnabled = true;
-            this.nutritionComboBox.Location = new System.Drawing.Point(42, 221);
+            this.nutritionComboBox.Location = new System.Drawing.Point(3, 23);
             this.nutritionComboBox.Name = "nutritionComboBox";
             this.nutritionComboBox.Size = new System.Drawing.Size(121, 24);
             this.nutritionComboBox.TabIndex = 8;
@@ -132,7 +143,7 @@
             // allergenComboBox
             // 
             this.allergenComboBox.FormattingEnabled = true;
-            this.allergenComboBox.Location = new System.Drawing.Point(219, 221);
+            this.allergenComboBox.Location = new System.Drawing.Point(151, 23);
             this.allergenComboBox.Name = "allergenComboBox";
             this.allergenComboBox.Size = new System.Drawing.Size(121, 24);
             this.allergenComboBox.TabIndex = 9;
@@ -140,7 +151,7 @@
             // kitchenWareComboBox
             // 
             this.kitchenWareComboBox.FormattingEnabled = true;
-            this.kitchenWareComboBox.Location = new System.Drawing.Point(751, 221);
+            this.kitchenWareComboBox.Location = new System.Drawing.Point(595, 23);
             this.kitchenWareComboBox.Name = "kitchenWareComboBox";
             this.kitchenWareComboBox.Size = new System.Drawing.Size(121, 24);
             this.kitchenWareComboBox.TabIndex = 10;
@@ -148,7 +159,7 @@
             // ingredientsComboBox
             // 
             this.ingredientsComboBox.FormattingEnabled = true;
-            this.ingredientsComboBox.Location = new System.Drawing.Point(576, 221);
+            this.ingredientsComboBox.Location = new System.Drawing.Point(447, 23);
             this.ingredientsComboBox.Name = "ingredientsComboBox";
             this.ingredientsComboBox.Size = new System.Drawing.Size(121, 24);
             this.ingredientsComboBox.TabIndex = 11;
@@ -156,19 +167,132 @@
             // mealTypeComboBox
             // 
             this.mealTypeComboBox.FormattingEnabled = true;
-            this.mealTypeComboBox.Location = new System.Drawing.Point(402, 221);
+            this.mealTypeComboBox.Location = new System.Drawing.Point(299, 23);
             this.mealTypeComboBox.Name = "mealTypeComboBox";
             this.mealTypeComboBox.Size = new System.Drawing.Size(121, 24);
             this.mealTypeComboBox.TabIndex = 12;
             // 
-            // button1
+            // filterButton
             // 
-            this.button1.Location = new System.Drawing.Point(913, 221);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(169, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Apply Filter";
-            this.button1.UseVisualStyleBackColor = true;
+            this.filterButton.Location = new System.Drawing.Point(1024, 23);
+            this.filterButton.Name = "filterButton";
+            this.filterButton.Size = new System.Drawing.Size(132, 23);
+            this.filterButton.TabIndex = 13;
+            this.filterButton.Text = "Apply Filter";
+            this.filterButton.UseVisualStyleBackColor = true;
+            // 
+            // applyFiltertableLayoutPanel
+            // 
+            this.applyFiltertableLayoutPanel.ColumnCount = 8;
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.82052F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.82051F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.82051F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.82051F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.82051F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.82051F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.53846F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.53846F));
+            this.applyFiltertableLayoutPanel.Controls.Add(this.foodLabel, 6, 0);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.ethnicLabel, 5, 0);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.kitchenLabel, 4, 0);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.ingredientsLabel, 3, 0);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.mealLabel, 2, 0);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.allergenLabel, 1, 0);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.nutritionComboBox, 0, 1);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.allergenComboBox, 1, 1);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.kitchenWareComboBox, 4, 1);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.ingredientsComboBox, 3, 1);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.mealTypeComboBox, 2, 1);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.nutritionLabel, 0, 0);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.ethnicComboBox, 5, 1);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.foodComboBox, 6, 1);
+            this.applyFiltertableLayoutPanel.Controls.Add(this.filterButton, 7, 1);
+            this.applyFiltertableLayoutPanel.Location = new System.Drawing.Point(12, 216);
+            this.applyFiltertableLayoutPanel.Name = "applyFiltertableLayoutPanel";
+            this.applyFiltertableLayoutPanel.RowCount = 2;
+            this.applyFiltertableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34F));
+            this.applyFiltertableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66F));
+            this.applyFiltertableLayoutPanel.Size = new System.Drawing.Size(1159, 61);
+            this.applyFiltertableLayoutPanel.TabIndex = 14;
+            // 
+            // nutritionLabel
+            // 
+            this.nutritionLabel.AutoSize = true;
+            this.nutritionLabel.Location = new System.Drawing.Point(3, 0);
+            this.nutritionLabel.Name = "nutritionLabel";
+            this.nutritionLabel.Size = new System.Drawing.Size(55, 16);
+            this.nutritionLabel.TabIndex = 13;
+            this.nutritionLabel.Text = "Nutrition";
+            // 
+            // allergenLabel
+            // 
+            this.allergenLabel.AutoSize = true;
+            this.allergenLabel.Location = new System.Drawing.Point(151, 0);
+            this.allergenLabel.Name = "allergenLabel";
+            this.allergenLabel.Size = new System.Drawing.Size(57, 16);
+            this.allergenLabel.TabIndex = 14;
+            this.allergenLabel.Text = "Allergen";
+            // 
+            // mealLabel
+            // 
+            this.mealLabel.AutoSize = true;
+            this.mealLabel.Location = new System.Drawing.Point(299, 0);
+            this.mealLabel.Name = "mealLabel";
+            this.mealLabel.Size = new System.Drawing.Size(69, 16);
+            this.mealLabel.TabIndex = 15;
+            this.mealLabel.Text = "MealType";
+            // 
+            // ingredientsLabel
+            // 
+            this.ingredientsLabel.AutoSize = true;
+            this.ingredientsLabel.Location = new System.Drawing.Point(447, 0);
+            this.ingredientsLabel.Name = "ingredientsLabel";
+            this.ingredientsLabel.Size = new System.Drawing.Size(73, 16);
+            this.ingredientsLabel.TabIndex = 16;
+            this.ingredientsLabel.Text = "Ingredients";
+            // 
+            // kitchenLabel
+            // 
+            this.kitchenLabel.AutoSize = true;
+            this.kitchenLabel.Location = new System.Drawing.Point(595, 0);
+            this.kitchenLabel.Name = "kitchenLabel";
+            this.kitchenLabel.Size = new System.Drawing.Size(83, 16);
+            this.kitchenLabel.TabIndex = 17;
+            this.kitchenLabel.Text = "KitchenWare";
+            // 
+            // ethnicLabel
+            // 
+            this.ethnicLabel.AutoSize = true;
+            this.ethnicLabel.Location = new System.Drawing.Point(743, 0);
+            this.ethnicLabel.Name = "ethnicLabel";
+            this.ethnicLabel.Size = new System.Drawing.Size(43, 16);
+            this.ethnicLabel.TabIndex = 18;
+            this.ethnicLabel.Text = "Ethnic";
+            // 
+            // ethnicComboBox
+            // 
+            this.ethnicComboBox.FormattingEnabled = true;
+            this.ethnicComboBox.Location = new System.Drawing.Point(743, 23);
+            this.ethnicComboBox.Name = "ethnicComboBox";
+            this.ethnicComboBox.Size = new System.Drawing.Size(114, 24);
+            this.ethnicComboBox.TabIndex = 19;
+            // 
+            // foodLabel
+            // 
+            this.foodLabel.AutoSize = true;
+            this.foodLabel.Location = new System.Drawing.Point(891, 0);
+            this.foodLabel.Name = "foodLabel";
+            this.foodLabel.Size = new System.Drawing.Size(71, 16);
+            this.foodLabel.TabIndex = 20;
+            this.foodLabel.Text = "FoodType";
+            // 
+            // foodComboBox
+            // 
+            this.foodComboBox.FormattingEnabled = true;
+            this.foodComboBox.Location = new System.Drawing.Point(891, 23);
+            this.foodComboBox.Name = "foodComboBox";
+            this.foodComboBox.Size = new System.Drawing.Size(114, 24);
+            this.foodComboBox.TabIndex = 21;
             // 
             // RecipeList
             // 
@@ -176,12 +300,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1183, 956);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.mealTypeComboBox);
-            this.Controls.Add(this.ingredientsComboBox);
-            this.Controls.Add(this.kitchenWareComboBox);
-            this.Controls.Add(this.allergenComboBox);
-            this.Controls.Add(this.nutritionComboBox);
+            this.Controls.Add(this.applyFiltertableLayoutPanel);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchTextBox);
@@ -195,6 +314,8 @@
             this.Text = "Digital Recipe App";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.applyFiltertableLayoutPanel.ResumeLayout(false);
+            this.applyFiltertableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,7 +334,17 @@
         private System.Windows.Forms.ComboBox kitchenWareComboBox;
         private System.Windows.Forms.ComboBox ingredientsComboBox;
         private System.Windows.Forms.ComboBox mealTypeComboBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button filterButton;
+        private System.Windows.Forms.TableLayoutPanel applyFiltertableLayoutPanel;
+        private System.Windows.Forms.Label allergenLabel;
+        private System.Windows.Forms.Label nutritionLabel;
+        private System.Windows.Forms.Label ethnicLabel;
+        private System.Windows.Forms.Label kitchenLabel;
+        private System.Windows.Forms.Label ingredientsLabel;
+        private System.Windows.Forms.Label mealLabel;
+        private System.Windows.Forms.ComboBox ethnicComboBox;
+        private System.Windows.Forms.Label foodLabel;
+        private System.Windows.Forms.ComboBox foodComboBox;
     }
 }
 
