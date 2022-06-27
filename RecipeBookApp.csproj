@@ -88,11 +88,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\MealTypeController.cs" />
     <Compile Include="Controller\AllergenController.cs" />
     <Compile Include="Controller\KitchenwareController.cs" />
     <Compile Include="Controller\IngredientsController.cs" />
     <Compile Include="Controller\NutritionController.cs" />
     <Compile Include="Controller\RecipeController.cs" />
+    <Compile Include="DAL\MealTypeDAL.cs" />
     <Compile Include="DAL\AllergenDAL.cs" />
     <Compile Include="DAL\KitchenwareDAL.cs" />
     <Compile Include="DAL\DBConnection.cs" />

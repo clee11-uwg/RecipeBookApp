@@ -43,14 +43,14 @@
             this.mealTypeComboBox = new System.Windows.Forms.ComboBox();
             this.filterButton = new System.Windows.Forms.Button();
             this.applyFiltertableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.nutritionLabel = new System.Windows.Forms.Label();
-            this.allergenLabel = new System.Windows.Forms.Label();
-            this.mealLabel = new System.Windows.Forms.Label();
-            this.ingredientsLabel = new System.Windows.Forms.Label();
-            this.kitchenLabel = new System.Windows.Forms.Label();
-            this.ethnicLabel = new System.Windows.Forms.Label();
-            this.ethnicComboBox = new System.Windows.Forms.ComboBox();
             this.foodLabel = new System.Windows.Forms.Label();
+            this.ethnicLabel = new System.Windows.Forms.Label();
+            this.kitchenLabel = new System.Windows.Forms.Label();
+            this.ingredientsLabel = new System.Windows.Forms.Label();
+            this.mealLabel = new System.Windows.Forms.Label();
+            this.allergenLabel = new System.Windows.Forms.Label();
+            this.nutritionLabel = new System.Windows.Forms.Label();
+            this.ethnicComboBox = new System.Windows.Forms.ComboBox();
             this.foodComboBox = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -110,26 +110,28 @@
             // 
             // searchButton
             // 
+            this.searchButton.BackColor = System.Drawing.Color.DarkSalmon;
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchButton.Location = new System.Drawing.Point(776, 176);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(110, 35);
             this.searchButton.TabIndex = 6;
             this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.UseVisualStyleBackColor = false;
             this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // clearButton
             // 
             this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearButton.BackColor = System.Drawing.Color.DarkSalmon;
             this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.Location = new System.Drawing.Point(892, 174);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(95, 37);
             this.clearButton.TabIndex = 7;
             this.clearButton.Text = "Clear";
-            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.UseVisualStyleBackColor = false;
             this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // nutritionComboBox
@@ -174,12 +176,15 @@
             // 
             // filterButton
             // 
+            this.filterButton.BackColor = System.Drawing.Color.LightSalmon;
+            this.filterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filterButton.Location = new System.Drawing.Point(1024, 23);
             this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(132, 23);
+            this.filterButton.Size = new System.Drawing.Size(132, 35);
             this.filterButton.TabIndex = 13;
             this.filterButton.Text = "Apply Filter";
-            this.filterButton.UseVisualStyleBackColor = true;
+            this.filterButton.UseVisualStyleBackColor = false;
+            this.filterButton.Click += new System.EventHandler(this.FilterButton_Click);
             // 
             // applyFiltertableLayoutPanel
             // 
@@ -215,50 +220,14 @@
             this.applyFiltertableLayoutPanel.Size = new System.Drawing.Size(1159, 61);
             this.applyFiltertableLayoutPanel.TabIndex = 14;
             // 
-            // nutritionLabel
+            // foodLabel
             // 
-            this.nutritionLabel.AutoSize = true;
-            this.nutritionLabel.Location = new System.Drawing.Point(3, 0);
-            this.nutritionLabel.Name = "nutritionLabel";
-            this.nutritionLabel.Size = new System.Drawing.Size(55, 16);
-            this.nutritionLabel.TabIndex = 13;
-            this.nutritionLabel.Text = "Nutrition";
-            // 
-            // allergenLabel
-            // 
-            this.allergenLabel.AutoSize = true;
-            this.allergenLabel.Location = new System.Drawing.Point(151, 0);
-            this.allergenLabel.Name = "allergenLabel";
-            this.allergenLabel.Size = new System.Drawing.Size(57, 16);
-            this.allergenLabel.TabIndex = 14;
-            this.allergenLabel.Text = "Allergen";
-            // 
-            // mealLabel
-            // 
-            this.mealLabel.AutoSize = true;
-            this.mealLabel.Location = new System.Drawing.Point(299, 0);
-            this.mealLabel.Name = "mealLabel";
-            this.mealLabel.Size = new System.Drawing.Size(69, 16);
-            this.mealLabel.TabIndex = 15;
-            this.mealLabel.Text = "MealType";
-            // 
-            // ingredientsLabel
-            // 
-            this.ingredientsLabel.AutoSize = true;
-            this.ingredientsLabel.Location = new System.Drawing.Point(447, 0);
-            this.ingredientsLabel.Name = "ingredientsLabel";
-            this.ingredientsLabel.Size = new System.Drawing.Size(73, 16);
-            this.ingredientsLabel.TabIndex = 16;
-            this.ingredientsLabel.Text = "Ingredients";
-            // 
-            // kitchenLabel
-            // 
-            this.kitchenLabel.AutoSize = true;
-            this.kitchenLabel.Location = new System.Drawing.Point(595, 0);
-            this.kitchenLabel.Name = "kitchenLabel";
-            this.kitchenLabel.Size = new System.Drawing.Size(83, 16);
-            this.kitchenLabel.TabIndex = 17;
-            this.kitchenLabel.Text = "KitchenWare";
+            this.foodLabel.AutoSize = true;
+            this.foodLabel.Location = new System.Drawing.Point(891, 0);
+            this.foodLabel.Name = "foodLabel";
+            this.foodLabel.Size = new System.Drawing.Size(71, 16);
+            this.foodLabel.TabIndex = 20;
+            this.foodLabel.Text = "FoodType";
             // 
             // ethnicLabel
             // 
@@ -269,6 +238,51 @@
             this.ethnicLabel.TabIndex = 18;
             this.ethnicLabel.Text = "Ethnic";
             // 
+            // kitchenLabel
+            // 
+            this.kitchenLabel.AutoSize = true;
+            this.kitchenLabel.Location = new System.Drawing.Point(595, 0);
+            this.kitchenLabel.Name = "kitchenLabel";
+            this.kitchenLabel.Size = new System.Drawing.Size(83, 16);
+            this.kitchenLabel.TabIndex = 17;
+            this.kitchenLabel.Text = "KitchenWare";
+            // 
+            // ingredientsLabel
+            // 
+            this.ingredientsLabel.AutoSize = true;
+            this.ingredientsLabel.Location = new System.Drawing.Point(447, 0);
+            this.ingredientsLabel.Name = "ingredientsLabel";
+            this.ingredientsLabel.Size = new System.Drawing.Size(73, 16);
+            this.ingredientsLabel.TabIndex = 16;
+            this.ingredientsLabel.Text = "Ingredients";
+            // 
+            // mealLabel
+            // 
+            this.mealLabel.AutoSize = true;
+            this.mealLabel.Location = new System.Drawing.Point(299, 0);
+            this.mealLabel.Name = "mealLabel";
+            this.mealLabel.Size = new System.Drawing.Size(69, 16);
+            this.mealLabel.TabIndex = 15;
+            this.mealLabel.Text = "MealType";
+            // 
+            // allergenLabel
+            // 
+            this.allergenLabel.AutoSize = true;
+            this.allergenLabel.Location = new System.Drawing.Point(151, 0);
+            this.allergenLabel.Name = "allergenLabel";
+            this.allergenLabel.Size = new System.Drawing.Size(57, 16);
+            this.allergenLabel.TabIndex = 14;
+            this.allergenLabel.Text = "Allergen";
+            // 
+            // nutritionLabel
+            // 
+            this.nutritionLabel.AutoSize = true;
+            this.nutritionLabel.Location = new System.Drawing.Point(3, 0);
+            this.nutritionLabel.Name = "nutritionLabel";
+            this.nutritionLabel.Size = new System.Drawing.Size(55, 16);
+            this.nutritionLabel.TabIndex = 13;
+            this.nutritionLabel.Text = "Nutrition";
+            // 
             // ethnicComboBox
             // 
             this.ethnicComboBox.FormattingEnabled = true;
@@ -276,15 +290,6 @@
             this.ethnicComboBox.Name = "ethnicComboBox";
             this.ethnicComboBox.Size = new System.Drawing.Size(114, 24);
             this.ethnicComboBox.TabIndex = 19;
-            // 
-            // foodLabel
-            // 
-            this.foodLabel.AutoSize = true;
-            this.foodLabel.Location = new System.Drawing.Point(891, 0);
-            this.foodLabel.Name = "foodLabel";
-            this.foodLabel.Size = new System.Drawing.Size(71, 16);
-            this.foodLabel.TabIndex = 20;
-            this.foodLabel.Text = "FoodType";
             // 
             // foodComboBox
             // 
