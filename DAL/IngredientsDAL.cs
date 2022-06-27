@@ -52,6 +52,7 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// This method to get the Ingredients based on the recipe ID
         /// </summary>
+        /// <param name="recipeID">ID of the recipe</param>
         /// <returns>ID of recipe</returns>
         public List<Ingredient> GetIngredient(int recipeID)
         {
@@ -83,11 +84,11 @@ namespace RecipeBookApp.DAL
                         }
                     }
                 }
+
+                return ingredientDetails;
             }
 
-            return ingredientDetails;
+
         }
-
-
     }
 }

@@ -55,20 +55,18 @@ namespace RecipeBookApp.View
             for (int i = 0; i < ingredientList.Count; i++)
             {
                 string ingredient = ingredientList[i].IngredientName;
-                var listViewItem = new ListViewItem(ingredient);
-                ingredientsListView.Items.Add(listViewItem);
+                this.ingredientsLbl.Text += ingredient + "\n";
             }
         }
 
         private void GetKitchenware()
         {
-            //List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(selectedRecipe.RecipeId);
-            /*for (int i = 0; i < kitchenwareList.Count; i++)
+            List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(selectedRecipe.RecipeId);
+            for (int i = 0; i < kitchenwareList.Count; i++)
             {
-                string ingredient = kitchenwareList[i].KitchenwareDetails;
-                var listViewItem = new ListViewItem(ingredient);
-                ingredientsListView.Items.Add(listViewItem);
-            }*/
+                string kitchenware = kitchenwareList[i].KitchenwareDetails;
+                this.kitchenwareLbl.Text += kitchenware + "\n";
+            }
         }
 
         private void GetInstructions()
