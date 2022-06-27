@@ -52,7 +52,7 @@ namespace RecipeBookApp.DAL
         public List<MealType> GetMealTypes(int recipeID)
         {
             List<MealType> mealTypesList = new List<MealType>();
-            string selectStatement = @"SELECT kitchenware.id, kitchenware.kitchenware
+            string selectStatement = @"SELECT type_of_meal.id, type_of_meal.Type
                                         FROM recipe
 		                                    JOIN recipe_is_a_type_of_meal ON recipe_is_a_type_of_meal.recipeID = recipe.id
 		                                    JOIN type_of_meal ON recipe_is_a_type_of_meal.typeOfMealID = type_of_meal.id
