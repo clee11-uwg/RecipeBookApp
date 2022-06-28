@@ -23,9 +23,10 @@ namespace RecipeBookApp.DAL
             //string workingDirectory = Environment.CurrentDirectory;
             //string path = Path.Combine(Directory.GetParent(workingDirectory).Parent.FullName, @"Data\", "sampleimage.jpg");
             List<Recipe> recipes = new List<Recipe>();
-            string selectStatement = "SELECT r.id, r.`Name`, r.Instructions, " +
-                "r.cooktime, r.nutritionID, r.ethnicOriginID, i.image FROM recipe r JOIN image i " +
-                "ON r.ID = i.recipeID;";
+            string selectStatement = @"SELECT r.id, r.`Name`, r.Instructions,
+                                            r.cooktime, r.nutritionID, r.ethnicOriginID, i.image 
+                                        FROM recipe r 
+                                            JOIN image i ON r.ID = i.recipeID;";
                 
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
