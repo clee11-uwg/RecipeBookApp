@@ -294,14 +294,15 @@ namespace RecipeBookApp.DAL
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    selectCommand.Parameters.AddWithValue("@allergens", allergens);
-                    selectCommand.Parameters.AddWithValue("@ethnicities", ethnicities);
-                    selectCommand.Parameters.AddWithValue("@foodTypes", foodTypes);
-                    selectCommand.Parameters.AddWithValue("@ingredients", ingredients);
-                    selectCommand.Parameters.AddWithValue("@kitchenware", kitchenware);
-                    selectCommand.Parameters.AddWithValue("@mealTypes", mealTypes);
-                    selectCommand.Parameters.AddWithValue("@nutrition", nutrition);
-                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    selectCommand.Parameters.AddRange("@allergens", allergens);
+                    selectCommand.Parameters.AddRange("@ethnicities", ethnicities);
+                    selectCommand.Parameters.AddRange("@foodTypes", foodTypes);
+                    selectCommand.Parameters.AddRange("@ingredients", ingredients);
+                    selectCommand.Parameters.AddRange("@kitchenware", kitchenware);
+                    selectCommand.Parameters.AddRange("@mealTypes", mealTypes);
+                    selectCommand.Parameters.AddRange("@nutrition", nutrition);
+                    
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())                    
                     {
                         while (reader.Read())
                         {
