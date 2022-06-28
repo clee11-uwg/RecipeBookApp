@@ -18,6 +18,7 @@ namespace RecipeBookApp.View
         private RecipeController recipeController;
         private IngredientsController ingredientsController;
         private KitchenwareController kitchenwareController;
+        private TypeOfMealController typeOfMealController;
 
         /// <summary>
         /// 0 param constructor
@@ -29,6 +30,7 @@ namespace RecipeBookApp.View
             this.recipeController = new RecipeController();
             this.ingredientsController = new IngredientsController();
             this.kitchenwareController = new KitchenwareController();
+            this.typeOfMealController = new TypeOfMealController();
         }
 
         /// <summary>
@@ -47,6 +49,7 @@ namespace RecipeBookApp.View
             GetIngredients();
             GetKitchenware();
             GetInstructions();
+            GetTypeOfFood();
         }
 
         private void GetIngredients()
@@ -72,6 +75,16 @@ namespace RecipeBookApp.View
         private void GetInstructions()
         {
             this.instructionsTxtBx.Text = this.selectedRecipe.RecipeInstructions;
+        }
+
+        private void GetTypeOfFood()
+        {
+            List<MealType> mealTypeList = this.typeOfMealController.GetMealTypes(selectedRecipe.RecipeId);
+            for (int i = 0; i < mealTypeList.Count; i++)
+            {
+                string mealType = mealTypeList[i].type;
+                this.typeOfMealLbl.Text += mealType + "\n";
+            }
         }
     }
 }

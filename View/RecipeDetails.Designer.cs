@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ingredientsLbl = new System.Windows.Forms.Label();
             this.kitchenwareLbl = new System.Windows.Forms.Label();
+            this.typeOfMealLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,12 +130,23 @@
             this.kitchenwareLbl.Size = new System.Drawing.Size(200, 100);
             this.kitchenwareLbl.TabIndex = 9;
             // 
+            // typeOfMealLbl
+            // 
+            this.typeOfMealLbl.AutoSize = true;
+            this.typeOfMealLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.typeOfMealLbl.Location = new System.Drawing.Point(531, 293);
+            this.typeOfMealLbl.MinimumSize = new System.Drawing.Size(200, 100);
+            this.typeOfMealLbl.Name = "typeOfMealLbl";
+            this.typeOfMealLbl.Size = new System.Drawing.Size(200, 100);
+            this.typeOfMealLbl.TabIndex = 10;
+            // 
             // RecipeDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(759, 746);
+            this.Controls.Add(this.typeOfMealLbl);
             this.Controls.Add(this.kitchenwareLbl);
             this.Controls.Add(this.ingredientsLbl);
             this.Controls.Add(this.label1);
@@ -163,5 +175,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label ingredientsLbl;
         private System.Windows.Forms.Label kitchenwareLbl;
+        private System.Windows.Forms.Label typeOfMealLbl;
     }
 }
