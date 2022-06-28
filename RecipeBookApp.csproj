@@ -218,6 +218,15 @@
     <None Include="bin\Release\db\recipe_app.db" />
     <None Include="bin\Release\RecipeBookApp.exe.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.Allergen.datasource" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.Ethnic.datasource" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.Filestream.datasource" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.FoodType.datasource" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.Ingredient.datasource" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.Kitchenware.datasource" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.MealType.datasource" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.Nutrition.datasource" />
+    <None Include="Properties\DataSources\RecipeBookApp.Model.Recipe.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -17,18 +17,15 @@ namespace RecipeBookApp
     {
         private RecipeController recipeController;
         private List<Recipe> recipeList;
-        private List<string> allergenList;
-        private List<string> nutritionList;
-        private List<string> kitchenWareList;
-        private List<string> mealTypeList;
-        private List<string> foodTypeList;
-        private List<string> ethnicList;
-        private List<string> IngredientList;
+       
         private readonly AllergenController allergenController;
         private readonly IngredientsController ingredientsController;
         private readonly KitchenwareController kitchenController;
         private readonly NutritionController nutritionController;
-        private readonly MealTypeController mealController;
+        private readonly TypeOfMealController mealController;
+        private readonly EthnicOriginController ethnicController;
+
+        private readonly TypeOfFoodController foodController;
 
         /// <summary>
         /// 0 parameter constructor for the RecipeList
@@ -40,7 +37,9 @@ namespace RecipeBookApp
             this.ingredientsController = new IngredientsController();
             this.kitchenController = new KitchenwareController();
             this.nutritionController = new NutritionController();
-            this.mealController = new MealTypeController();
+            this.mealController = new TypeOfMealController();
+            this.foodController = new TypeOfFoodController();
+            this.ethnicController = new EthnicOriginController();
             this.LoadComboBox();
             this.recipeController = new RecipeController();
             this.recipeList = new List<Recipe>();
@@ -114,35 +113,51 @@ namespace RecipeBookApp
         {
             try
             {
-                this.allergenComboBox.DataSource = null;
-                this.allergenList = new List<string>();
-                this.nutritionComboBox.DataSource = null;
-                this.nutritionList = new List<string>();
-                this.kitchenWareComboBox.DataSource = null;
-                this.kitchenWareList = new List<string>();
-                this.ingredientsComboBox.DataSource = null;
-                 this.IngredientList = new List<string>();
-                this.mealTypeComboBox.DataSource = null;
-                this.mealTypeList = new List<string>();
-                this.foodComboBox.DataSource = null;
-                this.foodTypeList = new List<string>();
+                this.allergenComboBox.DataSource = null;               
+                this.nutritionComboBox.DataSource = null;                
+                this.kitchenWareComboBox.DataSource = null;           
+                this.ingredientsComboBox.DataSource = null;               
+                this.mealTypeComboBox.DataSource = null;                
+                this.foodComboBox.DataSource = null;            
                 this.ethnicComboBox.DataSource = null;
-                this.ethnicList = new List<string>();
-
-                PopulateList();
-                this.allergenComboBox.DataSource = this.allergenList;
                 
-                this.nutritionComboBox.DataSource = this.nutritionList;
-              
-                this.kitchenWareComboBox.DataSource = this.kitchenWareList;
+                this.allergenComboBox.DataSource = this.allergenController.GetAllergens();
 
-               this.ingredientsComboBox.DataSource = this.IngredientList;
+                this.allergenComboBox.DisplayMember = "AllergenDetails";
+                this.allergenComboBox.ValueMember = "AllergenId" ;
+                this.allergenComboBox.SelectedValue = "Select";
 
-                this.mealTypeComboBox.DataSource = this.mealTypeList;
+                this.nutritionComboBox.DataSource = this.nutritionController.GetNutritions();
+                this.nutritionComboBox.ValueMember = "NutritionId";
+                this.nutritionComboBox.DisplayMember = "NutritionDetails";
+                this.nutritionComboBox.SelectedValue = "Select";
 
-                this.foodComboBox.DataSource= this.foodTypeList;
+                this.kitchenWareComboBox.DataSource = this.kitchenController.GetKitchenware();
+                this.kitchenWareComboBox.DisplayMember = "KitchenwareDetails";
+                this.kitchenWareComboBox.ValueMember = "KitchenwareId";
+                this.kitchenWareComboBox.SelectedValue = "Select";
 
-                this.ethnicComboBox.DataSource = this.ethnicList;
+                this.ingredientsComboBox.DataSource = this.ingredientsController.GetIngredients();
+                this.ingredientsComboBox.DisplayMember = "IngredientName";
+                this.ingredientsComboBox.ValueMember = "IngredientId";
+                this.ingredientsComboBox.SelectedValue = "Select";
+
+
+                this.mealTypeComboBox.DataSource = this.mealController.GetMealTypes();
+                this.mealTypeComboBox.DisplayMember = "type";
+                this.mealTypeComboBox.ValueMember = "mealTypeID";
+                this.mealTypeComboBox.SelectedValue = "Select";
+
+                this.foodComboBox.DataSource = this.foodController.GetFoodTypes();
+                this.foodComboBox.DisplayMember = "TypeOfFood";
+                this.foodComboBox.ValueMember = "FoodId";
+                this.foodComboBox.SelectedValue = "Select";
+
+                this.ethnicComboBox.DataSource = this.ethnicController.GetEthnicOrigins();
+                this.ethnicComboBox.DisplayMember = "Ethnicity";
+                this.ethnicComboBox.ValueMember = "EthnicId";
+                this.ethnicComboBox.SelectedValue = "Select";
+
 
             }
             catch (Exception ex)
@@ -152,47 +167,80 @@ namespace RecipeBookApp
             }
         }
 
-        private void PopulateList()
-        {
-            foreach (Allergen allergy in this.allergenController.GetAllergens())
-            {
-                this.allergenList.Add(allergy.AllergenDetails);
-            }
-            this.allergenList.Sort();
-
-            foreach (Kitchenware kitchen in this.kitchenController.GetKitchenware())
-            {
-                this.kitchenWareList.Add(kitchen.KitchenwareDetails);
-            }
-            this.kitchenWareList.Sort();
-
-            foreach (Ingredient ingredient in this.ingredientsController.GetIngredients())
-           {
-                this.IngredientList.Add(ingredient.IngredientName);
-            }
-            this.IngredientList.Sort();
-
-            foreach (Nutrition nutrition in this.nutritionController.GetNutritions())
-            {
-               this.nutritionList.Add(nutrition.NutritionDetails);
-            }
-           this.nutritionList.Sort();
-
-            foreach (MealType meal in this.mealController.GetMeals())
-            {
-                this.mealTypeList.Add(meal.type);
-            }
-            this.mealTypeList.Sort();
-
-
-
-
-
-
-        }
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
+            int[] selectedAllergy;
+            int[] selectedEthincity;
+            int[] selectedIngredients;
+            int[] selectedNutrition;
+            int[] selectedKitchenWare;
+            int[] selectedMealType;
+            int[] selectedFoodType;
+
+            if (this.allergenComboBox.SelectedValue!=null)
+            {
+                 selectedAllergy = new int[] { int.Parse(this.allergenComboBox.SelectedValue.ToString()) };
+            }
+            else
+            {
+                selectedAllergy = new int[] { -1 };
+            }
+            if (this.ethnicComboBox.SelectedValue != null)
+            {
+                selectedEthincity = new int[] { int.Parse(this.ethnicComboBox.SelectedValue.ToString()) };
+            }
+            else
+            {
+                selectedEthincity = new int[] { -1 };
+            }
+            if (this.ingredientsComboBox.SelectedValue != null)
+            {
+               selectedIngredients = new int[] { int.Parse(this.ingredientsComboBox.SelectedValue.ToString()) };
+               
+            }
+            else
+            {
+                selectedIngredients = new int[] { -1 };
+            }
+            if (this.nutritionComboBox.SelectedValue != null)
+            {
+               selectedNutrition = new int[] { int.Parse(this.nutritionComboBox.SelectedValue.ToString()) };
+            }
+            else
+            {
+                selectedNutrition = new int[] { -1 };
+            }
+            if (this.kitchenWareComboBox.SelectedValue != null)
+            {
+             selectedKitchenWare = new int[] { int.Parse(this.kitchenWareComboBox.SelectedValue.ToString()) };
+            }
+            else
+            {
+                selectedKitchenWare = new int[] { -1 };
+            }
+            if (this.mealTypeComboBox.SelectedValue != null)
+            {
+                 selectedMealType = new int[] { int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) };
+            }
+            else
+            {
+                selectedMealType = new int[] { -1 };
+            }
+            if (this.foodComboBox.SelectedValue != null)
+            {
+                 selectedFoodType = new int[] { 0 }; 
+            }
+            else
+            {
+                selectedFoodType = new int[] { -1 };
+            }
+
+            this.recipeList = this.recipeController.FilterRecipes(selectedAllergy, selectedEthincity, selectedFoodType,
+               selectedIngredients,selectedKitchenWare, selectedMealType, selectedNutrition);
+            this.flowLayoutPanel1.Controls.Clear();
+            this.PopulateItems();
+
 
         }
     }

@@ -221,6 +221,8 @@ namespace RecipeBookApp.DAL
         public List<Recipe> FilterRecipes(int[] allergens, int[] ethnicities, int[] foodTypes,
             int[] ingredients, int[] kitchenware, int[] mealTypes, int[] nutrition)
         {
+            Console.WriteLine("Dispaly array + " + allergens);
+          
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = @"DROP TABLE IF EXISTS tempFilterAllergen;
                                     CREATE TEMPORARY TABLE tempFilterAllergen AS
@@ -294,20 +296,22 @@ namespace RecipeBookApp.DAL
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
+                 //   @allergens,@ethnicities,@ingredients,@kitchenware,@typesOfMeal,@nutrition
                     selectCommand.Parameters.AddWithValue("@allergens", allergens);
                     selectCommand.Parameters.AddWithValue("@ethnicities", ethnicities);
-                    selectCommand.Parameters.AddWithValue("@foodTypes", foodTypes);
+                  selectCommand.Parameters.AddWithValue("@typesOfFood", foodTypes);
                     selectCommand.Parameters.AddWithValue("@ingredients", ingredients);
                     selectCommand.Parameters.AddWithValue("@kitchenware", kitchenware);
-                    selectCommand.Parameters.AddWithValue("@mealTypes", mealTypes);
+                    selectCommand.Parameters.AddWithValue("@typesOfMeal", mealTypes);
                     selectCommand.Parameters.AddWithValue("@nutrition", nutrition);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
+                            
                             // Set up byte array and stream to convert BLOB image from db into something readable and can be displayed
-                            byte[] image_byte = (byte[])reader["image"];
-                            MemoryStream ms = new MemoryStream(image_byte);
+                           // byte[] image_byte = (byte[])reader["image"];
+                          //  MemoryStream ms = new MemoryStream(image_byte);
                             Recipe recipe = new Recipe
                             {
                                 RecipeId = Convert.ToInt32(reader["id"]),
@@ -316,7 +320,7 @@ namespace RecipeBookApp.DAL
                                 CookingTime = Convert.ToInt32(reader["cooktime"]),
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
                                 EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
-                                RecipeImage = Image.FromStream(ms)
+                                RecipeImage = null
                             };
 
                             recipes.Add(recipe);
