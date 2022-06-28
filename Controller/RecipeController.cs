@@ -69,9 +69,11 @@ namespace RecipeBookApp.Controller
         /// <returns>Recipes found in the database</returns>
         public List<Recipe> GetRecipeSearch(string searchUserInput)
         {
-            List<Recipe> foundRecipeList = this.recipeDAL.GetSearchRecipe(searchUserInput);
-           
-            return foundRecipeList;
+            if (string.IsNullOrEmpty(searchUserInput))
+            {
+                throw new ArgumentNullException("Search string cannot be null or empty");
+            }
+            return this.recipeDAL.GetSearchRecipe(searchUserInput);
         }
 
         /// <summary>
