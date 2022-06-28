@@ -141,6 +141,7 @@
             this.nutritionComboBox.Name = "nutritionComboBox";
             this.nutritionComboBox.Size = new System.Drawing.Size(121, 24);
             this.nutritionComboBox.TabIndex = 8;
+            this.nutritionComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NutritionComboBox_KeyPress);
             // 
             // allergenComboBox
             // 
@@ -149,6 +150,7 @@
             this.allergenComboBox.Name = "allergenComboBox";
             this.allergenComboBox.Size = new System.Drawing.Size(121, 24);
             this.allergenComboBox.TabIndex = 9;
+            this.allergenComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllergenComboBox_KeyPress);
             // 
             // kitchenWareComboBox
             // 
@@ -157,6 +159,7 @@
             this.kitchenWareComboBox.Name = "kitchenWareComboBox";
             this.kitchenWareComboBox.Size = new System.Drawing.Size(121, 24);
             this.kitchenWareComboBox.TabIndex = 10;
+            this.kitchenWareComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KitchenWareComboBox_KeyPress);
             // 
             // ingredientsComboBox
             // 
@@ -165,6 +168,7 @@
             this.ingredientsComboBox.Name = "ingredientsComboBox";
             this.ingredientsComboBox.Size = new System.Drawing.Size(121, 24);
             this.ingredientsComboBox.TabIndex = 11;
+            this.ingredientsComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IngredientsComboBox_KeyPress);
             // 
             // mealTypeComboBox
             // 
@@ -173,6 +177,7 @@
             this.mealTypeComboBox.Name = "mealTypeComboBox";
             this.mealTypeComboBox.Size = new System.Drawing.Size(121, 24);
             this.mealTypeComboBox.TabIndex = 12;
+            this.mealTypeComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MealTypeComboBox_KeyPress);
             // 
             // filterButton
             // 
@@ -290,6 +295,7 @@
             this.ethnicComboBox.Name = "ethnicComboBox";
             this.ethnicComboBox.Size = new System.Drawing.Size(114, 24);
             this.ethnicComboBox.TabIndex = 19;
+            this.ethnicComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EthnicComboBox_KeyPress);
             // 
             // foodComboBox
             // 
@@ -298,6 +304,7 @@
             this.foodComboBox.Name = "foodComboBox";
             this.foodComboBox.Size = new System.Drawing.Size(114, 24);
             this.foodComboBox.TabIndex = 21;
+            this.foodComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FoodComboBox_KeyPress);
             // 
             // RecipeList
             // 

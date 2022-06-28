@@ -134,6 +134,7 @@ namespace RecipeBookApp
         {
             try
             {
+               
                 this.allergenComboBox.DataSource = null;               
                 this.nutritionComboBox.DataSource = null;                
                 this.kitchenWareComboBox.DataSource = null;           
@@ -318,6 +319,37 @@ namespace RecipeBookApp
             this.PopulateItems();
 
 
+        }
+
+        private void NutritionComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+      
+        private void KitchenWareComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void EthnicComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void IngredientsComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void FoodComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void MealTypeComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void AllergenComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
