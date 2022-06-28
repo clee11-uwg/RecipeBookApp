@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RecipeBookApp.Model
+﻿namespace RecipeBookApp.Model
 {
     /// <summary>
     /// Models the Nutrition table found in the recipe_app database

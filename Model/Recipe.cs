@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 
@@ -22,6 +21,5 @@ namespace RecipeBookApp.Model
 
         public Image RecipeImage  { get; set;}
 
-    
     }
 }

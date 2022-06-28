@@ -1,9 +1,10 @@
-﻿
-namespace RecipeBookApp.Model
+﻿namespace RecipeBookApp.Model
 {
+    /// <summary>
+    /// Models the Kitchenware table in the recipe_app database
+    /// </summary>
     public class Kitchenware
     {
-
         /// <summary>
         /// Cookware  attributes.
         /// </summary>

@@ -51,10 +51,10 @@ namespace RecipeBookApp.DAL
         public List<Kitchenware> GetKitchenware(int recipeID)
         {
             List<Kitchenware> cookwareList = new List<Kitchenware>();
-            string selectStatement = "SELECT kitchenware.id, kitchenware.kitchenware " +
-                 "FROM recipe JOIN recipe_uses_kitchenware ON recipe.id = recipe_uses_kitchenware.recipeID " +
-                     "JOIN kitchenware ON kitchenware.id = recipe_uses_kitchenware.kitchenwareID " +
-                     "WHERE recipe.id = @recipeID;";
+            string selectStatement = @"SELECT kitchenware.id, kitchenware.kitchenware
+                                     FROM recipe JOIN recipe_uses_kitchenware ON recipe.id = recipe_uses_kitchenware.recipeID
+                                         JOIN kitchenware ON kitchenware.id = recipe_uses_kitchenware.kitchenwareID
+                                     WHERE recipe.id = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
