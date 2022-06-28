@@ -48,6 +48,7 @@ namespace RecipeBookApp.Controller
             return this.recipeDAL.GetRecipe(searchRecipeID);
         }
 
+        /*
         /// <summary>
         /// Returns List of Recipes that do not contain the given allergen
         /// </summary>
@@ -61,6 +62,7 @@ namespace RecipeBookApp.Controller
             }
             return this.recipeDAL.GetRecipesWithoutAllergen(allergenID);
         }
+        */
 
         /// <summary>
         /// Gets the recipes matching the search input.

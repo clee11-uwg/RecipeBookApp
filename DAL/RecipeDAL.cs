@@ -105,6 +105,7 @@ namespace RecipeBookApp.DAL
             return recipe;
         }
 
+        /*
         /// <summary>
         /// Gets the list of recipes without the undesired allergen
         /// </summary>
@@ -161,7 +162,7 @@ namespace RecipeBookApp.DAL
 
             return recipes;
         }
-
+        */
 
         /// <summary>
         /// This method to get the recipe based on the  search ID
@@ -283,8 +284,9 @@ namespace RecipeBookApp.DAL
 	                                    WHERE nutrition.id IN (@nutrition);
 
                                     SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
-	                                    recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID
+	                                    recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID, image.image
                                     FROM recipe
+                                        JOIN image on recipe.id = image.recipeID
                                     WHERE recipe.id NOT IN tempFilterAllergen
 	                                    AND recipe.id NOT IN tempFilterEthnic
 	                                    AND recipe.id NOT IN tempFilterTypeOfFood
