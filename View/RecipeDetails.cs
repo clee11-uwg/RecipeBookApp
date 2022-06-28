@@ -19,6 +19,7 @@ namespace RecipeBookApp.View
         private IngredientsController ingredientsController;
         private KitchenwareController kitchenwareController;
         private TypeOfMealController typeOfMealController;
+        private AllergenController allergenController;
 
         /// <summary>
         /// 0 param constructor
@@ -31,6 +32,7 @@ namespace RecipeBookApp.View
             this.ingredientsController = new IngredientsController();
             this.kitchenwareController = new KitchenwareController();
             this.typeOfMealController = new TypeOfMealController();
+            this.allergenController = new AllergenController();
         }
 
         /// <summary>
@@ -50,6 +52,7 @@ namespace RecipeBookApp.View
             GetKitchenware();
             GetInstructions();
             GetTypeOfFood();
+            GetAllergens();
         }
 
         private void GetIngredients()
@@ -84,6 +87,24 @@ namespace RecipeBookApp.View
             {
                 string mealType = mealTypeList[i].type;
                 this.typeOfMealLbl.Text += mealType + "\n";
+            }
+        }
+
+        private void GetAllergens()
+        {
+            List<Allergen> allergenList = this.allergenController.GetAllergen(selectedRecipe.RecipeId);
+            for (int i = 0; i < allergenList.Count; i++)
+            {
+                string allergen = allergenList[i].AllergenDetails;
+                if (i < (allergenList.Count - 1))
+                {
+                    this.allergenListLbl.Text += allergen + " | ";
+                }
+                else
+                {
+                    this.allergenListLbl.Text += allergen;
+                }
+                
             }
         }
     }

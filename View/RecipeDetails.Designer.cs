@@ -38,6 +38,8 @@
             this.ingredientsLbl = new System.Windows.Forms.Label();
             this.kitchenwareLbl = new System.Windows.Forms.Label();
             this.typeOfMealLbl = new System.Windows.Forms.Label();
+            this.allergenHeadingLbl = new System.Windows.Forms.Label();
+            this.allergenListLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,12 +142,34 @@
             this.typeOfMealLbl.Size = new System.Drawing.Size(200, 100);
             this.typeOfMealLbl.TabIndex = 10;
             // 
+            // allergenHeadingLbl
+            // 
+            this.allergenHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allergenHeadingLbl.Location = new System.Drawing.Point(562, 184);
+            this.allergenHeadingLbl.Name = "allergenHeadingLbl";
+            this.allergenHeadingLbl.Size = new System.Drawing.Size(169, 24);
+            this.allergenHeadingLbl.TabIndex = 11;
+            this.allergenHeadingLbl.Text = "Allergens";
+            this.allergenHeadingLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // allergenListLbl
+            // 
+            this.allergenListLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allergenListLbl.Location = new System.Drawing.Point(547, 213);
+            this.allergenListLbl.MinimumSize = new System.Drawing.Size(200, 40);
+            this.allergenListLbl.Name = "allergenListLbl";
+            this.allergenListLbl.Size = new System.Drawing.Size(200, 40);
+            this.allergenListLbl.TabIndex = 12;
+            this.allergenListLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // RecipeDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(759, 746);
+            this.Controls.Add(this.allergenListLbl);
+            this.Controls.Add(this.allergenHeadingLbl);
             this.Controls.Add(this.typeOfMealLbl);
             this.Controls.Add(this.kitchenwareLbl);
             this.Controls.Add(this.ingredientsLbl);
@@ -176,5 +200,7 @@
         private System.Windows.Forms.Label ingredientsLbl;
         private System.Windows.Forms.Label kitchenwareLbl;
         private System.Windows.Forms.Label typeOfMealLbl;
+        private System.Windows.Forms.Label allergenHeadingLbl;
+        private System.Windows.Forms.Label allergenListLbl;
     }
 }
