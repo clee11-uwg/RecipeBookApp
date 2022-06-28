@@ -18,7 +18,7 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Constructor for EthnicOriginController
         /// </summary>
-        public AllergenController()
+        public EthnicOriginController()
         {
             this.ethnicOriginDAL = new EthnicOriginDAL();
         }
@@ -27,7 +27,7 @@ namespace RecipeBookApp.Controller
         /// Gets all Ethnic Origins known to the database
         /// </summary>
         /// <returns>List of all ethnic origins from database </returns>
-        public List<Allergen> GetEthnicOrigins()
+        public List<Ethnic> GetEthnicOrigins()
         {
             return this.ethnicOriginDAL.GetEthnicOrigins();
         }

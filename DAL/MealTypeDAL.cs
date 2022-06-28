@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -8,18 +8,18 @@ namespace RecipeBookApp.DAL
 {
     /// <summary>
     /// This class serves as the Data Access Layer
-    /// for the  DB Ethnic Origin table.
+    /// for the  DB Meal Type table.
     /// </summary>
-    public class EthnicOriginDAL
+    public class MealTypeDAL
     {
         /// <summary>
-        /// This method to get the list of all Ethnic Origins known to the database
+        /// This method to get the list of all mealtype known to the recipe database
         /// </summary>
-        /// <returns>List of Ethnic Origins known to the database</returns>
-        public List<Ethnic> GetEthnicOrigins()
+        /// <returns>List of Allergens known to the recipe database</returns>
+        public List<MealType> GetMealTypes()
         {
-            List<Ethnic> ethnicList = new List<Ethnic>();
-            string selectStatement = "SELECT ethnic_origin.id, ethnic_origin.Ethnicity FROM ethnic_origin; ";
+            List<MealType> mealList  = new List<MealType>();
+            string selectStatement = "SELECT meal.id, meal.type FROM type_of_meal meal; ";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -29,19 +29,20 @@ namespace RecipeBookApp.DAL
                     {
                         while (reader.Read())
                         {
-                            Ethnic ethnic = new Ethnic
+                            MealType meal = new MealType
                             {
-                                EthnicId = Convert.ToInt32(reader["id"]),
-                                Ethnicity = reader["Ethnicity"].ToString()
+                                mealTypeID = Convert.ToInt32(reader["id"]),
+                                type = reader["type"].ToString()
                             };
 
-                            ethnicList.Add(ethnic);
+                            mealList.Add(meal);
                         }
                     }
                 }
             }
 
-            return ethnicList;
+            return mealList;
         }
+
     }
 }

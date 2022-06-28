@@ -301,7 +301,8 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddRange("@kitchenware", kitchenware);
                     selectCommand.Parameters.AddRange("@mealTypes", mealTypes);
                     selectCommand.Parameters.AddRange("@nutrition", nutrition);
-                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())                    
                     {
                         while (reader.Read())
                         {

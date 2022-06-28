@@ -28,7 +28,8 @@ namespace RecipeBookApp
         private readonly IngredientsController ingredientsController;
         private readonly KitchenwareController kitchenController;
         private readonly NutritionController nutritionController;
-       
+        private readonly MealTypeController mealController;
+
         /// <summary>
         /// 0 parameter constructor for the RecipeList
         /// </summary>
@@ -39,6 +40,7 @@ namespace RecipeBookApp
             this.ingredientsController = new IngredientsController();
             this.kitchenController = new KitchenwareController();
             this.nutritionController = new NutritionController();
+            this.mealController = new MealTypeController();
             this.LoadComboBox();
             this.recipeController = new RecipeController();
             this.recipeList = new List<Recipe>();
@@ -119,7 +121,14 @@ namespace RecipeBookApp
                 this.kitchenWareComboBox.DataSource = null;
                 this.kitchenWareList = new List<string>();
                 this.ingredientsComboBox.DataSource = null;
-               this.IngredientList = new List<string>();
+                 this.IngredientList = new List<string>();
+                this.mealTypeComboBox.DataSource = null;
+                this.mealTypeList = new List<string>();
+                this.foodComboBox.DataSource = null;
+                this.foodTypeList = new List<string>();
+                this.ethnicComboBox.DataSource = null;
+                this.ethnicList = new List<string>();
+
                 PopulateList();
                 this.allergenComboBox.DataSource = this.allergenList;
                 
@@ -128,7 +137,13 @@ namespace RecipeBookApp
                 this.kitchenWareComboBox.DataSource = this.kitchenWareList;
 
                this.ingredientsComboBox.DataSource = this.IngredientList;
-             
+
+                this.mealTypeComboBox.DataSource = this.mealTypeList;
+
+                this.foodComboBox.DataSource= this.foodTypeList;
+
+                this.ethnicComboBox.DataSource = this.ethnicList;
+
             }
             catch (Exception ex)
             {
@@ -163,8 +178,22 @@ namespace RecipeBookApp
             }
            this.nutritionList.Sort();
 
+            foreach (MealType meal in this.mealController.GetMeals())
+            {
+                this.mealTypeList.Add(meal.type);
+            }
+            this.mealTypeList.Sort();
+
+
+
+
+
+
         }
 
-        
+        private void FilterButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

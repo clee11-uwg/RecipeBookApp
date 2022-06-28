@@ -75,6 +75,7 @@ namespace RecipeBookApp.DAL
                             cookwareList.Add(kitchen);
 
                         }
+                    }
                 }
             }
             return cookwareList;
