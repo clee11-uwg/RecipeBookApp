@@ -17,7 +17,14 @@ namespace RecipeBookApp
     {
         private RecipeController recipeController;
         private List<Recipe> recipeList;
-       
+        private List<Allergen> allergenList;
+        private List<Nutrition> nutritionList;
+        private List<Kitchenware> kitchenWareList;
+        private List<MealType> mealTypeList;
+        private List<FoodType> foodTypeList;
+        private List<Ethnic> ethnicList;
+        private List<Ingredient> ingredientList;
+
         private readonly AllergenController allergenController;
         private readonly IngredientsController ingredientsController;
         private readonly KitchenwareController kitchenController;
@@ -40,6 +47,14 @@ namespace RecipeBookApp
             this.mealController = new TypeOfMealController();
             this.foodController = new TypeOfFoodController();
             this.ethnicController = new EthnicOriginController();
+            this.allergenList= new List<Allergen>();
+            this.nutritionList = new List<Nutrition>();
+            this.kitchenWareList =  new List<Kitchenware>();
+            this.mealTypeList = new List<MealType>();
+            this.foodTypeList = new List<FoodType>();
+            this.ethnicList = new List<Ethnic>();
+            this.ingredientList = new List<Ingredient>();
+
             this.LoadComboBox();
             this.recipeController = new RecipeController();
             this.recipeList = new List<Recipe>();
@@ -101,6 +116,12 @@ namespace RecipeBookApp
         {
             this.searchTextBox.Text = "";
             this.recipeList = this.recipeController.GetRecipes();
+            this.allergenComboBox.SelectedValue = -1;
+            this.ingredientsComboBox.SelectedValue = -1;
+            this.ethnicComboBox.SelectedValue = -1;
+            this.foodComboBox.SelectedValue = -1;
+            this.mealTypeComboBox.SelectedValue = -1;
+            this.nutritionComboBox.SelectedValue = -1;
             this.flowLayoutPanel1.Controls.Clear();
             this.PopulateItems();
 
@@ -121,42 +142,83 @@ namespace RecipeBookApp
                 this.foodComboBox.DataSource = null;            
                 this.ethnicComboBox.DataSource = null;
                 
-                this.allergenComboBox.DataSource = this.allergenController.GetAllergens();
-
+                this.allergenList= this.allergenController.GetAllergens();
+                this.nutritionList = this.nutritionController.GetNutritions();
+                this.kitchenWareList = this.kitchenController.GetKitchenware();
+                this.ingredientList = this.ingredientsController.GetIngredients();
+                this.mealTypeList = this.mealController.GetMealTypes();
+                this.foodTypeList = this.foodController.GetFoodTypes();
+                this.ethnicList = this.ethnicController.GetEthnicOrigins();
+                this.allergenList.Add(new Allergen
+                {
+                    AllergenId = -1,
+                    AllergenDetails = "Select the allergy"
+                });
+                this.allergenComboBox.DataSource = this.allergenList;
                 this.allergenComboBox.DisplayMember = "AllergenDetails";
                 this.allergenComboBox.ValueMember = "AllergenId" ;
-                this.allergenComboBox.SelectedValue = "Select";
+                this.allergenComboBox.SelectedValue = -1;
 
-                this.nutritionComboBox.DataSource = this.nutritionController.GetNutritions();
+                this.nutritionList.Add(new Nutrition
+                {
+                    NutritionId = -1,
+                    NutritionDetails = "Select the Nutrition"
+                });
+                this.nutritionComboBox.DataSource = this.nutritionList;
                 this.nutritionComboBox.ValueMember = "NutritionId";
                 this.nutritionComboBox.DisplayMember = "NutritionDetails";
-                this.nutritionComboBox.SelectedValue = "Select";
+                this.nutritionComboBox.SelectedValue = -1;
 
-                this.kitchenWareComboBox.DataSource = this.kitchenController.GetKitchenware();
+                this.kitchenWareList.Add(new Kitchenware
+                {
+                    KitchenwareId = -1,
+                    KitchenwareDetails = "Select the Kitchenware"
+                });
+                this.kitchenWareComboBox.DataSource = this.kitchenWareList;
                 this.kitchenWareComboBox.DisplayMember = "KitchenwareDetails";
                 this.kitchenWareComboBox.ValueMember = "KitchenwareId";
-                this.kitchenWareComboBox.SelectedValue = "Select";
+                this.kitchenWareComboBox.SelectedValue = -1;
 
-                this.ingredientsComboBox.DataSource = this.ingredientsController.GetIngredients();
+
+                this.ingredientList.Add(new Ingredient
+                {
+                    IngredientId = -1,
+                    IngredientName = "Select the Ingredient"
+                });
+                this.ingredientsComboBox.DataSource = this.ingredientList;
                 this.ingredientsComboBox.DisplayMember = "IngredientName";
                 this.ingredientsComboBox.ValueMember = "IngredientId";
-                this.ingredientsComboBox.SelectedValue = "Select";
+                this.ingredientsComboBox.SelectedValue = -1;
 
-
-                this.mealTypeComboBox.DataSource = this.mealController.GetMealTypes();
+                this.mealTypeList.Add(new MealType
+                {
+                    mealTypeID = -1,
+                    type = "Select the MealType"
+                });
+                this.mealTypeComboBox.DataSource = this.mealTypeList;
                 this.mealTypeComboBox.DisplayMember = "type";
                 this.mealTypeComboBox.ValueMember = "mealTypeID";
-                this.mealTypeComboBox.SelectedValue = "Select";
+                this.mealTypeComboBox.SelectedValue = -1;
 
-                this.foodComboBox.DataSource = this.foodController.GetFoodTypes();
+                this.foodTypeList.Add(new FoodType
+                {
+                    FoodId = -1,
+                    TypeOfFood = "Select the Food type"
+                });
+                this.foodComboBox.DataSource = this.foodTypeList;
                 this.foodComboBox.DisplayMember = "TypeOfFood";
                 this.foodComboBox.ValueMember = "FoodId";
-                this.foodComboBox.SelectedValue = "Select";
+                this.foodComboBox.SelectedValue = -1;
 
-                this.ethnicComboBox.DataSource = this.ethnicController.GetEthnicOrigins();
+                this.ethnicList.Add(new Ethnic
+                {
+                    EthnicId = -1,
+                    Ethnicity = "Select the Ethnicity"
+                });
+                this.ethnicComboBox.DataSource = this.ethnicList;
                 this.ethnicComboBox.DisplayMember = "Ethnicity";
                 this.ethnicComboBox.ValueMember = "EthnicId";
-                this.ethnicComboBox.SelectedValue = "Select";
+                this.ethnicComboBox.SelectedValue = -1;
 
 
             }
@@ -177,63 +239,76 @@ namespace RecipeBookApp
             int[] selectedKitchenWare;
             int[] selectedMealType;
             int[] selectedFoodType;
+            bool isSelected = false;
 
-            if (this.allergenComboBox.SelectedValue!=null)
+            if (this.allergenComboBox.SelectedValue!=null && int.Parse(this.allergenComboBox.SelectedValue.ToString()) != -1)
             {
                  selectedAllergy = new int[] { int.Parse(this.allergenComboBox.SelectedValue.ToString()) };
+                isSelected = true;
             }
             else
             {
                 selectedAllergy = new int[] { -1 };
             }
-            if (this.ethnicComboBox.SelectedValue != null)
+            if (this.ethnicComboBox.SelectedValue != null &&  int.Parse(this.ethnicComboBox.SelectedValue.ToString()) != -1)
             {
                 selectedEthincity = new int[] { int.Parse(this.ethnicComboBox.SelectedValue.ToString()) };
+                isSelected = true;
             }
             else
             {
                 selectedEthincity = new int[] { -1 };
             }
-            if (this.ingredientsComboBox.SelectedValue != null)
+            if (this.ingredientsComboBox.SelectedValue != null && int.Parse(this.ingredientsComboBox.SelectedValue.ToString()) != -1)
             {
                selectedIngredients = new int[] { int.Parse(this.ingredientsComboBox.SelectedValue.ToString()) };
-               
+                isSelected = true;
+
             }
             else
             {
                 selectedIngredients = new int[] { -1 };
             }
-            if (this.nutritionComboBox.SelectedValue != null)
+            if (this.nutritionComboBox.SelectedValue != null && int.Parse(this.nutritionComboBox.SelectedValue.ToString()) != -1)
             {
                selectedNutrition = new int[] { int.Parse(this.nutritionComboBox.SelectedValue.ToString()) };
+                isSelected = true;
             }
             else
             {
                 selectedNutrition = new int[] { -1 };
             }
-            if (this.kitchenWareComboBox.SelectedValue != null)
+            if (this.kitchenWareComboBox.SelectedValue != null && int.Parse(this.kitchenWareComboBox.SelectedValue.ToString()) != -1)
             {
              selectedKitchenWare = new int[] { int.Parse(this.kitchenWareComboBox.SelectedValue.ToString()) };
+                isSelected = true;
             }
             else
             {
                 selectedKitchenWare = new int[] { -1 };
             }
-            if (this.mealTypeComboBox.SelectedValue != null)
+            if (this.mealTypeComboBox.SelectedValue != null && int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) != -1)
             {
                  selectedMealType = new int[] { int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) };
+                isSelected = true;
             }
             else
             {
                 selectedMealType = new int[] { -1 };
             }
-            if (this.foodComboBox.SelectedValue != null)
+            if (this.foodComboBox.SelectedValue != null && int.Parse(this.foodComboBox.SelectedValue.ToString()) != -1)
             {
-                 selectedFoodType = new int[] { 0 }; 
+                 selectedFoodType = new int[] { 0 };
+                isSelected = true;
             }
             else
             {
                 selectedFoodType = new int[] { -1 };
+            }
+            if (!isSelected)
+            {
+                MessageBox.Show("Please select atleast one options to filter");
+                return;
             }
 
             this.recipeList = this.recipeController.FilterRecipes(selectedAllergy, selectedEthincity, selectedFoodType,
