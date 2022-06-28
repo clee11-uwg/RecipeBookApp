@@ -86,7 +86,14 @@ namespace RecipeBookApp.View
             for (int i = 0; i < mealTypeList.Count; i++)
             {
                 string mealType = mealTypeList[i].type;
-                this.typeOfMealLbl.Text += mealType + "\n";
+                if (i < (mealTypeList.Count - 1))
+                {
+                    this.typeOfMealLbl.Text += mealType + " | ";
+                }
+                else
+                {
+                    this.typeOfMealLbl.Text += mealType;
+                }
             }
         }
 

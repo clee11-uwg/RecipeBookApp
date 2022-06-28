@@ -40,6 +40,7 @@
             this.typeOfMealLbl = new System.Windows.Forms.Label();
             this.allergenHeadingLbl = new System.Windows.Forms.Label();
             this.allergenListLbl = new System.Windows.Forms.Label();
+            this.mealTypeHeadingLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,11 +137,12 @@
             // 
             this.typeOfMealLbl.AutoSize = true;
             this.typeOfMealLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeOfMealLbl.Location = new System.Drawing.Point(531, 293);
-            this.typeOfMealLbl.MinimumSize = new System.Drawing.Size(200, 100);
+            this.typeOfMealLbl.Location = new System.Drawing.Point(547, 293);
+            this.typeOfMealLbl.MinimumSize = new System.Drawing.Size(200, 75);
             this.typeOfMealLbl.Name = "typeOfMealLbl";
-            this.typeOfMealLbl.Size = new System.Drawing.Size(200, 100);
+            this.typeOfMealLbl.Size = new System.Drawing.Size(200, 75);
             this.typeOfMealLbl.TabIndex = 10;
+            this.typeOfMealLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // allergenHeadingLbl
             // 
@@ -162,12 +164,23 @@
             this.allergenListLbl.TabIndex = 12;
             this.allergenListLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // mealTypeHeadingLbl
+            // 
+            this.mealTypeHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mealTypeHeadingLbl.Location = new System.Drawing.Point(562, 269);
+            this.mealTypeHeadingLbl.Name = "mealTypeHeadingLbl";
+            this.mealTypeHeadingLbl.Size = new System.Drawing.Size(169, 24);
+            this.mealTypeHeadingLbl.TabIndex = 13;
+            this.mealTypeHeadingLbl.Text = "Meal Type(s)";
+            this.mealTypeHeadingLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // RecipeDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(759, 746);
+            this.Controls.Add(this.mealTypeHeadingLbl);
             this.Controls.Add(this.allergenListLbl);
             this.Controls.Add(this.allergenHeadingLbl);
             this.Controls.Add(this.typeOfMealLbl);
@@ -202,5 +215,6 @@
         private System.Windows.Forms.Label typeOfMealLbl;
         private System.Windows.Forms.Label allergenHeadingLbl;
         private System.Windows.Forms.Label allergenListLbl;
+        private System.Windows.Forms.Label mealTypeHeadingLbl;
     }
 }
