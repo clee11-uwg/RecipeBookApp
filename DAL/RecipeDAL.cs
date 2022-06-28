@@ -172,9 +172,11 @@ namespace RecipeBookApp.DAL
         {
             
             List<Recipe> recipes = new List<Recipe>();
-            string selectStatement = "SELECT r.id, r.`Name`, r.Instructions, " +
-                "r.cooktime, r.nutritionID, r.ethnicOriginID, i.image FROM recipe r JOIN image i " +
-                "ON r.ID = i.recipeID where r.Name LIKE '%'|| @UserSearch ||'%'";
+            string selectStatement = @"SELECT r.id, r.`Name`, r.Instructions,
+                                            r.cooktime, r.nutritionID, r.ethnicOriginID, i.image 
+                                        FROM recipe r 
+                                            JOIN image i ON r.ID = i.recipeID 
+                                        WHERE r.Name LIKE '%'|| @UserSearch ||'%'";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
