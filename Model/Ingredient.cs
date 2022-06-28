@@ -15,6 +15,5 @@ namespace RecipeBookApp.Model
         public int IngredientId { get; set; }
         public string IngredientName { get; set; }
         public int FoodId { get; set; }
-        public int NutritionId { get; set; }
     }
 }
