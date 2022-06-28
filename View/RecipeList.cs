@@ -313,6 +313,7 @@ namespace RecipeBookApp
 
             this.recipeList = this.recipeController.FilterRecipes(selectedAllergy, selectedEthincity, selectedFoodType,
                selectedIngredients,selectedKitchenWare, selectedMealType, selectedNutrition);
+
             this.flowLayoutPanel1.Controls.Clear();
             this.PopulateItems();
 
