@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
-
 namespace RecipeBookApp.DAL
 {
     
@@ -20,7 +19,9 @@ namespace RecipeBookApp.DAL
         public List<Nutrition> GetNutritions()
         {
             List<Nutrition> nutritionList = new List<Nutrition>();
-            string selectStatement = "SELECT nutrition.id, nutrition.Stub    FROM nutrition; ";
+            string selectStatement = @"SELECT nutrition.id, nutrition.carbohydrate, nutrition.protein, nutrition.fat,
+                                        nutrition.vitamin, nutrition.mineral, nutrition.water, nutrition.fiber, nutrition.alcohol
+                                    FROM nutrition; ";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -33,7 +34,14 @@ namespace RecipeBookApp.DAL
                             Nutrition nutrition = new Nutrition
                             {
                                 NutritionId = Convert.ToInt32(reader["id"]),
-                                NutritionDetails = reader["Stub"].ToString(),
+                                Carbohydrate = reader["carbohydrate"].ToString(),
+                                Fat = reader["fat"].ToString(),
+                                Protein = reader["protein"].ToString(),
+                                Alcohol = reader["alcohol"].ToString(),
+                                Vitamin = reader["vitamin"].ToString(),
+                                Mineral = reader["mineral"].ToString(),
+                                Water = reader["water"].ToString(),
+                                Fiber = reader["fiber"].ToString()
                             };
 
                             nutritionList.Add(nutrition);
@@ -73,7 +81,14 @@ namespace RecipeBookApp.DAL
                             Nutrition nutrition = new Nutrition
                             {
                                 NutritionId = Convert.ToInt32(reader["id"]),
-                                NutritionDetails = reader["Stub"].ToString(),
+                                Carbohydrate = reader["carbohydrate"].ToString(),
+                                Fat = reader["fat"].ToString(),
+                                Protein = reader["protein"].ToString(),
+                                Alcohol = reader["alcohol"].ToString(),
+                                Vitamin = reader["vitamin"].ToString(),
+                                Mineral = reader["mineral"].ToString(),
+                                Water = reader["water"].ToString(),
+                                Fiber = reader["fiber"].ToString()
                             };
 
                             nutritionList.Add(nutrition);
@@ -85,7 +100,5 @@ namespace RecipeBookApp.DAL
             return nutritionList;
         }
     }
-
-
 
 }
