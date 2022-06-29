@@ -1,5 +1,8 @@
 ﻿namespace RecipeBookApp.Model
 {
+    /// <summary>
+    /// Models the Type_of_Food table in the recipe_app database
+    /// </summary>
     public class FoodType
     {
         /// <summary>

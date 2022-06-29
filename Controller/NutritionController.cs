@@ -45,7 +45,5 @@ namespace RecipeBookApp.Controller
             return this.nutritionDAL.GetNutrition(searchRecipeID);
         }
 
-
-
     }
 }

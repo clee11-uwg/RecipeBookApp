@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RecipeBookApp.Model
+﻿namespace RecipeBookApp.Model
 {
+    /// <summary>
+    /// Models the Allergen table in the recipe_app database
+    /// </summary>
     public class Allergen
     {
-
         /// <summary>
         /// Allergen  attributes.
         /// </summary>

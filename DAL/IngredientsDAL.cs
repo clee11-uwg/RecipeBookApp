@@ -19,8 +19,8 @@ namespace RecipeBookApp.DAL
         public List<Ingredient> GetIngredients()
         {
             List<Ingredient> ingredientDetails = new List<Ingredient>();
-            string selectStatement = "SELECT ingredient.id, ingredient.ingredient, ingredient.typeOfFoodID, " +
-                "ingredient.nutritionID FROM ingredient; ";
+            string selectStatement = @"SELECT ingredient.id, ingredient.ingredient, ingredient.typeOfFoodID,
+                                       FROM ingredient; ";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -36,7 +36,6 @@ namespace RecipeBookApp.DAL
                                 IngredientId = Convert.ToInt32(reader["id"]),
                                 IngredientName = reader["ingredient"].ToString(),
                                 FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
-                                NutritionId = Convert.ToInt32(reader["nutritionID"])
 
                             };
                             ingredientDetails.Add(ingredient);
@@ -57,10 +56,10 @@ namespace RecipeBookApp.DAL
         public List<Ingredient> GetIngredient(int recipeID)
         {
             List<Ingredient> ingredientDetails = new List<Ingredient>();
-            string selectStatement = "SELECT ingredient.id, ingredient.Ingredient, ingredient.typeOfFoodID, ingredient.nutritionID " +
-                     " FROM recipe JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id " +
-                 " JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id " +
-                " WHERE recipe.id = @recipeID; ";
+            string selectStatement = @"SELECT ingredient.id, ingredient.Ingredient, ingredient.typeOfFoodID
+                                         FROM recipe JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
+                                            JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
+                                        WHERE recipe.id = @recipeID; ";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -77,7 +76,6 @@ namespace RecipeBookApp.DAL
                                 IngredientId = Convert.ToInt32(reader["id"]),
                                 IngredientName = reader["ingredient"].ToString(),
                                 FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
-                                NutritionId = Convert.ToInt32(reader["nutritionID"])
 
                             };
                             ingredientDetails.Add(ingredient);

@@ -48,6 +48,7 @@ namespace RecipeBookApp.Controller
             return this.recipeDAL.GetRecipe(searchRecipeID);
         }
 
+        /*
         /// <summary>
         /// Returns List of Recipes that do not contain the given allergen
         /// </summary>
@@ -61,6 +62,7 @@ namespace RecipeBookApp.Controller
             }
             return this.recipeDAL.GetRecipesWithoutAllergen(allergenID);
         }
+        */
 
         /// <summary>
         /// Gets the recipes matching the search input.
@@ -69,9 +71,11 @@ namespace RecipeBookApp.Controller
         /// <returns>Recipes found in the database</returns>
         public List<Recipe> GetRecipeSearch(string searchUserInput)
         {
-            List<Recipe> foundRecipeList = this.recipeDAL.GetSearchRecipe(searchUserInput);
-           
-            return foundRecipeList;
+            if (string.IsNullOrEmpty(searchUserInput))
+            {
+                throw new ArgumentNullException("Search string cannot be null or empty");
+            }
+            return this.recipeDAL.GetSearchRecipe(searchUserInput);
         }
 
         /// <summary>
