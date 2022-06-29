@@ -150,6 +150,8 @@ namespace RecipeBookApp
                 this.mealTypeList = this.mealController.GetMealTypes();
                 this.foodTypeList = this.foodController.GetFoodTypes();
                 this.ethnicList = this.ethnicController.GetEthnicOrigins();
+     
+
                 this.allergenList.Add(new Allergen
                 {
                     AllergenId = -1,

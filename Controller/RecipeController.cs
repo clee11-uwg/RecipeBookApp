@@ -29,7 +29,7 @@ namespace RecipeBookApp.Controller
         /// Gets all Recipe  Recipe table.
         /// </summary>
         /// <returns>List of all Recipes from database </returns>
-        public List<Recipe> GetRecipes()
+        public  List<Recipe> GetRecipes()
         {
             return this.recipeDAL.GetRecipes();
         }
@@ -39,7 +39,7 @@ namespace RecipeBookApp.Controller
         /// </summary>
         /// <param name="searchRecipeID">ID of the recipe</param>
         /// <returns>Recipe found in the database</returns>
-        public Recipe GetRecipe(int searchRecipeID)
+        public  Recipe GetRecipe(int searchRecipeID)
         {
             if (searchRecipeID < 1)
             {

@@ -18,7 +18,7 @@ namespace RecipeBookApp.DAL
         /// This method to get the list of recipes avilable in the recipe database
         /// </summary>
         /// <returns>List of all recipes in database</returns>
-        public List<Recipe> GetRecipes()
+        public  List<Recipe> GetRecipes()
         {
             //string workingDirectory = Environment.CurrentDirectory;
             //string path = Path.Combine(Directory.GetParent(workingDirectory).Parent.FullName, @"Data\", "sampleimage.jpg");
