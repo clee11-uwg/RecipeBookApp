@@ -19,7 +19,7 @@ namespace RecipeBookApp.DAL
         public List<Ingredient> GetIngredients()
         {
             List<Ingredient> ingredientDetails = new List<Ingredient>();
-            string selectStatement = @"SELECT ingredient.id, ingredient.ingredient, ingredient.typeOfFoodID,
+            string selectStatement = @"SELECT ingredient.id, ingredient.ingredient, ingredient.typeOfFoodID
                                        FROM ingredient; ";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
