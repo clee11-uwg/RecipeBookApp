@@ -315,8 +315,8 @@ namespace RecipeBookApp.DAL
                         {
                             
                             // Set up byte array and stream to convert BLOB image from db into something readable and can be displayed
-                           // byte[] image_byte = (byte[])reader["image"];
-                          //  MemoryStream ms = new MemoryStream(image_byte);
+                            byte[] image_byte = (byte[])reader["image"];
+                            MemoryStream ms = new MemoryStream(image_byte);
                             Recipe recipe = new Recipe
                             {
                                 RecipeId = Convert.ToInt32(reader["id"]),
@@ -325,7 +325,7 @@ namespace RecipeBookApp.DAL
                                 CookingTime = Convert.ToInt32(reader["cooktime"]),
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
                                 EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
-                                RecipeImage = null
+                                RecipeImage = Image.FromStream(ms)
                             };
 
                             recipes.Add(recipe);

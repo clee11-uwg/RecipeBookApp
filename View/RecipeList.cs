@@ -165,11 +165,11 @@ namespace RecipeBookApp
                 this.nutritionList.Add(new Nutrition
                 {
                     NutritionId = -1,
-                    NutritionDetails = "Select the Nutrition"
+                    Carbohydrate = "Select the Nutrition"
                 });
                 this.nutritionComboBox.DataSource = this.nutritionList;
                 this.nutritionComboBox.ValueMember = "NutritionId";
-                this.nutritionComboBox.DisplayMember = "NutritionDetails";
+                this.nutritionComboBox.DisplayMember = "Carbohydrate";
                 this.nutritionComboBox.SelectedValue = -1;
 
                 this.kitchenWareList.Add(new Kitchenware
