@@ -114,5 +114,21 @@ namespace RecipeBookApp.View
                 
             }
         }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming soon......");
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming soon......");
+        }
+
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming soon......");
+        }
     }
 }
