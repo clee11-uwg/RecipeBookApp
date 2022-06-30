@@ -43,6 +43,7 @@ namespace RecipeAppTestProject
 
             RecipetestList.Add(recipe);
             RecipetestList.Add(recipe2);
+
             Assert.AreEqual(2, RecipetestList.Count);
         }
 
@@ -51,16 +52,9 @@ namespace RecipeAppTestProject
         public void TestGetRecipesMethod2()
         {
 
-            List<Recipe> recipetestList = new List<Recipe>();
-            RecipeDAL testRecipeDal = new RecipeDAL();
-            recipetestList = testRecipeDal.GetRecipes();
-            Assert.AreEqual(2, recipetestList.Count);
 
-            Assert.AreEqual(2, RecipetestList.Count);
+
+
         }
-
-
-
-
     }
 }
