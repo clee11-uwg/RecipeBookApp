@@ -33,7 +33,7 @@ namespace RecipeBookApp.DAL
                             MealType typeOfMeal = new MealType
                             {
                                 mealTypeID = Convert.ToInt32(reader["id"]),
-                                type = reader["Type"].ToString(),
+                                type = reader["Type"].ToString()
                             };
 
                             mealTypesList.Add(typeOfMeal);
