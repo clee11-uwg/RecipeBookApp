@@ -16,17 +16,19 @@ namespace RecipeBookApp.DAL
         /// This method to get the list of Kitchenware avilable in the recipe database
         /// </summary>
         /// <returns>List of all nutritional data known to the database</returns>
-        public List<Nutrition> GetNutritions()
+        public List<Nutrition> GetNutritions(string sort)
         {
             List<Nutrition> nutritionList = new List<Nutrition>();
             string selectStatement = @"SELECT nutrition.id, nutrition.carbohydrate, nutrition.protein, nutrition.fat,
                                         nutrition.alcohol, nutrition.calories, nutrition.serving_size
-                                    FROM nutrition; ";
+                                    FROM nutrition
+                                    ORDER BY @sort;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
+                    selectCommand.Parameters.AddWithValue("@sort", sort);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())
