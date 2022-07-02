@@ -69,6 +69,11 @@
     <Compile Include="Controller\TestTypeOfMealController.cs" />
     <Compile Include="Controller\TestTypeOfFoodController.cs" />
     <Compile Include="Controller\TestRecipeController.cs" />
+    <Compile Include="Controller\TestNutritionController.cs" />
+    <Compile Include="Controller\TestKitchenwareController.cs" />
+    <Compile Include="Controller\TestIngredientsController.cs" />
+    <Compile Include="Controller\TestEthnicOriginController.cs" />
+    <Compile Include="Controller\TestAllergenController.cs" />
     <Compile Include="DAL\TestTypeOfMealDAL.cs" />
     <Compile Include="DAL\RecipeTestsGetRecipe.cs" />
     <Compile Include="Model\EthnicTests.cs" />
