@@ -291,7 +291,7 @@ namespace RecipeBookApp.DAL
                                         JOIN image on recipe.id = image.recipeID
                                     WHERE recipe.id NOT IN tempFilterAllergen
 	                                    AND recipe.id IN tempFilterEthnic
-	                                    AND recipe.id IN tempFilterTypeOfFood
+	                                    AND recipe.id NOT IN tempFilterTypeOfFood
 	                                    AND recipe.id IN tempFilterIngredient
 	                                    AND recipe.id IN tempFilterKitchenware
 	                                    AND recipe.id IN tempFilterTypesOfMeal
