@@ -54,7 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\RecipeTestsGetRecipe.cs" />
+    <Compile Include="Model\EthnicTests.cs" />
+    <Compile Include="Model\AllergenTests.cs" />
+    <Compile Include="Model\FoodTypeTests.cs" />
+    <Compile Include="Model\KitchenWareTests.cs" />
+    <Compile Include="Model\NutritionTest.cs" />
     <Compile Include="Model\RecipeTests.cs" />
+    <Compile Include="Model\MealTypeTest.cs" />
+    <Compile Include="Model\IngredientsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
