@@ -25,10 +25,20 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Gets all Nutrition from the database table.
         /// </summary>
+        /// <param name="sort">What parameter of Nutrition to order by</param>
         /// <returns>List of all Nutritions from database </returns>
-        public List<Nutrition> GetNutritions()
+        public List<Nutrition> GetNutritions(string sort)
         {
-            return this.nutritionDAL.GetNutritions();
+            if (string.IsNullOrEmpty(sort))
+            {
+                throw new ArgumentNullException("sort must be an attribute of Nutrition");
+            }
+            if (sort != "id" || sort != "carbohydrate" || sort != "protein" || sort != "fat" || 
+                    sort != "alcohol" || sort != "calories" || sort != "serving_size")
+            {
+                throw new ArgumentException("sort must be an attribute of Nutrition");
+            }
+            return this.nutritionDAL.GetNutritions(sort);
         }
 
         /// <summary>

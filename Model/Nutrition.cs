@@ -9,14 +9,12 @@
         /// Nutrition  attributes.
         /// </summary>
         public int NutritionId { get; set; }
-        public string Carbohydrate { get; set; }
-        public string Protein { get; set; }
-        public string Fat { get; set; }
-        public string Alcohol { get; set; }
-        public string Vitamin { get; set; }
-        public string Mineral { get; set; }
-        public string Fiber { get; set; }
-        public string Water { get; set; }
+        public int Carbohydrate { get; set; }
+        public int Protein { get; set; }
+        public int Fat { get; set; }
+        public int Alcohol { get; set; }
+        public int Calories { get; set; }
+        public string ServingSize { get; set; }
 
     }
 }

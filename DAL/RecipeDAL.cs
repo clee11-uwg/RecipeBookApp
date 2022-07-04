@@ -290,12 +290,12 @@ namespace RecipeBookApp.DAL
                                     FROM recipe
                                         JOIN image on recipe.id = image.recipeID
                                     WHERE recipe.id NOT IN tempFilterAllergen
-	                                    AND recipe.id NOT IN tempFilterEthnic
+	                                    AND recipe.id IN tempFilterEthnic
 	                                    AND recipe.id NOT IN tempFilterTypeOfFood
-	                                    AND recipe.id NOT IN tempFilterIngredient
-	                                    AND recipe.id NOT IN tempFilterKitchenware
-	                                    AND recipe.id NOT IN tempFilterTypesOfMeal
-	                                    AND recipe.id NOT IN tempFilterNutrition;";
+	                                    AND recipe.id IN tempFilterIngredient
+	                                    AND recipe.id IN tempFilterKitchenware
+	                                    AND recipe.id IN tempFilterTypesOfMeal
+	                                    AND recipe.id IN tempFilterNutrition;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {

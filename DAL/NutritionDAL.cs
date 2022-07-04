@@ -16,17 +16,19 @@ namespace RecipeBookApp.DAL
         /// This method to get the list of Kitchenware avilable in the recipe database
         /// </summary>
         /// <returns>List of all nutritional data known to the database</returns>
-        public List<Nutrition> GetNutritions()
+        public List<Nutrition> GetNutritions(string sort)
         {
             List<Nutrition> nutritionList = new List<Nutrition>();
             string selectStatement = @"SELECT nutrition.id, nutrition.carbohydrate, nutrition.protein, nutrition.fat,
-                                        nutrition.vitamin, nutrition.mineral, nutrition.water, nutrition.fiber, nutrition.alcohol
-                                    FROM nutrition; ";
+                                        nutrition.alcohol, nutrition.calories, nutrition.serving_size
+                                    FROM nutrition
+                                    ORDER BY @sort;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
+                    selectCommand.Parameters.AddWithValue("@sort", sort);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
                         while (reader.Read())
@@ -34,14 +36,12 @@ namespace RecipeBookApp.DAL
                             Nutrition nutrition = new Nutrition
                             {
                                 NutritionId = Convert.ToInt32(reader["id"]),
-                                Carbohydrate = reader["carbohydrate"].ToString(),
-                                Fat = reader["fat"].ToString(),
-                                Protein = reader["protein"].ToString(),
-                                Alcohol = reader["alcohol"].ToString(),
-                                Vitamin = reader["vitamin"].ToString(),
-                                Mineral = reader["mineral"].ToString(),
-                                Water = reader["water"].ToString(),
-                                Fiber = reader["fiber"].ToString()
+                                Carbohydrate = Convert.ToInt32(reader["carbohydrate"]),
+                                Fat = Convert.ToInt32(reader["fat"]),
+                                Protein = Convert.ToInt32(reader["protein"]),
+                                Alcohol = Convert.ToInt32(reader["alcohol"]),
+                                Calories = Convert.ToInt32(reader["calories"]),
+                                ServingSize = reader["serving_size"].ToString()
                             };
 
                             nutritionList.Add(nutrition);
@@ -61,12 +61,14 @@ namespace RecipeBookApp.DAL
         public List<Nutrition> GetNutrition(int recipeID)
         {
             List<Nutrition> nutritionList = new List<Nutrition>();
-            string selectStatement = "SELECT ingredient.id, ingredient.Ingredient, type_of_food.`Type`," +
-             "nutrition.stub FROM recipe  JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id " +
-            "JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id " +
-            "JOIN type_of_food ON ingredient.typeOfFoodID = type_of_food.id " +
-             "JOIN nutrition ON ingredient.nutritionID = nutrition.id " +
-            "WHERE recipe.id = @recipeID;";
+            string selectStatement = @"SELECT nutrition.id, nutrition.carbohydrate, nutrition.protein, nutrition.fat,
+                                        nutrition.alcohol, nutrition.calories, nutrition.serving_size 
+                                    FROM recipe  
+                                        JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
+                                        JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
+                                        JOIN type_of_food ON ingredient.typeOfFoodID = type_of_food.id
+                                         JOIN nutrition ON ingredient.nutritionID = nutrition.id
+                                    WHERE recipe.id = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -81,14 +83,12 @@ namespace RecipeBookApp.DAL
                             Nutrition nutrition = new Nutrition
                             {
                                 NutritionId = Convert.ToInt32(reader["id"]),
-                                Carbohydrate = reader["carbohydrate"].ToString(),
-                                Fat = reader["fat"].ToString(),
-                                Protein = reader["protein"].ToString(),
-                                Alcohol = reader["alcohol"].ToString(),
-                                Vitamin = reader["vitamin"].ToString(),
-                                Mineral = reader["mineral"].ToString(),
-                                Water = reader["water"].ToString(),
-                                Fiber = reader["fiber"].ToString()
+                                Carbohydrate = Convert.ToInt32(reader["carbohydrate"]),
+                                Fat = Convert.ToInt32(reader["fat"]),
+                                Protein = Convert.ToInt32(reader["protein"]),
+                                Alcohol = Convert.ToInt32(reader["alcohol"]),
+                                Calories = Convert.ToInt32(reader["calories"]),
+                                ServingSize = reader["serving_size"].ToString()
                             };
 
                             nutritionList.Add(nutrition);
