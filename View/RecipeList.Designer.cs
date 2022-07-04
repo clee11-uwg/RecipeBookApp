@@ -58,9 +58,8 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1313, 172);
+            this.panel1.Size = new System.Drawing.Size(985, 140);
             this.panel1.TabIndex = 2;
             // 
             // pictureBox1
@@ -70,47 +69,49 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1313, 172);
+            this.pictureBox1.Size = new System.Drawing.Size(985, 140);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 284);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 231);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(20, 12, 13, 12);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1300, 666);
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(15, 10, 10, 10);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(975, 541);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // searchLabel
             // 
             this.searchLabel.AutoSize = true;
             this.searchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLabel.Location = new System.Drawing.Point(109, 178);
+            this.searchLabel.Location = new System.Drawing.Point(82, 145);
+            this.searchLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.searchLabel.Name = "searchLabel";
-            this.searchLabel.Size = new System.Drawing.Size(186, 25);
+            this.searchLabel.Size = new System.Drawing.Size(152, 20);
             this.searchLabel.TabIndex = 4;
             this.searchLabel.Text = "Search Your Recipe";
             // 
             // searchTextBox
             // 
             this.searchTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchTextBox.Location = new System.Drawing.Point(318, 182);
+            this.searchTextBox.Location = new System.Drawing.Point(238, 148);
+            this.searchTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(435, 28);
+            this.searchTextBox.Size = new System.Drawing.Size(327, 24);
             this.searchTextBox.TabIndex = 5;
             // 
             // searchButton
             // 
             this.searchButton.BackColor = System.Drawing.Color.DarkSalmon;
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(776, 176);
+            this.searchButton.Location = new System.Drawing.Point(582, 143);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(110, 35);
+            this.searchButton.Size = new System.Drawing.Size(82, 28);
             this.searchButton.TabIndex = 6;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = false;
@@ -122,9 +123,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.clearButton.BackColor = System.Drawing.Color.DarkSalmon;
             this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.Location = new System.Drawing.Point(892, 174);
+            this.clearButton.Location = new System.Drawing.Point(669, 141);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(225, 37);
+            this.clearButton.Size = new System.Drawing.Size(169, 30);
             this.clearButton.TabIndex = 7;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = false;
@@ -133,9 +135,10 @@
             // nutritionComboBox
             // 
             this.nutritionComboBox.FormattingEnabled = true;
-            this.nutritionComboBox.Location = new System.Drawing.Point(3, 23);
+            this.nutritionComboBox.Location = new System.Drawing.Point(2, 19);
+            this.nutritionComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nutritionComboBox.Name = "nutritionComboBox";
-            this.nutritionComboBox.Size = new System.Drawing.Size(121, 24);
+            this.nutritionComboBox.Size = new System.Drawing.Size(92, 21);
             this.nutritionComboBox.TabIndex = 8;
             this.nutritionComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NutritionComboBox_KeyPress);
             // 
@@ -143,27 +146,30 @@
             // 
             this.allergenComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.allergenComboBox.FormattingEnabled = true;
-            this.allergenComboBox.Location = new System.Drawing.Point(217, 23);
+            this.allergenComboBox.Location = new System.Drawing.Point(162, 19);
+            this.allergenComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.allergenComboBox.Name = "allergenComboBox";
-            this.allergenComboBox.Size = new System.Drawing.Size(121, 24);
+            this.allergenComboBox.Size = new System.Drawing.Size(92, 21);
             this.allergenComboBox.TabIndex = 9;
             this.allergenComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllergenComboBox_KeyPress);
             // 
             // ingredientsComboBox
             // 
             this.ingredientsComboBox.FormattingEnabled = true;
-            this.ingredientsComboBox.Location = new System.Drawing.Point(645, 23);
+            this.ingredientsComboBox.Location = new System.Drawing.Point(482, 19);
+            this.ingredientsComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ingredientsComboBox.Name = "ingredientsComboBox";
-            this.ingredientsComboBox.Size = new System.Drawing.Size(121, 24);
+            this.ingredientsComboBox.Size = new System.Drawing.Size(92, 21);
             this.ingredientsComboBox.TabIndex = 11;
             this.ingredientsComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IngredientsComboBox_KeyPress);
             // 
             // mealTypeComboBox
             // 
             this.mealTypeComboBox.FormattingEnabled = true;
-            this.mealTypeComboBox.Location = new System.Drawing.Point(431, 23);
+            this.mealTypeComboBox.Location = new System.Drawing.Point(322, 19);
+            this.mealTypeComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.mealTypeComboBox.Name = "mealTypeComboBox";
-            this.mealTypeComboBox.Size = new System.Drawing.Size(121, 24);
+            this.mealTypeComboBox.Size = new System.Drawing.Size(92, 21);
             this.mealTypeComboBox.TabIndex = 12;
             this.mealTypeComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MealTypeComboBox_KeyPress);
             // 
@@ -171,9 +177,10 @@
             // 
             this.filterButton.BackColor = System.Drawing.Color.LightSalmon;
             this.filterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterButton.Location = new System.Drawing.Point(1073, 23);
+            this.filterButton.Location = new System.Drawing.Point(802, 19);
+            this.filterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(177, 35);
+            this.filterButton.Size = new System.Drawing.Size(133, 28);
             this.filterButton.TabIndex = 13;
             this.filterButton.Text = "Apply Filter";
             this.filterButton.UseVisualStyleBackColor = false;
@@ -188,8 +195,8 @@
             this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.80039F));
             this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.80039F));
             this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.998F));
-            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.applyFiltertableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.applyFiltertableLayoutPanel.Controls.Add(this.ethnicLabel, 4, 0);
             this.applyFiltertableLayoutPanel.Controls.Add(this.ingredientsLabel, 3, 0);
             this.applyFiltertableLayoutPanel.Controls.Add(this.mealLabel, 2, 0);
@@ -201,74 +208,81 @@
             this.applyFiltertableLayoutPanel.Controls.Add(this.nutritionLabel, 0, 0);
             this.applyFiltertableLayoutPanel.Controls.Add(this.ethnicComboBox, 4, 1);
             this.applyFiltertableLayoutPanel.Controls.Add(this.filterButton, 5, 1);
-            this.applyFiltertableLayoutPanel.Location = new System.Drawing.Point(12, 216);
+            this.applyFiltertableLayoutPanel.Location = new System.Drawing.Point(9, 176);
+            this.applyFiltertableLayoutPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.applyFiltertableLayoutPanel.Name = "applyFiltertableLayoutPanel";
             this.applyFiltertableLayoutPanel.RowCount = 2;
             this.applyFiltertableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34F));
             this.applyFiltertableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66F));
-            this.applyFiltertableLayoutPanel.Size = new System.Drawing.Size(1274, 61);
+            this.applyFiltertableLayoutPanel.Size = new System.Drawing.Size(956, 50);
             this.applyFiltertableLayoutPanel.TabIndex = 14;
             // 
             // ethnicLabel
             // 
             this.ethnicLabel.AutoSize = true;
-            this.ethnicLabel.Location = new System.Drawing.Point(859, 0);
+            this.ethnicLabel.Location = new System.Drawing.Point(642, 0);
+            this.ethnicLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ethnicLabel.Name = "ethnicLabel";
-            this.ethnicLabel.Size = new System.Drawing.Size(43, 16);
+            this.ethnicLabel.Size = new System.Drawing.Size(37, 13);
             this.ethnicLabel.TabIndex = 18;
             this.ethnicLabel.Text = "Ethnic";
             // 
             // ingredientsLabel
             // 
             this.ingredientsLabel.AutoSize = true;
-            this.ingredientsLabel.Location = new System.Drawing.Point(645, 0);
+            this.ingredientsLabel.Location = new System.Drawing.Point(482, 0);
+            this.ingredientsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ingredientsLabel.Name = "ingredientsLabel";
-            this.ingredientsLabel.Size = new System.Drawing.Size(73, 16);
+            this.ingredientsLabel.Size = new System.Drawing.Size(59, 13);
             this.ingredientsLabel.TabIndex = 16;
             this.ingredientsLabel.Text = "Ingredients";
             // 
             // mealLabel
             // 
             this.mealLabel.AutoSize = true;
-            this.mealLabel.Location = new System.Drawing.Point(431, 0);
+            this.mealLabel.Location = new System.Drawing.Point(322, 0);
+            this.mealLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.mealLabel.Name = "mealLabel";
-            this.mealLabel.Size = new System.Drawing.Size(69, 16);
+            this.mealLabel.Size = new System.Drawing.Size(54, 13);
             this.mealLabel.TabIndex = 15;
             this.mealLabel.Text = "MealType";
             // 
             // allergenLabel
             // 
             this.allergenLabel.AutoSize = true;
-            this.allergenLabel.Location = new System.Drawing.Point(217, 0);
+            this.allergenLabel.Location = new System.Drawing.Point(162, 0);
+            this.allergenLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.allergenLabel.Name = "allergenLabel";
-            this.allergenLabel.Size = new System.Drawing.Size(57, 16);
+            this.allergenLabel.Size = new System.Drawing.Size(45, 13);
             this.allergenLabel.TabIndex = 14;
             this.allergenLabel.Text = "Allergen";
             // 
             // nutritionLabel
             // 
             this.nutritionLabel.AutoSize = true;
-            this.nutritionLabel.Location = new System.Drawing.Point(3, 0);
+            this.nutritionLabel.Location = new System.Drawing.Point(2, 0);
+            this.nutritionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.nutritionLabel.Name = "nutritionLabel";
-            this.nutritionLabel.Size = new System.Drawing.Size(55, 16);
+            this.nutritionLabel.Size = new System.Drawing.Size(46, 13);
             this.nutritionLabel.TabIndex = 13;
             this.nutritionLabel.Text = "Nutrition";
             // 
             // ethnicComboBox
             // 
             this.ethnicComboBox.FormattingEnabled = true;
-            this.ethnicComboBox.Location = new System.Drawing.Point(859, 23);
+            this.ethnicComboBox.Location = new System.Drawing.Point(642, 19);
+            this.ethnicComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ethnicComboBox.Name = "ethnicComboBox";
-            this.ethnicComboBox.Size = new System.Drawing.Size(114, 24);
+            this.ethnicComboBox.Size = new System.Drawing.Size(86, 21);
             this.ethnicComboBox.TabIndex = 19;
             this.ethnicComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EthnicComboBox_KeyPress);
             // 
             // RecipeList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1313, 956);
+            this.ClientSize = new System.Drawing.Size(985, 777);
             this.Controls.Add(this.applyFiltertableLayoutPanel);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.searchButton);
@@ -277,7 +291,6 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RecipeList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Digital Recipe App";

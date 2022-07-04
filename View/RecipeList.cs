@@ -273,7 +273,7 @@ namespace RecipeBookApp
         private void CreateNutritionDropDown()
         {
             this.nutritionComboBox.DataSource = null;
-            this.nutritionList = this.nutritionController.GetNutritions();
+            this.nutritionList = this.nutritionController.GetNutritions("protein");
             this.nutritionList.Add(new Nutrition
             {
                 NutritionId = -1,
