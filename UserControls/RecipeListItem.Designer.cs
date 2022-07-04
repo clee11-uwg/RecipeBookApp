@@ -75,7 +75,7 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.lblTile);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 15);
+            this.Margin = new System.Windows.Forms.Padding(16, 12, 15, 12);
             this.Name = "RecipeListItem";
             this.Size = new System.Drawing.Size(264, 197);
             ((System.ComponentModel.ISupportInitialize)(this.picBoxRecipeImage)).EndInit();
