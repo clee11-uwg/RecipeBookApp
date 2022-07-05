@@ -50,10 +50,9 @@
             // titleLbl
             // 
             this.titleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLbl.Location = new System.Drawing.Point(16, 164);
-            this.titleLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.titleLbl.Location = new System.Drawing.Point(12, 133);
             this.titleLbl.Name = "titleLbl";
-            this.titleLbl.Size = new System.Drawing.Size(980, 30);
+            this.titleLbl.Size = new System.Drawing.Size(735, 24);
             this.titleLbl.TabIndex = 0;
             this.titleLbl.Text = "Title";
             this.titleLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -65,9 +64,8 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1012, 151);
+            this.pictureBox1.Size = new System.Drawing.Size(759, 123);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -75,10 +73,9 @@
             // ingredientsHeadingLbl
             // 
             this.ingredientsHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ingredientsHeadingLbl.Location = new System.Drawing.Point(40, 222);
-            this.ingredientsHeadingLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ingredientsHeadingLbl.Location = new System.Drawing.Point(30, 180);
             this.ingredientsHeadingLbl.Name = "ingredientsHeadingLbl";
-            this.ingredientsHeadingLbl.Size = new System.Drawing.Size(299, 41);
+            this.ingredientsHeadingLbl.Size = new System.Drawing.Size(224, 33);
             this.ingredientsHeadingLbl.TabIndex = 2;
             this.ingredientsHeadingLbl.Text = "Ingredients";
             this.ingredientsHeadingLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -86,10 +83,9 @@
             // kitchenwareHeadingLbl
             // 
             this.kitchenwareHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kitchenwareHeadingLbl.Location = new System.Drawing.Point(389, 226);
-            this.kitchenwareHeadingLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.kitchenwareHeadingLbl.Location = new System.Drawing.Point(292, 184);
             this.kitchenwareHeadingLbl.Name = "kitchenwareHeadingLbl";
-            this.kitchenwareHeadingLbl.Size = new System.Drawing.Size(299, 30);
+            this.kitchenwareHeadingLbl.Size = new System.Drawing.Size(224, 24);
             this.kitchenwareHeadingLbl.TabIndex = 3;
             this.kitchenwareHeadingLbl.Text = "Kitchen-ware";
             this.kitchenwareHeadingLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -102,22 +98,20 @@
             this.instructionsTxtBx.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.instructionsTxtBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.instructionsTxtBx.ForeColor = System.Drawing.Color.Black;
-            this.instructionsTxtBx.Location = new System.Drawing.Point(0, 520);
-            this.instructionsTxtBx.Margin = new System.Windows.Forms.Padding(4);
+            this.instructionsTxtBx.Location = new System.Drawing.Point(0, 422);
             this.instructionsTxtBx.Multiline = true;
             this.instructionsTxtBx.Name = "instructionsTxtBx";
             this.instructionsTxtBx.ReadOnly = true;
             this.instructionsTxtBx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.instructionsTxtBx.Size = new System.Drawing.Size(1012, 398);
+            this.instructionsTxtBx.Size = new System.Drawing.Size(759, 324);
             this.instructionsTxtBx.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 475);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(5, 386);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(299, 41);
+            this.label1.Size = new System.Drawing.Size(224, 33);
             this.label1.TabIndex = 7;
             this.label1.Text = "Steps";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -126,43 +120,39 @@
             // 
             this.ingredientsLbl.AutoSize = true;
             this.ingredientsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ingredientsLbl.Location = new System.Drawing.Point(101, 262);
-            this.ingredientsLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.ingredientsLbl.MinimumSize = new System.Drawing.Size(267, 123);
+            this.ingredientsLbl.Location = new System.Drawing.Point(76, 213);
+            this.ingredientsLbl.MinimumSize = new System.Drawing.Size(200, 100);
             this.ingredientsLbl.Name = "ingredientsLbl";
-            this.ingredientsLbl.Size = new System.Drawing.Size(267, 123);
+            this.ingredientsLbl.Size = new System.Drawing.Size(200, 100);
             this.ingredientsLbl.TabIndex = 8;
             // 
             // kitchenwareLbl
             // 
             this.kitchenwareLbl.AutoSize = true;
             this.kitchenwareLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kitchenwareLbl.Location = new System.Drawing.Point(433, 262);
-            this.kitchenwareLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.kitchenwareLbl.MinimumSize = new System.Drawing.Size(267, 123);
+            this.kitchenwareLbl.Location = new System.Drawing.Point(325, 213);
+            this.kitchenwareLbl.MinimumSize = new System.Drawing.Size(200, 100);
             this.kitchenwareLbl.Name = "kitchenwareLbl";
-            this.kitchenwareLbl.Size = new System.Drawing.Size(267, 123);
+            this.kitchenwareLbl.Size = new System.Drawing.Size(200, 100);
             this.kitchenwareLbl.TabIndex = 9;
             // 
             // typeOfMealLbl
             // 
             this.typeOfMealLbl.AutoSize = true;
             this.typeOfMealLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeOfMealLbl.Location = new System.Drawing.Point(729, 361);
-            this.typeOfMealLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.typeOfMealLbl.MinimumSize = new System.Drawing.Size(267, 92);
+            this.typeOfMealLbl.Location = new System.Drawing.Point(547, 293);
+            this.typeOfMealLbl.MinimumSize = new System.Drawing.Size(200, 75);
             this.typeOfMealLbl.Name = "typeOfMealLbl";
-            this.typeOfMealLbl.Size = new System.Drawing.Size(267, 92);
+            this.typeOfMealLbl.Size = new System.Drawing.Size(200, 75);
             this.typeOfMealLbl.TabIndex = 10;
             this.typeOfMealLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // allergenHeadingLbl
             // 
             this.allergenHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.allergenHeadingLbl.Location = new System.Drawing.Point(749, 226);
-            this.allergenHeadingLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.allergenHeadingLbl.Location = new System.Drawing.Point(562, 184);
             this.allergenHeadingLbl.Name = "allergenHeadingLbl";
-            this.allergenHeadingLbl.Size = new System.Drawing.Size(225, 30);
+            this.allergenHeadingLbl.Size = new System.Drawing.Size(169, 24);
             this.allergenHeadingLbl.TabIndex = 11;
             this.allergenHeadingLbl.Text = "Allergens";
             this.allergenHeadingLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -170,21 +160,19 @@
             // allergenListLbl
             // 
             this.allergenListLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.allergenListLbl.Location = new System.Drawing.Point(729, 262);
-            this.allergenListLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.allergenListLbl.MinimumSize = new System.Drawing.Size(267, 49);
+            this.allergenListLbl.Location = new System.Drawing.Point(547, 213);
+            this.allergenListLbl.MinimumSize = new System.Drawing.Size(200, 40);
             this.allergenListLbl.Name = "allergenListLbl";
-            this.allergenListLbl.Size = new System.Drawing.Size(267, 49);
+            this.allergenListLbl.Size = new System.Drawing.Size(200, 40);
             this.allergenListLbl.TabIndex = 12;
             this.allergenListLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // mealTypeHeadingLbl
             // 
             this.mealTypeHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mealTypeHeadingLbl.Location = new System.Drawing.Point(749, 331);
-            this.mealTypeHeadingLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.mealTypeHeadingLbl.Location = new System.Drawing.Point(562, 269);
             this.mealTypeHeadingLbl.Name = "mealTypeHeadingLbl";
-            this.mealTypeHeadingLbl.Size = new System.Drawing.Size(225, 30);
+            this.mealTypeHeadingLbl.Size = new System.Drawing.Size(169, 24);
             this.mealTypeHeadingLbl.TabIndex = 13;
             this.mealTypeHeadingLbl.Text = "Meal Type(s)";
             this.mealTypeHeadingLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -193,44 +181,50 @@
             // 
             this.editButton.BackColor = System.Drawing.Color.Tan;
             this.editButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editButton.Location = new System.Drawing.Point(744, 167);
+            this.editButton.Location = new System.Drawing.Point(558, 136);
+            this.editButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(75, 30);
+            this.editButton.Size = new System.Drawing.Size(56, 24);
             this.editButton.TabIndex = 14;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = false;
+            this.editButton.Visible = false;
             this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // deleteButton
             // 
             this.deleteButton.BackColor = System.Drawing.Color.Tan;
             this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButton.Location = new System.Drawing.Point(825, 167);
+            this.deleteButton.Location = new System.Drawing.Point(619, 136);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(91, 30);
+            this.deleteButton.Size = new System.Drawing.Size(68, 24);
             this.deleteButton.TabIndex = 15;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Visible = false;
             this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // saveButton
             // 
             this.saveButton.BackColor = System.Drawing.Color.Tan;
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(917, 167);
+            this.saveButton.Location = new System.Drawing.Point(688, 136);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(79, 30);
+            this.saveButton.Size = new System.Drawing.Size(59, 24);
             this.saveButton.TabIndex = 16;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Visible = false;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // RecipeDetails
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1012, 918);
+            this.ClientSize = new System.Drawing.Size(759, 746);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.editButton);
@@ -247,7 +241,6 @@
             this.Controls.Add(this.titleLbl);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RecipeDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Recipe Details";
