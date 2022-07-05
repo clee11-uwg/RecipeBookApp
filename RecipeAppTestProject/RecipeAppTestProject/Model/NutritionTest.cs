@@ -13,14 +13,16 @@ namespace RecipeAppTestProject.Model
         /// <summary>
         /// Test Method to create get the Nutritions 
         /// </summary>
+        ///         
+
         [TestMethod]
         public void TestGetNutritionsMethod()
         {
             List<Nutrition> NutritionList = new List<Nutrition>();
              Nutrition Nutrition = new Nutrition
             {
-                NutritionId = 1,
-            };
+                NutritionId = 1
+             };
             Nutrition Nutrition2 = new Nutrition
             {
                 NutritionId = 2

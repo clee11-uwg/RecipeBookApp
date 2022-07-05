@@ -24,7 +24,7 @@ namespace RecipeAppTestProject.Model
             };
             FoodType food2 = new FoodType
             {
-                FoodId = 1,
+                FoodId = 2,
                 TypeOfFood = "",
             };
 
@@ -49,7 +49,7 @@ namespace RecipeAppTestProject.Model
             };
             FoodType food2 = new FoodType
             {
-                FoodId = 1,
+                FoodId = 2,
                 TypeOfFood = "Vegetable",
             };
 
@@ -74,13 +74,14 @@ namespace RecipeAppTestProject.Model
             };
             FoodType food2 = new FoodType
             {
-                FoodId = 1,
+                FoodId = 2,
                 TypeOfFood = "Vegetable",
             };
 
             foodList.Add(food);
             foodList.Add(food2);
-            foodList.RemoveAt(0);
+
+            foodList.RemoveAll(x => x.FoodId == 1);
             Assert.AreEqual("Vegetable", foodList[0].TypeOfFood);
             Assert.AreEqual(1, foodList.Count);
 
@@ -101,13 +102,19 @@ namespace RecipeAppTestProject.Model
             };
             FoodType food2 = new FoodType
             {
-                FoodId = 1,
+                FoodId = 2,
                 TypeOfFood = "Alcohol",
             };
 
             foodList.Add(food);
             foodList.Add(food2);
-            food2.TypeOfFood = "Legume";
+            foreach (FoodType updateFood in foodList)
+            {
+                if (updateFood.FoodId == 2)
+                {
+                    updateFood.TypeOfFood = "Legume";
+                }
+            }
             Assert.AreEqual(2, foodList.Count);
             Assert.AreEqual("Legume", foodList[1].TypeOfFood);
         }

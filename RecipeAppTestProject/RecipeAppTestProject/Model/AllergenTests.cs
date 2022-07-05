@@ -24,7 +24,7 @@ namespace RecipeAppTestProject.Model
             };
             Allergen recipeAllergen2 = new Allergen
             {
-                AllergenId = 1,
+                AllergenId = 2,
                 AllergenDetails = "Mango"
             };
 
@@ -50,7 +50,7 @@ namespace RecipeAppTestProject.Model
             };
             Allergen recipeAllergen2 = new Allergen
             {
-                AllergenId = 1,
+                AllergenId = 2,
                 AllergenDetails = "Maize"
             };
             allergenList.Add(recipeAllergen);
@@ -74,12 +74,12 @@ namespace RecipeAppTestProject.Model
             };
             Allergen recipeAllergen2 = new Allergen
             {
-                AllergenId = 1,
+                AllergenId = 2,
                 AllergenDetails = "Maize"
             };
             allergenList.Add(recipeAllergen);
             allergenList.Add(recipeAllergen2);
-            allergenList.RemoveAt(0);
+            allergenList.RemoveAll(x => x.AllergenId == 1);
             Assert.AreEqual("Maize", allergenList[0].AllergenDetails);
       
         }
@@ -99,12 +99,18 @@ namespace RecipeAppTestProject.Model
             };
             Allergen recipeAllergen2 = new Allergen
             {
-                AllergenId = 1,
+                AllergenId = 2,
                 AllergenDetails = "Maize"
             };
             allergenList.Add(recipeAllergen);
             allergenList.Add(recipeAllergen2);
-            allergenList[0].AllergenDetails = "Sesame";
+            foreach (Allergen updateAllergy in allergenList)
+            {
+                if (updateAllergy.AllergenId == 1)
+                {
+                    updateAllergy.AllergenDetails = "Sesame";
+                }               
+            }
             Assert.AreEqual("Sesame", allergenList[0].AllergenDetails);
         }
     }

@@ -121,7 +121,8 @@ namespace RecipeAppTestProject.Model
 
             RecipeList.Add(recipe);
             RecipeList.Add(recipe2);
-            RecipeList.RemoveAt(0);
+            RecipeList.RemoveAll(x => x.RecipeId == 1);
+
             Assert.AreEqual("Alfredo Bread", RecipeList[0].RecipeName);
       
         }
@@ -159,8 +160,18 @@ namespace RecipeAppTestProject.Model
 
             RecipeList.Add(recipe);
             RecipeList.Add(recipe2);
-            RecipeList[0].RecipeName="Tomato Soup";
-            RecipeList[1].NutritionId = 8;
+            foreach (Recipe updateRecipe in RecipeList)
+            {
+                if (updateRecipe.RecipeId==2)
+                {
+                    updateRecipe.NutritionId = 8;
+                }
+               else if (updateRecipe.RecipeId == 1)
+                {
+                    updateRecipe.RecipeName = "Tomato Soup";
+                }
+            }
+        
             Assert.AreEqual("Tomato Soup", RecipeList[0].RecipeName);
             Assert.AreEqual(8, RecipeList[1].NutritionId);
         }

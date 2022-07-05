@@ -25,7 +25,7 @@ namespace RecipeAppTestProject.Model
             };
             Ethnic recipeEthnicity2 = new Ethnic
             {
-                EthnicId = 1,
+                EthnicId = 2,
                 Ethnicity = "Northeast Asian"
             };
             ethnicityList.Add(recipeEthnicity);
@@ -50,7 +50,7 @@ namespace RecipeAppTestProject.Model
             };
             Ethnic recipeEthnicity2 = new Ethnic
             {
-                EthnicId = 1,
+                EthnicId = 2,
                 Ethnicity = "Northeast Asian"
             };
             ethnicityList.Add(recipeEthnicity);
@@ -74,12 +74,13 @@ namespace RecipeAppTestProject.Model
             };
             Ethnic recipeEthnicity2 = new Ethnic
             {
-                EthnicId = 1,
+                EthnicId = 2,
                 Ethnicity = "Northeast Asian"
             };
             ethnicityList.Add(recipeEthnicity);
             ethnicityList.Add(recipeEthnicity2);
-            ethnicityList.RemoveAt(0);
+
+            ethnicityList.RemoveAll(x => x.EthnicId == 1);
             Assert.AreEqual("Northeast Asian", ethnicityList[0].Ethnicity);
       
         }
@@ -99,12 +100,18 @@ namespace RecipeAppTestProject.Model
             };
             Ethnic recipeEthnicity2 = new Ethnic
             {
-                EthnicId = 1,
+                EthnicId = 2,
                 Ethnicity = "Northeast Asian"
             };
             ethnicityList.Add(recipeEthnicity);
             ethnicityList.Add(recipeEthnicity2);
-            ethnicityList[0].Ethnicity = "Pacifia";
+            foreach (Ethnic updateEthnic in ethnicityList)
+            {
+                if (updateEthnic.EthnicId == 1)
+                {
+                    updateEthnic.Ethnicity = "Pacifia";
+                }
+            }
             Assert.AreEqual("Pacifia", ethnicityList[0].Ethnicity);
         }
     }

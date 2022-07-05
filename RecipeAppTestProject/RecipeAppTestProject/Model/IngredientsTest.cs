@@ -86,7 +86,7 @@ namespace RecipeAppTestProject.Model
             recipeIngredientList.Add(newIngredient);
             recipeIngredientList.Add(newIngredient2);
             Assert.AreEqual(2, recipeIngredientList.Count);
-            recipeIngredientList.RemoveAt(0);
+            recipeIngredientList.RemoveAll(x => x.IngredientId == 1);
             Assert.AreEqual("Salt", recipeIngredientList[0].IngredientName);
             Assert.AreEqual(1, recipeIngredientList.Count);
 
@@ -115,8 +115,14 @@ namespace RecipeAppTestProject.Model
 
             recipeIngredientList.Add(newIngredient);
             recipeIngredientList.Add(newIngredient2);
-            newIngredient2.IngredientName = "Black beans";
-            
+            foreach (Ingredient updateIngredient in recipeIngredientList)
+            {
+                if (updateIngredient.IngredientId == 2)
+                {
+                    updateIngredient.IngredientName = "Black beans";
+                }
+            }
+
             Assert.AreEqual("Black beans", recipeIngredientList[1].IngredientName);
         }
    

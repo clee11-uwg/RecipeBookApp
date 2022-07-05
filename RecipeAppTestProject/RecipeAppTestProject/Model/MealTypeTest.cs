@@ -83,7 +83,8 @@ namespace RecipeAppTestProject.Model
 
             MealTypeList.Add(mealType);
             MealTypeList.Add(mealType2);
-            MealTypeList.RemoveAt(0);
+
+            MealTypeList.RemoveAll(x => x.mealTypeID == 1);
             Assert.AreEqual("BreakFast", MealTypeList[0].type);
 
         }
@@ -110,7 +111,13 @@ namespace RecipeAppTestProject.Model
 
             MealTypeList.Add(mealType);
             MealTypeList.Add(mealType2);
-            MealTypeList[0].type = "Dinner";
+            foreach (MealType updateMeal in MealTypeList)
+            {
+                if (updateMeal.mealTypeID == 1)
+                {
+                    updateMeal.type = "Dinner";
+                }
+            }
             Assert.AreEqual("Dinner", MealTypeList[0].type);
         }
     }

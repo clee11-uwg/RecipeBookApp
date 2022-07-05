@@ -81,7 +81,8 @@ namespace RecipeAppTestProject.Model
 
             kicthenList.Add(kitchen);
             kicthenList.Add(kitchen2);
-            kicthenList.RemoveAt(0);
+
+            kicthenList.RemoveAll(x => x.KitchenwareId == 1);
             Assert.AreEqual("Corkscrew", kicthenList[0].KitchenwareDetails);
       
         }
@@ -107,7 +108,14 @@ namespace RecipeAppTestProject.Model
 
             kicthenList.Add(kitchen);
             kicthenList.Add(kitchen2);
-            kicthenList[0].KitchenwareDetails = "Electric mixer";
+
+            foreach (Kitchenware kit in kicthenList)
+            {
+                if (kit.KitchenwareId == 1)
+                {
+                    kit.KitchenwareDetails = "Electric mixer";
+                }
+            }
             Assert.AreEqual("Electric mixer", kicthenList[0].KitchenwareDetails);
         }
     }
