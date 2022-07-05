@@ -90,7 +90,14 @@ namespace RecipeBookApp
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            if (this.searchTextBox.Text=="")
+            {
+                this.searchTextBox.Focus();
 
+                MessageBox.Show("Please enter text on the textbox to search your recipe");
+                return;
+
+            }
 
             this.ProcessUserSearchRecipe(this.searchTextBox.Text);
         }
@@ -100,9 +107,10 @@ namespace RecipeBookApp
             try
             {
                 this.recipeList = this.recipeController.GetRecipeSearch(recipeUserInput);
-                if (!this.recipeList.Any())
+                if (! this.recipeList.Any())
                 {
                     MessageBox.Show("No Recipe found on the database");
+                    this.Reset();
                     return;
 
                 }
@@ -118,7 +126,7 @@ namespace RecipeBookApp
             }
         }
 
-        private void ClearButton_Click(object sender, EventArgs e)
+        private void Reset()
         {
             this.searchTextBox.Text = "";
             this.recipeList = this.recipeController.GetRecipes();
@@ -130,6 +138,11 @@ namespace RecipeBookApp
             this.flowLayoutPanel1.Controls.Clear();
             this.PopulateItems();
 
+
+        }
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            this.Reset();
         }
 
         /// <summary>
