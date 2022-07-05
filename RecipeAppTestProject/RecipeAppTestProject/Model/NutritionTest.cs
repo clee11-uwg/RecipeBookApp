@@ -19,13 +19,25 @@ namespace RecipeAppTestProject.Model
         public void TestGetNutritionsMethod()
         {
             List<Nutrition> NutritionList = new List<Nutrition>();
-             Nutrition Nutrition = new Nutrition
+            Nutrition Nutrition = new Nutrition
             {
-                NutritionId = 1
-             };
+                NutritionId = 1,
+                Carbohydrate = 86,
+                Protein = 7,
+                Fat = 40,
+                Alcohol = 0,
+                Calories = 722,
+                ServingSize = "1 Slice"
+            };
             Nutrition Nutrition2 = new Nutrition
             {
-                NutritionId = 2
+                NutritionId = 2,    
+                 Carbohydrate = 18,
+                Protein = 4,
+                Fat = 1,
+                Alcohol = 0,
+                Calories = 88,
+                ServingSize = "1/4 pound"
             };
 
             NutritionList.Add(Nutrition);
@@ -45,15 +57,29 @@ namespace RecipeAppTestProject.Model
             List<Nutrition> NutritionList = new List<Nutrition>();
             Nutrition Nutrition = new Nutrition
             {
-                NutritionId = 1
+                NutritionId = 1,
+                Carbohydrate = 86,
+                Protein = 7,
+                Fat = 40,
+                Alcohol = 0,
+                Calories = 722,
+                ServingSize = "1 Slice"
             };
             Nutrition Nutrition2 = new Nutrition
             {
-                NutritionId = 2
+                NutritionId = 2,
+                Carbohydrate = 18,
+                Protein = 4,
+                Fat = 1,
+                Alcohol = 0,
+                Calories = 88,
+                ServingSize = "1/4 pound"
             };
+
 
             NutritionList.Add(Nutrition);
             NutritionList.Add(Nutrition2);
+            Assert.AreEqual("1 Slice", NutritionList[0].ServingSize);
         }
 
 
@@ -64,18 +90,34 @@ namespace RecipeAppTestProject.Model
         [TestMethod]
         public void TestDeleteNutritionMethod()
         {
-            List<Nutrition> NutritionList = new List<Nutrition>();
+            List<Nutrition> nutritionList = new List<Nutrition>();
             Nutrition Nutrition = new Nutrition
             {
-                NutritionId = 1
+                NutritionId = 1,
+                Carbohydrate = 86,
+                Protein = 7,
+                Fat = 40,
+                Alcohol = 0,
+                Calories = 722,
+                ServingSize = "1 Slice"
             };
             Nutrition Nutrition2 = new Nutrition
             {
-                NutritionId = 2
+                NutritionId = 2,
+                Carbohydrate = 18,
+                Protein = 4,
+                Fat = 1,
+                Alcohol = 0,
+                Calories = 88,
+                ServingSize = "1/4 pound"
             };
 
-            NutritionList.Add(Nutrition);
-            NutritionList.Add(Nutrition2);
+           
+            nutritionList.Add(Nutrition);
+            nutritionList.Add(Nutrition2);
+            nutritionList.RemoveAll(x => x.NutritionId == 1);
+            Assert.AreEqual(18, nutritionList[0].Carbohydrate);
+            Assert.AreEqual(1, nutritionList.Count);
 
         }
 
@@ -86,18 +128,39 @@ namespace RecipeAppTestProject.Model
         [TestMethod]
         public void TestUpdateNutritionMethod()
         {
-            List<Nutrition> NutritionList = new List<Nutrition>();
-            Nutrition Nutrition = new Nutrition
+            List<Nutrition> nutritionList = new List<Nutrition>();
+            Nutrition nutrition = new Nutrition
             {
-                NutritionId = 1
+                NutritionId = 1,
+                Carbohydrate = 86,
+                Protein = 7,
+                Fat = 40,
+                Alcohol = 0,
+                Calories = 722,
+                ServingSize = "1 Slice"
             };
-            Nutrition Nutrition2 = new Nutrition
+            Nutrition nutrition2 = new Nutrition
             {
-                NutritionId = 2
+                NutritionId = 2,
+                Carbohydrate = 18,
+                Protein = 4,
+                Fat = 1,
+                Alcohol = 0,
+                Calories = 88,
+                ServingSize = "1/4 pound"
             };
 
-            NutritionList.Add(Nutrition);
-            NutritionList.Add(Nutrition2);
+            nutritionList.Add(nutrition);
+            nutritionList.Add(nutrition2);
+            foreach (Nutrition updateNutrition in nutritionList)
+            {
+                if (updateNutrition.NutritionId == 2)
+                {
+                    updateNutrition.Protein = 10;
+                }
+            }
+            Assert.AreEqual(10, nutritionList[1].Protein);
+
         }
     }
 }
