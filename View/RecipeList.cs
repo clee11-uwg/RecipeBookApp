@@ -90,28 +90,23 @@ namespace RecipeBookApp
         }
         private bool ValidateSearchText()
         {
-            String regex = "[^a-zA-Z0-9]+";
+           String regex = "[^a-zA-Z0-9]+";
             Regex rgex = new Regex(regex);
             MatchCollection matchedText = rgex.Matches(this.searchTextBox.Text);
 
-            if (this.searchTextBox.Text == "" )
+            if (this.searchTextBox.Text.Trim() == "" )
             {
               
                 MessageBox.Show("Recipe Search input cannot be empty.");
                 return false;
 
             }
-            else if ( Int32.TryParse(this.searchTextBox.Text, out int numValue))
+            else if (!Regex.IsMatch(this.searchTextBox.Text, "[a-zA-Z]"))
             {
-                MessageBox.Show("Recipe Search input should be valid text, cannot be only number.");
+                MessageBox.Show("Recipe Search input should be valid text, cannot be only number or special character");
                 return false;
             }
-            else if (matchedText.Count != 0)
-            {
-                MessageBox.Show("Recipe Search input should be valid text, cannot be only special character.");
-                return false;
-
-            }
+         
             return true;
         }
 
@@ -123,7 +118,7 @@ namespace RecipeBookApp
                 return;
           }
 
-            this.ProcessUserSearchRecipe(this.searchTextBox.Text);
+            this.ProcessUserSearchRecipe(this.searchTextBox.Text.Trim());
         }
 
         private void ProcessUserSearchRecipe(string recipeUserInput)
