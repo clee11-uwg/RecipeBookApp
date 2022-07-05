@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RecipeBookApp.UserControls;
+using System.Text.RegularExpressions;
 
 namespace RecipeBookApp
 {
@@ -87,17 +88,40 @@ namespace RecipeBookApp
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private bool ValidateSearchText()
+        {
+            String regex = "[^a-zA-Z0-9]+";
+            Regex rgex = new Regex(regex);
+            MatchCollection matchedText = rgex.Matches(this.searchTextBox.Text);
+
+            if (this.searchTextBox.Text == "" )
+            {
+              
+                MessageBox.Show("Recipe Search input cannot be empty.");
+                return false;
+
+            }
+            else if ( Int32.TryParse(this.searchTextBox.Text, out int numValue))
+            {
+                MessageBox.Show("Recipe Search input should be valid text, cannot be only number.");
+                return false;
+            }
+            else if (matchedText.Count != 0)
+            {
+                MessageBox.Show("Recipe Search input should be valid text, cannot be only special character.");
+                return false;
+
+            }
+            return true;
+        }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            if (this.searchTextBox.Text=="")
-            {
-                this.searchTextBox.Focus();
-
-                MessageBox.Show("Please enter text on the textbox to search your recipe");
+          if (!ValidateSearchText())
+          {
+                Reset();
                 return;
-
-            }
+          }
 
             this.ProcessUserSearchRecipe(this.searchTextBox.Text);
         }
