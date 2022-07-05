@@ -25,5 +25,25 @@ namespace RecipeAppTestProject.Controller
         {
             controller = new EthnicOriginController();
         }
+
+        /// <summary>
+        /// Tests that GetEthnicOrigin(int) throws errors if int is 0
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestGetEthnicitiesByRecipeIDThrowsExceptionIfZero()
+        {
+            List<Ethnic> ingredients = controller.GetEthnicOrigin(0);
+        }
+
+        /// <summary>
+        /// Tests that GetEthnicOrigin(int) throws errors if int is negative
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestGetEthnicitiesByRecipeIDThrowsExceptionIfNegative()
+        {
+            List<Ethnic> ingredients = controller.GetEthnicOrigin(-1);
+        }
     }
 }
