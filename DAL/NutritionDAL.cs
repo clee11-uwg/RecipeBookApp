@@ -62,13 +62,10 @@ namespace RecipeBookApp.DAL
         {
             List<Nutrition> nutritionList = new List<Nutrition>();
             string selectStatement = @"SELECT nutrition.id, nutrition.carbohydrate, nutrition.protein, nutrition.fat,
-                                        nutrition.alcohol, nutrition.calories, nutrition.serving_size 
-                                    FROM recipe  
-                                        JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
-                                        JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
-                                        JOIN type_of_food ON ingredient.typeOfFoodID = type_of_food.id
-                                         JOIN nutrition ON ingredient.nutritionID = nutrition.id
-                                    WHERE recipe.id = @recipeID;";
+	                                        nutrition.alcohol, nutrition.calories, nutrition.serving_size 
+                                        FROM recipe  
+	                                         JOIN nutrition ON recipe.nutritionID = nutrition.id
+                                        WHERE recipe.id = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
