@@ -69,7 +69,6 @@
     <Compile Include="Model\RecipeTests.cs" />
     <Compile Include="Model\MealTypeTest.cs" />
     <Compile Include="Model\IngredientsTest.cs" />
-    <Compile Include="Model\ImageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

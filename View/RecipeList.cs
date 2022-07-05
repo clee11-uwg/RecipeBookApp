@@ -43,13 +43,11 @@ namespace RecipeBookApp
             this.allergenController = new AllergenController();
             this.ingredientsController = new IngredientsController();
             this.kitchenController = new KitchenwareController();
-            this.nutritionController = new NutritionController();
             this.mealController = new TypeOfMealController();
             this.foodController = new TypeOfFoodController();
             this.ethnicController = new EthnicOriginController();
-            this.allergenList= new List<Allergen>();
-            this.nutritionList = new List<Nutrition>();
-            this.kitchenWareList =  new List<Kitchenware>();
+            this.allergenList = new List<Allergen>();
+            this.kitchenWareList = new List<Kitchenware>();
             this.mealTypeList = new List<MealType>();
             this.foodTypeList = new List<FoodType>();
             this.ethnicList = new List<Ethnic>();
@@ -60,31 +58,39 @@ namespace RecipeBookApp
             this.recipeList = new List<Recipe>();
             this.recipeList = this.recipeController.GetRecipes();
             this.PopulateItems();
-        }         
+        }
 
         private void PopulateItems()
         {
-            RecipeListItem[] recipeListItems = new RecipeListItem[this.recipeList.Count];
-
-            // Create new list item and add to the flow layout panel
-            for (int i = 0; i < recipeListItems.Length; i++)
+            try
             {
-                recipeListItems[i] = new RecipeListItem();
-                recipeListItems[i].RecipeId = this.recipeList[i].RecipeId;
-                recipeListItems[i].RecipeName = this.recipeList[i].RecipeName;
-                recipeListItems[i].RecipeImage = this.recipeList[i].RecipeImage;
-                
-                if (flowLayoutPanel1.Controls.Count < 0)
+                RecipeListItem[] recipeListItems = new RecipeListItem[this.recipeList.Count];
+
+                // Create new list item and add to the flow layout panel
+                for (int i = 0; i < recipeListItems.Length; i++)
                 {
-                    flowLayoutPanel1.Controls.Clear();
+                    recipeListItems[i] = new RecipeListItem();
+                    recipeListItems[i].RecipeId = this.recipeList[i].RecipeId;
+                    recipeListItems[i].RecipeName = this.recipeList[i].RecipeName;
+                    recipeListItems[i].RecipeImage = this.recipeList[i].RecipeImage;
+
+                    if (flowLayoutPanel1.Controls.Count < 0)
+                    {
+                        flowLayoutPanel1.Controls.Clear();
+                    }
+                    flowLayoutPanel1.Controls.Add(recipeListItems[i]);
                 }
-                flowLayoutPanel1.Controls.Add(recipeListItems[i]);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter Allergen transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-          
+
 
             this.ProcessUserSearchRecipe(this.searchTextBox.Text);
         }
@@ -93,14 +99,14 @@ namespace RecipeBookApp
         {
             try
             {
-                this.recipeList=this.recipeController.GetRecipeSearch(recipeUserInput);
+                this.recipeList = this.recipeController.GetRecipeSearch(recipeUserInput);
                 if (!this.recipeList.Any())
                 {
                     MessageBox.Show("No Recipe found on the database");
                     return;
 
                 }
-                //flowLayoutPanel1.Controls;
+
                 this.flowLayoutPanel1.Controls.Clear();
                 this.PopulateItems();
             }
@@ -119,9 +125,8 @@ namespace RecipeBookApp
             this.allergenComboBox.SelectedValue = -1;
             this.ingredientsComboBox.SelectedValue = -1;
             this.ethnicComboBox.SelectedValue = -1;
-          
+
             this.mealTypeComboBox.SelectedValue = -1;
-            this.nutritionComboBox.SelectedValue = -1;
             this.flowLayoutPanel1.Controls.Clear();
             this.PopulateItems();
 
@@ -138,7 +143,6 @@ namespace RecipeBookApp
                 this.CreateMealTypeDropDown();
                 this.CreateIngredientsDropDown();
                 this.CreateMealTypeDropDown();
-              //  this.CreateNutritionDropDown();
                 this.CreateEthnicDropDown();
             }
             catch (Exception ex)
@@ -151,84 +155,80 @@ namespace RecipeBookApp
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            int[] selectedAllergy;
-            int[] selectedEthincity;
-            int[] selectedIngredients;
-            int[] selectedNutrition;
-            int[] selectedKitchenWare = new int[] { -1 }; ;
-            int[] selectedMealType;
-            int[] selectedFoodType = new int[] { -1 }; ;
-            bool isSelected = false;
+            try
+            {
+                this.searchTextBox.Text = "";
+                int[] selectedAllergy;
+                int[] selectedEthincity;
+                int[] selectedIngredients;
+                int[] selectedNutrition = new int[] { -1 }; ;
+                int[] selectedKitchenWare = new int[] { -1 }; ;
+                int[] selectedMealType;
+                int[] selectedFoodType = new int[] { -1 }; ;
+                bool isSelected = false;
 
-            if (this.allergenComboBox.SelectedValue!=null && int.Parse(this.allergenComboBox.SelectedValue.ToString()) != -1)
-            {
-                 selectedAllergy = new int[] { int.Parse(this.allergenComboBox.SelectedValue.ToString()) };
-                isSelected = true;
-            }
-            else
-            {
-                selectedAllergy = new int[] { -1 };
-            }
-            if (this.ethnicComboBox.SelectedValue != null &&  int.Parse(this.ethnicComboBox.SelectedValue.ToString()) != -1)
-            {
-                selectedEthincity = new int[] { int.Parse(this.ethnicComboBox.SelectedValue.ToString()) };
-                isSelected = true;
-            }
-            else
-            {
-                selectedEthincity = new int[] { -1 };
-            }
-            if (this.ingredientsComboBox.SelectedValue != null && int.Parse(this.ingredientsComboBox.SelectedValue.ToString()) != -1)
-            {
-               selectedIngredients = new int[] { int.Parse(this.ingredientsComboBox.SelectedValue.ToString()) };
-                isSelected = true;
+                if (this.allergenComboBox.SelectedValue != null && int.Parse(this.allergenComboBox.SelectedValue.ToString()) != -1)
+                {
+                    selectedAllergy = new int[] { int.Parse(this.allergenComboBox.SelectedValue.ToString()) };
+                    isSelected = true;
+                }
+                else
+                {
+                    selectedAllergy = new int[] { -1 };
+                }
+                if (this.ethnicComboBox.SelectedValue != null && int.Parse(this.ethnicComboBox.SelectedValue.ToString()) != -1)
+                {
+                    selectedEthincity = new int[] { int.Parse(this.ethnicComboBox.SelectedValue.ToString()) };
+                    isSelected = true;
+                }
+                else
+                {
+                    selectedEthincity = new int[] { -1 };
+                }
+                if (this.ingredientsComboBox.SelectedValue != null && int.Parse(this.ingredientsComboBox.SelectedValue.ToString()) != -1)
+                {
+                    selectedIngredients = new int[] { int.Parse(this.ingredientsComboBox.SelectedValue.ToString()) };
+                    isSelected = true;
 
-            }
-            else
-            {
-                selectedIngredients = new int[] { -1 };
-            }
-            if (this.nutritionComboBox.SelectedValue != null && int.Parse(this.nutritionComboBox.SelectedValue.ToString()) != -1)
-            {
-               selectedNutrition = new int[] { int.Parse(this.nutritionComboBox.SelectedValue.ToString()) };
-                isSelected = true;
-            }
-            else
-            {
-                selectedNutrition = new int[] { -1 };
-            }
-           
-            if (this.mealTypeComboBox.SelectedValue != null && int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) != -1)
-            {
-                 selectedMealType = new int[] { int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) };
-                isSelected = true;
-            }
-            else
-            {
-                selectedMealType = new int[] { -1 };
-            }
-            
-            if (!isSelected)
-            {
-                MessageBox.Show("Please select atleast one options to filter");
-                return;
-            }
+                }
+                else
+                {
+                    selectedIngredients = new int[] { -1 };
+                }
+               
+                if (this.mealTypeComboBox.SelectedValue != null && int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) != -1)
+                {
+                    selectedMealType = new int[] { int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) };
+                    isSelected = true;
+                }
+                else
+                {
+                    selectedMealType = new int[] { -1 };
+                }
 
-             
-            this.recipeList = this.recipeController.FilterRecipes(selectedAllergy, selectedEthincity,
-                selectedFoodType,selectedIngredients, selectedKitchenWare,selectedMealType, selectedNutrition);
+                if (!isSelected)
+                {
+                    MessageBox.Show("Please select atleast one options to filter");
+                    return;
+                }
 
-            this.flowLayoutPanel1.Controls.Clear();
-            this.PopulateItems();
+
+                this.recipeList = this.recipeController.FilterRecipes(selectedAllergy, selectedEthincity,
+                    selectedFoodType, selectedIngredients, selectedKitchenWare, selectedMealType, selectedNutrition);
+
+                this.flowLayoutPanel1.Controls.Clear();
+                this.PopulateItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
         }
 
-        private void NutritionComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-      
+
         private void KitchenWareComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
@@ -257,80 +257,117 @@ namespace RecipeBookApp
 
         private void CreateAllergenDropDown()
         {
-            this.allergenComboBox.DataSource = null;
-            this.allergenList = this.allergenController.GetAllergens();
-            this.allergenList.Add(new Allergen
+            try
             {
-                AllergenId = -1,
-                AllergenDetails = "Select the allergy"
-            });
-            this.allergenComboBox.DataSource = this.allergenList;
-            this.allergenComboBox.DisplayMember = "AllergenDetails";
-            this.allergenComboBox.ValueMember = "AllergenId";
-            this.allergenComboBox.SelectedValue = -1;
+                this.allergenComboBox.DataSource = null;
+                this.allergenList = this.allergenController.GetAllergens();
+                this.allergenList.Add(new Allergen
+                {
+                    AllergenId = -1,
+                    AllergenDetails = "Select the allergy"
+                });
+                this.allergenComboBox.DataSource = this.allergenList;
+                this.allergenComboBox.DisplayMember = "AllergenDetails";
+                this.allergenComboBox.ValueMember = "AllergenId";
+                this.allergenComboBox.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter Allergen transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void CreateNutritionDropDown()
-        {
-            this.nutritionComboBox.DataSource = null;
-            this.nutritionList = this.nutritionController.GetNutritions("protein");
-            this.nutritionList.Add(new Nutrition
-            {
-                NutritionId = -1,
-                Carbohydrate = 1
-            });
-            this.nutritionComboBox.DataSource = this.nutritionList;
-            this.nutritionComboBox.ValueMember = "NutritionId";
-            this.nutritionComboBox.DisplayMember = "Carbohydrate";
-            this.nutritionComboBox.SelectedValue = -1;
+        
 
-        }
-
-      
         private void CreateIngredientsDropDown()
         {
-            this.ingredientsComboBox.DataSource = null;           
-            this.ingredientList = this.ingredientsController.GetIngredients();
-            this.ingredientList.Add(new Ingredient
+            try
             {
-                IngredientId = -1,
-                IngredientName = "Select the Ingredient"
-            });
-            this.ingredientsComboBox.DataSource = this.ingredientList;
-            this.ingredientsComboBox.DisplayMember = "IngredientName";
-            this.ingredientsComboBox.ValueMember = "IngredientId";
-            this.ingredientsComboBox.SelectedValue = -1;
+                this.ingredientsComboBox.DataSource = null;
+                this.ingredientList = this.ingredientsController.GetIngredients();
+                this.ingredientList.Add(new Ingredient
+                {
+                    IngredientId = -1,
+                    IngredientName = "Select the Ingredient"
+                });
+                this.ingredientsComboBox.DataSource = this.ingredientList;
+                this.ingredientsComboBox.DisplayMember = "IngredientName";
+                this.ingredientsComboBox.ValueMember = "IngredientId";
+                this.ingredientsComboBox.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter Ingredients transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CreateMealTypeDropDown()
         {
-            this.mealTypeComboBox.DataSource = null;
-            this.mealTypeList = this.mealController.GetMealTypes();
-            this.mealTypeList.Add(new MealType
+            try
             {
-                mealTypeID = -1,
-                type = "Select the MealType"
-            });
-            this.mealTypeComboBox.DataSource = this.mealTypeList;
-            this.mealTypeComboBox.DisplayMember = "type";
-            this.mealTypeComboBox.ValueMember = "mealTypeID";
-            this.mealTypeComboBox.SelectedValue = -1;  
+                this.mealTypeComboBox.DataSource = null;
+                this.mealTypeList = this.mealController.GetMealTypes();
+                this.mealTypeList.Add(new MealType
+                {
+                    mealTypeID = -1,
+                    type = "Select the MealType"
+                });
+                this.mealTypeComboBox.DataSource = this.mealTypeList;
+                this.mealTypeComboBox.DisplayMember = "type";
+                this.mealTypeComboBox.ValueMember = "mealTypeID";
+                this.mealTypeComboBox.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter meal type transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CreateEthnicDropDown()
         {
-     
-            this.ethnicComboBox.DataSource = null;          
-            this.ethnicList = this.ethnicController.GetEthnicOrigins();
-            this.ethnicList.Add(new Ethnic
+            try
             {
-                EthnicId = -1,
-                Ethnicity = "Select the Ethnicity"
-            });
-            this.ethnicComboBox.DataSource = this.ethnicList;
-            this.ethnicComboBox.DisplayMember = "Ethnicity";
-            this.ethnicComboBox.ValueMember = "EthnicId";
-            this.ethnicComboBox.SelectedValue = -1;
+
+                this.ethnicComboBox.DataSource = null;
+                this.ethnicList = this.ethnicController.GetEthnicOrigins();
+                this.ethnicList.Add(new Ethnic
+                {
+                    EthnicId = -1,
+                    Ethnicity = "Select the Ethnicity"
+                });
+                this.ethnicComboBox.DataSource = this.ethnicList;
+                this.ethnicComboBox.DisplayMember = "Ethnicity";
+                this.ethnicComboBox.ValueMember = "EthnicId";
+                this.ethnicComboBox.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter Ethnic transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void MealTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.searchTextBox.Text = "";
+        }
+
+        private void IngredientsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.searchTextBox.Text = "";
+        }
+
+        private void AllergenComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.searchTextBox.Text = "";
+        }
+
+        private void EthnicComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.searchTextBox.Text = "";
         }
     }
 }

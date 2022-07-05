@@ -123,7 +123,7 @@
     <Compile Include="Model\Kitchenware.cs" />
     <Compile Include="Model\Ethnic.cs" />
     <Compile Include="Model\FoodType.cs" />
-    <Compile Include="Model\Image.cs" />
+    <Compile Include="Model\RecipeImage.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\MealType.cs" />
     <Compile Include="Model\Nutrition.cs" />
