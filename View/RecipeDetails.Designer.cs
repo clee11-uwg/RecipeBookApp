@@ -182,13 +182,12 @@
             this.editButton.BackColor = System.Drawing.Color.Tan;
             this.editButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editButton.Location = new System.Drawing.Point(558, 136);
-            this.editButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.editButton.Margin = new System.Windows.Forms.Padding(2);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(56, 24);
             this.editButton.TabIndex = 14;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = false;
-            this.editButton.Visible = false;
             this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // deleteButton
@@ -196,13 +195,12 @@
             this.deleteButton.BackColor = System.Drawing.Color.Tan;
             this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteButton.Location = new System.Drawing.Point(619, 136);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(68, 24);
             this.deleteButton.TabIndex = 15;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Visible = false;
             this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // saveButton
@@ -210,13 +208,12 @@
             this.saveButton.BackColor = System.Drawing.Color.Tan;
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.Location = new System.Drawing.Point(688, 136);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(2);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(59, 24);
             this.saveButton.TabIndex = 16;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
-            this.saveButton.Visible = false;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // RecipeDetails
