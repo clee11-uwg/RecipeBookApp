@@ -70,7 +70,49 @@ namespace RecipeBookApp.Controller
             }
         }
 
+        /// <summary>
+        /// Adds a new favorite recipe for the user
+        /// </summary>
+        /// <param name="userID">ID of the user</param>
+        /// <param name="recipeID">ID of the recipe</param>
+        /// <returns>Whether or not the recipe was added as a favorite</returns>
+        public bool AddNewFavoriteRecipe(int userID, int recipeID)
+        {
+            if (userID < 1 || recipeID < 1)
+            {
+                throw new ArgumentOutOfRangeException("Must be a valid user and recipe id");
+            }
+            try
+            {
+                return this.UserDAL.AddNewFavoriteRecipe(userID, recipeID);
+            }
+            catch (NullReferenceException)
+            {
+                throw new NullReferenceException("User or Recipe does not exist. Please try again");
+            }
+        }
 
+        /// <summary>
+        /// Deletes a favorite recipe for the user
+        /// </summary>
+        /// <param name="userID">ID of the user</param>
+        /// <param name="recipeID">ID of the recipe</param>
+        /// <returns>Whether or not the recipe was deleted as a favorite</returns>
+        public bool DeleteFavoriteRecipe(int userID, int recipeID)
+        {
+            if (userID < 1 || recipeID < 1)
+            {
+                throw new ArgumentOutOfRangeException("Must be a valid user and recipe id");
+            }
+            try
+            {
+                return this.UserDAL.DeleteFavoriteRecipe(userID, recipeID);
+            }
+            catch
+            {
+                throw new NullReferenceException("User or Recipe does not exist. Please try again");
+            }
+        }
 
     }
 }
