@@ -24,7 +24,7 @@ namespace RecipeBookApp.DAL
             //string path = Path.Combine(Directory.GetParent(workingDirectory).Parent.FullName, @"Data\", "sampleimage.jpg");
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = @"SELECT r.id, r.`Name`, r.Instructions,
-                                            r.cooktime, r.nutritionID, r.ethnicOriginID, i.image 
+                                            r.cooktime, r.nutritionID, r.ethnicOriginID, r.userWhoCreated, i.image 
                                         FROM recipe r 
                                             JOIN image i ON r.ID = i.recipeID;";
                 
@@ -48,6 +48,7 @@ namespace RecipeBookApp.DAL
                                 CookingTime = Convert.ToInt32(reader["cooktime"]),
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
                                 EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                UserWhoCreated = reader["userWhoCreated"].ToString(),
                                 RecipeImage = Image.FromStream(ms)
                             };
 
@@ -69,7 +70,7 @@ namespace RecipeBookApp.DAL
         {
             Recipe recipe = new Recipe();
             string selectStatement = @"SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, 
-                                        recipe.nutritionID, recipe.ethnicOriginID, image.image
+                                        recipe.nutritionID, recipe.ethnicOriginID, recipe.userWhoCreated, image.image
                                     FROM recipe    
                                         JOIN image ON recipe.id = image.recipeID
                                     WHERE recipe.id = @recipeID;";
@@ -95,6 +96,7 @@ namespace RecipeBookApp.DAL
                                 recipe.CookingTime = Convert.ToInt32(reader["cooktime"]);
                                 recipe.NutritionId = Convert.ToInt32(reader["nutritionID"]);
                                 recipe.EthnicId = Convert.ToInt32(reader["ethnicOriginID"]);
+                                recipe.UserWhoCreated = reader["userWhoCreated"].ToString();
                                 recipe.RecipeImage = Image.FromStream(ms);
                             };
                         }
@@ -174,7 +176,7 @@ namespace RecipeBookApp.DAL
             
             List<Recipe> recipes = new List<Recipe>();
             string selectStatement = @"SELECT r.id, r.`Name`, r.Instructions,
-                                            r.cooktime, r.nutritionID, r.ethnicOriginID, i.image 
+                                            r.cooktime, r.nutritionID, r.ethnicOriginID, r.userWhoCreated, i.image 
                                         FROM recipe r 
                                             JOIN image i ON r.ID = i.recipeID 
                                         WHERE r.Name LIKE '%'|| @UserSearch ||'%'";
@@ -199,6 +201,7 @@ namespace RecipeBookApp.DAL
                                 CookingTime = Convert.ToInt32(reader["cooktime"]),
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
                                 EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                UserWhoCreated = reader["userWhoCreated"].ToString(),
                                 RecipeImage = Image.FromStream(ms)
                             };
 
@@ -286,7 +289,7 @@ namespace RecipeBookApp.DAL
 	                                    WHERE nutrition.id IN (@nutrition);
 
                                     SELECT recipe.id, recipe.`Name`, recipe.Instructions, 
-	                                    recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID, image.image
+	                                    recipe.cooktime, recipe.nutritionID, recipe.ethnicOriginID, recipe.userWhoCreated, image.image
                                     FROM recipe
                                         JOIN image on recipe.id = image.recipeID
                                     WHERE recipe.id NOT IN tempFilterAllergen
@@ -325,6 +328,7 @@ namespace RecipeBookApp.DAL
                                 CookingTime = Convert.ToInt32(reader["cooktime"]),
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
                                 EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                UserWhoCreated = reader["userWhoCreated"].ToString(),
                                 RecipeImage = Image.FromStream(ms)
                             };
 
