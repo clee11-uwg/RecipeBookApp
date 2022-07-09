@@ -95,7 +95,21 @@ namespace RecipeBookApp.Controller
             return this.recipeDAL.FilterRecipes(allergens, ethnicities, foodTypes, ingredients, kitchenware, mealTypes, nutrition);
         }
 
+        /// <summary>
+        /// Returns a list of the user's favorite recipes
+        /// </summary>
+        /// <param name="userID">User ID of the user</param>
+        /// <returns>List of favorite recipes</returns>
+        public List<Recipe> GetFavoriteRecipes(int userID)
+        {
+            if (userID < 1)
+            {
+                throw new ArgumentOutOfRangeException("User ID cannot be less than 1");
+            }
+            return this.recipeDAL.GetFavoriteRecipes(userID);
+        }
 
+        /**
         /// <summary>
         /// Updates the recipe.
         /// </summary>
@@ -138,5 +152,6 @@ namespace RecipeBookApp.Controller
              return this.recipeDAL.DeleteRecipe(deleteRecipe);
             // return RecipeDAL.DeleteRecipe(deleteRecipeId);
         }
+        */
     }
 }
