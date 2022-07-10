@@ -16,6 +16,7 @@ namespace RecipeAppTestProject.Controller
     public class TestRecipeController
     {
         RecipeController controller;
+        User joe;
 
         /// <summary>
         /// Initialize RecipeController used in tests
@@ -24,6 +25,12 @@ namespace RecipeAppTestProject.Controller
         public void Setup()
         {
             controller = new RecipeController();
+            joe = new User
+            {
+                ID = 6,
+                Name = "joe",
+                Is_Admin = false
+            };
         }
 
         /// <summary>
@@ -109,22 +116,24 @@ namespace RecipeAppTestProject.Controller
             List<MealType> mealTypes_empty = new List<MealType>();
             List<Kitchenware> kitchenware_empty = new List<Kitchenware>();
 
-            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(null, ingredients, 
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(null, null, ingredients,
                 mealTypes, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(recipe, null,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, null, ingredients, 
                 mealTypes, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(recipe, ingredients,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, recipe, null,
+                mealTypes, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 null, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(recipe, ingredients,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes, null, nutrition));
-            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(recipe, ingredients,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes, kitchenware, null));
 
-            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(recipe, ingredients_empty,
+            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients_empty,
                 mealTypes, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(recipe, ingredients,
+            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes_empty, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(recipe, ingredients,
+            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes, kitchenware_empty, nutrition));
         }
     }
