@@ -109,6 +109,29 @@ namespace RecipeBookApp.Controller
             return this.recipeDAL.GetFavoriteRecipes(userID);
         }
 
+        /// <summary>
+        /// Inserts the recipe into the database
+        /// </summary>
+        /// <param name="recipe">Recipe to add</param>
+        /// <param name="ingredients">Ingredients of the recipe</param>
+        /// <param name="mealTypes">Types of Meal for the Recipe</param>
+        /// <param name="kitchenware">Kitchenware used by the recipe</param>
+        /// <param name="nutrition">Nutrition of the recipe</param>
+        /// <returns>Whether or not the recipe was inserted</returns>
+        public bool AddRecipe(Recipe recipe, List<Ingredient> ingredients, List<MealType> mealTypes,
+                List<Kitchenware> kitchenware, Nutrition nutrition)
+        {
+            if (recipe == null || ingredients == null || mealTypes == null || kitchenware == null || nutrition == null)
+            {
+                throw new ArgumentNullException("Parameters cannot be null");
+            }
+            if (!ingredients.Any() || !mealTypes.Any() || !kitchenware.Any())
+            {
+                throw new ArgumentException("Ingredients, Meal Types, and Kitchenware cannot be empty");
+            }
+            return false;
+        }
+
         /**
         /// <summary>
         /// Updates the recipe.
@@ -124,16 +147,6 @@ namespace RecipeBookApp.Controller
 
             }
             RecipeDAL.UpdateRecipe(newUpdateRecipe, oldUpdateRecipe);
-        }
-
-        /// <summary>
-        /// Adds the recipe.
-        /// </summary>
-        /// <param name="newRecipe">The new recipe.</param>
-        /// <returns></returns>
-        public void AddRecipe(Recipe newRecipe)
-        {
-             RecipeDAL.AddRecipe(newRecipe);
         }
 
 

@@ -392,16 +392,17 @@ namespace RecipeBookApp.DAL
             }
         }
 
-            /**
-            /// <summary>
-            /// Adds the new recipe.
-            /// </summary>
-            /// <param name="addRecipe">The add recipe.</param>
-            public static void AddRecipe(Recipe addRecipe){
+        /**
+         * 
+         *         /// <summary>
+        /// Adds the new recipe.
+        /// </summary>
+        /// <param name="addRecipe">The add recipe.</param>
+        public bool AddRecipe(Recipe addRecipe)
+        {
+            string addRecipeStatement = "INSERT INTO Recipe (RecipeName,RecipeInstructions,CookingTime,NutritionId, EthnicId) " +
+                                         "VALUES(@RecipeName, @RecipeInstructions, @CookingTime, @NutritionId  , @EthnicId)";
 
-        string addRecipeStatement = "INSERT INTO Recipe (RecipeName,RecipeInstructions,CookingTime,NutritionId, EthnicId) " +
-                                     "VALUES(@RecipeName, @RecipeInstructions, @CookingTime, @NutritionId  , @EthnicId)";
-            
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
@@ -426,77 +427,77 @@ namespace RecipeBookApp.DAL
             }
         }
 
-        /// <summary>
-        /// Updates the Recipe details.
-        /// </summary>
-        /// <param name="oldRecipe">The old recipe.</param>
-        /// <param name="newRecipe">The new recipe.</param>
-        /// <returns></returns>
-        public static bool UpdateRecipe(Recipe oldRecipe, Recipe newRecipe)
+    /// <summary>
+    /// Updates the Recipe details.
+    /// </summary>
+    /// <param name="oldRecipe">The old recipe.</param>
+    /// <param name="newRecipe">The new recipe.</param>
+    /// <returns></returns>
+    public static bool UpdateRecipe(Recipe oldRecipe, Recipe newRecipe)
+    {
+        string selectStatement = "UPDATE Recipe SET " +
+                                    "RecipeName = @NewRecipeName, RecipeInstructions = @NewRecipeInstructions, " +
+                                    "CookingTime = @NewCookingTime, NutritionId = @NewNutritionId, EthnicId = @NewEthnicId" +
+                                    "WHERE RecipeID = @OldRecipeID " +
+                                        "AND RecipeName = @OldRecipeName AND " +
+                                    "RecipeInstructions = @OldRecipeInstructions " +
+                                        "AND CookingTime = @OldCookingTime AND " +
+                                    "NutritionId = @OldNutritionId AND EthnicId = @OldEthnicId ";
+
+        using (SQLiteConnection connection = DBConnection.GetConnection())
         {
-            string selectStatement = "UPDATE Recipe SET " +
-                                        "RecipeName = @NewRecipeName, RecipeInstructions = @NewRecipeInstructions, " +
-                                        "CookingTime = @NewCookingTime, NutritionId = @NewNutritionId, EthnicId = @NewEthnicId" +
-                                        "WHERE RecipeID = @OldRecipeID " +
-                                            "AND RecipeName = @OldRecipeName AND " +
-                                        "RecipeInstructions = @OldRecipeInstructions " +
-                                            "AND CookingTime = @OldCookingTime AND " +
-                                        "NutritionId = @OldNutritionId AND EthnicId = @OldEthnicId ";
-
-            using (SQLiteConnection connection = DBConnection.GetConnection())
+            using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
             {
-                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                // Old Recipe details Mappings
+                selectCommand.Parameters.Add("@OldRecipeName", DbType.String);
+                selectCommand.Parameters["@OldRecipeName"].Value = oldRecipe.RecipeName;
+
+                selectCommand.Parameters.Add("@OldRecipeInstructions", DbType.String);
+                selectCommand.Parameters["@OldRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
+
+                selectCommand.Parameters.Add("@OldCookingTime", DbType.Int32);
+                selectCommand.Parameters["@OldCookingTime"].Value = oldRecipe.CookingTime;
+                selectCommand.Parameters.Add("@OldNutritionId", DbType.Int32);
+                selectCommand.Parameters["@OldNutritionId"].Value = oldRecipe.NutritionId;
+                selectCommand.Parameters.Add("@OldEthnicId", DbType.Int32);
+                selectCommand.Parameters["@OldEthnicId"].Value = oldRecipe.EthnicId;
+
+                // New Recipe details Mappings
+                selectCommand.Parameters.Add("@NewRecipeName", DbType.String);
+                selectCommand.Parameters["@NewRecipeName"].Value = newRecipe.RecipeName;
+                selectCommand.Parameters.Add("@NewRecipeInstructions", DbType.String);
+                selectCommand.Parameters["@NewRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
+                selectCommand.Parameters.Add("@NewCookingTime", DbType.Int32);
+                selectCommand.Parameters["@NewCookingTime"].Value = oldRecipe.CookingTime;
+                selectCommand.Parameters.Add("@NewNutritionId", DbType.Int32);
+                selectCommand.Parameters["@NewNutritionId"].Value = oldRecipe.NutritionId;
+                selectCommand.Parameters.Add("@EthnicId", DbType.Int32);
+                selectCommand.Parameters["@NewEthnicId"].Value = oldRecipe.EthnicId;
+
+                
+                int resultCount = selectCommand.ExecuteNonQuery();
+                if (resultCount > 0)
                 {
-                    // Old Recipe details Mappings
-                    selectCommand.Parameters.Add("@OldRecipeName", DbType.String);
-                    selectCommand.Parameters["@OldRecipeName"].Value = oldRecipe.RecipeName;
-
-                    selectCommand.Parameters.Add("@OldRecipeInstructions", DbType.String);
-                    selectCommand.Parameters["@OldRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
-
-                    selectCommand.Parameters.Add("@OldCookingTime", DbType.Int32);
-                    selectCommand.Parameters["@OldCookingTime"].Value = oldRecipe.CookingTime;
-                    selectCommand.Parameters.Add("@OldNutritionId", DbType.Int32);
-                    selectCommand.Parameters["@OldNutritionId"].Value = oldRecipe.NutritionId;
-                    selectCommand.Parameters.Add("@OldEthnicId", DbType.Int32);
-                    selectCommand.Parameters["@OldEthnicId"].Value = oldRecipe.EthnicId;
-
-                    // New Recipe details Mappings
-                    selectCommand.Parameters.Add("@NewRecipeName", DbType.String);
-                    selectCommand.Parameters["@NewRecipeName"].Value = newRecipe.RecipeName;
-                    selectCommand.Parameters.Add("@NewRecipeInstructions", DbType.String);
-                    selectCommand.Parameters["@NewRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
-                    selectCommand.Parameters.Add("@NewCookingTime", DbType.Int32);
-                    selectCommand.Parameters["@NewCookingTime"].Value = oldRecipe.CookingTime;
-                    selectCommand.Parameters.Add("@NewNutritionId", DbType.Int32);
-                    selectCommand.Parameters["@NewNutritionId"].Value = oldRecipe.NutritionId;
-                    selectCommand.Parameters.Add("@EthnicId", DbType.Int32);
-                    selectCommand.Parameters["@NewEthnicId"].Value = oldRecipe.EthnicId;
-
-                    
-                    int resultCount = selectCommand.ExecuteNonQuery();
-                    if (resultCount > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
         }
+    }
 
 
-        /// <summary>
-        /// Delete the Recipe details.
-        ///
-        public  bool DeleteRecipe(Recipe deleteRecipe)
-        {
-            return true;
-            
-        }
-            */
+    /// <summary>
+    /// Delete the Recipe details.
+    ///
+    public  bool DeleteRecipe(Recipe deleteRecipe)
+    {
+        return true;
+        
+    }
+        */
 
     }
 }

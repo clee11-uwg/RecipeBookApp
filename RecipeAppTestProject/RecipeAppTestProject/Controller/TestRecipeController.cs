@@ -75,5 +75,57 @@ namespace RecipeAppTestProject.Controller
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetFavoriteRecipes(0));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetFavoriteRecipes(-1));
         }
+
+        /// <summary>
+        /// Tests that AddRecipe throws error if pass null parameters or empty lists
+        /// </summary>
+        [TestMethod]
+        public void TestAddRecipeThrowsExceptionIfParametersAreNullOrListsAreEmpty()
+        {
+            Recipe recipe = new Recipe();
+            Nutrition nutrition = new Nutrition();
+            List<Ingredient> ingredients = new List<Ingredient>();
+            ingredients.Add(new Ingredient
+            {
+                IngredientId = 1001,
+                IngredientName = "ingredient",
+                FoodId = 1001,
+                Amount = "1"
+            });
+            List<MealType> mealTypes = new List<MealType>();
+            mealTypes.Add(new MealType
+            {
+                mealTypeID = 1001,
+                type = "type"
+            });
+            List<Kitchenware> kitchenware = new List<Kitchenware>();
+            kitchenware.Add(new Kitchenware
+            {
+                KitchenwareId = 1001,
+                KitchenwareDetails = "details"
+            });
+
+            List<Ingredient> ingredients_empty = new List<Ingredient>();
+            List<MealType> mealTypes_empty = new List<MealType>();
+            List<Kitchenware> kitchenware_empty = new List<Kitchenware>();
+
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(null, ingredients, 
+                mealTypes, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(recipe, null,
+                mealTypes, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(recipe, ingredients,
+                null, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(recipe, ingredients,
+                mealTypes, null, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(recipe, ingredients,
+                mealTypes, kitchenware, null));
+
+            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(recipe, ingredients_empty,
+                mealTypes, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(recipe, ingredients,
+                mealTypes_empty, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(recipe, ingredients,
+                mealTypes, kitchenware_empty, nutrition));
+        }
     }
 }
