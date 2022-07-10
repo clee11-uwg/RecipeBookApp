@@ -130,7 +130,7 @@ namespace RecipeBookApp.DAL
                     connection.Close();
                 }
             }
-            if (result < 0)
+            if (result < 1)
             {
                 return false;
             }
@@ -163,7 +163,7 @@ namespace RecipeBookApp.DAL
                     connection.Close();
                 }
             }
-            if (result < 0)
+            if (result < 1)
             {
                 return false;
             }
