@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecipeBookApp.View;
+using System;
 using System.Windows.Forms;
 
 namespace RecipeBookApp
@@ -13,7 +14,10 @@ namespace RecipeBookApp
         {
              Application.EnableVisualStyles();
              Application.SetCompatibleTextRenderingDefault(false);
-             Application.Run(new RecipeList());
+          //  Application.Run(new RecipeList());
+       //  Application.Run(new HomeScreen());
+            Application.Run(new MainForm());
+            //  Application.Run(new UserControls.AddRecipeDetailUserControl());
         }
     }
 }

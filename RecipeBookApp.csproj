@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -112,6 +115,24 @@
     </Compile>
     <Compile Include="UserControls\RecipeListItem.Designer.cs">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AddRecipeDetailUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AddRecipeDetailUserControl.Designer.cs">
+      <DependentUpon>AddRecipeDetailUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RecipeMainUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\RecipeMainUserControl.Designer.cs">
+      <DependentUpon>RecipeMainUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Login.cs">
       <SubType>Form</SubType>
@@ -200,6 +221,18 @@
     <Content Include="sampleimage.jpg" />
     <EmbeddedResource Include="UserControls\RecipeListItem.resx">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AddRecipeDetailUserControl.resx">
+      <DependentUpon>AddRecipeDetailUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\RecipeMainUserControl.resx">
+      <DependentUpon>RecipeMainUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\RecipeDetails.resx">
       <DependentUpon>RecipeDetails.cs</DependentUpon>

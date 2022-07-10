@@ -1,5 +1,5 @@
-﻿using RecipeBookApp.Model;
-using RecipeBookApp.Controller;
+﻿using RecipeBookApp.Controller;
+using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,15 +7,15 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RecipeBookApp.UserControls;
-using System.Text.RegularExpressions;
 
-namespace RecipeBookApp
+namespace RecipeBookApp.UserControls
 {
-    public partial class RecipeList : Form
+    public partial class RecipeMainUserControl : UserControl
     {
+        
         private RecipeController recipeController;
         private List<Recipe> recipeList;
         private List<Allergen> allergenList;
@@ -38,7 +38,7 @@ namespace RecipeBookApp
         /// <summary>
         /// 0 parameter constructor for the RecipeList
         /// </summary>
-        public RecipeList()
+    public RecipeMainUserControl()
         {
             InitializeComponent();
             this.allergenController = new AllergenController();
@@ -52,13 +52,11 @@ namespace RecipeBookApp
             this.mealTypeList = new List<MealType>();
             this.foodTypeList = new List<FoodType>();
             this.ethnicList = new List<Ethnic>();
-            this.ingredientList = new List<Ingredient>();
-
-            this.LoadComboBox();
+            this.ingredientList = new List<Ingredient>();         
             this.recipeController = new RecipeController();
             this.recipeList = new List<Recipe>();
-            this.recipeList = this.recipeController.GetRecipes();
-            this.PopulateItems();
+            
+           
         }
 
         private void PopulateItems()
@@ -90,13 +88,11 @@ namespace RecipeBookApp
         }
         private bool ValidateSearchText()
         {
-           String regex = "[^a-zA-Z0-9]+";
-            Regex rgex = new Regex(regex);
-            MatchCollection matchedText = rgex.Matches(this.searchTextBox.Text);
+           
 
-            if (this.searchTextBox.Text.Trim() == "" )
+            if (this.searchTextBox.Text.Trim() == "")
             {
-              
+
                 MessageBox.Show("Recipe Search input cannot be empty.");
                 return false;
 
@@ -106,17 +102,17 @@ namespace RecipeBookApp
                 MessageBox.Show("Recipe Search input should be valid text, cannot be only number or special character");
                 return false;
             }
-         
+
             return true;
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-          if (!ValidateSearchText())
-          {
+            if (!ValidateSearchText())
+            {
                 Reset();
                 return;
-          }
+            }
 
             this.ProcessUserSearchRecipe(this.searchTextBox.Text.Trim());
         }
@@ -126,7 +122,7 @@ namespace RecipeBookApp
             try
             {
                 this.recipeList = this.recipeController.GetRecipeSearch(recipeUserInput);
-                if (! this.recipeList.Any())
+                if (!this.recipeList.Any())
                 {
                     MessageBox.Show("No Recipe found on the database");
                     this.Reset();
@@ -176,6 +172,7 @@ namespace RecipeBookApp
                 this.CreateIngredientsDropDown();
                 this.CreateMealTypeDropDown();
                 this.CreateEthnicDropDown();
+                this.recipeList = this.recipeController.GetRecipes();
             }
             catch (Exception ex)
             {
@@ -227,7 +224,7 @@ namespace RecipeBookApp
                 {
                     selectedIngredients = new int[] { -1 };
                 }
-               
+
                 if (this.mealTypeComboBox.SelectedValue != null && int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) != -1)
                 {
                     selectedMealType = new int[] { int.Parse(this.mealTypeComboBox.SelectedValue.ToString()) };
@@ -310,7 +307,7 @@ namespace RecipeBookApp
             }
         }
 
-        
+
 
         private void CreateIngredientsDropDown()
         {
@@ -401,5 +398,18 @@ namespace RecipeBookApp
         {
             this.searchTextBox.Text = "";
         }
+
+        private void RecipeMainUserControl_Load(object sender, EventArgs e)
+        {
+            this.LoadComboBox();
+          
+            this.PopulateItems();
+           
+        }
+
+        
     }
+
+
+
 }
