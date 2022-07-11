@@ -17,7 +17,6 @@ namespace RecipeBookApp.UserControls
     {
 
         private List<Recipe> recipeList;
-        private List<Allergen> allergenList;
         private List<Nutrition> nutritionList;
         private List<Kitchenware> kitchenWareList;
         private List<MealType> mealTypeList;
@@ -41,8 +40,7 @@ namespace RecipeBookApp.UserControls
             this.kitchenController = new KitchenwareController();
             this.mealController = new TypeOfMealController();
             this.foodController = new TypeOfFoodController();
-            this.ethnicController = new EthnicOriginController();
-            this.allergenList = new List<Allergen>();
+            this.ethnicController = new EthnicOriginController();           ;
             this.kitchenWareList = new List<Kitchenware>();
             this.mealTypeList = new List<MealType>();
             this.foodTypeList = new List<FoodType>();
@@ -59,10 +57,12 @@ namespace RecipeBookApp.UserControls
         {
             try
             {
-                this.CreateAllergenDropDown();
+          
                 this.CreateMealTypeDropDown();
                 this.CreateIngredientsDropDown();
                 this.CreateMealTypeDropDown();
+                this.CreateKitchenWareDropDown();
+                this.CreateFoodTypeDropDown();
                 this.CreateEthnicDropDown();
             }
             catch (Exception ex)
@@ -72,28 +72,7 @@ namespace RecipeBookApp.UserControls
             }
         }
 
-        private void CreateAllergenDropDown()
-        {
-            try
-            {
-                this.addAllergyComboBox.DataSource = null;
-                this.allergenList = this.allergenController.GetAllergens();
-                this.allergenList.Add(new Allergen
-                {
-                    AllergenId = -1,
-                    AllergenDetails = "Select the allergy"
-                });
-                this.addAllergyComboBox.DataSource = this.allergenList;
-                this.addAllergyComboBox.DisplayMember = "AllergenDetails";
-                this.addAllergyComboBox.ValueMember = "AllergenId";
-                this.addAllergyComboBox.SelectedValue = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error occured on - Add recipe Allergen transaction -" + ex.Message,
-                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+       
 
 
 
@@ -143,6 +122,51 @@ namespace RecipeBookApp.UserControls
             }
         }
 
+        private void CreateKitchenWareDropDown()
+        {
+            try
+            {
+                this.addKitchenWareComboBox.DataSource = null;
+                this.kitchenWareList = this.kitchenController.GetKitchenware();
+                this.kitchenWareList.Add(new Kitchenware
+                {
+                    KitchenwareId = -1,
+                    KitchenwareDetails = "Select the KitchenWare"
+                });
+                this.addKitchenWareComboBox.DataSource = this.kitchenWareList;
+                this.addKitchenWareComboBox.DisplayMember = "KitchenwareDetails";
+                this.addKitchenWareComboBox.ValueMember = "KitchenwareId";
+                this.addKitchenWareComboBox.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter Ingredients transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CreateFoodTypeDropDown()
+        {
+            try
+            {
+                this.addFoodTypeComboBox.DataSource = null;
+                this.foodTypeList = this.foodController.GetFoodTypes();
+                this.foodTypeList.Add(new FoodType
+                {
+                    FoodId = -1,
+                    TypeOfFood = "Select the Food type"
+                });
+                this.addFoodTypeComboBox.DataSource = this.foodTypeList;
+                this.addFoodTypeComboBox.DisplayMember = "TypeOfFood";
+                this.addFoodTypeComboBox.ValueMember = "FoodId";
+                this.addFoodTypeComboBox.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter meal type transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void CreateEthnicDropDown()
         {
             try
