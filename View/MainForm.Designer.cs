@@ -75,17 +75,17 @@
             this.AddRecipetabPage.Location = new System.Drawing.Point(4, 25);
             this.AddRecipetabPage.Name = "AddRecipetabPage";
             this.AddRecipetabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AddRecipetabPage.Size = new System.Drawing.Size(1338, 696);
+            this.AddRecipetabPage.Size = new System.Drawing.Size(1338, 879);
             this.AddRecipetabPage.TabIndex = 1;
             this.AddRecipetabPage.Text = "Add Recipe";
             this.AddRecipetabPage.UseVisualStyleBackColor = true;
             // 
             // addRecipeDetailUserControl1
             // 
-            this.addRecipeDetailUserControl1.Location = new System.Drawing.Point(11, 24);
+            this.addRecipeDetailUserControl1.Location = new System.Drawing.Point(0, 7);
             this.addRecipeDetailUserControl1.Margin = new System.Windows.Forms.Padding(4);
             this.addRecipeDetailUserControl1.Name = "addRecipeDetailUserControl1";
-            this.addRecipeDetailUserControl1.Size = new System.Drawing.Size(1580, 731);
+            this.addRecipeDetailUserControl1.Size = new System.Drawing.Size(1311, 513);
             this.addRecipeDetailUserControl1.TabIndex = 0;
             // 
             // MainForm
