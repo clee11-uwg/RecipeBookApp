@@ -121,6 +121,18 @@
     <Compile Include="UserControls\RecipeListItem.Designer.cs">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UpdateRecipeUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UpdateRecipeUserControl.Designer.cs">
+      <DependentUpon>UpdateRecipeUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ViewRecipeUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ViewRecipeUserControl.Designer.cs">
+      <DependentUpon>ViewRecipeUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utility\Crypt.cs" />
     <Compile Include="UserControls\AddRecipeDetailUserControl.cs">
       <SubType>UserControl</SubType>
