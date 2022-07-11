@@ -119,8 +119,9 @@ namespace RecipeBookApp.View
         {
             // Add check if this current recipe was created by this user. This can be done either here or
             // to determine if the button should show at all. The following is assuming the user created selected recipe
-
-            MessageBox.Show("Coming soon......");
+            UpdateRecipeForm updateRecipeForm = new UpdateRecipeForm();
+            updateRecipeForm.SetRecipe(this.selectedRecipe);
+            updateRecipeForm.ShowDialog();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)

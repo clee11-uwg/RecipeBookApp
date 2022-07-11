@@ -28,10 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.titleLbl = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // titleLbl
+            // 
+            this.titleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLbl.Location = new System.Drawing.Point(56, 14);
+            this.titleLbl.Name = "titleLbl";
+            this.titleLbl.Size = new System.Drawing.Size(486, 24);
+            this.titleLbl.TabIndex = 1;
+            this.titleLbl.Text = "Title";
+            this.titleLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UpdateRecipeUserControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.titleLbl);
+            this.Name = "UpdateRecipeUserControl";
+            this.Size = new System.Drawing.Size(593, 316);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label titleLbl;
     }
 }
