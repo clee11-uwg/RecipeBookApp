@@ -65,5 +65,15 @@ namespace RecipeAppTestProject.Controller
         {
             List<Recipe> recipes = controller.GetRecipeSearch("");
         }
+
+        /// <summary>
+        /// Tests that GetFavoriteRecipes(int) throws exception if int is less than 1
+        /// </summary>
+        [TestMethod]
+        public void TestGetFavoriteRecipeThrowsExceptionIfUserIDIsLessThanOne()
+        {
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetFavoriteRecipes(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetFavoriteRecipes(-1));
+        }
     }
 }
