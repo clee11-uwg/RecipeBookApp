@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,13 +24,14 @@ namespace RecipeBookApp.UserControls
         private List<FoodType> foodTypeList;
         private List<Ethnic> ethnicList;
         private List<Ingredient> ingredientList;
-
+        private RecipeController recipeController;
         private readonly AllergenController allergenController;
         private readonly IngredientsController ingredientsController;
         private readonly KitchenwareController kitchenController;
         private readonly NutritionController nutritionController;
         private readonly TypeOfMealController mealController;
         private readonly EthnicOriginController ethnicController;
+        private  string displayMessage;
 
         private readonly TypeOfFoodController foodController;
         public AddRecipeDetailUserControl()
@@ -40,7 +42,8 @@ namespace RecipeBookApp.UserControls
             this.kitchenController = new KitchenwareController();
             this.mealController = new TypeOfMealController();
             this.foodController = new TypeOfFoodController();
-            this.ethnicController = new EthnicOriginController();           ;
+            this.ethnicController = new EthnicOriginController();
+            this.recipeController = new RecipeController(); ;
             this.kitchenWareList = new List<Kitchenware>();
             this.mealTypeList = new List<MealType>();
             this.foodTypeList = new List<FoodType>();
@@ -64,6 +67,7 @@ namespace RecipeBookApp.UserControls
                 this.CreateKitchenWareDropDown();
                 this.CreateFoodTypeDropDown();
                 this.CreateEthnicDropDown();
+                this.recipeList = this.recipeController.GetRecipes();
             }
             catch (Exception ex)
             {
@@ -219,6 +223,95 @@ namespace RecipeBookApp.UserControls
         private void AddEthnicCombobox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void AddRecipeButton_Click(object sender, EventArgs e)
+        {
+            this.erroLabel.Visible = false;
+            this.erroLabel.Visible = false;
+            if (!ValidateRecipeName())
+            {
+                DisplayError(true);
+                return;
+            }
+            else if (!ValidateNutritions()) {
+                DisplayError(true);
+                return;
+            }
+
+        }
+        private bool ValidateRecipeName() {
+
+            string recipName = this.addRecipenameTextBox.Text;
+            bool nameExists = this.recipeList.Any(name => name.RecipeName == recipName);
+            if (string.IsNullOrEmpty(recipName) )
+            {
+                this.displayMessage = "Recipe Name cannot be empty";
+                return false;
+            }
+
+            else if (nameExists)
+            {
+                this.displayMessage = this.addRecipenameTextBox.Text + " - Recipe with this name already Exists, plesae choose different name";
+                return false;
+            }
+            return true;
+        }
+        private bool ValidateNutritions()
+        {
+            if (string.IsNullOrEmpty(this.carbTextBox.Text) || string.IsNullOrEmpty(this.proteinTextBox.Text) || 
+                string.IsNullOrEmpty(this.fattextBox.Text) || string.IsNullOrEmpty(this.alchoholTextBox.Text) 
+                || string.IsNullOrEmpty(this.calorieTextBox.Text))
+            {
+                this.displayMessage = "Carbohydrate,Protein,Fat,Alcohol,Calories - should be a valid number or cannot be empty";
+                return false;
+            }
+
+            else if (!Regex.IsMatch(this.carbTextBox.Text, @"^\d+$"))
+            {
+                this.displayMessage = "Carbohydrate should be a valid number !";
+                return false;
+            }
+            else if(!Regex.IsMatch(this.proteinTextBox.Text, @"^\d+$"))
+            {
+                this.displayMessage = "Protein should be a valid number !";
+                return false;
+            }
+            else if(!Regex.IsMatch(this.fattextBox.Text, @"^\d+$"))
+            {
+                this.displayMessage = "Fats should be a valid number !";
+                return false;
+            }
+            if (!Regex.IsMatch(this.alchoholTextBox.Text, @"^\d+$"))
+            {
+                this.displayMessage = "Alcohol should be a valid number !";
+                return false;
+            }
+            else if(!Regex.IsMatch(this.calorieTextBox.Text, @"^\d+$"))
+            {
+                this.displayMessage = "Calorie should be a valid number !";
+                return false;
+            }
+
+           
+            return true;
+        }
+        private void DisplayError( bool isError)
+        {
+            if (string.IsNullOrEmpty(this.displayMessage))
+            {
+                throw new ArgumentException("Message cannot be null or empty");
+            }
+            if (isError)
+            {
+                this.erroLabel.ForeColor = Color.Red;
+            }
+            else
+            {
+                this.erroLabel.ForeColor = Color.Green;
+            }
+            this.erroLabel.Text = this.displayMessage;
+            this.erroLabel.Visible = true;
         }
     }
 }
