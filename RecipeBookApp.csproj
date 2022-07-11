@@ -102,6 +102,7 @@
     <Compile Include="Controller\RecipeController.cs" />
     <Compile Include="Controller\TypeOfFoodController.cs" />
     <Compile Include="Controller\TypeOfMealController.cs" />
+    <Compile Include="Controller\UserController.cs" />
     <Compile Include="DAL\EthnicOriginDAL.cs" />
     <Compile Include="DAL\MealTypeDAL.cs" />
     <Compile Include="DAL\AllergenDAL.cs" />
@@ -112,12 +113,15 @@
     <Compile Include="DAL\RecipeDAL.cs" />
     <Compile Include="DAL\TypeOfFoodDAL.cs" />
     <Compile Include="DAL\TypeOfMealDAL.cs" />
+    <Compile Include="DAL\UserDAL.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="UserControls\RecipeListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\RecipeListItem.Designer.cs">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Crypt.cs" />
     <Compile Include="UserControls\AddRecipeDetailUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

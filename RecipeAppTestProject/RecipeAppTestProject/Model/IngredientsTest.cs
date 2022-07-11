@@ -20,13 +20,15 @@ namespace RecipeAppTestProject.Model
             {
                 IngredientId = 1,
                 IngredientName = "Soybeans",
-                FoodId=4
+                FoodId=4,
+                Amount="2 whole"
             };
             Ingredient newIngredient2 = new Ingredient
             {
                 IngredientId = 2,
                 IngredientName = "Salt",
-                FoodId = 9
+                FoodId = 9,
+                Amount="10 million pounds"
             };
 
             recipeIngredientList.Add(newIngredient);
@@ -47,13 +49,15 @@ namespace RecipeAppTestProject.Model
             {
                 IngredientId = 1,
                 IngredientName = "Soybeans",
-                FoodId = 4
+                FoodId = 4,
+                Amount = "2 whole"
             };
             Ingredient newIngredient2 = new Ingredient
             {
                 IngredientId = 2,
                 IngredientName = "Salt",
-                FoodId = 9
+                FoodId = 9,
+                Amount = "10 million pounds"
             };
 
             recipeIngredientList.Add(newIngredient);
@@ -74,13 +78,15 @@ namespace RecipeAppTestProject.Model
             {
                 IngredientId = 1,
                 IngredientName = "Soybeans",
-                FoodId = 4
+                FoodId = 4,
+                Amount = "2 whole"
             };
             Ingredient newIngredient2 = new Ingredient
             {
                 IngredientId = 2,
                 IngredientName = "Salt",
-                FoodId = 9
+                FoodId = 9,
+                Amount = "10 million pounds"
             };
 
             recipeIngredientList.Add(newIngredient);
@@ -104,13 +110,15 @@ namespace RecipeAppTestProject.Model
             {
                 IngredientId = 1,
                 IngredientName = "Soybeans",
-                FoodId = 4
+                FoodId = 4,
+                Amount = "2 whole"
             };
             Ingredient newIngredient2 = new Ingredient
             {
                 IngredientId = 2,
                 IngredientName = "Salt",
-                FoodId = 9
+                FoodId = 9,
+                Amount = "10 million pounds"
             };
 
             recipeIngredientList.Add(newIngredient);
