@@ -1,6 +1,6 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Transactions;
 using System.IO;
 using System.Linq;
 using RecipeBookApp.DAL;
@@ -109,6 +109,7 @@ namespace RecipeBookApp.Controller
             return this.recipeDAL.GetFavoriteRecipes(userID);
         }
 
+        
         /// <summary>
         /// Inserts the recipe into the database
         /// </summary>
@@ -118,10 +119,12 @@ namespace RecipeBookApp.Controller
         /// <param name="kitchenware">Kitchenware used by the recipe</param>
         /// <param name="nutrition">Nutrition of the recipe</param>
         /// <returns>Whether or not the recipe was inserted</returns>
-        public bool AddRecipe(Recipe recipe, List<Ingredient> ingredients, List<MealType> mealTypes,
+        public bool AddRecipe(User user, Recipe recipe, List<Ingredient> ingredients, List<MealType> mealTypes,
                 List<Kitchenware> kitchenware, Nutrition nutrition)
         {
-            if (recipe == null || ingredients == null || mealTypes == null || kitchenware == null || nutrition == null)
+            bool ret = false;
+            if (user == null || recipe == null || ingredients == null || 
+                    mealTypes == null || kitchenware == null || nutrition == null)
             {
                 throw new ArgumentNullException("Parameters cannot be null");
             }
@@ -129,7 +132,31 @@ namespace RecipeBookApp.Controller
             {
                 throw new ArgumentException("Ingredients, Meal Types, and Kitchenware cannot be empty");
             }
-            return false;
+            using (TransactionScope scope = new TransactionScope())
+            {
+                //for each list, use loop to go through whole list, AddIngredients, AddMealTypes, AddKitchenware
+                NutritionDAL nutritionDAL = new NutritionDAL();
+                nutritionDAL.AddNutrition(nutrition);
+
+                recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
+
+                foreach (Ingredient ingredient in ingredients)
+                {
+                    this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
+                }
+                foreach (MealType mealType in mealTypes)
+                {
+                    this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
+                }
+                foreach (Kitchenware pots in kitchenware)
+                {
+                    this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
+                }
+
+                ret = true;
+                scope.Complete();
+            }
+            return ret;
         }
 
         /**
