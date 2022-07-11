@@ -17,6 +17,11 @@ namespace RecipeAppTestProject.Controller
     {
         RecipeController controller;
         User joe;
+        Recipe recipe;
+        Nutrition nutrition;
+        List<Ingredient> ingredients;
+        List<MealType> mealTypes;
+        List<Kitchenware> kitchenware;
 
         /// <summary>
         /// Initialize RecipeController used in tests
@@ -31,6 +36,31 @@ namespace RecipeAppTestProject.Controller
                 Name = "joe",
                 Is_Admin = false
             };
+            recipe = new Recipe();
+            nutrition = new Nutrition();
+
+            ingredients = new List<Ingredient>();
+            ingredients.Add(new Ingredient
+            {
+                IngredientId = 1001,
+                IngredientName = "ingredient",
+                FoodId = 1001,
+                Amount = "1"
+            });
+
+            mealTypes = new List<MealType>();
+            mealTypes.Add(new MealType
+            {
+                mealTypeID = 1001,
+                type = "type"
+            });
+
+            kitchenware = new List<Kitchenware>();
+            kitchenware.Add(new Kitchenware
+            {
+                KitchenwareId = 1001,
+                KitchenwareDetails = "details"
+            });
         }
 
         /// <summary>
@@ -89,34 +119,11 @@ namespace RecipeAppTestProject.Controller
         [TestMethod]
         public void TestAddRecipeThrowsExceptionIfParametersAreNullOrListsAreEmpty()
         {
-            Recipe recipe = new Recipe();
-            Nutrition nutrition = new Nutrition();
-            List<Ingredient> ingredients = new List<Ingredient>();
-            ingredients.Add(new Ingredient
-            {
-                IngredientId = 1001,
-                IngredientName = "ingredient",
-                FoodId = 1001,
-                Amount = "1"
-            });
-            List<MealType> mealTypes = new List<MealType>();
-            mealTypes.Add(new MealType
-            {
-                mealTypeID = 1001,
-                type = "type"
-            });
-            List<Kitchenware> kitchenware = new List<Kitchenware>();
-            kitchenware.Add(new Kitchenware
-            {
-                KitchenwareId = 1001,
-                KitchenwareDetails = "details"
-            });
-
             List<Ingredient> ingredients_empty = new List<Ingredient>();
             List<MealType> mealTypes_empty = new List<MealType>();
             List<Kitchenware> kitchenware_empty = new List<Kitchenware>();
 
-            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(null, null, ingredients,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(null, recipe, ingredients,
                 mealTypes, kitchenware, nutrition));
             Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, null, ingredients, 
                 mealTypes, kitchenware, nutrition));
@@ -135,6 +142,33 @@ namespace RecipeAppTestProject.Controller
                 mealTypes_empty, kitchenware, nutrition));
             Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes, kitchenware_empty, nutrition));
+        }
+
+        /// <summary>
+        /// Tests that AddRecipe returns false with badly formed data
+        /// </summary>
+        [TestMethod]
+        public void TestAddRecipeReturnsFalseWithBadlyFormedData()
+        {
+            Assert.ThrowsException<NullReferenceException>(() => controller.AddRecipe(joe, 
+                recipe, ingredients, mealTypes, kitchenware, nutrition));
+
+            nutrition = new Nutrition
+            {
+                Carbohydrate = 1,
+                Protein = 1,
+                Fat = 1,
+                Calories = 1,
+                Alcohol = 1,
+                ServingSize = "1"
+            };
+            recipe = new Recipe
+            {
+
+            };
+            Assert.ThrowsException<NullReferenceException>(() => controller.AddRecipe(joe,
+                recipe, ingredients, mealTypes, kitchenware, nutrition));
+            Assert.AreEqual(false, controller.AddRecipe(joe, recipe, ingredients, mealTypes, kitchenware, nutrition));
         }
     }
 }

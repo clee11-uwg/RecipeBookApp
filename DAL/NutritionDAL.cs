@@ -101,10 +101,10 @@ namespace RecipeBookApp.DAL
         /// Adds the Nutrition to the database
         /// </summary>
         /// <param name="nutrition">Nutrition to add</param>
-        /// <returns>Whether or not the addition was successful</returns>
-        public bool AddNutrition(Nutrition nutrition)
+        /// <returns>Id of the nutrition added, -1 if nothing added</returns>
+        public int AddNutrition(Nutrition nutrition)
         {
-            int result = -1;
+            int id = -1;
             string selectStatement = @"INSERT INTO nutrition (carbohydrate, fat, protein, alcohol, calories, serving_size)
                                     VALUES (@carbohydrate, @fat, @protein, @alcohol, @calories, @serving_size);";
 
@@ -120,18 +120,11 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@serving_size", nutrition.ServingSize);
 
                     connection.Open();
-                    result = selectCommand.ExecuteNonQuery();
+                    id = Convert.ToInt32(selectCommand.ExecuteScalar());
                     connection.Close();
                 }
             }
-            if (result < 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return id;
         }
 
         /// <summary>

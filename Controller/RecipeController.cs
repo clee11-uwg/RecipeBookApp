@@ -136,7 +136,7 @@ namespace RecipeBookApp.Controller
             {
                 //for each list, use loop to go through whole list, AddIngredients, AddMealTypes, AddKitchenware
                 NutritionDAL nutritionDAL = new NutritionDAL();
-                nutritionDAL.AddNutrition(nutrition);
+                recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
 
                 recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
 

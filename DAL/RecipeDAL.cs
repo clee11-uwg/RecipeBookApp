@@ -396,7 +396,7 @@ namespace RecipeBookApp.DAL
         /// Inserts the recipe into the database
         /// </summary>
         /// <param name="recipe">Recipe to add</param>
-        /// <returns>Whether or not the recipe was inserted</returns>
+        /// <returns>Id of the Recipe added, -1 if nothing added</returns>
         public int AddRecipe(Recipe recipe)
         {
             int id = -1;
