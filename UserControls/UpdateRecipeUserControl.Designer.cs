@@ -28,32 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.titleLbl = new System.Windows.Forms.Label();
+            this.recipeNameTextBox = new System.Windows.Forms.TextBox();
+            this.updateRecipeLbl = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // titleLbl
+            // recipeNameTextBox
             // 
-            this.titleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLbl.Location = new System.Drawing.Point(56, 14);
-            this.titleLbl.Name = "titleLbl";
-            this.titleLbl.Size = new System.Drawing.Size(486, 24);
-            this.titleLbl.TabIndex = 1;
-            this.titleLbl.Text = "Title";
-            this.titleLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.recipeNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recipeNameTextBox.Location = new System.Drawing.Point(109, 44);
+            this.recipeNameTextBox.Name = "recipeNameTextBox";
+            this.recipeNameTextBox.Size = new System.Drawing.Size(293, 26);
+            this.recipeNameTextBox.TabIndex = 1;
+            // 
+            // updateRecipeLbl
+            // 
+            this.updateRecipeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateRecipeLbl.Location = new System.Drawing.Point(3, 6);
+            this.updateRecipeLbl.Name = "updateRecipeLbl";
+            this.updateRecipeLbl.Size = new System.Drawing.Size(587, 25);
+            this.updateRecipeLbl.TabIndex = 0;
+            this.updateRecipeLbl.Text = "Update Recipe";
+            this.updateRecipeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Recipe Name:";
             // 
             // UpdateRecipeUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.titleLbl);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.updateRecipeLbl);
+            this.Controls.Add(this.recipeNameTextBox);
             this.Name = "UpdateRecipeUserControl";
             this.Size = new System.Drawing.Size(593, 316);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label titleLbl;
+        private System.Windows.Forms.TextBox recipeNameTextBox;
+        private System.Windows.Forms.Label updateRecipeLbl;
+        private System.Windows.Forms.Label label2;
     }
 }

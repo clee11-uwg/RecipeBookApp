@@ -41,7 +41,7 @@
             this.allergenHeadingLbl = new System.Windows.Forms.Label();
             this.allergenListLbl = new System.Windows.Forms.Label();
             this.mealTypeHeadingLbl = new System.Windows.Forms.Label();
-            this.editButton = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -105,6 +105,7 @@
             this.instructionsTxtBx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.instructionsTxtBx.Size = new System.Drawing.Size(759, 324);
             this.instructionsTxtBx.TabIndex = 6;
+            this.instructionsTxtBx.TabStop = false;
             // 
             // label1
             // 
@@ -177,18 +178,18 @@
             this.mealTypeHeadingLbl.Text = "Meal Type(s)";
             this.mealTypeHeadingLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // editButton
+            // updateButton
             // 
-            this.editButton.BackColor = System.Drawing.Color.Tan;
-            this.editButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editButton.Location = new System.Drawing.Point(558, 136);
-            this.editButton.Margin = new System.Windows.Forms.Padding(2);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(56, 24);
-            this.editButton.TabIndex = 14;
-            this.editButton.Text = "Edit";
-            this.editButton.UseVisualStyleBackColor = false;
-            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
+            this.updateButton.BackColor = System.Drawing.Color.Tan;
+            this.updateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateButton.Location = new System.Drawing.Point(536, 136);
+            this.updateButton.Margin = new System.Windows.Forms.Padding(2);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(80, 33);
+            this.updateButton.TabIndex = 14;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = false;
+            this.updateButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // deleteButton
             // 
@@ -197,7 +198,7 @@
             this.deleteButton.Location = new System.Drawing.Point(619, 136);
             this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(68, 24);
+            this.deleteButton.Size = new System.Drawing.Size(68, 33);
             this.deleteButton.TabIndex = 15;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = false;
@@ -210,7 +211,7 @@
             this.saveButton.Location = new System.Drawing.Point(688, 136);
             this.saveButton.Margin = new System.Windows.Forms.Padding(2);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(59, 24);
+            this.saveButton.Size = new System.Drawing.Size(59, 33);
             this.saveButton.TabIndex = 16;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
@@ -224,7 +225,7 @@
             this.ClientSize = new System.Drawing.Size(759, 746);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.editButton);
+            this.Controls.Add(this.updateButton);
             this.Controls.Add(this.mealTypeHeadingLbl);
             this.Controls.Add(this.allergenListLbl);
             this.Controls.Add(this.allergenHeadingLbl);
@@ -261,7 +262,7 @@
         private System.Windows.Forms.Label allergenHeadingLbl;
         private System.Windows.Forms.Label allergenListLbl;
         private System.Windows.Forms.Label mealTypeHeadingLbl;
-        private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button saveButton;
     }

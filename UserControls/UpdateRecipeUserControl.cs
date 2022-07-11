@@ -26,7 +26,7 @@ namespace RecipeBookApp.UserControls
         public void SetRecipe(Recipe selectedRecipe)
         {
             this.recipe = selectedRecipe;
-            this.titleLbl.Text = this.recipe.RecipeName;
+            this.recipeNameTextBox.Text = this.recipe.RecipeName;
         }
     }
 }

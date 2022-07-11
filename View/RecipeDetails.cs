@@ -78,6 +78,7 @@ namespace RecipeBookApp.View
         private void GetInstructions()
         {
             this.instructionsTxtBx.Text = this.selectedRecipe.RecipeInstructions;
+            this.instructionsTxtBx.SelectionLength = 0;
         }
 
         private void GetTypeOfFood()
