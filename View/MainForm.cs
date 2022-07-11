@@ -10,13 +10,11 @@ using System.Windows.Forms;
 
 namespace RecipeBookApp.View
 {
-    public partial class Login : Form
+    public partial class MainForm : Form
     {
-        public Login()
+        public MainForm()
         {
             InitializeComponent();
         }
-        
-       
     }
 }
