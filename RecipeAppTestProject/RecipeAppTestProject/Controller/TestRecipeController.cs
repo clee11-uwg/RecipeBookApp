@@ -114,10 +114,11 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests that AddRecipe throws error if pass null parameters or empty lists
+        /// Tests that AddRecipe throws error if pass null parameters, empty lists, or
+        /// Recipe and Nutrition IDs that are preset (greater than 0)
         /// </summary>
         [TestMethod]
-        public void TestAddRecipeThrowsExceptionIfParametersAreNullOrListsAreEmpty()
+        public void TestAddRecipeThrowsExceptionIfParametersAreNullOrListsAreEmptyOrIDsArePreset()
         {
             List<Ingredient> ingredients_empty = new List<Ingredient>();
             List<MealType> mealTypes_empty = new List<MealType>();
@@ -142,13 +143,38 @@ namespace RecipeAppTestProject.Controller
                 mealTypes_empty, kitchenware, nutrition));
             Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes, kitchenware_empty, nutrition));
+
+            nutrition = new Nutrition
+            {
+                NutritionId = 1,
+                Carbohydrate = 1,
+                Protein = 1,
+                Fat = 1,
+                Calories = 1,
+                Alcohol = 1,
+                ServingSize = "1"
+            };
+            recipe = new Recipe
+            {
+                RecipeId = 1,
+                NutritionId = 1,
+                UserWhoCreated = "greg",
+                RecipeName = "recipe",
+                RecipeInstructions = "instructions",
+                RecipeImage = null,
+                CookingTime = 1,
+                EthnicId = 1
+            };
+
+            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients,
+                mealTypes, kitchenware, nutrition));
         }
 
         /// <summary>
-        /// Tests that AddRecipe returns false with badly formed data
+        /// Tests that AddRecipe returns error with badly formed data
         /// </summary>
         [TestMethod]
-        public void TestAddRecipeReturnsFalseWithBadlyFormedData()
+        public void TestAddRecipeReturnsErrorWithBadlyFormedData()
         {
             Assert.ThrowsException<NullReferenceException>(() => controller.AddRecipe(joe, 
                 recipe, ingredients, mealTypes, kitchenware, nutrition));
@@ -168,7 +194,6 @@ namespace RecipeAppTestProject.Controller
             };
             Assert.ThrowsException<NullReferenceException>(() => controller.AddRecipe(joe,
                 recipe, ingredients, mealTypes, kitchenware, nutrition));
-            Assert.AreEqual(false, controller.AddRecipe(joe, recipe, ingredients, mealTypes, kitchenware, nutrition));
         }
     }
 }

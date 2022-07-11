@@ -458,6 +458,77 @@ namespace RecipeBookApp.DAL
             }
         }
 
+        /// <summary>
+        /// Inserts the recipe image into the database
+        /// </summary>
+        /// <param name="recipe">Recipe whose image to add</param>
+        /// <returns>If the insertion worked</returns>
+        public bool AddImage(Recipe recipe)
+        {
+            int result = -1;
+            string addRecipeStatement = @"INSERT INTO image (recipeID, image)
+                                            VALUES (@recipeID, @image); ";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
+                {
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        selectCommand.Parameters.AddWithValue("@recipeID", recipe.RecipeId);
+                        recipe.RecipeImage.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                        byte[] data = stream.ToArray();
+                        selectCommand.Parameters.AddWithValue("@image", data);
+
+                        connection.Open();
+                        result = Convert.ToInt32(selectCommand.ExecuteScalar());
+                        connection.Close();
+                    }
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Deletes the recipe image from the database
+        /// </summary>
+        /// <param name="recipe">Recipe whose image to delete</param>
+        /// <returns>Whether or not the recipe was deleted</returns>
+        public bool DeleteImage(Recipe recipe)
+        {
+            int result = -1;
+            string addRecipeStatement = @"DELETE FROM image
+                                            WHERE recipeID = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@id", recipe.RecipeId);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         /**
     /// <summary>
     /// Updates the Recipe details.
