@@ -312,5 +312,30 @@ namespace RecipeBookApp.UserControls
             this.recipeKitchenware.Add(this.kitchenwareCmbBx.Text.ToString());
             this.DisplayKitchenwares();
         }
+
+        private void RemoveKitchenwareBtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.kitchenwareRchBx.Text))
+            {
+                MessageBox.Show("No kitchenware present. Please add kitchenware",
+                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.kitchenwareCmbBx.Text == "-- Select the Kitchenware --")
+            {
+                MessageBox.Show("Please select valid kitchenware to Remove",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!this.recipeKitchenware.Contains(this.kitchenwareCmbBx.Text))
+            {
+                MessageBox.Show(this.kitchenwareCmbBx.Text + "- Cannot be removed as it was never added",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeKitchenware.Remove(this.kitchenwareCmbBx.Text);
+            this.DisplayKitchenwares();
+        }
     }
 }

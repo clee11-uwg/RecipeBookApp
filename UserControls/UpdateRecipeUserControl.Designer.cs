@@ -286,6 +286,7 @@
             this.removeKitchenwareBtn.TabIndex = 2;
             this.removeKitchenwareBtn.Text = "Remove";
             this.removeKitchenwareBtn.UseVisualStyleBackColor = true;
+            this.removeKitchenwareBtn.Click += new System.EventHandler(this.RemoveKitchenwareBtn_Click);
             // 
             // updateRecipeTableLayoutPanel
             // 
