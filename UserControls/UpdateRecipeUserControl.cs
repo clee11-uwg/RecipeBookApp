@@ -54,13 +54,13 @@ namespace RecipeBookApp.UserControls
         {
             this.recipe = selectedRecipe;
             this.recipeNameTxtBx.Text = this.recipe.RecipeName;
+            GetIngredientListForDropdown();
+            GetKitchenwareListForDropdown();
+            GetMealTypesListForDropdown();
             GetNutritionForRecipe();
             GetFoodTypeForRecipe();
             GetEthnicityForRecipe();
-            GetIngredientListForDropdown();
-            GetKitchenwareListForDropdown();
             GetMealTypesForRecipe();
-            GetMealTypesListForDropdown();
             GetIngredientsForRecipe();
             GetKitchenwareForRecipe();
         }
@@ -239,9 +239,29 @@ namespace RecipeBookApp.UserControls
             this.servingTxtBx.Text = nutritionList[0].ServingSize;
         }
 
-        private void UpdateRecipeTableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        private void DisplayIngredients()
         {
+            this.ingredientsRchBx.Text = string.Join(",", this.recipeIngredients);
+            this.ingredientsRchBx.Refresh();
+        }
 
+        private void AddIngredientBtn_Click(object sender, EventArgs e)
+        {
+            if (this.recipeIngredients.Contains(this.ingredientCmbBx.Text))
+            {
+                MessageBox.Show(this.ingredientCmbBx.Text + "- already added. Please select something else.",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.ingredientCmbBx.Text == "-- Select the Ingredient --")
+            {
+                MessageBox.Show("Please select valid Ingredients to add",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeIngredients.Add(this.ingredientCmbBx.Text.ToString());
+            this.DisplayIngredients();
         }
     }
 }
