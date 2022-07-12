@@ -181,7 +181,7 @@
             // 
             this.updateButton.BackColor = System.Drawing.Color.Tan;
             this.updateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateButton.Location = new System.Drawing.Point(550, 136);
+            this.updateButton.Location = new System.Drawing.Point(580, 133);
             this.updateButton.Margin = new System.Windows.Forms.Padding(2);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(80, 33);
@@ -194,7 +194,7 @@
             // 
             this.deleteButton.BackColor = System.Drawing.Color.Tan;
             this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButton.Location = new System.Drawing.Point(663, 136);
+            this.deleteButton.Location = new System.Drawing.Point(679, 133);
             this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(68, 33);

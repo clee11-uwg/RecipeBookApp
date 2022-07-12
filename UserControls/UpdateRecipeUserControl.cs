@@ -392,5 +392,10 @@ namespace RecipeBookApp.UserControls
         {
             ParentForm.Close();
         }
+
+        private void UpdateRecipeButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming soon...");
+        }
     }
 }

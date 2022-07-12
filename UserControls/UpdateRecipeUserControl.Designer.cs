@@ -102,6 +102,7 @@
             this.updateRecipeButton.TabIndex = 31;
             this.updateRecipeButton.Text = "Update Recipe";
             this.updateRecipeButton.UseVisualStyleBackColor = true;
+            this.updateRecipeButton.Click += new System.EventHandler(this.UpdateRecipeButton_Click);
             // 
             // foodTypeCmbBx
             // 
