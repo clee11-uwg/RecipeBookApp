@@ -173,5 +173,10 @@ namespace RecipeBookApp.UserControls
             this.calorieTxtBx.Text = nutritionList[0].Calories.ToString();
             this.servingTxtBx.Text = nutritionList[0].ServingSize;
         }
+
+        private void UpdateRecipeTableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
