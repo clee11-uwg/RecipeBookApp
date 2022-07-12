@@ -387,5 +387,10 @@ namespace RecipeBookApp.UserControls
             this.recipeMealTypes.Remove(this.mealTypeCmbBx.Text);
             this.DisplayMealTypes();
         }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            ParentForm.Close();
+        }
     }
 }
