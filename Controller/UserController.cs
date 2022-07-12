@@ -48,25 +48,24 @@ namespace RecipeBookApp.Controller
             {
                 throw new UnauthorizedAccessException("Failed to login");
             }
-            String expected_password_hash = null;
+            User loginUser = null;
             String given_password_hash = Crypt.SHA256_hash(password);
+            
 
-            try
+            loginUser = this.UserDAL.VerifyUser(username);
+            if (loginUser == null)
             {
-                expected_password_hash = this.UserDAL.VerifyUser(username);
-            }
-            catch (NullReferenceException)
-            {
-                throw new UnauthorizedAccessException("Failed to login");
+                throw new UnauthorizedAccessException("Failed to login-User name does not exists.Please check your user name or SignnUp to create one. ");
             }
 
-            if (given_password_hash.Equals(expected_password_hash))
+       
+            if (string.Equals(given_password_hash, loginUser.Password, StringComparison.OrdinalIgnoreCase))
             {
-                return this.UserDAL.GetUser(username);
+                return loginUser;
             }
             else
             {
-                throw new UnauthorizedAccessException("Failed to login");
+                throw new UnauthorizedAccessException("Failed to login-Password does not match.Plesae try again-"+ given_password_hash);
             }
         }
 

@@ -5,6 +5,14 @@
     /// </summary>
     public class Nutrition
     {
+        private object value;
+        private object protein;
+        private object fat;
+        private object alcohol;
+        private object calories;
+        private object servingSize;
+
+
         /// <summary>
         /// Nutrition  attributes.
         /// </summary>
