@@ -622,6 +622,7 @@
             this.removeMealTypeBtn.TabIndex = 2;
             this.removeMealTypeBtn.Text = "Remove";
             this.removeMealTypeBtn.UseVisualStyleBackColor = true;
+            this.removeMealTypeBtn.Click += new System.EventHandler(this.RemoveMealTypeBtn_Click);
             // 
             // addMealTypeBtn
             // 

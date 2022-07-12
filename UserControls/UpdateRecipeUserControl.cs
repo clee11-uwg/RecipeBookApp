@@ -362,5 +362,30 @@ namespace RecipeBookApp.UserControls
             this.recipeMealTypes.Add(this.mealTypeCmbBx.Text.ToString());
             this.DisplayMealTypes();
         }
+
+        private void RemoveMealTypeBtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.mealTypeRchBx.Text))
+            {
+                MessageBox.Show("No meal types present. Please add a meal type",
+                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.mealTypeCmbBx.Text == "-- Select the Meal Type --")
+            {
+                MessageBox.Show("Please select valid meal type to Remove",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!this.recipeMealTypes.Contains(this.mealTypeCmbBx.Text))
+            {
+                MessageBox.Show(this.mealTypeCmbBx.Text + "- Cannot be removed as it was never added",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeMealTypes.Remove(this.mealTypeCmbBx.Text);
+            this.DisplayMealTypes();
+        }
     }
 }
