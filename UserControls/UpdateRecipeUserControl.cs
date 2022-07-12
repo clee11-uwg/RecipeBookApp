@@ -16,10 +16,13 @@ namespace RecipeBookApp.UserControls
     {
         private Recipe recipe;
         private NutritionController nutritionController;
+        private TypeOfFoodController foodTypeController;
+
         public UpdateRecipeUserControl()
         {
             InitializeComponent();
             this.nutritionController = new NutritionController();
+            this.foodTypeController = new TypeOfFoodController();
         }
 
         /// <summary>
@@ -31,6 +34,32 @@ namespace RecipeBookApp.UserControls
             this.recipe = selectedRecipe;
             this.recipeNameTxtBx.Text = this.recipe.RecipeName;
             GetNutrition();
+            GetFoodType();
+        }
+
+        private void GetFoodType()
+        {
+            List<FoodType> foodTypeList;
+            
+            try
+            {
+                this.foodTypeCmbBx.DataSource = null;
+                foodTypeList = this.foodTypeController.GetFoodTypes();
+                foodTypeList.Add(new FoodType
+                {
+                    FoodId = -1,
+                    TypeOfFood = "Select the Food type"
+                });
+                this.foodTypeCmbBx.DataSource = foodTypeList;
+                this.foodTypeCmbBx.DisplayMember = "TypeOfFood";
+                this.foodTypeCmbBx.ValueMember = "FoodId";
+                this.foodTypeCmbBx.SelectedValue = this.foodTypeController.GetFoodTypes(this.recipe.RecipeId)[0].FoodId;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter meal type transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GetNutrition()
