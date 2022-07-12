@@ -18,6 +18,7 @@ namespace RecipeBookApp.UserControls
         private NutritionController nutritionController;
         private TypeOfFoodController foodTypeController;
         private EthnicOriginController ethnicController;
+        private IngredientsController ingredientsController;
 
         public UpdateRecipeUserControl()
         {
@@ -25,6 +26,7 @@ namespace RecipeBookApp.UserControls
             this.nutritionController = new NutritionController();
             this.foodTypeController = new TypeOfFoodController();
             this.ethnicController = new EthnicOriginController();
+            this.ingredientsController = new IngredientsController();
         }
 
         /// <summary>
@@ -35,12 +37,37 @@ namespace RecipeBookApp.UserControls
         {
             this.recipe = selectedRecipe;
             this.recipeNameTxtBx.Text = this.recipe.RecipeName;
-            GetNutrition();
-            GetFoodType();
-            GetEthnicity();
+            GetNutritionForRecipe();
+            GetFoodTypeForRecipe();
+            GetEthnicityForRecipe();
+            GetIngredientListForDropdown();
         }
 
-        private void GetEthnicity()
+        private void GetIngredientListForDropdown()
+        {
+            List<Ingredient> ingredientList;
+            try
+            {
+                this.ingredientCmbBx.DataSource = null;
+                ingredientList = this.ingredientsController.GetIngredients();
+                ingredientList.Add(new Ingredient
+                {
+                    IngredientId = -1,
+                    IngredientName = "-- Select the Ingredient --"
+                });
+                this.ingredientCmbBx.DataSource = ingredientList;
+                this.ingredientCmbBx.DisplayMember = "IngredientName";
+                this.ingredientCmbBx.ValueMember = "IngredientId";
+                this.ingredientCmbBx.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - populating ingredient dropdown transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void GetEthnicityForRecipe()
         {
             List<Ethnic> ethnicList;
             try
@@ -60,7 +87,7 @@ namespace RecipeBookApp.UserControls
             }
         }
 
-        private void GetFoodType()
+        private void GetFoodTypeForRecipe()
         {
             List<FoodType> foodTypeList;
             
@@ -80,7 +107,7 @@ namespace RecipeBookApp.UserControls
             }
         }
 
-        private void GetNutrition()
+        private void GetNutritionForRecipe()
         {
             List<Nutrition> nutritionList = this.nutritionController.GetNutrition(this.recipe.RecipeId);
             this.carbTxtBx.Text = nutritionList[0].Carbohydrate.ToString();
