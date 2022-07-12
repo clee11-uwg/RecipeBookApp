@@ -16,5 +16,10 @@ namespace RecipeBookApp.View
         {
             InitializeComponent();
         }
+
+        private void RecipeMainUserControl2_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
