@@ -499,9 +499,9 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// Deletes the recipe image from the database
         /// </summary>
-        /// <param name="recipe">Recipe whose image to delete</param>
+        /// <param name="id">Id of recipe to delete</param>
         /// <returns>Whether or not the recipe was deleted</returns>
-        public bool DeleteImage(Recipe recipe)
+        public bool DeleteImage(int id)
         {
             int result = -1;
             string addRecipeStatement = @"DELETE FROM image
@@ -511,7 +511,7 @@ namespace RecipeBookApp.DAL
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
                 {
-                    selectCommand.Parameters.AddWithValue("@id", recipe.RecipeId);
+                    selectCommand.Parameters.AddWithValue("@id", id);
 
                     connection.Open();
                     result = selectCommand.ExecuteNonQuery();
@@ -628,20 +628,18 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// Deletes the row from recipe_has_kitchenware table
         /// <param name="recipeID">Id of the Recipe</param>
-        /// <param name="kitchenwareID">Id of the Kitchenware</param>
         /// <returns>If the database was updated or not</returns>
-        public bool DeleteRecipeUsesKitchenware(int recipeID, int kitchenwareID)
+        public bool DeleteRecipeUsesKitchenware(int recipeID)
         {
             int result = -1;
             string selectStatement = @"DELETE FROM recipe_uses_kitchenware
-                                        WHERE recipeID = @recipeID AND kitchenwareID = @kitchenwareID;";
+                                        WHERE recipeID = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
-                    selectCommand.Parameters.AddWithValue("@kitchenwareID", kitchenwareID);
 
                     connection.Open();
                     result = selectCommand.ExecuteNonQuery();
@@ -694,20 +692,18 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// Deletes the row from recipe_is_a_type_of_meal table
         /// <param name="recipeID">Id of the Recipe</param>
-        /// <param name="typeOfMealID">Id of the Type of Meal</param>
         /// <returns>If the database was updated or not</returns>
-        public bool DeleteRecipeIsATypeOfMeal(int recipeID, int typeOfMealID)
+        public bool DeleteRecipeIsATypeOfMeal(int recipeID)
         {
             int result = -1;
             string selectStatement = @"DELETE FROM recipe_is_a_type_of_meal
-                                        WHERE recipeID = @recipeID AND typeOfMealID = @typeOfMealID;";
+                                        WHERE recipeID = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
-                    selectCommand.Parameters.AddWithValue("@typeOfMealID", typeOfMealID);
 
                     connection.Open();
                     result = selectCommand.ExecuteNonQuery();
@@ -761,20 +757,18 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// Deletes the row from recipe_has_ingredient table
         /// <param name="recipeID">Id of the Recipe</param>
-        /// <param name="ingredientID">Id of the Ingredient</param>
         /// <returns>If the database was updated or not</returns>
-        public bool DeleteRecipeHasIngredient(int recipeID, int ingredientID)
+        public bool DeleteRecipeHasIngredient(int recipeID)
         {
             int result = -1;
             string selectStatement = @"DELETE FROM recipe_has_ingredient
-                                        WHERE recipeID = @recipeID AND ingredientID = @ingredientID;";
+                                        WHERE recipeID = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
-                    selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
 
                     connection.Open();
                     result = selectCommand.ExecuteNonQuery();
