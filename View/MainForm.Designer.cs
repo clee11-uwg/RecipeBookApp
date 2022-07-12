@@ -31,14 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.hometabPage = new System.Windows.Forms.TabPage();
+            this.recipeMainUserControl2 = new RecipeBookApp.UserControls.RecipeMainUserControl();
             this.AddRecipetabPage = new System.Windows.Forms.TabPage();
+            this.addRecipeDetailUserControl2 = new RecipeBookApp.UserControls.AddRecipeDetailUserControl();
             this.loginPage = new System.Windows.Forms.TabPage();
             this.loginUserControl1 = new RecipeBookApp.UserControls.LoginUserControl();
             this.signUpPage = new System.Windows.Forms.TabPage();
             this.signUpUserControl1 = new RecipeBookApp.UserControls.SignUpUserControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.recipeMainUserControl2 = new RecipeBookApp.UserControls.RecipeMainUserControl();
-            this.addRecipeDetailUserControl2 = new RecipeBookApp.UserControls.AddRecipeDetailUserControl();
+            this.welcomeUserLabel = new System.Windows.Forms.Label();
+            this.logoutLinkLabel = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.hometabPage.SuspendLayout();
             this.AddRecipetabPage.SuspendLayout();
@@ -53,11 +55,11 @@
             this.tabControl1.Controls.Add(this.AddRecipetabPage);
             this.tabControl1.Controls.Add(this.loginPage);
             this.tabControl1.Controls.Add(this.signUpPage);
-            this.tabControl1.Location = new System.Drawing.Point(0, 220);
+            this.tabControl1.Location = new System.Drawing.Point(0, 197);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1347, 688);
+            this.tabControl1.Size = new System.Drawing.Size(1347, 711);
             this.tabControl1.TabIndex = 0;
             // 
             // hometabPage
@@ -67,10 +69,19 @@
             this.hometabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hometabPage.Name = "hometabPage";
             this.hometabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.hometabPage.Size = new System.Drawing.Size(1339, 659);
+            this.hometabPage.Size = new System.Drawing.Size(1339, 682);
             this.hometabPage.TabIndex = 0;
             this.hometabPage.Text = "Home";
             this.hometabPage.UseVisualStyleBackColor = true;
+            // 
+            // recipeMainUserControl2
+            // 
+            this.recipeMainUserControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recipeMainUserControl2.Location = new System.Drawing.Point(3, 2);
+            this.recipeMainUserControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.recipeMainUserControl2.Name = "recipeMainUserControl2";
+            this.recipeMainUserControl2.Size = new System.Drawing.Size(1333, 678);
+            this.recipeMainUserControl2.TabIndex = 0;
             // 
             // AddRecipetabPage
             // 
@@ -83,6 +94,14 @@
             this.AddRecipetabPage.TabIndex = 1;
             this.AddRecipetabPage.Text = "Add Recipe";
             this.AddRecipetabPage.UseVisualStyleBackColor = true;
+            // 
+            // addRecipeDetailUserControl2
+            // 
+            this.addRecipeDetailUserControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addRecipeDetailUserControl2.Location = new System.Drawing.Point(3, 2);
+            this.addRecipeDetailUserControl2.Name = "addRecipeDetailUserControl2";
+            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(1333, 655);
+            this.addRecipeDetailUserControl2.TabIndex = 0;
             // 
             // loginPage
             // 
@@ -129,27 +148,31 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1381, 214);
+            this.pictureBox1.Size = new System.Drawing.Size(1381, 175);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // recipeMainUserControl2
+            // welcomeUserLabel
             // 
-            this.recipeMainUserControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.recipeMainUserControl2.Location = new System.Drawing.Point(3, 2);
-            this.recipeMainUserControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.recipeMainUserControl2.Name = "recipeMainUserControl2";
-            this.recipeMainUserControl2.Size = new System.Drawing.Size(1333, 655);
-            this.recipeMainUserControl2.TabIndex = 0;
+            this.welcomeUserLabel.AutoSize = true;
+            this.welcomeUserLabel.Location = new System.Drawing.Point(554, 179);
+            this.welcomeUserLabel.Name = "welcomeUserLabel";
+            this.welcomeUserLabel.Size = new System.Drawing.Size(44, 16);
+            this.welcomeUserLabel.TabIndex = 2;
+            this.welcomeUserLabel.Text = "label1";
+            this.welcomeUserLabel.Visible = false;
             // 
-            // addRecipeDetailUserControl2
+            // logoutLinkLabel
             // 
-            this.addRecipeDetailUserControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addRecipeDetailUserControl2.Location = new System.Drawing.Point(3, 2);
-            this.addRecipeDetailUserControl2.Name = "addRecipeDetailUserControl2";
-            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(1333, 655);
-            this.addRecipeDetailUserControl2.TabIndex = 0;
+            this.logoutLinkLabel.AutoSize = true;
+            this.logoutLinkLabel.Location = new System.Drawing.Point(1272, 179);
+            this.logoutLinkLabel.Name = "logoutLinkLabel";
+            this.logoutLinkLabel.Size = new System.Drawing.Size(68, 16);
+            this.logoutLinkLabel.TabIndex = 3;
+            this.logoutLinkLabel.TabStop = true;
+            this.logoutLinkLabel.Text = "linkLabel1";
+            this.logoutLinkLabel.Visible = false;
             // 
             // MainForm
             // 
@@ -157,6 +180,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1381, 847);
+            this.Controls.Add(this.logoutLinkLabel);
+            this.Controls.Add(this.welcomeUserLabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -173,6 +198,7 @@
             this.signUpPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -190,5 +216,7 @@
         private UserControls.SignUpUserControl signUpUserControl1;
         private UserControls.RecipeMainUserControl recipeMainUserControl2;
         private UserControls.AddRecipeDetailUserControl addRecipeDetailUserControl2;
+        private System.Windows.Forms.Label welcomeUserLabel;
+        private System.Windows.Forms.LinkLabel logoutLinkLabel;
     }
 }
