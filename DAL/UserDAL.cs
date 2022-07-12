@@ -106,5 +106,71 @@ namespace RecipeBookApp.DAL
             }
             return hashed;
         }
+
+        /// <summary>
+        /// Adds a new favorite recipe for the user
+        /// <param name="userID">Id of the User</param>
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool AddNewFavoriteRecipe(int userID, int recipeID)
+        {
+            int result = -1;
+            string selectStatement = @"INSERT INTO User_has_favorite_Recipes (userID, recipeID)
+                                        VALUES (@userID, @recipeID);";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@userID", userID);
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Deletes a favorite recipe for the user
+        /// <param name="userID">Id of the User</param>
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool DeleteFavoriteRecipe(int userID, int recipeID)
+        {
+            int result = -1;
+            string selectStatement = @"DELETE FROM User_has_favorite_Recipes
+                                        WHERE userID = @userID AND recipeID = @userID;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@userID", userID);
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

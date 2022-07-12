@@ -392,111 +392,404 @@ namespace RecipeBookApp.DAL
             }
         }
 
-            /**
-            /// <summary>
-            /// Adds the new recipe.
-            /// </summary>
-            /// <param name="addRecipe">The add recipe.</param>
-            public static void AddRecipe(Recipe addRecipe){
+        /// <summary>
+        /// Inserts the recipe into the database
+        /// </summary>
+        /// <param name="recipe">Recipe to add</param>
+        /// <returns>Id of the Recipe added, -1 if nothing added</returns>
+        public int AddRecipe(Recipe recipe)
+        {
+            int id = -1;
+            string addRecipeStatement = @"INSERT INTO recipe (Name, Instructions, cooktime, nutritionID, 
+                                            ethnicOriginID, userWhoCreated)
+                                        VALUES(@name, @instructions, @cooktime, @nutritionID, 
+                                            @ethnicOriginID, @userWhoCreated); ";
 
-        string addRecipeStatement = "INSERT INTO Recipe (RecipeName,RecipeInstructions,CookingTime,NutritionId, EthnicId) " +
-                                     "VALUES(@RecipeName, @RecipeInstructions, @CookingTime, @NutritionId  , @EthnicId)";
-            
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
                 {
-                    selectCommand.Parameters.Add("@RecipeName", DbType.String);
-                    selectCommand.Parameters["@RecipeName"].Value = addRecipe.RecipeName;
+                    selectCommand.Parameters.AddWithValue("@name", recipe.RecipeName);
+                    selectCommand.Parameters.AddWithValue("@instructions", recipe.RecipeInstructions);
+                    selectCommand.Parameters.AddWithValue("@cooktime", recipe.CookingTime);
+                    selectCommand.Parameters.AddWithValue("@nutritionID", recipe.NutritionId);
+                    selectCommand.Parameters.AddWithValue("@ethnicOriginID", recipe.EthnicId);
+                    selectCommand.Parameters.AddWithValue("@userWhoCreated", recipe.UserWhoCreated);
 
-                    selectCommand.Parameters.Add("@RecipeInstructions", DbType.String);
-                    selectCommand.Parameters.Add("@RecipeInstructions", DbType.String).Value = addRecipe.RecipeInstructions;
-
-                    selectCommand.Parameters.Add("@CookingTime", DbType.Int32);
-                    selectCommand.Parameters.Add("@CookingTime", DbType.Int32).Value = addRecipe.CookingTime;
-                    selectCommand.Parameters.Add("@NutritionId", DbType.String);
-                    selectCommand.Parameters.Add("@NutritionId", DbType.String).Value = addRecipe.NutritionId;
-
-                    selectCommand.Parameters.Add("@EthnicId", DbType.Int32);
-                    selectCommand.Parameters.Add("@EthnicId", DbType.Int32).Value = addRecipe.EthnicId;
-
-                    selectCommand.ExecuteNonQuery();
+                    connection.Open();
+                    id = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    connection.Close();
 
                 }
+            }
+            return id;
+        }
+
+        /// <summary>
+        /// Deletes the recipe from the database
+        /// </summary>
+        /// <param name="recipe">Recipe to delete</param>
+        /// <returns>Whether or not the recipe was deleted</returns>
+        public bool DeleteRecipe(Recipe recipe)
+        {
+            int result = -1;
+            string addRecipeStatement = @"DELETE FROM recipe
+                                            WHERE id = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@id", recipe.RecipeId);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
         /// <summary>
-        /// Updates the Recipe details.
+        /// Inserts the recipe image into the database
         /// </summary>
-        /// <param name="oldRecipe">The old recipe.</param>
-        /// <param name="newRecipe">The new recipe.</param>
-        /// <returns></returns>
-        public static bool UpdateRecipe(Recipe oldRecipe, Recipe newRecipe)
+        /// <param name="recipe">Recipe whose image to add</param>
+        /// <returns>If the insertion worked</returns>
+        public bool AddImage(Recipe recipe)
         {
-            string selectStatement = "UPDATE Recipe SET " +
-                                        "RecipeName = @NewRecipeName, RecipeInstructions = @NewRecipeInstructions, " +
-                                        "CookingTime = @NewCookingTime, NutritionId = @NewNutritionId, EthnicId = @NewEthnicId" +
-                                        "WHERE RecipeID = @OldRecipeID " +
-                                            "AND RecipeName = @OldRecipeName AND " +
-                                        "RecipeInstructions = @OldRecipeInstructions " +
-                                            "AND CookingTime = @OldCookingTime AND " +
-                                        "NutritionId = @OldNutritionId AND EthnicId = @OldEthnicId ";
+            int result = -1;
+            string addRecipeStatement = @"INSERT INTO image (recipeID, image)
+                                            VALUES (@recipeID, @image); ";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
+                {
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        selectCommand.Parameters.AddWithValue("@recipeID", recipe.RecipeId);
+                        recipe.RecipeImage.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                        byte[] data = stream.ToArray();
+                        selectCommand.Parameters.AddWithValue("@image", data);
+
+                        connection.Open();
+                        result = Convert.ToInt32(selectCommand.ExecuteScalar());
+                        connection.Close();
+                    }
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Deletes the recipe image from the database
+        /// </summary>
+        /// <param name="recipe">Recipe whose image to delete</param>
+        /// <returns>Whether or not the recipe was deleted</returns>
+        public bool DeleteImage(Recipe recipe)
+        {
+            int result = -1;
+            string addRecipeStatement = @"DELETE FROM image
+                                            WHERE recipeID = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@id", recipe.RecipeId);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /**
+    /// <summary>
+    /// Updates the Recipe details.
+    /// </summary>
+    /// <param name="oldRecipe">The old recipe.</param>
+    /// <param name="newRecipe">The new recipe.</param>
+    /// <returns></returns>
+    public static bool UpdateRecipe(Recipe oldRecipe, Recipe newRecipe)
+    {
+        string selectStatement = "UPDATE Recipe SET " +
+                                    "RecipeName = @NewRecipeName, RecipeInstructions = @NewRecipeInstructions, " +
+                                    "CookingTime = @NewCookingTime, NutritionId = @NewNutritionId, EthnicId = @NewEthnicId" +
+                                    "WHERE RecipeID = @OldRecipeID " +
+                                        "AND RecipeName = @OldRecipeName AND " +
+                                    "RecipeInstructions = @OldRecipeInstructions " +
+                                        "AND CookingTime = @OldCookingTime AND " +
+                                    "NutritionId = @OldNutritionId AND EthnicId = @OldEthnicId ";
+
+        using (SQLiteConnection connection = DBConnection.GetConnection())
+        {
+            using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+            {
+                // Old Recipe details Mappings
+                selectCommand.Parameters.Add("@OldRecipeName", DbType.String);
+                selectCommand.Parameters["@OldRecipeName"].Value = oldRecipe.RecipeName;
+
+                selectCommand.Parameters.Add("@OldRecipeInstructions", DbType.String);
+                selectCommand.Parameters["@OldRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
+
+                selectCommand.Parameters.Add("@OldCookingTime", DbType.Int32);
+                selectCommand.Parameters["@OldCookingTime"].Value = oldRecipe.CookingTime;
+                selectCommand.Parameters.Add("@OldNutritionId", DbType.Int32);
+                selectCommand.Parameters["@OldNutritionId"].Value = oldRecipe.NutritionId;
+                selectCommand.Parameters.Add("@OldEthnicId", DbType.Int32);
+                selectCommand.Parameters["@OldEthnicId"].Value = oldRecipe.EthnicId;
+
+                // New Recipe details Mappings
+                selectCommand.Parameters.Add("@NewRecipeName", DbType.String);
+                selectCommand.Parameters["@NewRecipeName"].Value = newRecipe.RecipeName;
+                selectCommand.Parameters.Add("@NewRecipeInstructions", DbType.String);
+                selectCommand.Parameters["@NewRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
+                selectCommand.Parameters.Add("@NewCookingTime", DbType.Int32);
+                selectCommand.Parameters["@NewCookingTime"].Value = oldRecipe.CookingTime;
+                selectCommand.Parameters.Add("@NewNutritionId", DbType.Int32);
+                selectCommand.Parameters["@NewNutritionId"].Value = oldRecipe.NutritionId;
+                selectCommand.Parameters.Add("@EthnicId", DbType.Int32);
+                selectCommand.Parameters["@NewEthnicId"].Value = oldRecipe.EthnicId;
+
+                
+                int resultCount = selectCommand.ExecuteNonQuery();
+                if (resultCount > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+    }
+        */
+
+        /// <summary>
+        /// Adds a new row to the recipe_uses_kitchenware table
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <param name="kitchenwareID">Id of the Kitchenware</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool AddRecipeUsesKitchenware(int recipeID, int kitchenwareID)
+        {
+            int result = -1;
+            string selectStatement = @"INSERT INTO recipe_uses_kitchenware (recipeID, kitchenwareID)
+                                        VALUES (@recipeID, @kitchenwareID);";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    // Old Recipe details Mappings
-                    selectCommand.Parameters.Add("@OldRecipeName", DbType.String);
-                    selectCommand.Parameters["@OldRecipeName"].Value = oldRecipe.RecipeName;
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+                    selectCommand.Parameters.AddWithValue("@kitchenwareID", kitchenwareID);
 
-                    selectCommand.Parameters.Add("@OldRecipeInstructions", DbType.String);
-                    selectCommand.Parameters["@OldRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
-
-                    selectCommand.Parameters.Add("@OldCookingTime", DbType.Int32);
-                    selectCommand.Parameters["@OldCookingTime"].Value = oldRecipe.CookingTime;
-                    selectCommand.Parameters.Add("@OldNutritionId", DbType.Int32);
-                    selectCommand.Parameters["@OldNutritionId"].Value = oldRecipe.NutritionId;
-                    selectCommand.Parameters.Add("@OldEthnicId", DbType.Int32);
-                    selectCommand.Parameters["@OldEthnicId"].Value = oldRecipe.EthnicId;
-
-                    // New Recipe details Mappings
-                    selectCommand.Parameters.Add("@NewRecipeName", DbType.String);
-                    selectCommand.Parameters["@NewRecipeName"].Value = newRecipe.RecipeName;
-                    selectCommand.Parameters.Add("@NewRecipeInstructions", DbType.String);
-                    selectCommand.Parameters["@NewRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
-                    selectCommand.Parameters.Add("@NewCookingTime", DbType.Int32);
-                    selectCommand.Parameters["@NewCookingTime"].Value = oldRecipe.CookingTime;
-                    selectCommand.Parameters.Add("@NewNutritionId", DbType.Int32);
-                    selectCommand.Parameters["@NewNutritionId"].Value = oldRecipe.NutritionId;
-                    selectCommand.Parameters.Add("@EthnicId", DbType.Int32);
-                    selectCommand.Parameters["@NewEthnicId"].Value = oldRecipe.EthnicId;
-
-                    
-                    int resultCount = selectCommand.ExecuteNonQuery();
-                    if (resultCount > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
                 }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
+        /// <summary>
+        /// Deletes the row from recipe_has_kitchenware table
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <param name="kitchenwareID">Id of the Kitchenware</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool DeleteRecipeUsesKitchenware(int recipeID, int kitchenwareID)
+        {
+            int result = -1;
+            string selectStatement = @"DELETE FROM recipe_uses_kitchenware
+                                        WHERE recipeID = @recipeID AND kitchenwareID = @kitchenwareID;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+                    selectCommand.Parameters.AddWithValue("@kitchenwareID", kitchenwareID);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         /// <summary>
-        /// Delete the Recipe details.
-        ///
-        public  bool DeleteRecipe(Recipe deleteRecipe)
+        /// Adds a new row to the recipe_is_a_type_of_meal table
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <param name="typeOfMealID">Id of the Type of Meal</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool AddRecipeIsATypeOfMeal(int recipeID, int typeOfMealID)
         {
-            return true;
-            
+            int result = -1;
+            string selectStatement = @"INSERT INTO recipe_is_a_type_of_meal (recipeID, typeOfMealID)
+                                        VALUES (@recipeID, @typeOfMealID);";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+                    selectCommand.Parameters.AddWithValue("@typeOfMealID", typeOfMealID);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
-            */
+
+        /// <summary>
+        /// Deletes the row from recipe_is_a_type_of_meal table
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <param name="typeOfMealID">Id of the Type of Meal</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool DeleteRecipeIsATypeOfMeal(int recipeID, int typeOfMealID)
+        {
+            int result = -1;
+            string selectStatement = @"DELETE FROM recipe_is_a_type_of_meal
+                                        WHERE recipeID = @recipeID AND typeOfMealID = @typeOfMealID;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+                    selectCommand.Parameters.AddWithValue("@typeOfMealID", typeOfMealID);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Adds a new row to the recipe_has_ingredient table
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <param name="ingredientID">Id of the Ingredient</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool AddRecipeHasIngredient(int recipeID, int ingredientID, string amount)
+        {
+            int result = -1;
+            string selectStatement = @"INSERT INTO recipe_has_ingredient (recipeID, ingredientID, amount)
+                                        VALUES (@recipeID, @ingredientID, @amount);";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+                    selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
+                    selectCommand.Parameters.AddWithValue("@amount", amount);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Deletes the row from recipe_has_ingredient table
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <param name="ingredientID">Id of the Ingredient</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool DeleteRecipeHasIngredient(int recipeID, int ingredientID)
+        {
+            int result = -1;
+            string selectStatement = @"DELETE FROM recipe_has_ingredient
+                                        WHERE recipeID = @recipeID AND ingredientID = @ingredientID;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+                    selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
     }
 }

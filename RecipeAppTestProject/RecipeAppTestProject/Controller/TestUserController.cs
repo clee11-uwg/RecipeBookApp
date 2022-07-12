@@ -85,5 +85,37 @@ namespace RecipeAppTestProject.Controller
         {
             Assert.ThrowsException<UnauthorizedAccessException>(() => controller.Login(joe.Name, "bob"));
         }
+
+        /// <summary>
+        /// Tests that Add and Delete favorites recipes don't work with ids below 1
+        /// </summary>
+        [TestMethod]
+        public void TestAddDeleteFavoriteRecipeThrowsExceptionIfIDsAreBelowOne()
+        {
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.AddNewFavoriteRecipe(0, 1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.AddNewFavoriteRecipe(-1, 1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.AddNewFavoriteRecipe(1, 0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.AddNewFavoriteRecipe(1, -1));
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.DeleteFavoriteRecipe(0, 1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.DeleteFavoriteRecipe(-1, 1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.DeleteFavoriteRecipe(1, 0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.DeleteFavoriteRecipe(1, -1));
+        }
+
+        /// <summary>
+        /// Tests that Add and Delete favorites recipes don't work with invalid user/recipe combos
+        /// </summary>
+        [TestMethod]
+        public void TestAddDeleteFavoriteRecipeThrowsExceptionIfInvalidCombination()
+        {
+            Assert.ThrowsException<NullReferenceException>(() => controller.AddNewFavoriteRecipe(101, 37));
+            Assert.ThrowsException<NullReferenceException>(() => controller.AddNewFavoriteRecipe(37, 101));
+            Assert.ThrowsException<NullReferenceException>(() => controller.AddNewFavoriteRecipe(1001, 370));
+
+            Assert.ThrowsException<NullReferenceException>(() => controller.DeleteFavoriteRecipe(102, 38));
+            Assert.ThrowsException<NullReferenceException>(() => controller.DeleteFavoriteRecipe(587, 107));
+            Assert.ThrowsException<NullReferenceException>(() => controller.DeleteFavoriteRecipe(1002, 377));
+        }
     }
 }
