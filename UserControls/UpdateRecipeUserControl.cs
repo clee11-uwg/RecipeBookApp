@@ -263,5 +263,30 @@ namespace RecipeBookApp.UserControls
             this.recipeIngredients.Add(this.ingredientCmbBx.Text.ToString());
             this.DisplayIngredients();
         }
+
+        private void RemoveIngredientBtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.ingredientsRchBx.Text))
+            {
+                MessageBox.Show("No Ingredient present. Please add Ingredients",
+                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.ingredientCmbBx.Text == "-- Select the Ingredient --")
+            {
+                MessageBox.Show("Please select valid Ingredients to Remove",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!this.recipeIngredients.Contains(this.ingredientCmbBx.Text))
+            {
+                MessageBox.Show(this.ingredientCmbBx.Text + " - Cannot be removed as it was never added",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeIngredients.Remove(this.ingredientCmbBx.Text);
+            this.DisplayIngredients();
+        }
     }
 }
