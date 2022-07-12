@@ -112,6 +112,12 @@
     <Compile Include="DAL\RecipeDAL.cs" />
     <Compile Include="DAL\TypeOfFoodDAL.cs" />
     <Compile Include="DAL\TypeOfMealDAL.cs" />
+    <Compile Include="UserControls\LoginUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\LoginUserControl.Designer.cs">
+      <DependentUpon>LoginUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\RecipeListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -221,6 +227,9 @@
     <Content Include="Data\Digital Recipe Book Banner.png" />
     <Content Include="Data\sampleimage.jpg" />
     <Content Include="sampleimage.jpg" />
+    <EmbeddedResource Include="UserControls\LoginUserControl.resx">
+      <DependentUpon>LoginUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\RecipeListItem.resx">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
     </EmbeddedResource>
