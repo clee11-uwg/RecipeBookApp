@@ -162,6 +162,42 @@ namespace RecipeBookApp.Controller
             return true;
         }
 
+        /// <summary>
+        /// Deletes the recipe from the database
+        /// </summary>
+        /// <param name="recipe">Recipe to delete</param>
+        /// <returns>Whether or not the recipe was deleted</returns>
+        public bool DeleteRecipe(User user, Recipe recipe)
+        {
+            if (user == null || recipe == null)
+            {
+                throw new UnauthorizedAccessException("Unauthorized");
+            }
+            if (user.Is_Admin == false && user.Name != recipe.UserWhoCreated)
+            {
+                throw new UnauthorizedAccessException("Unauthorized");
+            }
+            if (recipe.RecipeId < 1)
+            {
+                throw new ArgumentException("RecipeID must be valid");
+            }
+
+            using (TransactionScope scope = new TransactionScope())
+            {
+                NutritionDAL nutritionDAL = new NutritionDAL();
+                nutritionDAL.DeleteNutrition(recipe.NutritionId);
+
+                this.recipeDAL.DeleteImage(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
+
+                recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
+                scope.Complete();
+            }
+            return true;
+        }
+
         /**
         /// <summary>
         /// Updates the recipe.
@@ -179,22 +215,6 @@ namespace RecipeBookApp.Controller
             RecipeDAL.UpdateRecipe(newUpdateRecipe, oldUpdateRecipe);
         }
 
-
-        /// <summary>
-        /// Deletes the recipes.
-        /// </summary>
-        /// <param name="deleteRecipeId">The delete recipe identifier.</param>
-        /// <returns></returns>
-        public bool DeleteRecipe(Recipe deleteRecipe)
-        {
-            if (deleteRecipe == null)
-            {
-                throw new ArgumentNullException("Delete of a recipe or restore cannot be performed ");
-            }
-
-             return this.recipeDAL.DeleteRecipe(deleteRecipe);
-            // return RecipeDAL.DeleteRecipe(deleteRecipeId);
-        }
         */
     }
 }

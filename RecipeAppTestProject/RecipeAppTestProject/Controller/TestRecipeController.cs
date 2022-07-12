@@ -195,5 +195,31 @@ namespace RecipeAppTestProject.Controller
             Assert.ThrowsException<NullReferenceException>(() => controller.AddRecipe(joe,
                 recipe, ingredients, mealTypes, kitchenware, nutrition));
         }
+
+        /// <summary>
+        /// Tests that DeleteRecipe throws exception when bad user or recipe data is passed
+        /// </summary>
+        [TestMethod]
+        public void TestDeleteRecipeThrowsExceptionWithBadUserOrRecipe()
+        {
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.DeleteRecipe(null, recipe));
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.DeleteRecipe(joe, null));
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.DeleteRecipe(joe, recipe));
+
+            recipe = new Recipe
+            {
+                RecipeId = -1,
+                UserWhoCreated = "joe"
+            };
+            Assert.ThrowsException<ArgumentException>(() => controller.DeleteRecipe(joe, recipe));
+
+            User admin = new User
+            {
+                ID = 6,
+                Name = "joe",
+                Is_Admin = true
+            };
+            Assert.ThrowsException<ArgumentException>(() => controller.DeleteRecipe(admin, recipe));
+        }
     }
 }
