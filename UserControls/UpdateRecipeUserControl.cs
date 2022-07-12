@@ -8,15 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RecipeBookApp.Model;
+using RecipeBookApp.Controller;
 
 namespace RecipeBookApp.UserControls
 {
     public partial class UpdateRecipeUserControl : UserControl
     {
         private Recipe recipe;
+        private NutritionController nutritionController;
         public UpdateRecipeUserControl()
         {
             InitializeComponent();
+            this.nutritionController = new NutritionController();
         }
 
         /// <summary>
@@ -27,6 +30,18 @@ namespace RecipeBookApp.UserControls
         {
             this.recipe = selectedRecipe;
             this.recipeNameTxtBx.Text = this.recipe.RecipeName;
+            GetNutrition();
+        }
+
+        private void GetNutrition()
+        {
+            List<Nutrition> nutritionList = this.nutritionController.GetNutrition(this.recipe.RecipeId);
+            this.carbTxtBx.Text = nutritionList[0].Carbohydrate.ToString();
+            this.proteinTxtBx.Text = nutritionList[0].Protein.ToString();
+            this.alcoholTxtBx.Text = nutritionList[0].Alcohol.ToString();
+            this.fatTxtBx.Text = nutritionList[0].Fat.ToString();
+            this.calorieTxtBx.Text = nutritionList[0].Calories.ToString();
+            this.servingTxtBx.Text = nutritionList[0].ServingSize;
         }
     }
 }
