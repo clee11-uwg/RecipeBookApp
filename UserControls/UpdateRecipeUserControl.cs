@@ -46,20 +46,27 @@ namespace RecipeBookApp.UserControls
             GetEthnicityForRecipe();
             GetIngredientListForDropdown();
             GetKitchenwareListForDropdown();
-            GetMealTypeForRecipe();
+            GetMealTypesForRecipe();
         }
 
-        private void GetMealTypeForRecipe()
+        private void GetMealTypesForRecipe()
         {
-            List<MealType> mealTypeList;
+            List<MealType> mealTypeList = this.mealTypeController.GetMealTypes(this.recipe.RecipeId);
+            string recipeMealTypes = "";
             try
             {
-                this.mealTypeCmbBx.DataSource = null;
-                mealTypeList = this.mealTypeController.GetMealTypes();
-                this.mealTypeCmbBx.DataSource = mealTypeList;
-                this.mealTypeCmbBx.DisplayMember = "type";
-                this.mealTypeCmbBx.ValueMember = "mealTypeID";
-                this.mealTypeCmbBx.SelectedValue = this.mealTypeController.GetMealTypes(this.recipe.RecipeId)[0].type;
+                for (int i = 0; i < mealTypeList.Count; i++)
+                {
+                    if (i < (mealTypeList.Count - 1))
+                    {
+                        recipeMealTypes += mealTypeList[i].type + ", ";
+                    }
+                    else
+                    {
+                        recipeMealTypes += mealTypeList[i].type;
+                    }
+                }
+                this.mealTypeRchBx.Text = recipeMealTypes;
             }
             catch (Exception ex)
             {
