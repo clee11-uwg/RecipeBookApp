@@ -19,6 +19,7 @@ namespace RecipeBookApp.UserControls
 
         private List<Recipe> recipeList;
         private List<Nutrition> nutritionList;
+        private Nutrition addNutrition;
         private List<Kitchenware> kitchenWareList;
         private List<MealType> mealTypeList;
         private List<FoodType> foodTypeList;
@@ -31,7 +32,9 @@ namespace RecipeBookApp.UserControls
         private readonly NutritionController nutritionController;
         private readonly TypeOfMealController mealController;
         private readonly EthnicOriginController ethnicController;
-        private  string displayMessage;
+        private List<string> recipeIngredients;
+        private List<string> recipeKitchenWare;
+        private string displayMessage;
 
         private readonly TypeOfFoodController foodController;
         public AddRecipeDetailUserControl()
@@ -49,7 +52,10 @@ namespace RecipeBookApp.UserControls
             this.foodTypeList = new List<FoodType>();
             this.ethnicList = new List<Ethnic>();
             this.ingredientList = new List<Ingredient>();
-        
+            this.recipeIngredients = new List<string>();
+            this.recipeKitchenWare= new List<string>();
+
+
         }
 
 
@@ -239,6 +245,21 @@ namespace RecipeBookApp.UserControls
                 return;
             }
 
+            this.CollectNutritionData();
+
+        }
+        private void CollectNutritionData()
+        {
+            this.addNutrition = new Nutrition
+            {
+                Carbohydrate = int.Parse(this.calorieTextBox.Text),
+                Protein = int.Parse(this.proteinTextBox.Text),
+                Fat = int.Parse(this.fattextBox.Text),
+                Alcohol = int.Parse(this.calorieTextBox.Text),
+                Calories = int.Parse(this.calorieTextBox.Text),
+                ServingSize = this.servingtextBox.Text
+            };
+
         }
         private bool ValidateRecipeName() {
 
@@ -313,5 +334,107 @@ namespace RecipeBookApp.UserControls
             this.erroLabel.Text = this.displayMessage;
             this.erroLabel.Visible = true;
         }
+
+        private void AddIngredients_Click(object sender, EventArgs e)
+        {
+            if (this.recipeIngredients.Contains(this.addIngredientCombobox.Text))
+            {
+                MessageBox.Show(this.addIngredientCombobox.Text + "already added. Please select something else.",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.addIngredientCombobox.Text == "Select the Ingredient")
+            {
+                MessageBox.Show("Please select valid Ingredients to add",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeIngredients.Add(this.addIngredientCombobox.Text.ToString());
+            this.DisplayIngredients();
+
+        }
+        private void DisplayIngredients()
+        {
+            this.addIngredIentsRichBox.Text=  string.Join(",", this.recipeIngredients);
+            this.addIngredIentsRichBox.Refresh();
+        }
+
+        private void RemoveIngrdients_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.addIngredientCombobox.Text))
+            {
+                MessageBox.Show("No Ingredient present. Please add Ingredients",
+                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.addIngredientCombobox.Text == "Select the Ingredient")
+            {
+                MessageBox.Show("Please select valid Ingredients to Remove",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!this.recipeIngredients.Contains(this.addIngredientCombobox.Text))
+            {
+                MessageBox.Show(this.addIngredientCombobox.Text + "Cannot be removed as it was never added",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+                   
+            this.recipeIngredients.Remove(this.addIngredientCombobox.Text);           
+            this.DisplayIngredients();
+          
+        }
+
+        private void AddKitchennware_Click(object sender, EventArgs e)
+        {
+            if (this.recipeKitchenWare.Contains(this.addKitchenWareComboBox.Text))
+            {
+                MessageBox.Show(this.addKitchenWareComboBox.Text + "already added. Please select something else.",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.addKitchenWareComboBox.Text == "Select the KitchenWare")
+            {
+                MessageBox.Show("Please select valid kitchenware to add",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            this.recipeKitchenWare.Add(this.addKitchenWareComboBox.Text.ToString());
+            this.DisplayKitchenwares();
+
+        }
+
+        private void RemovKitchenware_Click(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrEmpty(this.addKitchenWareComboBox.Text))
+            {
+                MessageBox.Show("No kitchenware present. Please add kitchenware",
+                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.addKitchenWareComboBox.Text == "Select the KitchenWare")
+            {
+                MessageBox.Show("Please select valid kitchenware to Remove",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!this.recipeKitchenWare.Contains(this.addKitchenWareComboBox.Text))
+            {
+                MessageBox.Show(this.addKitchenWareComboBox.Text + "Cannot be removed as it was never added",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeKitchenWare.Remove(this.addKitchenWareComboBox.Text);
+            this.DisplayKitchenwares();
+        }
+        private void DisplayKitchenwares()
+        {
+            this.addKitchenwareRichTextBox.Text = string.Join(",", this.recipeIngredients);
+            this.addKitchenwareRichTextBox.Refresh();
+        }
+
     }
 }

@@ -83,7 +83,7 @@
             this.addNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addNameLabel.Location = new System.Drawing.Point(3, 0);
             this.addNameLabel.Name = "addNameLabel";
-            this.addNameLabel.Size = new System.Drawing.Size(181, 58);
+            this.addNameLabel.Size = new System.Drawing.Size(181, 38);
             this.addNameLabel.TabIndex = 0;
             this.addNameLabel.Text = "* RecipeName -";
             // 
@@ -91,7 +91,7 @@
             // 
             this.addNutritionLabel.AutoSize = true;
             this.addNutritionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addNutritionLabel.Location = new System.Drawing.Point(3, 58);
+            this.addNutritionLabel.Location = new System.Drawing.Point(3, 38);
             this.addNutritionLabel.Name = "addNutritionLabel";
             this.addNutritionLabel.Size = new System.Drawing.Size(107, 20);
             this.addNutritionLabel.TabIndex = 1;
@@ -101,7 +101,7 @@
             // 
             this.nutritionLabel.AutoSize = true;
             this.nutritionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nutritionLabel.Location = new System.Drawing.Point(3, 131);
+            this.nutritionLabel.Location = new System.Drawing.Point(3, 86);
             this.nutritionLabel.Name = "nutritionLabel";
             this.nutritionLabel.Size = new System.Drawing.Size(128, 20);
             this.nutritionLabel.TabIndex = 2;
@@ -111,7 +111,7 @@
             // 
             this.kitchenWareLabel.AutoSize = true;
             this.kitchenWareLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kitchenWareLabel.Location = new System.Drawing.Point(3, 173);
+            this.kitchenWareLabel.Location = new System.Drawing.Point(3, 210);
             this.kitchenWareLabel.Name = "kitchenWareLabel";
             this.kitchenWareLabel.Size = new System.Drawing.Size(138, 20);
             this.kitchenWareLabel.TabIndex = 3;
@@ -131,7 +131,7 @@
             this.addKitchenWareComboBox.FormattingEnabled = true;
             this.addKitchenWareComboBox.Location = new System.Drawing.Point(364, 3);
             this.addKitchenWareComboBox.Name = "addKitchenWareComboBox";
-            this.addKitchenWareComboBox.Size = new System.Drawing.Size(221, 24);
+            this.addKitchenWareComboBox.Size = new System.Drawing.Size(248, 24);
             this.addKitchenWareComboBox.TabIndex = 11;
             this.addKitchenWareComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddKitchenWareComboBox_KeyPress);
             // 
@@ -140,7 +140,7 @@
             this.addIngredIentsRichBox.Location = new System.Drawing.Point(3, 3);
             this.addIngredIentsRichBox.Name = "addIngredIentsRichBox";
             this.addIngredIentsRichBox.ReadOnly = true;
-            this.addIngredIentsRichBox.Size = new System.Drawing.Size(357, 30);
+            this.addIngredIentsRichBox.Size = new System.Drawing.Size(357, 112);
             this.addIngredIentsRichBox.TabIndex = 14;
             this.addIngredIentsRichBox.Text = "";
             // 
@@ -149,7 +149,7 @@
             this.addKitchenwareRichTextBox.Location = new System.Drawing.Point(3, 3);
             this.addKitchenwareRichTextBox.Name = "addKitchenwareRichTextBox";
             this.addKitchenwareRichTextBox.ReadOnly = true;
-            this.addKitchenwareRichTextBox.Size = new System.Drawing.Size(339, 32);
+            this.addKitchenwareRichTextBox.Size = new System.Drawing.Size(355, 81);
             this.addKitchenwareRichTextBox.TabIndex = 15;
             this.addKitchenwareRichTextBox.Text = "";
             // 
@@ -164,7 +164,7 @@
             // 
             this.foodTypeLabel.AutoSize = true;
             this.foodTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.foodTypeLabel.Location = new System.Drawing.Point(3, 291);
+            this.foodTypeLabel.Location = new System.Drawing.Point(3, 351);
             this.foodTypeLabel.Name = "foodTypeLabel";
             this.foodTypeLabel.Size = new System.Drawing.Size(103, 20);
             this.foodTypeLabel.TabIndex = 17;
@@ -174,7 +174,7 @@
             // 
             this.mealTypeLabel.AutoSize = true;
             this.mealTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mealTypeLabel.Location = new System.Drawing.Point(3, 217);
+            this.mealTypeLabel.Location = new System.Drawing.Point(3, 303);
             this.mealTypeLabel.Name = "mealTypeLabel";
             this.mealTypeLabel.Size = new System.Drawing.Size(121, 20);
             this.mealTypeLabel.TabIndex = 18;
@@ -184,7 +184,7 @@
             // 
             this.imageLabel.AutoSize = true;
             this.imageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageLabel.Location = new System.Drawing.Point(3, 407);
+            this.imageLabel.Location = new System.Drawing.Point(3, 427);
             this.imageLabel.Name = "imageLabel";
             this.imageLabel.Size = new System.Drawing.Size(110, 20);
             this.imageLabel.TabIndex = 19;
@@ -194,7 +194,7 @@
             // 
             this.ethnicLabel.AutoSize = true;
             this.ethnicLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ethnicLabel.Location = new System.Drawing.Point(3, 349);
+            this.ethnicLabel.Location = new System.Drawing.Point(3, 389);
             this.ethnicLabel.Name = "ethnicLabel";
             this.ethnicLabel.Size = new System.Drawing.Size(75, 20);
             this.ethnicLabel.TabIndex = 20;
@@ -226,24 +226,23 @@
             this.addRecipeTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.addRecipeTableLayoutPanel.Name = "addRecipeTableLayoutPanel";
             this.addRecipeTableLayoutPanel.RowCount = 10;
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.71165F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.057302F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.363296F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.73034F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.253985F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.3747F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.41275F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.80957F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.38704F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.253985F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.253985F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.253985F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.addRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.addRecipeTableLayoutPanel.Size = new System.Drawing.Size(1149, 585);
             this.addRecipeTableLayoutPanel.TabIndex = 1;
             // 
             // addEthnicCombobox
             // 
             this.addEthnicCombobox.FormattingEnabled = true;
-            this.addEthnicCombobox.Location = new System.Drawing.Point(190, 352);
+            this.addEthnicCombobox.Location = new System.Drawing.Point(190, 392);
             this.addEthnicCombobox.Name = "addEthnicCombobox";
             this.addEthnicCombobox.Size = new System.Drawing.Size(278, 24);
             this.addEthnicCombobox.TabIndex = 25;
@@ -260,11 +259,11 @@
             this.ingredientsTableLayoutPanel.Controls.Add(this.addIngredIentsRichBox, 0, 0);
             this.ingredientsTableLayoutPanel.Controls.Add(this.addIngredients, 2, 0);
             this.ingredientsTableLayoutPanel.Controls.Add(this.addIngredientCombobox, 1, 0);
-            this.ingredientsTableLayoutPanel.Location = new System.Drawing.Point(190, 134);
+            this.ingredientsTableLayoutPanel.Location = new System.Drawing.Point(190, 89);
             this.ingredientsTableLayoutPanel.Name = "ingredientsTableLayoutPanel";
             this.ingredientsTableLayoutPanel.RowCount = 1;
             this.ingredientsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.ingredientsTableLayoutPanel.Size = new System.Drawing.Size(778, 36);
+            this.ingredientsTableLayoutPanel.Size = new System.Drawing.Size(778, 118);
             this.ingredientsTableLayoutPanel.TabIndex = 28;
             // 
             // removeIngrdients
@@ -275,6 +274,7 @@
             this.removeIngrdients.TabIndex = 3;
             this.removeIngrdients.Text = "Remove";
             this.removeIngrdients.UseVisualStyleBackColor = true;
+            this.removeIngrdients.Click += new System.EventHandler(this.RemoveIngrdients_Click);
             // 
             // addIngredients
             // 
@@ -284,23 +284,24 @@
             this.addIngredients.TabIndex = 0;
             this.addIngredients.Text = "Add";
             this.addIngredients.UseVisualStyleBackColor = true;
+            this.addIngredients.Click += new System.EventHandler(this.AddIngredients_Click);
             // 
             // kitchenWareTableLayoutPanel
             // 
             this.kitchenWareTableLayoutPanel.ColumnCount = 4;
             this.kitchenWareTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.40434F));
-            this.kitchenWareTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.17232F));
-            this.kitchenWareTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.12121F));
+            this.kitchenWareTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.64782F));
+            this.kitchenWareTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.611825F));
             this.kitchenWareTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.12121F));
             this.kitchenWareTableLayoutPanel.Controls.Add(this.removKitchenware, 3, 0);
             this.kitchenWareTableLayoutPanel.Controls.Add(this.addKitchenwareRichTextBox, 0, 0);
             this.kitchenWareTableLayoutPanel.Controls.Add(this.addKitchennware, 2, 0);
             this.kitchenWareTableLayoutPanel.Controls.Add(this.addKitchenWareComboBox, 1, 0);
-            this.kitchenWareTableLayoutPanel.Location = new System.Drawing.Point(190, 176);
+            this.kitchenWareTableLayoutPanel.Location = new System.Drawing.Point(190, 213);
             this.kitchenWareTableLayoutPanel.Name = "kitchenWareTableLayoutPanel";
             this.kitchenWareTableLayoutPanel.RowCount = 1;
             this.kitchenWareTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.kitchenWareTableLayoutPanel.Size = new System.Drawing.Size(778, 38);
+            this.kitchenWareTableLayoutPanel.Size = new System.Drawing.Size(778, 87);
             this.kitchenWareTableLayoutPanel.TabIndex = 29;
             // 
             // removKitchenware
@@ -311,20 +312,22 @@
             this.removKitchenware.TabIndex = 2;
             this.removKitchenware.Text = "Remove";
             this.removKitchenware.UseVisualStyleBackColor = true;
+            this.removKitchenware.Click += new System.EventHandler(this.RemovKitchenware_Click);
             // 
             // addKitchennware
             // 
-            this.addKitchennware.Location = new System.Drawing.Point(591, 3);
+            this.addKitchennware.Location = new System.Drawing.Point(618, 3);
             this.addKitchennware.Name = "addKitchennware";
-            this.addKitchennware.Size = new System.Drawing.Size(70, 32);
+            this.addKitchennware.Size = new System.Drawing.Size(61, 32);
             this.addKitchennware.TabIndex = 1;
             this.addKitchennware.Text = "Add";
             this.addKitchennware.UseVisualStyleBackColor = true;
+            this.addKitchennware.Click += new System.EventHandler(this.AddKitchennware_Click);
             // 
             // addRecipeMealTypeComboBox
             // 
             this.addRecipeMealTypeComboBox.FormattingEnabled = true;
-            this.addRecipeMealTypeComboBox.Location = new System.Drawing.Point(190, 220);
+            this.addRecipeMealTypeComboBox.Location = new System.Drawing.Point(190, 306);
             this.addRecipeMealTypeComboBox.Name = "addRecipeMealTypeComboBox";
             this.addRecipeMealTypeComboBox.Size = new System.Drawing.Size(278, 24);
             this.addRecipeMealTypeComboBox.TabIndex = 24;
@@ -333,7 +336,7 @@
             // addFoodTypeComboBox
             // 
             this.addFoodTypeComboBox.FormattingEnabled = true;
-            this.addFoodTypeComboBox.Location = new System.Drawing.Point(190, 294);
+            this.addFoodTypeComboBox.Location = new System.Drawing.Point(190, 354);
             this.addFoodTypeComboBox.Name = "addFoodTypeComboBox";
             this.addFoodTypeComboBox.Size = new System.Drawing.Size(278, 24);
             this.addFoodTypeComboBox.TabIndex = 26;
@@ -347,7 +350,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.23129F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
             this.tableLayoutPanel1.Controls.Add(this.servingtextBox, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.fattextBox, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.calorieTextBox, 5, 0);
@@ -360,38 +363,38 @@
             this.tableLayoutPanel1.Controls.Add(this.fatLabel, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.carbTextBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.proteinTextBox, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(190, 61);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(190, 41);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(647, 67);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(647, 42);
             this.tableLayoutPanel1.TabIndex = 27;
             // 
             // servingtextBox
             // 
-            this.servingtextBox.Location = new System.Drawing.Point(541, 36);
+            this.servingtextBox.Location = new System.Drawing.Point(537, 24);
             this.servingtextBox.Name = "servingtextBox";
             this.servingtextBox.Size = new System.Drawing.Size(93, 22);
             this.servingtextBox.TabIndex = 11;
             // 
             // fattextBox
             // 
-            this.fattextBox.Location = new System.Drawing.Point(387, 36);
+            this.fattextBox.Location = new System.Drawing.Point(383, 24);
             this.fattextBox.Name = "fattextBox";
             this.fattextBox.Size = new System.Drawing.Size(49, 22);
             this.fattextBox.TabIndex = 10;
             // 
             // calorieTextBox
             // 
-            this.calorieTextBox.Location = new System.Drawing.Point(541, 3);
+            this.calorieTextBox.Location = new System.Drawing.Point(537, 3);
             this.calorieTextBox.Name = "calorieTextBox";
             this.calorieTextBox.Size = new System.Drawing.Size(93, 22);
             this.calorieTextBox.TabIndex = 9;
             // 
             // alchoholTextBox
             // 
-            this.alchoholTextBox.Location = new System.Drawing.Point(387, 3);
+            this.alchoholTextBox.Location = new System.Drawing.Point(383, 3);
             this.alchoholTextBox.Name = "alchoholTextBox";
             this.alchoholTextBox.Size = new System.Drawing.Size(49, 22);
             this.alchoholTextBox.TabIndex = 8;
@@ -408,7 +411,7 @@
             // proteinLabel
             // 
             this.proteinLabel.AutoSize = true;
-            this.proteinLabel.Location = new System.Drawing.Point(3, 33);
+            this.proteinLabel.Location = new System.Drawing.Point(3, 21);
             this.proteinLabel.Name = "proteinLabel";
             this.proteinLabel.Size = new System.Drawing.Size(55, 16);
             this.proteinLabel.TabIndex = 1;
@@ -417,7 +420,7 @@
             // calorisLabel
             // 
             this.calorisLabel.AutoSize = true;
-            this.calorisLabel.Location = new System.Drawing.Point(442, 0);
+            this.calorisLabel.Location = new System.Drawing.Point(438, 0);
             this.calorisLabel.Name = "calorisLabel";
             this.calorisLabel.Size = new System.Drawing.Size(63, 16);
             this.calorisLabel.TabIndex = 4;
@@ -426,7 +429,7 @@
             // servingLabel
             // 
             this.servingLabel.AutoSize = true;
-            this.servingLabel.Location = new System.Drawing.Point(442, 33);
+            this.servingLabel.Location = new System.Drawing.Point(438, 21);
             this.servingLabel.Name = "servingLabel";
             this.servingLabel.Size = new System.Drawing.Size(85, 16);
             this.servingLabel.TabIndex = 5;
@@ -435,7 +438,7 @@
             // alcoholLabel
             // 
             this.alcoholLabel.AutoSize = true;
-            this.alcoholLabel.Location = new System.Drawing.Point(279, 0);
+            this.alcoholLabel.Location = new System.Drawing.Point(276, 0);
             this.alcoholLabel.Name = "alcoholLabel";
             this.alcoholLabel.Size = new System.Drawing.Size(58, 16);
             this.alcoholLabel.TabIndex = 3;
@@ -444,7 +447,7 @@
             // fatLabel
             // 
             this.fatLabel.AutoSize = true;
-            this.fatLabel.Location = new System.Drawing.Point(279, 33);
+            this.fatLabel.Location = new System.Drawing.Point(276, 21);
             this.fatLabel.Name = "fatLabel";
             this.fatLabel.Size = new System.Drawing.Size(39, 16);
             this.fatLabel.TabIndex = 2;
@@ -452,14 +455,14 @@
             // 
             // carbTextBox
             // 
-            this.carbTextBox.Location = new System.Drawing.Point(142, 3);
+            this.carbTextBox.Location = new System.Drawing.Point(140, 3);
             this.carbTextBox.Name = "carbTextBox";
             this.carbTextBox.Size = new System.Drawing.Size(100, 22);
             this.carbTextBox.TabIndex = 6;
             // 
             // proteinTextBox
             // 
-            this.proteinTextBox.Location = new System.Drawing.Point(142, 36);
+            this.proteinTextBox.Location = new System.Drawing.Point(140, 24);
             this.proteinTextBox.Name = "proteinTextBox";
             this.proteinTextBox.Size = new System.Drawing.Size(99, 22);
             this.proteinTextBox.TabIndex = 7;
@@ -469,11 +472,11 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.00529F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.99471F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 523F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 526F));
             this.tableLayoutPanel2.Controls.Add(this.addRecipeCancelButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.addRecipeButton, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(190, 521);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(190, 493);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -483,7 +486,7 @@
             // addRecipeCancelButton
             // 
             this.addRecipeCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addRecipeCancelButton.Location = new System.Drawing.Point(135, 3);
+            this.addRecipeCancelButton.Location = new System.Drawing.Point(133, 3);
             this.addRecipeCancelButton.Name = "addRecipeCancelButton";
             this.addRecipeCancelButton.Size = new System.Drawing.Size(120, 39);
             this.addRecipeCancelButton.TabIndex = 32;
@@ -495,7 +498,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(324, 0);
+            this.label1.Location = new System.Drawing.Point(321, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(299, 18);
             this.label1.TabIndex = 30;
@@ -506,7 +509,7 @@
             this.addRecipeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addRecipeButton.Location = new System.Drawing.Point(3, 3);
             this.addRecipeButton.Name = "addRecipeButton";
-            this.addRecipeButton.Size = new System.Drawing.Size(126, 37);
+            this.addRecipeButton.Size = new System.Drawing.Size(124, 37);
             this.addRecipeButton.TabIndex = 31;
             this.addRecipeButton.Text = "Add Recipe";
             this.addRecipeButton.UseVisualStyleBackColor = true;
