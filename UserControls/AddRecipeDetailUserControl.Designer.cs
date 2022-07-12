@@ -537,8 +537,9 @@
             this.addRecipeCancelButton.Name = "addRecipeCancelButton";
             this.addRecipeCancelButton.Size = new System.Drawing.Size(97, 39);
             this.addRecipeCancelButton.TabIndex = 32;
-            this.addRecipeCancelButton.Text = "Cancel";
+            this.addRecipeCancelButton.Text = "Reset";
             this.addRecipeCancelButton.UseVisualStyleBackColor = true;
+            this.addRecipeCancelButton.Click += new System.EventHandler(this.AddRecipeResetButton_Click);
             // 
             // label1
             // 

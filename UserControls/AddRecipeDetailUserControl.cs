@@ -2,13 +2,9 @@
 using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RecipeBookApp.UserControls
@@ -240,7 +236,6 @@ namespace RecipeBookApp.UserControls
             this.recipeNameError.Visible = false;
             this.addErrorNutritionLabel.Visible = false;
             this.addErrorIngredientsLabel.Visible = false;
-            this.addErrorFoodTypeLabel.Visible = false;
             this.addErrorKitchenwareLabel.Visible = false;
             this.addErrorMealTypeLabel.Visible = false;
         }
@@ -278,7 +273,22 @@ namespace RecipeBookApp.UserControls
         }
         private void ProcessNewRecipe()
         {
-          //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
+            string message = "Do you want to proceed adding new recipe?";
+       
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(message, "New recipe", buttons);
+            if (result == DialogResult.OK)
+            {
+                //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
+                this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
+                this.DisplayError(false);
+            }
+            else
+            {
+                return;
+            }
+
+
         }
         private void CollectNutritionData()
         {
@@ -411,9 +421,7 @@ namespace RecipeBookApp.UserControls
                 this.addErrorNutritionLabel.Visible = true;
                 this.calorieTextBox.Focus();
            
-            }
-
-           
+            }           
             return true;
         }
         private void DisplayError( bool isError)
@@ -535,5 +543,22 @@ namespace RecipeBookApp.UserControls
             this.addKitchenwareRichTextBox.Refresh();
         }
 
+        private void AddRecipeResetButton_Click(object sender, EventArgs e)
+        {
+            this.ErrorReset();
+            this.addRecipenameTextBox.Clear();
+            this.carbTextBox.Clear();
+            this.proteinTextBox.Clear();
+            this.fattextBox.Clear();
+            this.calorieTextBox.Clear();
+            this.alchoholTextBox.Clear();
+            this.addKitchenwareRichTextBox.Text = "";
+            this.addIngredIentsRichBox.Text = "";
+            this.addRecipeMealTypeComboBox.Text = "Select the MealType";
+            this.addFoodTypeComboBox.Text = "Select the Food type";
+            this.addIngredientCombobox.Text = "Select the Ingredient";
+            this.addKitchenWareComboBox.Text = "Select the KitchenWare";
+            this.addEthnicCombobox.Text = "Select the Ethnicity";
+        }
     }
 }
