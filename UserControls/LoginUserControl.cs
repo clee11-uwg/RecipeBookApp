@@ -57,6 +57,7 @@ namespace RecipeBookApp.UserControls
                 this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
                 this.welcomeLabel.Text="Welcome " + this.welcomeUser.Name.ToUpper() + " to the Recipe App !";
                 this.welcomeLabel.Visible = true;
+                this.CheckUserType();
             }
             catch (Exception ex)
             {
@@ -83,6 +84,18 @@ namespace RecipeBookApp.UserControls
         private void CurrentPasswordTextBox_TextChanged(object sender, EventArgs e)
         {
             Reset();
+        }
+        private void CheckUserType()
+        {
+            if (this.welcomeUser.Is_Admin)
+            {
+                
+            }
+            else
+            {
+                //tabControl1.SelectedTab = tp;
+            }
+
         }
     }
 }
