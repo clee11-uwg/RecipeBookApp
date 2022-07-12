@@ -20,6 +20,7 @@ namespace RecipeBookApp.Model
         public int EthnicId { get; set; }
 
         public Image RecipeImage  { get; set;}
+        public string UserWhoCreated { get; set; }
 
     }
 }

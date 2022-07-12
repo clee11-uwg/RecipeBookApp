@@ -11,5 +11,6 @@
         public int IngredientId { get; set; }
         public string IngredientName { get; set; }
         public int FoodId { get; set; }
+        public string Amount { get; set; }
     }
 }

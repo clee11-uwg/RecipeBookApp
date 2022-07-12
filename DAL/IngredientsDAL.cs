@@ -36,7 +36,7 @@ namespace RecipeBookApp.DAL
                                 IngredientId = Convert.ToInt32(reader["id"]),
                                 IngredientName = reader["ingredient"].ToString(),
                                 FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
-
+                                Amount = null
                             };
                             ingredientDetails.Add(ingredient);
                         }
@@ -56,7 +56,8 @@ namespace RecipeBookApp.DAL
         public List<Ingredient> GetIngredient(int recipeID)
         {
             List<Ingredient> ingredientDetails = new List<Ingredient>();
-            string selectStatement = @"SELECT ingredient.id, ingredient.Ingredient, ingredient.typeOfFoodID
+            string selectStatement = @"SELECT ingredient.id, ingredient.Ingredient, ingredient.typeOfFoodID,
+                                            recipe_has_ingredient.amount
                                          FROM recipe JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
                                             JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
                                         WHERE recipe.id = @recipeID; ";
@@ -76,7 +77,7 @@ namespace RecipeBookApp.DAL
                                 IngredientId = Convert.ToInt32(reader["id"]),
                                 IngredientName = reader["ingredient"].ToString(),
                                 FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
-
+                                Amount = reader["amount"].ToString()
                             };
                             ingredientDetails.Add(ingredient);
                         }

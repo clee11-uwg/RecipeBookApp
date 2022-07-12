@@ -61,6 +61,7 @@
     <Compile Include="Controller\TestRecipeController.cs" />
     <Compile Include="Controller\TestTypeOfFoodController.cs" />
     <Compile Include="Controller\TestTypeOfMealController.cs" />
+    <Compile Include="Controller\TestUserController.cs" />
     <Compile Include="Model\EthnicTests.cs" />
     <Compile Include="Model\AllergenTests.cs" />
     <Compile Include="Model\FoodTypeTests.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Model\MealTypeTest.cs" />
     <Compile Include="Model\IngredientsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\TestCrypt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

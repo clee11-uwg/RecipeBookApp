@@ -96,6 +96,68 @@ namespace RecipeBookApp.DAL
             }
             return nutritionList;
         }
+
+        /// <summary>
+        /// Adds the Nutrition to the database
+        /// </summary>
+        /// <param name="nutrition">Nutrition to add</param>
+        /// <returns>Id of the nutrition added, -1 if nothing added</returns>
+        public int AddNutrition(Nutrition nutrition)
+        {
+            int id = -1;
+            string selectStatement = @"INSERT INTO nutrition (carbohydrate, fat, protein, alcohol, calories, serving_size)
+                                    VALUES (@carbohydrate, @fat, @protein, @alcohol, @calories, @serving_size);";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@carbohydrate", nutrition.Carbohydrate);
+                    selectCommand.Parameters.AddWithValue("@fat", nutrition.Fat);
+                    selectCommand.Parameters.AddWithValue("@protein", nutrition.Protein);
+                    selectCommand.Parameters.AddWithValue("@alcohol", nutrition.Alcohol);
+                    selectCommand.Parameters.AddWithValue("@calories", nutrition.Calories);
+                    selectCommand.Parameters.AddWithValue("@serving_size", nutrition.ServingSize);
+
+                    connection.Open();
+                    id = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    connection.Close();
+                }
+            }
+            return id;
+        }
+
+        /// <summary>
+        /// Deletes the Nutrition to the database
+        /// </summary>
+        /// <param name="nutrition">Nutrition to delete</param>
+        /// <returns>Whether or not the deletion was successful</returns>
+        public bool DeleteNutrition(Nutrition nutrition)
+        {
+            int result = -1;
+            string selectStatement = @"DELETE FROM nutrition
+                                    WHERE id = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@id", nutrition.NutritionId);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 
 }
