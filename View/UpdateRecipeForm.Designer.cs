@@ -33,9 +33,9 @@
             // 
             // updateRecipeUserControl1
             // 
-            this.updateRecipeUserControl1.Location = new System.Drawing.Point(102, 12);
+            this.updateRecipeUserControl1.Location = new System.Drawing.Point(3, 5);
             this.updateRecipeUserControl1.Name = "updateRecipeUserControl1";
-            this.updateRecipeUserControl1.Size = new System.Drawing.Size(593, 316);
+            this.updateRecipeUserControl1.Size = new System.Drawing.Size(796, 441);
             this.updateRecipeUserControl1.TabIndex = 0;
             // 
             // UpdateRecipeForm
