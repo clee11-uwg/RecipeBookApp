@@ -633,6 +633,7 @@
             this.addMealTypeBtn.TabIndex = 1;
             this.addMealTypeBtn.Text = "Add";
             this.addMealTypeBtn.UseVisualStyleBackColor = true;
+            this.addMealTypeBtn.Click += new System.EventHandler(this.AddMealTypeBtn_Click);
             // 
             // mealTypeCmbBx
             // 

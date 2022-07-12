@@ -251,6 +251,12 @@ namespace RecipeBookApp.UserControls
             this.kitchenwareRchBx.Refresh();
         }
 
+        private void DisplayMealTypes()
+        {
+            this.mealTypeRchBx.Text = string.Join(", ", this.recipeMealTypes);
+            this.mealTypeRchBx.Refresh();
+        }
+
         private void AddIngredientBtn_Click(object sender, EventArgs e)
         {
             if (this.recipeIngredients.Contains(this.ingredientCmbBx.Text))
@@ -336,6 +342,25 @@ namespace RecipeBookApp.UserControls
 
             this.recipeKitchenware.Remove(this.kitchenwareCmbBx.Text);
             this.DisplayKitchenwares();
+        }
+
+        private void AddMealTypeBtn_Click(object sender, EventArgs e)
+        {
+            if (this.recipeMealTypes.Contains(this.mealTypeCmbBx.Text))
+            {
+                MessageBox.Show(this.mealTypeCmbBx.Text + "- already added. Please select something else.",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.mealTypeCmbBx.Text == "-- Select the Meal Type --")
+            {
+                MessageBox.Show("Please select valid Meal Type to add",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeMealTypes.Add(this.mealTypeCmbBx.Text.ToString());
+            this.DisplayMealTypes();
         }
     }
 }
