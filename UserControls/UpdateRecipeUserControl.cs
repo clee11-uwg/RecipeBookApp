@@ -21,6 +21,11 @@ namespace RecipeBookApp.UserControls
         private EthnicOriginController ethnicController;
         private IngredientsController ingredientsController;
         private KitchenwareController kitchenwareController;
+        private List<Kitchenware> kitchenWareList;
+        private List<MealType> mealTypeList;
+        private List<Ingredient> ingredientList;
+        private List<string> recipeIngredients;
+        private List<string> recipeKitchenware;
 
         public UpdateRecipeUserControl()
         {
@@ -31,6 +36,12 @@ namespace RecipeBookApp.UserControls
             this.ethnicController = new EthnicOriginController();
             this.ingredientsController = new IngredientsController();
             this.kitchenwareController = new KitchenwareController();
+
+            this.kitchenWareList = new List<Kitchenware>();
+            this.mealTypeList = new List<MealType>();
+            this.ingredientList = new List<Ingredient>();
+            this.recipeIngredients = new List<string>();
+            this.recipeKitchenware = new List<string>();
         }
 
         /// <summary>
@@ -48,21 +59,58 @@ namespace RecipeBookApp.UserControls
             GetKitchenwareListForDropdown();
             GetMealTypesForRecipe();
             GetMealTypesListForDropdown();
+            GetIngredientsForRecipe();
+            GetKitchenwareForRecipe();
+        }
+
+        private void GetKitchenwareForRecipe()
+        {
+            List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(this.recipe.RecipeId);
+            try
+            {
+                for (int i = 0; i < kitchenwareList.Count; i++)
+                {
+                    this.recipeKitchenware.Add(kitchenwareList[i].KitchenwareDetails);
+                }
+                this.kitchenwareRchBx.Text = string.Join(", ", this.recipeKitchenware);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - displaying kitchenware transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void GetIngredientsForRecipe()
+        {
+            List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
+            try
+            {
+                for (int i = 0; i < ingredientList.Count; i++)
+                {
+                    this.recipeIngredients.Add(ingredientList[i].IngredientName);
+                }
+                this.ingredientsRchBx.Text = string.Join(", ", this.recipeIngredients);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - displaying ingredients transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GetMealTypesListForDropdown()
         {
-            List<MealType> mealTypeList;
             try
             {
                 this.mealTypeCmbBx.DataSource = null;
-                mealTypeList = this.mealTypeController.GetMealTypes();
-                mealTypeList.Add(new MealType
+                this.mealTypeList = this.mealTypeController.GetMealTypes();
+                this.mealTypeList.Add(new MealType
                 {
                     mealTypeID = -1,
                     type = "-- Select the Meal Type --"
                 });
-                this.mealTypeCmbBx.DataSource = mealTypeList;
+                this.mealTypeCmbBx.DataSource = this.mealTypeList;
                 this.mealTypeCmbBx.DisplayMember = "type";
                 this.mealTypeCmbBx.ValueMember = "mealTypeID";
                 this.mealTypeCmbBx.SelectedValue = -1;
@@ -102,17 +150,16 @@ namespace RecipeBookApp.UserControls
 
         private void GetKitchenwareListForDropdown()
         {
-            List<Kitchenware> kitchenWareList;
             try
             {
                 this.kitchenwareCmbBx.DataSource = null;
-                kitchenWareList = this.kitchenwareController.GetKitchenware();
-                kitchenWareList.Add(new Kitchenware
+                this.kitchenWareList = this.kitchenwareController.GetKitchenware();
+                this.kitchenWareList.Add(new Kitchenware
                 {
                     KitchenwareId = -1,
                     KitchenwareDetails = "-- Select the Kitchenware --"
                 });
-                this.kitchenwareCmbBx.DataSource = kitchenWareList;
+                this.kitchenwareCmbBx.DataSource = this.kitchenWareList;
                 this.kitchenwareCmbBx.DisplayMember = "KitchenwareDetails";
                 this.kitchenwareCmbBx.ValueMember = "KitchenwareId";
                 this.kitchenwareCmbBx.SelectedValue = -1;
@@ -126,17 +173,16 @@ namespace RecipeBookApp.UserControls
 
         private void GetIngredientListForDropdown()
         {
-            List<Ingredient> ingredientList;
             try
             {
                 this.ingredientCmbBx.DataSource = null;
-                ingredientList = this.ingredientsController.GetIngredients();
-                ingredientList.Add(new Ingredient
+                this.ingredientList = this.ingredientsController.GetIngredients();
+                this.ingredientList.Add(new Ingredient
                 {
                     IngredientId = -1,
                     IngredientName = "-- Select the Ingredient --"
                 });
-                this.ingredientCmbBx.DataSource = ingredientList;
+                this.ingredientCmbBx.DataSource = this.ingredientList;
                 this.ingredientCmbBx.DisplayMember = "IngredientName";
                 this.ingredientCmbBx.ValueMember = "IngredientId";
                 this.ingredientCmbBx.SelectedValue = -1;
