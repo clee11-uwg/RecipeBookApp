@@ -130,9 +130,9 @@ namespace RecipeBookApp.DAL
         /// <summary>
         /// Deletes the Nutrition to the database
         /// </summary>
-        /// <param name="nutrition">Nutrition to delete</param>
+        /// <param name="id">Id of nutrition to delete</param>
         /// <returns>Whether or not the deletion was successful</returns>
-        public bool DeleteNutrition(Nutrition nutrition)
+        public bool DeleteNutrition(int id)
         {
             int result = -1;
             string selectStatement = @"DELETE FROM nutrition
@@ -142,7 +142,7 @@ namespace RecipeBookApp.DAL
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    selectCommand.Parameters.AddWithValue("@id", nutrition.NutritionId);
+                    selectCommand.Parameters.AddWithValue("@id", id);
 
                     connection.Open();
                     result = selectCommand.ExecuteNonQuery();
