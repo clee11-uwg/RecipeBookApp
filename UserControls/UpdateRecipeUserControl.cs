@@ -26,6 +26,7 @@ namespace RecipeBookApp.UserControls
         private List<Ingredient> ingredientList;
         private List<string> recipeIngredients;
         private List<string> recipeKitchenware;
+        private List<string> recipeMealTypes;
 
         public UpdateRecipeUserControl()
         {
@@ -42,6 +43,7 @@ namespace RecipeBookApp.UserControls
             this.ingredientList = new List<Ingredient>();
             this.recipeIngredients = new List<string>();
             this.recipeKitchenware = new List<string>();
+            this.recipeMealTypes = new List<string>();
         }
 
         /// <summary>
@@ -125,21 +127,13 @@ namespace RecipeBookApp.UserControls
         private void GetMealTypesForRecipe()
         {
             List<MealType> mealTypeList = this.mealTypeController.GetMealTypes(this.recipe.RecipeId);
-            string recipeMealTypes = "";
             try
             {
                 for (int i = 0; i < mealTypeList.Count; i++)
                 {
-                    if (i < (mealTypeList.Count - 1))
-                    {
-                        recipeMealTypes += mealTypeList[i].type + ", ";
-                    }
-                    else
-                    {
-                        recipeMealTypes += mealTypeList[i].type;
-                    }
+                    this.recipeMealTypes.Add(mealTypeList[i].type);
                 }
-                this.mealTypeRchBx.Text = recipeMealTypes;
+                this.mealTypeRchBx.Text = string.Join(", ", this.recipeMealTypes);
             }
             catch (Exception ex)
             {
