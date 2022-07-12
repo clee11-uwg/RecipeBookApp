@@ -47,6 +47,31 @@ namespace RecipeBookApp.UserControls
             GetIngredientListForDropdown();
             GetKitchenwareListForDropdown();
             GetMealTypesForRecipe();
+            GetMealTypesListForDropdown();
+        }
+
+        private void GetMealTypesListForDropdown()
+        {
+            List<MealType> mealTypeList;
+            try
+            {
+                this.mealTypeCmbBx.DataSource = null;
+                mealTypeList = this.mealTypeController.GetMealTypes();
+                mealTypeList.Add(new MealType
+                {
+                    mealTypeID = -1,
+                    type = "-- Select the Meal Type --"
+                });
+                this.mealTypeCmbBx.DataSource = mealTypeList;
+                this.mealTypeCmbBx.DisplayMember = "type";
+                this.mealTypeCmbBx.ValueMember = "mealTypeID";
+                this.mealTypeCmbBx.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - populating meal type dropdown transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GetMealTypesForRecipe()
@@ -70,7 +95,7 @@ namespace RecipeBookApp.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured on - Apply Filter meal type transaction -" + ex.Message,
+                MessageBox.Show("Error occured on - displaying meal types transaction -" + ex.Message,
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -94,7 +119,7 @@ namespace RecipeBookApp.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured on - Apply Filter Ingredients transaction -" + ex.Message,
+                MessageBox.Show("Error occured on - populating kitchenware dropdown transaction -" + ex.Message,
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

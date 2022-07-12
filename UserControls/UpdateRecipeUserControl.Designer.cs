@@ -108,7 +108,7 @@
             this.foodTypeCmbBx.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.foodTypeCmbBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.foodTypeCmbBx.FormattingEnabled = true;
-            this.foodTypeCmbBx.Location = new System.Drawing.Point(134, 355);
+            this.foodTypeCmbBx.Location = new System.Drawing.Point(134, 360);
             this.foodTypeCmbBx.Margin = new System.Windows.Forms.Padding(2);
             this.foodTypeCmbBx.Name = "foodTypeCmbBx";
             this.foodTypeCmbBx.Size = new System.Drawing.Size(210, 24);
@@ -318,8 +318,8 @@
             this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.62348F));
             this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.39676F));
             this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.59919F));
-            this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.441296F));
-            this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692307F));
+            this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.299595F));
             this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.updateRecipeTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -391,7 +391,7 @@
             this.ethnicLbl.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ethnicLbl.AutoSize = true;
             this.ethnicLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ethnicLbl.Location = new System.Drawing.Point(60, 393);
+            this.ethnicLbl.Location = new System.Drawing.Point(60, 403);
             this.ethnicLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ethnicLbl.Name = "ethnicLbl";
             this.ethnicLbl.Size = new System.Drawing.Size(70, 16);
@@ -403,7 +403,7 @@
             this.ethnicityCmbBx.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ethnicityCmbBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ethnicityCmbBx.FormattingEnabled = true;
-            this.ethnicityCmbBx.Location = new System.Drawing.Point(134, 389);
+            this.ethnicityCmbBx.Location = new System.Drawing.Point(134, 399);
             this.ethnicityCmbBx.Margin = new System.Windows.Forms.Padding(2);
             this.ethnicityCmbBx.Name = "ethnicityCmbBx";
             this.ethnicityCmbBx.Size = new System.Drawing.Size(210, 24);
@@ -529,7 +529,7 @@
             this.foodTypeLbl.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.foodTypeLbl.AutoSize = true;
             this.foodTypeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.foodTypeLbl.Location = new System.Drawing.Point(42, 353);
+            this.foodTypeLbl.Location = new System.Drawing.Point(42, 364);
             this.foodTypeLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.foodTypeLbl.Name = "foodTypeLbl";
             this.foodTypeLbl.Size = new System.Drawing.Size(88, 16);
