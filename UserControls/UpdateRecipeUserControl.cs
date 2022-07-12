@@ -17,12 +17,14 @@ namespace RecipeBookApp.UserControls
         private Recipe recipe;
         private NutritionController nutritionController;
         private TypeOfFoodController foodTypeController;
+        private EthnicOriginController ethnicController;
 
         public UpdateRecipeUserControl()
         {
             InitializeComponent();
             this.nutritionController = new NutritionController();
             this.foodTypeController = new TypeOfFoodController();
+            this.ethnicController = new EthnicOriginController();
         }
 
         /// <summary>
@@ -35,6 +37,27 @@ namespace RecipeBookApp.UserControls
             this.recipeNameTxtBx.Text = this.recipe.RecipeName;
             GetNutrition();
             GetFoodType();
+            GetEthnicity();
+        }
+
+        private void GetEthnicity()
+        {
+            List<Ethnic> ethnicList;
+            try
+            {
+
+                this.ethnicityCmbBx.DataSource = null;
+                ethnicList = this.ethnicController.GetEthnicOrigins();
+                this.ethnicityCmbBx.DataSource = ethnicList;
+                this.ethnicityCmbBx.DisplayMember = "Ethnicity";
+                this.ethnicityCmbBx.ValueMember = "EthnicId";
+                this.ethnicityCmbBx.SelectedValue = this.ethnicController.GetEthnicOrigin(this.recipe.RecipeId)[0].EthnicId;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - populating ethnic dropdown transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GetFoodType()
@@ -45,11 +68,6 @@ namespace RecipeBookApp.UserControls
             {
                 this.foodTypeCmbBx.DataSource = null;
                 foodTypeList = this.foodTypeController.GetFoodTypes();
-                foodTypeList.Add(new FoodType
-                {
-                    FoodId = -1,
-                    TypeOfFood = "Select the Food type"
-                });
                 this.foodTypeCmbBx.DataSource = foodTypeList;
                 this.foodTypeCmbBx.DisplayMember = "TypeOfFood";
                 this.foodTypeCmbBx.ValueMember = "FoodId";
@@ -57,7 +75,7 @@ namespace RecipeBookApp.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured on - Apply Filter meal type transaction -" + ex.Message,
+                MessageBox.Show("Error occured on - populating food type dropdown transaction -" + ex.Message,
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
