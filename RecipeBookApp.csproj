@@ -127,6 +127,12 @@
     <Compile Include="UserControls\RecipeListItem.Designer.cs">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SignUpUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SignUpUserControl.Designer.cs">
+      <DependentUpon>SignUpUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UpdateRecipeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -260,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\RecipeMainUserControl.resx">
       <DependentUpon>RecipeMainUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SignUpUserControl.resx">
+      <DependentUpon>SignUpUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UpdateRecipeUserControl.resx">
       <DependentUpon>UpdateRecipeUserControl.cs</DependentUpon>

@@ -33,7 +33,7 @@ namespace RecipeBookApp.DAL
                             User user = new User
                             {
                                 ID = Convert.ToInt32(reader["id"]),
-                                Name = reader["Ethnicity"].ToString(),
+                                Name = reader["name"].ToString(),
                                 Is_Admin = Convert.ToBoolean(Convert.ToInt32(reader["is_admin"]))
                             };
 
@@ -69,7 +69,7 @@ namespace RecipeBookApp.DAL
                             user = new User
                             {
                                 ID = Convert.ToInt32(reader["id"]),
-                                Name = reader["Ethnicity"].ToString(),
+                                Name = reader["name"].ToString(),
                                 Is_Admin = Convert.ToBoolean(Convert.ToInt32(reader["is_admin"]))
                             };
                         }
@@ -83,10 +83,11 @@ namespace RecipeBookApp.DAL
         /// Returns password hash for given user
         /// <param name="username">Name of User</param>
         /// <returns>Password hash</returns>
-        public String VerifyUser(string username)
+        public User VerifyUser(string username)
         {
-            String hashed = null;
-            string selectStatement = @"SELECT user.password
+           
+            User loginUser = null;
+            string selectStatement = @"SELECT user.id,user.password,user.name ,user.is_admin
                                     FROM user
                                     WHERE user.name = @username;";
 
@@ -99,12 +100,19 @@ namespace RecipeBookApp.DAL
                     {
                         while (reader.Read())
                         {
-                            hashed = reader["password"].ToString();
-                        };
+                            loginUser = new User
+                            {
+                                ID = Convert.ToInt32(reader["id"]),
+                                Name = reader["name"].ToString(),
+                                Password = reader["password"].ToString(),
+                                Is_Admin = Convert.ToBoolean(Convert.ToInt32(reader["is_admin"]))
+                            };
+                        }
+
                     }
                 }
             }
-            return hashed;
+            return loginUser;
         }
 
         /// <summary>
