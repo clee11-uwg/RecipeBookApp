@@ -514,6 +514,7 @@
             this.addKitchenwareBtn.TabIndex = 1;
             this.addKitchenwareBtn.Text = "Add";
             this.addKitchenwareBtn.UseVisualStyleBackColor = true;
+            this.addKitchenwareBtn.Click += new System.EventHandler(this.AddKitchenwareBtn_Click);
             // 
             // kitchenwareCmbBx
             // 

@@ -241,8 +241,14 @@ namespace RecipeBookApp.UserControls
 
         private void DisplayIngredients()
         {
-            this.ingredientsRchBx.Text = string.Join(",", this.recipeIngredients);
+            this.ingredientsRchBx.Text = string.Join(", ", this.recipeIngredients);
             this.ingredientsRchBx.Refresh();
+        }
+
+        private void DisplayKitchenwares()
+        {
+            this.kitchenwareRchBx.Text = string.Join(", ", this.recipeKitchenware);
+            this.kitchenwareRchBx.Refresh();
         }
 
         private void AddIngredientBtn_Click(object sender, EventArgs e)
@@ -287,6 +293,24 @@ namespace RecipeBookApp.UserControls
 
             this.recipeIngredients.Remove(this.ingredientCmbBx.Text);
             this.DisplayIngredients();
+        }
+
+        private void AddKitchenwareBtn_Click(object sender, EventArgs e)
+        {
+            if (this.recipeKitchenware.Contains(this.kitchenwareCmbBx.Text))
+            {
+                MessageBox.Show(this.kitchenwareCmbBx.Text + " - already added. Please select something else.",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.kitchenwareCmbBx.Text == "-- Select the Kitchenware --")
+            {
+                MessageBox.Show("Please select valid kitchenware to add",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            this.recipeKitchenware.Add(this.kitchenwareCmbBx.Text.ToString());
+            this.DisplayKitchenwares();
         }
     }
 }
