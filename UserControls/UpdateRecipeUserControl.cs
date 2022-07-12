@@ -17,6 +17,7 @@ namespace RecipeBookApp.UserControls
         private Recipe recipe;
         private NutritionController nutritionController;
         private TypeOfFoodController foodTypeController;
+        private TypeOfMealController mealTypeController;
         private EthnicOriginController ethnicController;
         private IngredientsController ingredientsController;
         private KitchenwareController kitchenwareController;
@@ -26,6 +27,7 @@ namespace RecipeBookApp.UserControls
             InitializeComponent();
             this.nutritionController = new NutritionController();
             this.foodTypeController = new TypeOfFoodController();
+            this.mealTypeController = new TypeOfMealController();
             this.ethnicController = new EthnicOriginController();
             this.ingredientsController = new IngredientsController();
             this.kitchenwareController = new KitchenwareController();
@@ -44,6 +46,26 @@ namespace RecipeBookApp.UserControls
             GetEthnicityForRecipe();
             GetIngredientListForDropdown();
             GetKitchenwareListForDropdown();
+            GetMealTypeForRecipe();
+        }
+
+        private void GetMealTypeForRecipe()
+        {
+            List<MealType> mealTypeList;
+            try
+            {
+                this.mealTypeCmbBx.DataSource = null;
+                mealTypeList = this.mealTypeController.GetMealTypes();
+                this.mealTypeCmbBx.DataSource = mealTypeList;
+                this.mealTypeCmbBx.DisplayMember = "type";
+                this.mealTypeCmbBx.ValueMember = "mealTypeID";
+                this.mealTypeCmbBx.SelectedValue = this.mealTypeController.GetMealTypes(this.recipe.RecipeId)[0].type;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter meal type transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GetKitchenwareListForDropdown()
