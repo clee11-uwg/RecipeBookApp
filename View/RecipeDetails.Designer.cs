@@ -43,7 +43,6 @@
             this.mealTypeHeadingLbl = new System.Windows.Forms.Label();
             this.updateButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,7 +181,7 @@
             // 
             this.updateButton.BackColor = System.Drawing.Color.Tan;
             this.updateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateButton.Location = new System.Drawing.Point(536, 136);
+            this.updateButton.Location = new System.Drawing.Point(550, 136);
             this.updateButton.Margin = new System.Windows.Forms.Padding(2);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(80, 33);
@@ -195,7 +194,7 @@
             // 
             this.deleteButton.BackColor = System.Drawing.Color.Tan;
             this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButton.Location = new System.Drawing.Point(619, 136);
+            this.deleteButton.Location = new System.Drawing.Point(663, 136);
             this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(68, 33);
@@ -204,26 +203,12 @@
             this.deleteButton.UseVisualStyleBackColor = false;
             this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
-            // saveButton
-            // 
-            this.saveButton.BackColor = System.Drawing.Color.Tan;
-            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(688, 136);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(2);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(59, 33);
-            this.saveButton.TabIndex = 16;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = false;
-            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
             // RecipeDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(759, 746);
-            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.mealTypeHeadingLbl);
@@ -264,6 +249,5 @@
         private System.Windows.Forms.Label mealTypeHeadingLbl;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button saveButton;
     }
 }

@@ -19,6 +19,7 @@ namespace RecipeBookApp.UserControls
         private TypeOfFoodController foodTypeController;
         private EthnicOriginController ethnicController;
         private IngredientsController ingredientsController;
+        private KitchenwareController kitchenwareController;
 
         public UpdateRecipeUserControl()
         {
@@ -27,6 +28,7 @@ namespace RecipeBookApp.UserControls
             this.foodTypeController = new TypeOfFoodController();
             this.ethnicController = new EthnicOriginController();
             this.ingredientsController = new IngredientsController();
+            this.kitchenwareController = new KitchenwareController();
         }
 
         /// <summary>
@@ -41,6 +43,31 @@ namespace RecipeBookApp.UserControls
             GetFoodTypeForRecipe();
             GetEthnicityForRecipe();
             GetIngredientListForDropdown();
+            GetKitchenwareListForDropdown();
+        }
+
+        private void GetKitchenwareListForDropdown()
+        {
+            List<Kitchenware> kitchenWareList;
+            try
+            {
+                this.kitchenwareCmbBx.DataSource = null;
+                kitchenWareList = this.kitchenwareController.GetKitchenware();
+                kitchenWareList.Add(new Kitchenware
+                {
+                    KitchenwareId = -1,
+                    KitchenwareDetails = "-- Select the Kitchenware --"
+                });
+                this.kitchenwareCmbBx.DataSource = kitchenWareList;
+                this.kitchenwareCmbBx.DisplayMember = "KitchenwareDetails";
+                this.kitchenwareCmbBx.ValueMember = "KitchenwareId";
+                this.kitchenwareCmbBx.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured on - Apply Filter Ingredients transaction -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GetIngredientListForDropdown()
