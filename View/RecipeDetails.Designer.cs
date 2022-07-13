@@ -86,7 +86,7 @@
             this.kitchenwareHeadingLbl.Name = "kitchenwareHeadingLbl";
             this.kitchenwareHeadingLbl.Size = new System.Drawing.Size(224, 24);
             this.kitchenwareHeadingLbl.TabIndex = 3;
-            this.kitchenwareHeadingLbl.Text = "Kitchen-ware";
+            this.kitchenwareHeadingLbl.Text = "Kitchenware";
             this.kitchenwareHeadingLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // instructionsTxtBx
@@ -118,29 +118,28 @@
             // 
             // ingredientsLbl
             // 
-            this.ingredientsLbl.AutoSize = true;
             this.ingredientsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ingredientsLbl.Location = new System.Drawing.Point(76, 213);
+            this.ingredientsLbl.Location = new System.Drawing.Point(40, 213);
             this.ingredientsLbl.MinimumSize = new System.Drawing.Size(200, 100);
             this.ingredientsLbl.Name = "ingredientsLbl";
             this.ingredientsLbl.Size = new System.Drawing.Size(200, 100);
             this.ingredientsLbl.TabIndex = 8;
+            this.ingredientsLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // kitchenwareLbl
             // 
-            this.kitchenwareLbl.AutoSize = true;
             this.kitchenwareLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kitchenwareLbl.Location = new System.Drawing.Point(325, 213);
+            this.kitchenwareLbl.Location = new System.Drawing.Point(293, 208);
             this.kitchenwareLbl.MinimumSize = new System.Drawing.Size(200, 100);
             this.kitchenwareLbl.Name = "kitchenwareLbl";
             this.kitchenwareLbl.Size = new System.Drawing.Size(200, 100);
             this.kitchenwareLbl.TabIndex = 9;
+            this.kitchenwareLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // typeOfMealLbl
             // 
-            this.typeOfMealLbl.AutoSize = true;
             this.typeOfMealLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeOfMealLbl.Location = new System.Drawing.Point(547, 293);
+            this.typeOfMealLbl.Location = new System.Drawing.Point(547, 322);
             this.typeOfMealLbl.MinimumSize = new System.Drawing.Size(200, 75);
             this.typeOfMealLbl.Name = "typeOfMealLbl";
             this.typeOfMealLbl.Size = new System.Drawing.Size(200, 75);
@@ -163,14 +162,14 @@
             this.allergenListLbl.Location = new System.Drawing.Point(547, 213);
             this.allergenListLbl.MinimumSize = new System.Drawing.Size(200, 40);
             this.allergenListLbl.Name = "allergenListLbl";
-            this.allergenListLbl.Size = new System.Drawing.Size(200, 40);
+            this.allergenListLbl.Size = new System.Drawing.Size(200, 75);
             this.allergenListLbl.TabIndex = 12;
             this.allergenListLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // mealTypeHeadingLbl
             // 
             this.mealTypeHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mealTypeHeadingLbl.Location = new System.Drawing.Point(562, 269);
+            this.mealTypeHeadingLbl.Location = new System.Drawing.Point(562, 298);
             this.mealTypeHeadingLbl.Name = "mealTypeHeadingLbl";
             this.mealTypeHeadingLbl.Size = new System.Drawing.Size(169, 24);
             this.mealTypeHeadingLbl.TabIndex = 13;
@@ -188,7 +187,7 @@
             this.updateButton.TabIndex = 14;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = false;
-            this.updateButton.Click += new System.EventHandler(this.EditButton_Click);
+            this.updateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // deleteButton
             // 

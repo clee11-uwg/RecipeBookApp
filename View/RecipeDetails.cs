@@ -20,6 +20,10 @@ namespace RecipeBookApp.View
         private KitchenwareController kitchenwareController;
         private TypeOfMealController typeOfMealController;
         private AllergenController allergenController;
+        private List<string> recipeIngredients;
+        private List<string> recipeKitchenware;
+        private List<string> recipeAllergens;
+        private List<string> recipeMealTypes;
 
         /// <summary>
         /// 0 param constructor
@@ -33,6 +37,11 @@ namespace RecipeBookApp.View
             this.kitchenwareController = new KitchenwareController();
             this.typeOfMealController = new TypeOfMealController();
             this.allergenController = new AllergenController();
+
+            this.recipeIngredients = new List<string>();
+            this.recipeKitchenware = new List<string>();
+            this.recipeAllergens = new List<string>();
+            this.recipeMealTypes = new List<string>();
         }
 
         /// <summary>
@@ -51,7 +60,7 @@ namespace RecipeBookApp.View
             GetIngredients();
             GetKitchenware();
             GetInstructions();
-            GetTypeOfFood();
+            GetMealTypes();
             GetAllergens();
         }
 
@@ -60,9 +69,9 @@ namespace RecipeBookApp.View
             List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(selectedRecipe.RecipeId);
             for (int i = 0; i < ingredientList.Count; i++)
             {
-                string ingredient = ingredientList[i].IngredientName;
-                this.ingredientsLbl.Text += ingredient + "\n";
+                this.recipeIngredients.Add(ingredientList[i].IngredientName);
             }
+            this.ingredientsLbl.Text = string.Join(" | ", this.recipeIngredients);
         }
 
         private void GetKitchenware()
@@ -70,9 +79,9 @@ namespace RecipeBookApp.View
             List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(selectedRecipe.RecipeId);
             for (int i = 0; i < kitchenwareList.Count; i++)
             {
-                string kitchenware = kitchenwareList[i].KitchenwareDetails;
-                this.kitchenwareLbl.Text += kitchenware + "\n";
+                this.recipeKitchenware.Add(kitchenwareList[i].KitchenwareDetails);                
             }
+            this.kitchenwareLbl.Text = string.Join(" | ", this.recipeKitchenware);
         }
 
         private void GetInstructions()
@@ -81,21 +90,14 @@ namespace RecipeBookApp.View
             this.instructionsTxtBx.SelectionLength = 0;
         }
 
-        private void GetTypeOfFood()
+        private void GetMealTypes()
         {
             List<MealType> mealTypeList = this.typeOfMealController.GetMealTypes(selectedRecipe.RecipeId);
             for (int i = 0; i < mealTypeList.Count; i++)
             {
-                string mealType = mealTypeList[i].type;
-                if (i < (mealTypeList.Count - 1))
-                {
-                    this.typeOfMealLbl.Text += mealType + " | ";
-                }
-                else
-                {
-                    this.typeOfMealLbl.Text += mealType;
-                }
+                this.recipeMealTypes.Add(mealTypeList[i].type);
             }
+            this.typeOfMealLbl.Text = string.Join(" | ", this.recipeMealTypes);
         }
 
         private void GetAllergens()
@@ -103,20 +105,12 @@ namespace RecipeBookApp.View
             List<Allergen> allergenList = this.allergenController.GetAllergen(selectedRecipe.RecipeId);
             for (int i = 0; i < allergenList.Count; i++)
             {
-                string allergen = allergenList[i].AllergenDetails;
-                if (i < (allergenList.Count - 1))
-                {
-                    this.allergenListLbl.Text += allergen + " | ";
-                }
-                else
-                {
-                    this.allergenListLbl.Text += allergen;
-                }
-                
+                this.recipeAllergens.Add(allergenList[i].AllergenDetails);                
             }
+            this.allergenListLbl.Text = string.Join(" | ", this.recipeAllergens);
         }
 
-        private void EditButton_Click(object sender, EventArgs e)
+        private void UpdateButton_Click(object sender, EventArgs e)
         {
             // Add check if this current recipe was created by this user. This can be done either here or
             // to determine if the button should show at all. The following is assuming the user created selected recipe
