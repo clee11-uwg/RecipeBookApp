@@ -46,7 +46,11 @@ namespace RecipeBookApp.View
                 this.welcomeLabel.ForeColor = Color.SandyBrown;
                 this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
                 this.welcomeLabel.Text = "Welcome " + UserController.GetLoginUser().Name.ToUpper() + " to the Recipe App !";
-               
+                this.welcomeLabel.Visible = true;
+                this.logoutLinkLabel.Visible = true;
+                this.tabControl1.TabPages.Add(AddRecipetabPage);
+                this.loginlinkLabel.Visible = false;
+                this.signUplabel.Visible = false;
             }
 
         }
@@ -91,11 +95,7 @@ namespace RecipeBookApp.View
         {
             this.DisplayUserDetails();
             
-            this.welcomeLabel.Visible = true;
-            this.logoutLinkLabel.Visible = true;
-            this.tabControl1.TabPages.Add(AddRecipetabPage);
-            this.loginlinkLabel.Visible = false;
-            this.signUplabel.Visible = false;
+            
         }
     }
 }
