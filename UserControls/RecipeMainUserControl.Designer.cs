@@ -86,7 +86,7 @@
             this.ingredientsComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ingredientsComboBox.FormattingEnabled = true;
             this.ingredientsComboBox.Location = new System.Drawing.Point(441, 20);
-            this.ingredientsComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ingredientsComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.ingredientsComboBox.Name = "ingredientsComboBox";
             this.ingredientsComboBox.Size = new System.Drawing.Size(92, 21);
             this.ingredientsComboBox.TabIndex = 11;
@@ -110,8 +110,8 @@
             this.applyFiltertableLayoutPanel.Controls.Add(this.ethnicComboBox, 3, 1);
             this.applyFiltertableLayoutPanel.Controls.Add(this.filterButton, 4, 1);
             this.applyFiltertableLayoutPanel.Controls.Add(this.ingredientsComboBox, 2, 1);
-            this.applyFiltertableLayoutPanel.Location = new System.Drawing.Point(26, 43);
-            this.applyFiltertableLayoutPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.applyFiltertableLayoutPanel.Location = new System.Drawing.Point(4, 43);
+            this.applyFiltertableLayoutPanel.Margin = new System.Windows.Forms.Padding(2);
             this.applyFiltertableLayoutPanel.Name = "applyFiltertableLayoutPanel";
             this.applyFiltertableLayoutPanel.RowCount = 2;
             this.applyFiltertableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34F));
@@ -136,7 +136,7 @@
             this.allergenComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.allergenComboBox.FormattingEnabled = true;
             this.allergenComboBox.Location = new System.Drawing.Point(51, 20);
-            this.allergenComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.allergenComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.allergenComboBox.Name = "allergenComboBox";
             this.allergenComboBox.Size = new System.Drawing.Size(92, 21);
             this.allergenComboBox.TabIndex = 9;
@@ -147,7 +147,7 @@
             this.mealTypeComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mealTypeComboBox.FormattingEnabled = true;
             this.mealTypeComboBox.Location = new System.Drawing.Point(246, 20);
-            this.mealTypeComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.mealTypeComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.mealTypeComboBox.Name = "mealTypeComboBox";
             this.mealTypeComboBox.Size = new System.Drawing.Size(92, 21);
             this.mealTypeComboBox.TabIndex = 12;
@@ -158,7 +158,7 @@
             this.ethnicComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ethnicComboBox.FormattingEnabled = true;
             this.ethnicComboBox.Location = new System.Drawing.Point(639, 20);
-            this.ethnicComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ethnicComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.ethnicComboBox.Name = "ethnicComboBox";
             this.ethnicComboBox.Size = new System.Drawing.Size(86, 21);
             this.ethnicComboBox.TabIndex = 19;
@@ -170,7 +170,7 @@
             this.filterButton.BackColor = System.Drawing.Color.LightSalmon;
             this.filterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filterButton.Location = new System.Drawing.Point(807, 17);
-            this.filterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.filterButton.Margin = new System.Windows.Forms.Padding(2);
             this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(133, 27);
             this.filterButton.TabIndex = 13;
@@ -184,7 +184,7 @@
             this.searchButton.BackColor = System.Drawing.Color.DarkSalmon;
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchButton.Location = new System.Drawing.Point(726, 4);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(2);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(82, 28);
             this.searchButton.TabIndex = 19;
@@ -198,7 +198,7 @@
             this.clearButton.BackColor = System.Drawing.Color.DarkSalmon;
             this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.Location = new System.Drawing.Point(828, 3);
-            this.clearButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(116, 31);
             this.clearButton.TabIndex = 20;
@@ -211,7 +211,7 @@
             this.searchTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.searchTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchTextBox.Location = new System.Drawing.Point(187, 6);
-            this.searchTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(519, 24);
             this.searchTextBox.TabIndex = 18;
@@ -235,7 +235,7 @@
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(12, 3, 3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(35, 10, 10, 10);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1002, 434);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(972, 401);
             this.flowLayoutPanel1.TabIndex = 16;
             // 
             // tableLayoutPanel1
@@ -249,8 +249,8 @@
             this.tableLayoutPanel1.Controls.Add(this.searchButton, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.searchTextBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.searchLabel, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(26, 2);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -264,9 +264,9 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.applyFiltertableLayoutPanel);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "RecipeMainUserControl";
-            this.Size = new System.Drawing.Size(1002, 533);
+            this.Size = new System.Drawing.Size(971, 499);
             this.Load += new System.EventHandler(this.RecipeMainUserControl_Load);
             this.applyFiltertableLayoutPanel.ResumeLayout(false);
             this.applyFiltertableLayoutPanel.PerformLayout();
