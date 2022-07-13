@@ -84,7 +84,7 @@ namespace RecipeBookApp.Controller
             }
             else
             {
-                throw new UnauthorizedAccessException("Failed to login-Password does not match.Plesae try again-"+ given_password_hash);
+                throw new UnauthorizedAccessException("Failed to login-Password does not match.Plesae try again.");
             }
         }
 
