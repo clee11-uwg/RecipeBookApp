@@ -28,7 +28,7 @@ namespace RecipeBookApp.Controller
         /// Set the user login details
         /// </summary>
         /// <param name="currentUser"></param>
-        public void SetLoginUser(User currentUser)
+        public static void SetLoginUser(User currentUser)
         {
             currentLoginUser = currentUser;
         }

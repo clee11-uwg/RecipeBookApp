@@ -31,14 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.hometabPage = new System.Windows.Forms.TabPage();
+            this.recipeMainUserControl2 = new RecipeBookApp.UserControls.RecipeMainUserControl();
             this.AddRecipetabPage = new System.Windows.Forms.TabPage();
+            this.addRecipeDetailUserControl2 = new RecipeBookApp.UserControls.AddRecipeDetailUserControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.logoutLinkLabel = new System.Windows.Forms.LinkLabel();
             this.signUplabel = new System.Windows.Forms.LinkLabel();
             this.loginlinkLabel = new System.Windows.Forms.LinkLabel();
-            this.recipeMainUserControl2 = new RecipeBookApp.UserControls.RecipeMainUserControl();
-            this.addRecipeDetailUserControl2 = new RecipeBookApp.UserControls.AddRecipeDetailUserControl();
             this.tabControl1.SuspendLayout();
             this.hometabPage.SuspendLayout();
             this.AddRecipetabPage.SuspendLayout();
@@ -68,6 +68,14 @@
             this.hometabPage.Text = "Home";
             this.hometabPage.UseVisualStyleBackColor = true;
             // 
+            // recipeMainUserControl2
+            // 
+            this.recipeMainUserControl2.Location = new System.Drawing.Point(9, 9);
+            this.recipeMainUserControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.recipeMainUserControl2.Name = "recipeMainUserControl2";
+            this.recipeMainUserControl2.Size = new System.Drawing.Size(1295, 614);
+            this.recipeMainUserControl2.TabIndex = 0;
+            // 
             // AddRecipetabPage
             // 
             this.AddRecipetabPage.Controls.Add(this.addRecipeDetailUserControl2);
@@ -79,6 +87,15 @@
             this.AddRecipetabPage.TabIndex = 1;
             this.AddRecipetabPage.Text = "Add Recipe";
             this.AddRecipetabPage.UseVisualStyleBackColor = true;
+            // 
+            // addRecipeDetailUserControl2
+            // 
+            this.addRecipeDetailUserControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addRecipeDetailUserControl2.Location = new System.Drawing.Point(3, 2);
+            this.addRecipeDetailUserControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addRecipeDetailUserControl2.Name = "addRecipeDetailUserControl2";
+            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(1299, 629);
+            this.addRecipeDetailUserControl2.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -114,6 +131,7 @@
             this.logoutLinkLabel.TabIndex = 3;
             this.logoutLinkLabel.TabStop = true;
             this.logoutLinkLabel.Text = "LogOut";
+            this.logoutLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LogoutLinkLabel_LinkClicked);
             // 
             // signUplabel
             // 
@@ -138,23 +156,6 @@
             this.loginlinkLabel.TabStop = true;
             this.loginlinkLabel.Text = "Login";
             this.loginlinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LoginlinkLabel_LinkClicked);
-            // 
-            // recipeMainUserControl2
-            // 
-            this.recipeMainUserControl2.Location = new System.Drawing.Point(9, 9);
-            this.recipeMainUserControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.recipeMainUserControl2.Name = "recipeMainUserControl2";
-            this.recipeMainUserControl2.Size = new System.Drawing.Size(1295, 614);
-            this.recipeMainUserControl2.TabIndex = 0;
-            // 
-            // addRecipeDetailUserControl2
-            // 
-            this.addRecipeDetailUserControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addRecipeDetailUserControl2.Location = new System.Drawing.Point(3, 2);
-            this.addRecipeDetailUserControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.addRecipeDetailUserControl2.Name = "addRecipeDetailUserControl2";
-            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(1299, 629);
-            this.addRecipeDetailUserControl2.TabIndex = 0;
             // 
             // MainForm
             // 

@@ -21,7 +21,7 @@ namespace RecipeBookApp.View
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            tabControl1.TabPages.Remove(AddRecipetabPage);
+            this.LogoutClear();
         }
 
 
@@ -33,7 +33,7 @@ namespace RecipeBookApp.View
                 DialogResult result = loginDialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    this.DisplayUserDetails();
+                    this.LoginDisplay();
                
                 }
             }
@@ -46,11 +46,7 @@ namespace RecipeBookApp.View
                 this.welcomeLabel.ForeColor = Color.SandyBrown;
                 this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
                 this.welcomeLabel.Text = "Welcome " + UserController.GetLoginUser().Name.ToUpper() + " to the Recipe App !";
-                this.welcomeLabel.Visible = true;
-                this.logoutLinkLabel.Visible = true;
-                tabControl1.TabPages.Add(AddRecipetabPage);
-                this.loginlinkLabel.Visible = false;
-                this.signUplabel.Visible = false;
+               
             }
 
         }
@@ -62,12 +58,44 @@ namespace RecipeBookApp.View
                 DialogResult result = signUpDialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    this.DisplayUserDetails();
-                    tabControl1.TabPages.Add(AddRecipetabPage);
-                    this.loginlinkLabel.Visible = false;
-                    this.signUplabel.Visible = false;
+                    this.LoginDisplay();
                 }
             }
+        }
+
+        private void LogoutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string message = "You are about to logout from the RecipeApp, Please confirm?";
+            string title = "Log Out Recipe App";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                this.LogoutClear();
+            }
+            
+        }
+
+        private void LogoutClear()
+        {
+            UserController.SetLoginUser(null);
+            this.loginlinkLabel.Visible = true;
+            this.signUplabel.Visible = true;
+            this.logoutLinkLabel.Visible = false;
+            this.welcomeLabel.Text = "";
+            this.welcomeLabel.Visible = false;
+            this.tabControl1.TabPages.Remove(AddRecipetabPage);
+        }
+
+        private void LoginDisplay()
+        {
+            this.DisplayUserDetails();
+            
+            this.welcomeLabel.Visible = true;
+            this.logoutLinkLabel.Visible = true;
+            this.tabControl1.TabPages.Add(AddRecipetabPage);
+            this.loginlinkLabel.Visible = false;
+            this.signUplabel.Visible = false;
         }
     }
 }
