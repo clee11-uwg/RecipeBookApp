@@ -1,6 +1,5 @@
 ﻿using RecipeBookApp.Controller;
 using RecipeBookApp.Model;
-using RecipeBookApp.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,21 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RecipeBookApp.UserControls
+namespace RecipeBookApp.View
 {
-    public partial class LoginUserControl : UserControl
+    public partial class LoginFormDialog : Form
     {
         private readonly UserController userController;
         private User welcomeUser;
-        public LoginUserControl()
+        public LoginFormDialog()
         {
             InitializeComponent();
-            this.userController= new UserController();
+            this.userController = new UserController();
             this.loginErrorLabelText.Visible = false;
             this.welcomeLabel.Visible = false;
             this.welcomeUser = new User();
         }
-
         private void ChangePasswordButton_Click(object sender, EventArgs e)
         {
             Reset();
@@ -56,12 +54,10 @@ namespace RecipeBookApp.UserControls
                 this.loginErrorLabelText.Visible = true;
                 this.welcomeLabel.ForeColor = Color.SandyBrown;
                 this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
-                this.welcomeLabel.Text="Welcome " + this.welcomeUser.Name.ToUpper() + " to the Recipe App !";
+                this.welcomeLabel.Text = "Welcome " + this.welcomeUser.Name.ToUpper() + " to the Recipe App !";
                 this.welcomeLabel.Visible = true;
                 this.userController.SetLoginUser(this.welcomeUser);
-                this.Parent.Parent.FindForm().Refresh();
-              //  MainForm main = new View.MainForm();
-               // main.Show();
+               
 
             }
             catch (Exception ex)
@@ -72,7 +68,7 @@ namespace RecipeBookApp.UserControls
                 return;
             }
         }
-         private void Reset()
+        private void Reset()
         {
             this.loginErrorLabelText.Text = "";
             this.loginErrorLabelText.Visible = false;
@@ -81,15 +77,6 @@ namespace RecipeBookApp.UserControls
 
         }
 
-        private void UserNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            Reset();
-        }
-      
-        private void CurrentPasswordTextBox_TextChanged(object sender, EventArgs e)
-        {
-            Reset();
-        }
-        
+       
     }
 }

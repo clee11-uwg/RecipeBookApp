@@ -40,7 +40,9 @@
             this.signUpUserControl1 = new RecipeBookApp.UserControls.SignUpUserControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.welcomeLabel = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.logoutLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.signUplabel = new System.Windows.Forms.LinkLabel();
+            this.loginlinkLabel = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.hometabPage.SuspendLayout();
             this.AddRecipetabPage.SuspendLayout();
@@ -150,7 +152,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1315, 188);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -167,17 +169,40 @@
             this.welcomeLabel.Text = "Welcome";
             this.welcomeLabel.Visible = false;
             // 
-            // linkLabel1
+            // logoutLinkLabel
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(1166, 192);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(83, 25);
-            this.linkLabel1.TabIndex = 3;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "LogOut";
-            this.linkLabel1.Visible = false;
+            this.logoutLinkLabel.AutoSize = true;
+            this.logoutLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logoutLinkLabel.Location = new System.Drawing.Point(1178, 192);
+            this.logoutLinkLabel.Name = "logoutLinkLabel";
+            this.logoutLinkLabel.Size = new System.Drawing.Size(83, 25);
+            this.logoutLinkLabel.TabIndex = 3;
+            this.logoutLinkLabel.TabStop = true;
+            this.logoutLinkLabel.Text = "LogOut";
+            // 
+            // signUplabel
+            // 
+            this.signUplabel.AutoSize = true;
+            this.signUplabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signUplabel.Location = new System.Drawing.Point(1077, 193);
+            this.signUplabel.Name = "signUplabel";
+            this.signUplabel.Size = new System.Drawing.Size(83, 25);
+            this.signUplabel.TabIndex = 4;
+            this.signUplabel.TabStop = true;
+            this.signUplabel.Text = "SignUp";
+            this.signUplabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // loginlinkLabel
+            // 
+            this.loginlinkLabel.AutoSize = true;
+            this.loginlinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginlinkLabel.Location = new System.Drawing.Point(988, 193);
+            this.loginlinkLabel.Name = "loginlinkLabel";
+            this.loginlinkLabel.Size = new System.Drawing.Size(65, 25);
+            this.loginlinkLabel.TabIndex = 5;
+            this.loginlinkLabel.TabStop = true;
+            this.loginlinkLabel.Text = "Login";
+            this.loginlinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LoginlinkLabel_LinkClicked);
             // 
             // MainForm
             // 
@@ -185,7 +210,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1315, 879);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.loginlinkLabel);
+            this.Controls.Add(this.signUplabel);
+            this.Controls.Add(this.logoutLinkLabel);
             this.Controls.Add(this.welcomeLabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl1);
@@ -196,6 +223,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Digital Recipe Book";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.hometabPage.ResumeLayout(false);
             this.AddRecipetabPage.ResumeLayout(false);
@@ -222,6 +250,8 @@
         private UserControls.AddRecipeDetailUserControl addRecipeDetailUserControl2;
         private UserControls.RecipeMainUserControl recipeMainUserControl2;
         private System.Windows.Forms.Label welcomeLabel;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel logoutLinkLabel;
+        private System.Windows.Forms.LinkLabel signUplabel;
+        private System.Windows.Forms.LinkLabel loginlinkLabel;
     }
 }
