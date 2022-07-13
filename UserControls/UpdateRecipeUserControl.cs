@@ -27,6 +27,7 @@ namespace RecipeBookApp.UserControls
         private List<string> recipeIngredients;
         private List<string> recipeKitchenware;
         private List<string> recipeMealTypes;
+        private List<string> recipeFoodTypes;
 
         public UpdateRecipeUserControl()
         {
@@ -44,6 +45,7 @@ namespace RecipeBookApp.UserControls
             this.recipeIngredients = new List<string>();
             this.recipeKitchenware = new List<string>();
             this.recipeMealTypes = new List<string>();
+            this.recipeFoodTypes = new List<string>();
         }
 
         /// <summary>
@@ -210,21 +212,18 @@ namespace RecipeBookApp.UserControls
 
         private void GetFoodTypeForRecipe()
         {
-            List<FoodType> foodTypeList;
-            
+            List<FoodType> foodTypeList = this.foodTypeController.GetFoodTypes(this.recipe.RecipeId);
             try
             {
-                this.foodTypeCmbBx.DataSource = null;
-                foodTypeList = this.foodTypeController.GetFoodTypes();
-                this.foodTypeCmbBx.DataSource = foodTypeList;
-                this.foodTypeCmbBx.DisplayMember = "TypeOfFood";
-                this.foodTypeCmbBx.ValueMember = "FoodId";
-                List<FoodType> foodType = this.foodTypeController.GetFoodTypes(this.recipe.RecipeId);
-                //this.foodTypeCmbBx.SelectedValue = this.foodTypeController.GetFoodTypes(this.recipe.RecipeId)[0].FoodId;
+                for (int i = 0; i < foodTypeList.Count; i++)
+                {
+                    this.recipeFoodTypes.Add(foodTypeList[i].TypeOfFood);
+                }
+                this.foodTypeRchBx.Text = string.Join(", ", this.recipeFoodTypes);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured on - populating food type dropdown transaction -" + ex.Message,
+                MessageBox.Show("Error occured on - displaying food types transaction -" + ex.Message,
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
