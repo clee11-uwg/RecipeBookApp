@@ -14,6 +14,7 @@ namespace RecipeBookApp.Controller
     public class UserController
     {
         private readonly UserDAL UserDAL;
+        private static User currentLoginUser;
 
         /// <summary>
         /// Instantiate variables
@@ -21,6 +22,24 @@ namespace RecipeBookApp.Controller
         public UserController()
         {
             this.UserDAL = new UserDAL();
+        }
+
+        /// <summary>
+        /// Set the user login details
+        /// </summary>
+        /// <param name="currentUser"></param>
+        public static void SetLoginUser(User currentUser)
+        {
+            currentLoginUser = currentUser;
+        }
+
+        /// <summary>
+        /// Get the user login detsila
+        /// </summary>
+        /// <returns></returns>
+        public static User GetLoginUser()
+        {
+            return currentLoginUser;
         }
 
         /// <summary>
