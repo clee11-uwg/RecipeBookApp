@@ -34,9 +34,7 @@ namespace RecipeBookApp.View
                 if (result == DialogResult.OK)
                 {
                     this.DisplayUserDetails();
-                    tabControl1.TabPages.Add(AddRecipetabPage);
-
-
+               
                 }
             }
         }
@@ -50,11 +48,26 @@ namespace RecipeBookApp.View
                 this.welcomeLabel.Text = "Welcome " + UserController.GetLoginUser().Name.ToUpper() + " to the Recipe App !";
                 this.welcomeLabel.Visible = true;
                 this.logoutLinkLabel.Visible = true;
-               // this.Close();
-               // new MainForm();
-
+                tabControl1.TabPages.Add(AddRecipetabPage);
+                this.loginlinkLabel.Visible = false;
+                this.signUplabel.Visible = false;
             }
 
+        }
+
+        private void SignUplabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (Form signUpDialog = new View.SignUpFormDialog())
+            {
+                DialogResult result = signUpDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this.DisplayUserDetails();
+                    tabControl1.TabPages.Add(AddRecipetabPage);
+                    this.loginlinkLabel.Visible = false;
+                    this.signUplabel.Visible = false;
+                }
+            }
         }
     }
 }

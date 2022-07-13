@@ -75,7 +75,7 @@
             this.AddRecipetabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddRecipetabPage.Name = "AddRecipetabPage";
             this.AddRecipetabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.AddRecipetabPage.Size = new System.Drawing.Size(1305, 635);
+            this.AddRecipetabPage.Size = new System.Drawing.Size(1305, 633);
             this.AddRecipetabPage.TabIndex = 1;
             this.AddRecipetabPage.Text = "Add Recipe";
             this.AddRecipetabPage.UseVisualStyleBackColor = true;
@@ -125,6 +125,7 @@
             this.signUplabel.TabIndex = 4;
             this.signUplabel.TabStop = true;
             this.signUplabel.Text = "SignUp";
+            this.signUplabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SignUplabel_LinkClicked);
             // 
             // loginlinkLabel
             // 
@@ -152,7 +153,7 @@
             this.addRecipeDetailUserControl2.Location = new System.Drawing.Point(3, 2);
             this.addRecipeDetailUserControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addRecipeDetailUserControl2.Name = "addRecipeDetailUserControl2";
-            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(1299, 631);
+            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(1299, 629);
             this.addRecipeDetailUserControl2.TabIndex = 0;
             // 
             // MainForm
