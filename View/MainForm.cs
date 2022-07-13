@@ -21,22 +21,9 @@ namespace RecipeBookApp.View
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-                if (UserController.GetLoginUser() != null)
-            {
-                this.welcomeLabel.ForeColor = Color.SandyBrown;
-                this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
-                this.welcomeLabel.Text = "Welcome " + UserController.GetLoginUser().Name.ToUpper() + " to the Recipe App !";
-                this.welcomeLabel.Visible = true;
-                this.logoutLinkLabel.Visible = true;
-                tabControl1.TabPages.Remove(loginPage);
-
-            }
+            tabControl1.TabPages.Remove(AddRecipetabPage);
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
 
         private void LoginlinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -46,11 +33,28 @@ namespace RecipeBookApp.View
                 DialogResult result = loginDialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    //this.Reset();
+                    this.DisplayUserDetails();
+                    tabControl1.TabPages.Add(AddRecipetabPage);
 
-                    
+
                 }
             }
+        }
+
+        private void DisplayUserDetails()
+        {
+            if (UserController.GetLoginUser() != null)
+            {
+                this.welcomeLabel.ForeColor = Color.SandyBrown;
+                this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
+                this.welcomeLabel.Text = "Welcome " + UserController.GetLoginUser().Name.ToUpper() + " to the Recipe App !";
+                this.welcomeLabel.Visible = true;
+                this.logoutLinkLabel.Visible = true;
+               // this.Close();
+               // new MainForm();
+
+            }
+
         }
     }
 }

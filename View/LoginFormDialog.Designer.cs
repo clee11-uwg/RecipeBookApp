@@ -40,6 +40,7 @@
             this.userNameTextBox = new System.Windows.Forms.TextBox();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.welcomeLabel = new System.Windows.Forms.Label();
+            this.backHomeButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -73,25 +74,27 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.changePasswordButton, 1, 0);
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.70564F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.43144F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.97324F));
             this.tableLayoutPanel2.Controls.Add(this.loginButton, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.changePasswordButton, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.backHomeButton, 2, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(202, 364);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(500, 69);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(598, 52);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // changePasswordButton
             // 
             this.changePasswordButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.changePasswordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.changePasswordButton.Location = new System.Drawing.Point(253, 3);
+            this.changePasswordButton.Location = new System.Drawing.Point(174, 3);
             this.changePasswordButton.Name = "changePasswordButton";
-            this.changePasswordButton.Size = new System.Drawing.Size(212, 52);
+            this.changePasswordButton.Size = new System.Drawing.Size(169, 37);
             this.changePasswordButton.TabIndex = 2;
             this.changePasswordButton.Text = "Change Password";
             this.changePasswordButton.UseVisualStyleBackColor = false;
@@ -103,7 +106,7 @@
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginButton.Location = new System.Drawing.Point(3, 3);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(154, 52);
+            this.loginButton.Size = new System.Drawing.Size(154, 37);
             this.loginButton.TabIndex = 3;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = false;
@@ -183,6 +186,18 @@
             this.welcomeLabel.Text = "Welcome";
             this.welcomeLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // backHomeButton
+            // 
+            this.backHomeButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.backHomeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.backHomeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backHomeButton.Location = new System.Drawing.Point(349, 3);
+            this.backHomeButton.Name = "backHomeButton";
+            this.backHomeButton.Size = new System.Drawing.Size(208, 37);
+            this.backHomeButton.TabIndex = 4;
+            this.backHomeButton.Text = "Go Back To Home Page";
+            this.backHomeButton.UseVisualStyleBackColor = false;
+            // 
             // LoginFormDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -213,5 +228,6 @@
         private System.Windows.Forms.TextBox userNameTextBox;
         private System.Windows.Forms.Label userNameLabel;
         private System.Windows.Forms.Label welcomeLabel;
+        private System.Windows.Forms.Button backHomeButton;
     }
 }
