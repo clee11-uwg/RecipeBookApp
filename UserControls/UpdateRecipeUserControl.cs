@@ -219,7 +219,8 @@ namespace RecipeBookApp.UserControls
                 this.foodTypeCmbBx.DataSource = foodTypeList;
                 this.foodTypeCmbBx.DisplayMember = "TypeOfFood";
                 this.foodTypeCmbBx.ValueMember = "FoodId";
-                this.foodTypeCmbBx.SelectedValue = this.foodTypeController.GetFoodTypes(this.recipe.RecipeId)[0].FoodId;
+                List<FoodType> foodType = this.foodTypeController.GetFoodTypes(this.recipe.RecipeId);
+                //this.foodTypeCmbBx.SelectedValue = this.foodTypeController.GetFoodTypes(this.recipe.RecipeId)[0].FoodId;
             }
             catch (Exception ex)
             {
