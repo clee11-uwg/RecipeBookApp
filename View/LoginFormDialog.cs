@@ -20,6 +20,7 @@ namespace RecipeBookApp.View
         {
             InitializeComponent();
             this.userController = new UserController();
+            this.ControlBox = false;
             this.loginErrorLabelText.Visible = false;
             this.welcomeLabel.Visible = false;
             this.welcomeUser = new User();
@@ -52,9 +53,11 @@ namespace RecipeBookApp.View
                 this.loginErrorLabelText.Text = "You have login successfully!";
                 this.loginErrorLabelText.ForeColor = Color.Green;
                 this.loginErrorLabelText.Visible = true;
-                this.welcomeLabel.ForeColor = Color.SandyBrown;
+                this.welcomeLabel.ForeColor = Color.White;
+                this.welcomeLabel.BackColor = Color.Orange;
                 this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
                 this.welcomeLabel.Text = "Welcome " + this.welcomeUser.Name.ToUpper() + " to the Recipe App !";
+              
                 this.welcomeLabel.Visible = true;
                 UserController.SetLoginUser(this.welcomeUser);
                
