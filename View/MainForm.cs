@@ -63,7 +63,7 @@ namespace RecipeBookApp.View
                 DialogResult result = signUpDialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    this.LoginDisplay();
+                    return;
                 }
             }
         }

@@ -49,7 +49,6 @@ namespace RecipeBookApp.View
             try
             {
                 this.welcomeUser = this.userController.Login(this.userNameTextBox.Text, this.currentPasswordTextBox.Text);
-
                 this.loginErrorLabelText.Text = "You have login successfully!";
                 this.loginErrorLabelText.ForeColor = Color.Green;
                 this.loginErrorLabelText.Visible = true;

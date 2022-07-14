@@ -132,5 +132,29 @@ namespace RecipeBookApp.Controller
             }
         }
 
+        public void AddUser(User newUser)
+        {
+            try
+
+            {
+                if (newUser is null)
+                {
+                    throw new ArgumentNullException("No new user detaisl found to registration");
+                }
+                if ((this.UserDAL.GetUser(newUser.Name)) is null)
+                {
+                    this.UserDAL.RegisterUser(newUser);
+                }
+                else
+                {
+                    throw new ArgumentNullException(newUser.Name + " - Username already existis in the database");
+                }                
+            }
+            catch
+            {
+                throw new ArgumentNullException ("User or Recipe does not exist. Please try again");
+            }
+        }
+
     }
 }
