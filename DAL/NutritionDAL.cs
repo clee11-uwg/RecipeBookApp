@@ -158,6 +158,50 @@ namespace RecipeBookApp.DAL
                 return true;
             }
         }
+
+        /// <summary>
+        /// Updates the Nutrition to the database
+        /// </summary>
+        /// <param name="nutrition">Nutrition to update</param>
+        /// <returns>Whether or not the nutrition updated</returns>
+        public bool UpdateNutrition(Nutrition nutrition)
+        {
+            int result = -1;
+            string selectStatement = @"UPDATE nutrition 
+                                        SET carbohydrate = @carbohydrate, 
+	                                        fat = @fat, 
+	                                        protein = @protein, 
+	                                        alcohol = @alcohol, 
+	                                        calories = @calories, 
+	                                        serving_size = @serving_size
+                                        WHERE id = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@carbohydrate", nutrition.Carbohydrate);
+                    selectCommand.Parameters.AddWithValue("@fat", nutrition.Fat);
+                    selectCommand.Parameters.AddWithValue("@protein", nutrition.Protein);
+                    selectCommand.Parameters.AddWithValue("@alcohol", nutrition.Alcohol);
+                    selectCommand.Parameters.AddWithValue("@calories", nutrition.Calories);
+                    selectCommand.Parameters.AddWithValue("@serving_size", nutrition.ServingSize);
+                    selectCommand.Parameters.AddWithValue("@id", nutrition.NutritionId);
+
+                    connection.Open();
+                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 
 }
