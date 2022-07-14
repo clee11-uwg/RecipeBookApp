@@ -134,12 +134,10 @@ namespace RecipeBookApp.Controller
 
         public void AddUser(User newUser)
         {
-            try
-
-            {
+           
                 if (newUser is null)
                 {
-                    throw new ArgumentNullException("No new user detaisl found to registration");
+                    throw new ArgumentNullException("No new user details found to registration");
                 }
                 if ((this.UserDAL.GetUser(newUser.Name)) is null)
                 {
@@ -147,13 +145,10 @@ namespace RecipeBookApp.Controller
                 }
                 else
                 {
-                    throw new ArgumentNullException(newUser.Name + " - Username already existis in the database");
+                    throw new NullReferenceException("Username already exists in the database");
                 }                
-            }
-            catch
-            {
-                throw new ArgumentNullException ("User or Recipe does not exist. Please try again");
-            }
+            
+            
         }
 
     }

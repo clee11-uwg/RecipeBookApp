@@ -19,7 +19,9 @@ namespace RecipeBookApp.View
         public SignUpFormDialog()
         {
             InitializeComponent();
+            this.userController = new UserController();
             this.signupMessageLabel.Visible = false;
+            this.confirmPasswordSignUpText.Focus();
         }
 
         private void SignupButton_Click(object sender, EventArgs e)
@@ -50,22 +52,61 @@ namespace RecipeBookApp.View
                 return;
 
             }
-            bool isAdminChecked = isAdminCheckBox.Checked;
-            this.newRegisteruser = new User
+            try
             {
-                Name = this.userIDSignUpText.Text,
-                Password = this.passwordSignUpText.Text,
-                Is_Admin = isAdminChecked
+                bool isAdminChecked = isAdminCheckBox.Checked;
+                this.newRegisteruser = new User
+                {
+                    Name = this.userIDSignUpText.Text,
+                    Password = this.passwordSignUpText.Text,
+                    Is_Admin = isAdminChecked
 
-            };
+                };
 
-            this.userController.AddUser(newRegisteruser);
+                this.userController.AddUser(newRegisteruser);
+                this.signupMessageLabel.Text = "Congratulations! You are registered, Please login using your credentials!";
+                this.signupMessageLabel.ForeColor = Color.Red;
+                this.signupMessageLabel.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                this.signupMessageLabel.Text = ex.Message;
+                this.signupMessageLabel.ForeColor = Color.Red;
+                this.signupMessageLabel.Visible = true;
+                this.userIDSignUpText.BackColor = Color.OrangeRed;
+                this.userIDSignUpText.Focus();
+               // throw ex;
+               return;
+            }
 
         }
 
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        private void Reset()
         {
-
+            this.signupMessageLabel.Text = "";
+            this.signupMessageLabel.ForeColor = Color.Black;
+            this.signupMessageLabel.Visible = false;
+            this.passwordSignUpText.BackColor = Color.White;
+            this.confirmPasswordSignUpText.BackColor = Color.White;
+            this.userIDSignUpText.BackColor = Color.White;
+          //  this.userIDSignUpText.Focus();
         }
-    }
+
+
+        private void PasswordSignUpText_Click(object sender, EventArgs e)
+        {
+            this.Reset();
+        }
+        
+
+        private void ConfirmPasswordSignUpText_TextChanged(object sender, EventArgs e)
+        {
+            this.Reset();
+        }
+
+        private void UserIDSignUpText_TextChanged(object sender, EventArgs e)
+        {
+            this.Reset();
+        }
+    }   
 }

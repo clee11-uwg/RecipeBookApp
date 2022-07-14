@@ -51,22 +51,29 @@ namespace RecipeBookApp.DAL
        /// 
        /// </summary>
        /// <param name="newUser"></param>
-        public void RegisterUser(User newUser)
+        public bool  RegisterUser(User newUser)
         {
-            string selectStatement = @"INSERT INTO USER (name, password,is_admin) VALUES (?,?,?)";
+            bool insertSucess = false;
+            string selectStatement = @"INSERT INTO USER (name, password,is_admin) VALUES (@username,@password,@is_admin)";
             using (SQLiteConnection connection = DBConnection.GetConnection())
-                {
+            {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    selectCommand.Parameters.Add(newUser.Name);
-                    selectCommand.Parameters.Add(newUser.Password);
-                    selectCommand.Parameters.Add(newUser.Is_Admin);
+
+                    selectCommand.Parameters.AddWithValue("@username", newUser.Name);
+                    selectCommand.Parameters.AddWithValue("@password", newUser.Password);
+                    selectCommand.Parameters.AddWithValue("@is_admin", Convert.ToInt32(newUser.Is_Admin));
+    
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
-                        selectCommand.ExecuteNonQuery();
+                        while (reader.Read())
+                        {
+                            insertSucess = true;
+                        }
                     }
                 }
-            }           
+            }
+            return insertSucess; ;
         }
 
         /// <summary>
