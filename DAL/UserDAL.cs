@@ -113,11 +113,11 @@ namespace RecipeBookApp.DAL
         /// Returns password hash for given user
         /// <param name="username">Name of User</param>
         /// <returns>Password hash</returns>
-        public User VerifyUser(string username)
+        public string VerifyUser(string username)
         {
-           
-            User loginUser = null;
-            string selectStatement = @"SELECT user.id,user.password,user.name ,user.is_admin
+
+            String hashed = null;
+            string selectStatement = @"SELECT user.password
                                     FROM user
                                     WHERE user.name = @username;";
 
@@ -130,19 +130,12 @@ namespace RecipeBookApp.DAL
                     {
                         while (reader.Read())
                         {
-                            loginUser = new User
-                            {
-                                ID = Convert.ToInt32(reader["id"]),
-                                Name = reader["name"].ToString(),
-                                Password = reader["password"].ToString(),
-                                Is_Admin = Convert.ToBoolean(Convert.ToInt32(reader["is_admin"]))
-                            };
-                        }
-
+                            hashed = reader["password"].ToString();
+                        };
                     }
                 }
             }
-            return loginUser;
+            return hashed;
         }
 
         /// <summary>
