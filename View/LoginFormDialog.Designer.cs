@@ -52,7 +52,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.83709F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.16291F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 232F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
             this.tableLayoutPanel1.Controls.Add(this.loginErrorLabelText, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.newPassowrdTextBox, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.currentPasswordTextBox, 1, 2);
@@ -90,7 +90,7 @@
             // 
             this.newPassowrdTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.newPassowrdTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPassowrdTextBox.Location = new System.Drawing.Point(461, 248);
+            this.newPassowrdTextBox.Location = new System.Drawing.Point(460, 248);
             this.newPassowrdTextBox.Name = "newPassowrdTextBox";
             this.newPassowrdTextBox.Size = new System.Drawing.Size(375, 28);
             this.newPassowrdTextBox.TabIndex = 8;
@@ -100,7 +100,7 @@
             // 
             this.currentPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.currentPasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentPasswordTextBox.Location = new System.Drawing.Point(461, 188);
+            this.currentPasswordTextBox.Location = new System.Drawing.Point(460, 188);
             this.currentPasswordTextBox.Name = "currentPasswordTextBox";
             this.currentPasswordTextBox.Size = new System.Drawing.Size(375, 28);
             this.currentPasswordTextBox.TabIndex = 7;
@@ -109,7 +109,7 @@
             // 
             this.userNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.userNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameTextBox.Location = new System.Drawing.Point(461, 113);
+            this.userNameTextBox.Location = new System.Drawing.Point(460, 113);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(375, 28);
             this.userNameTextBox.TabIndex = 6;
@@ -148,7 +148,7 @@
             this.tableLayoutPanel2.Controls.Add(this.loginButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.changePasswordButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.backHomeButton, 2, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(420, 334);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(419, 334);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -208,7 +208,7 @@
             this.welcomeLabel.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.welcomeLabel, 2);
             this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.welcomeLabel.Location = new System.Drawing.Point(382, 23);
+            this.welcomeLabel.Location = new System.Drawing.Point(381, 23);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Padding = new System.Windows.Forms.Padding(3);
             this.welcomeLabel.Size = new System.Drawing.Size(138, 38);
