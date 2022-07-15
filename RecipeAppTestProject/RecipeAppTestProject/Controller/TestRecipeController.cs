@@ -19,6 +19,7 @@ namespace RecipeAppTestProject.Controller
         User joe;
         Recipe recipe;
         Nutrition nutrition;
+        User admin;
         List<Ingredient> ingredients;
         List<MealType> mealTypes;
         List<Kitchenware> kitchenware;
@@ -35,6 +36,12 @@ namespace RecipeAppTestProject.Controller
                 ID = 6,
                 Name = "joe",
                 Is_Admin = false
+            };
+            admin = new User
+            {
+                ID = 6,
+                Name = "joe",
+                Is_Admin = true
             };
             recipe = new Recipe();
             nutrition = new Nutrition();
@@ -212,14 +219,173 @@ namespace RecipeAppTestProject.Controller
                 UserWhoCreated = "joe"
             };
             Assert.ThrowsException<ArgumentException>(() => controller.DeleteRecipe(joe, recipe));
-
-            User admin = new User
-            {
-                ID = 6,
-                Name = "joe",
-                Is_Admin = true
-            };
             Assert.ThrowsException<ArgumentException>(() => controller.DeleteRecipe(admin, recipe));
+        }
+
+        /// <summary>
+        /// Update Amount of Ingredient throws the expected exceptions
+        /// </summary>
+        [TestMethod]
+        public void TestUpdateAmountOfIngredientThrowsExpectedExceptions()
+        {
+            Ingredient ingredient = new Ingredient
+            {
+
+            };
+
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateAmountOfIngredient(null, recipe, ingredient));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateAmountOfIngredient(joe, null, ingredient));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateAmountOfIngredient(joe, recipe, null));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateAmountOfIngredient(admin, null, ingredient));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateAmountOfIngredient(admin, recipe, null));
+
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.UpdateAmountOfIngredient(joe, recipe, ingredient));
+
+            recipe = new Recipe
+            {
+                UserWhoCreated = "greg"
+            };
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.UpdateAmountOfIngredient(joe, recipe, ingredient));
+        }
+
+        /// <summary>
+        /// Tests that UpdateRecipe returns error with badly formed data
+        /// </summary>
+        [TestMethod]
+        public void TestUpdateAmountOfIngredientThrowsExceptionWithBadlyFormedData()
+        {
+            recipe = new Recipe
+            {
+                UserWhoCreated = "joe"
+            };
+            Ingredient ingredient = new Ingredient
+            {
+
+            };
+            Assert.ThrowsException<NullReferenceException>(() => controller.UpdateAmountOfIngredient(joe,
+                recipe, ingredient));
+        }
+
+        /// <summary>
+        /// Tests that UpdateRecipe throws expected exceptions
+        /// </summary>
+        [TestMethod]
+        public void TestUpdateRecipeThrowsExpectedExceptions()
+        {
+            List<Ingredient> ingredients_empty = new List<Ingredient>();
+            List<MealType> mealTypes_empty = new List<MealType>();
+            List<Kitchenware> kitchenware_empty = new List<Kitchenware>();
+
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(null, recipe, ingredients,
+                mealTypes, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(joe, null, ingredients,
+                mealTypes, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(joe, recipe, null,
+                mealTypes, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                null, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                mealTypes, null, nutrition));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                mealTypes, kitchenware, null));
+
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                mealTypes, kitchenware, nutrition));
+
+            recipe = new Recipe
+            {
+                UserWhoCreated = "greg"
+            };
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                mealTypes, kitchenware, nutrition));
+
+            recipe = new Recipe
+            {
+                UserWhoCreated = "joe"
+            };
+            Assert.ThrowsException<ArgumentException>(() => controller.UpdateRecipe(joe, recipe, ingredients_empty,
+                mealTypes, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                mealTypes_empty, kitchenware, nutrition));
+            Assert.ThrowsException<ArgumentException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                mealTypes, kitchenware_empty, nutrition));
+
+            nutrition = new Nutrition
+            {
+                NutritionId = -1,
+                Carbohydrate = 1,
+                Protein = 1,
+                Fat = 1,
+                Calories = 1,
+                Alcohol = 1,
+                ServingSize = "1"
+            };
+            recipe = new Recipe
+            {
+                RecipeId = -1,
+                NutritionId = 1,
+                UserWhoCreated = "joe",
+                RecipeName = "recipe",
+                RecipeInstructions = "instructions",
+                RecipeImage = null,
+                CookingTime = 1,
+                EthnicId = 1
+            };
+
+            Assert.ThrowsException<ArgumentException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                mealTypes, kitchenware, nutrition));
+
+            nutrition = new Nutrition
+            {
+                NutritionId = 1,
+                Carbohydrate = 1,
+                Protein = 1,
+                Fat = 1,
+                Calories = 1,
+                Alcohol = 1,
+                ServingSize = "1"
+            };
+            recipe = new Recipe
+            {
+                RecipeId = 1,
+                NutritionId = 2,
+                UserWhoCreated = "joe",
+                RecipeName = "recipe",
+                RecipeInstructions = "instructions",
+                RecipeImage = null,
+                CookingTime = 1,
+                EthnicId = 1
+            };
+
+            Assert.ThrowsException<ArgumentException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+                mealTypes, kitchenware, nutrition));
+        }
+
+        /// <summary>
+        /// Tests that UpdateRecipe returns error with badly formed data
+        /// </summary>
+        [TestMethod]
+        public void TestUpdateRecipeReturnsErrorWithBadlyFormedData()
+        {
+            recipe = new Recipe
+            {
+                RecipeId = 1,
+                UserWhoCreated = "joe",
+                NutritionId = 1
+            };
+            nutrition = new Nutrition
+            {
+                NutritionId = 1,
+                Carbohydrate = 1,
+                Protein = 1,
+                Fat = 1,
+                Calories = 1,
+                Alcohol = 1,
+                ServingSize = "1"
+            };
+
+            Assert.ThrowsException<NullReferenceException>(() => controller.UpdateRecipe(joe,
+                recipe, ingredients, mealTypes, kitchenware, nutrition));
         }
     }
 }
