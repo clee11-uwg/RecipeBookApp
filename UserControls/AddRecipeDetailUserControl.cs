@@ -14,7 +14,7 @@ namespace RecipeBookApp.UserControls
     {
 
         private List<Recipe> recipeList;
-        private List<Nutrition> nutritionList;
+        
         private Nutrition addNutrition;
         private List<Kitchenware> kitchenWareList;
         private List<MealType> mealTypeList;
@@ -31,6 +31,7 @@ namespace RecipeBookApp.UserControls
         private List<string> recipeIngredients;
         private List<string> recipeKitchenWare;
         private string displayMessage;
+     
 
         private readonly TypeOfFoodController foodController;
         public AddRecipeDetailUserControl()
@@ -54,6 +55,7 @@ namespace RecipeBookApp.UserControls
 
         }
 
+       
 
         /// <summary>
         /// Loads the ComboBox for furniture category and style.
@@ -537,6 +539,33 @@ namespace RecipeBookApp.UserControls
             this.addIngredientCombobox.Text = "Select the Ingredient";
             this.addKitchenWareComboBox.Text = "Select the KitchenWare";
             this.addEthnicCombobox.Text = "Select the Ethnicity";
+        }
+
+        private void Uploadbutton_Click(object sender, EventArgs e)
+        {
+           
+            OpenFileDialog open = new OpenFileDialog();             
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+          
+                imageTextBox.Text = open.FileName;
+            }
+        }
+
+        private void AddInstructionlinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (Form instructionDialog = new View.AddRecipeInstructionDialog())
+            {
+                DialogResult result = instructionDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this.recipeInstructions.Text = RecipeController.GetRecipeInstructions();
+                }else
+                {
+                    this.recipeInstructions.Text = "";
+                }
+            }
         }
     }
 }

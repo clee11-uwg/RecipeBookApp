@@ -157,6 +157,12 @@
     <Compile Include="UserControls\RecipeMainUserControl.Designer.cs">
       <DependentUpon>RecipeMainUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\AddRecipeInstructionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddRecipeInstructionDialog.Designer.cs">
+      <DependentUpon>AddRecipeInstructionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginFormDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UpdateRecipeUserControl.resx">
       <DependentUpon>UpdateRecipeUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddRecipeInstructionDialog.resx">
+      <DependentUpon>AddRecipeInstructionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LoginFormDialog.resx">
       <DependentUpon>LoginFormDialog.cs</DependentUpon>

@@ -33,14 +33,14 @@
             this.newPassowrdTextBox = new System.Windows.Forms.TextBox();
             this.currentPasswordTextBox = new System.Windows.Forms.TextBox();
             this.userNameTextBox = new System.Windows.Forms.TextBox();
-            this.welcomeLabel = new System.Windows.Forms.Label();
-            this.passwordLabel = new System.Windows.Forms.Label();
             this.newPasswordLabel = new System.Windows.Forms.Label();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.loginButton = new System.Windows.Forms.Button();
             this.changePasswordButton = new System.Windows.Forms.Button();
             this.backHomeButton = new System.Windows.Forms.Button();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.welcomeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +52,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.83709F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.16291F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 226F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 232F));
             this.tableLayoutPanel1.Controls.Add(this.loginErrorLabelText, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.newPassowrdTextBox, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.currentPasswordTextBox, 1, 2);
@@ -79,7 +79,7 @@
             // 
             this.loginErrorLabelText.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.loginErrorLabelText.AutoSize = true;
-            this.loginErrorLabelText.Location = new System.Drawing.Point(630, 301);
+            this.loginErrorLabelText.Location = new System.Drawing.Point(625, 301);
             this.loginErrorLabelText.Name = "loginErrorLabelText";
             this.loginErrorLabelText.Padding = new System.Windows.Forms.Padding(1);
             this.loginErrorLabelText.Size = new System.Drawing.Size(46, 18);
@@ -90,7 +90,7 @@
             // 
             this.newPassowrdTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.newPassowrdTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPassowrdTextBox.Location = new System.Drawing.Point(465, 248);
+            this.newPassowrdTextBox.Location = new System.Drawing.Point(461, 248);
             this.newPassowrdTextBox.Name = "newPassowrdTextBox";
             this.newPassowrdTextBox.Size = new System.Drawing.Size(375, 28);
             this.newPassowrdTextBox.TabIndex = 8;
@@ -100,7 +100,7 @@
             // 
             this.currentPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.currentPasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentPasswordTextBox.Location = new System.Drawing.Point(465, 188);
+            this.currentPasswordTextBox.Location = new System.Drawing.Point(461, 188);
             this.currentPasswordTextBox.Name = "currentPasswordTextBox";
             this.currentPasswordTextBox.Size = new System.Drawing.Size(375, 28);
             this.currentPasswordTextBox.TabIndex = 7;
@@ -109,42 +109,17 @@
             // 
             this.userNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.userNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameTextBox.Location = new System.Drawing.Point(465, 113);
+            this.userNameTextBox.Location = new System.Drawing.Point(461, 113);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(375, 28);
             this.userNameTextBox.TabIndex = 6;
-            // 
-            // welcomeLabel
-            // 
-            this.welcomeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.welcomeLabel.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.welcomeLabel, 2);
-            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.welcomeLabel.Location = new System.Drawing.Point(385, 23);
-            this.welcomeLabel.Name = "welcomeLabel";
-            this.welcomeLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.welcomeLabel.Size = new System.Drawing.Size(138, 38);
-            this.welcomeLabel.TabIndex = 10;
-            this.welcomeLabel.Text = "Welcome";
-            this.welcomeLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // passwordLabel
-            // 
-            this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordLabel.Location = new System.Drawing.Point(224, 186);
-            this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(171, 32);
-            this.passwordLabel.TabIndex = 1;
-            this.passwordLabel.Text = "Password : ";
             // 
             // newPasswordLabel
             // 
             this.newPasswordLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.newPasswordLabel.AutoSize = true;
             this.newPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPasswordLabel.Location = new System.Drawing.Point(157, 246);
+            this.newPasswordLabel.Location = new System.Drawing.Point(154, 246);
             this.newPasswordLabel.Name = "newPasswordLabel";
             this.newPasswordLabel.Size = new System.Drawing.Size(238, 32);
             this.newPasswordLabel.TabIndex = 5;
@@ -156,7 +131,7 @@
             this.userNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.userNameLabel.AutoSize = true;
             this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameLabel.Location = new System.Drawing.Point(256, 111);
+            this.userNameLabel.Location = new System.Drawing.Point(253, 111);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(139, 32);
             this.userNameLabel.TabIndex = 0;
@@ -173,7 +148,7 @@
             this.tableLayoutPanel2.Controls.Add(this.loginButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.changePasswordButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.backHomeButton, 2, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(424, 334);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(420, 334);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -215,6 +190,31 @@
             this.backHomeButton.TabIndex = 4;
             this.backHomeButton.Text = "Go Back To Home Page";
             this.backHomeButton.UseVisualStyleBackColor = false;
+            // 
+            // passwordLabel
+            // 
+            this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.Location = new System.Drawing.Point(221, 186);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(171, 32);
+            this.passwordLabel.TabIndex = 1;
+            this.passwordLabel.Text = "Password : ";
+            // 
+            // welcomeLabel
+            // 
+            this.welcomeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.welcomeLabel.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.welcomeLabel, 2);
+            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeLabel.Location = new System.Drawing.Point(382, 23);
+            this.welcomeLabel.Name = "welcomeLabel";
+            this.welcomeLabel.Padding = new System.Windows.Forms.Padding(3);
+            this.welcomeLabel.Size = new System.Drawing.Size(138, 38);
+            this.welcomeLabel.TabIndex = 10;
+            this.welcomeLabel.Text = "Welcome";
+            this.welcomeLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // LoginFormDialog
             // 
