@@ -53,7 +53,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1313, 662);
+            this.tabControl1.Size = new System.Drawing.Size(1313, 678);
             this.tabControl1.TabIndex = 0;
             // 
             // hometabPage
@@ -63,7 +63,7 @@
             this.hometabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hometabPage.Name = "hometabPage";
             this.hometabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.hometabPage.Size = new System.Drawing.Size(1305, 633);
+            this.hometabPage.Size = new System.Drawing.Size(1305, 649);
             this.hometabPage.TabIndex = 0;
             this.hometabPage.Text = "Home";
             this.hometabPage.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@
             this.AddRecipetabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddRecipetabPage.Name = "AddRecipetabPage";
             this.AddRecipetabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.AddRecipetabPage.Size = new System.Drawing.Size(1305, 633);
+            this.AddRecipetabPage.Size = new System.Drawing.Size(1305, 649);
             this.AddRecipetabPage.TabIndex = 1;
             this.AddRecipetabPage.Text = "Add Recipe";
             this.AddRecipetabPage.UseVisualStyleBackColor = true;
@@ -92,9 +92,8 @@
             // 
             this.addRecipeDetailUserControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addRecipeDetailUserControl2.Location = new System.Drawing.Point(3, 2);
-            this.addRecipeDetailUserControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addRecipeDetailUserControl2.Name = "addRecipeDetailUserControl2";
-            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(1299, 629);
+            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(1299, 645);
             this.addRecipeDetailUserControl2.TabIndex = 0;
             // 
             // pictureBox1
@@ -162,7 +161,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1315, 879);
+            this.ClientSize = new System.Drawing.Size(1315, 1055);
             this.Controls.Add(this.loginlinkLabel);
             this.Controls.Add(this.signUplabel);
             this.Controls.Add(this.logoutLinkLabel);
@@ -194,11 +193,11 @@
         private UserControls.AddRecipeDetailUserControl addRecipeDetailUserControl1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private UserControls.RecipeMainUserControl recipeMainUserControl1;
-        private UserControls.AddRecipeDetailUserControl addRecipeDetailUserControl2;
         private UserControls.RecipeMainUserControl recipeMainUserControl2;
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.LinkLabel logoutLinkLabel;
         private System.Windows.Forms.LinkLabel signUplabel;
         private System.Windows.Forms.LinkLabel loginlinkLabel;
+        private UserControls.AddRecipeDetailUserControl addRecipeDetailUserControl2;
     }
 }
