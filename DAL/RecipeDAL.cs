@@ -459,6 +459,50 @@ namespace RecipeBookApp.DAL
         }
 
         /// <summary>
+        /// Updates the Recipe to the database
+        /// </summary>
+        /// <param name="nutrition">Recipe to update</param>
+        /// <returns>Whether or not the recipe updated</returns>
+        public bool UpdateRecipe(Recipe recipe)
+        {
+            int result = -1;
+            string selectStatement = @"UPDATE recipe 
+                                        SET Name = @name, 
+	                                        Instructions = @instructions, 
+	                                        cooktime = @cooktime, 
+	                                        nutritionID = @nutritionID, 
+	                                        ethnicOriginID = @ethnicOriginID, 
+	                                        userWhoCreated = @userWhoCreated
+                                        WHERE id = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@name", recipe.RecipeName);
+                    selectCommand.Parameters.AddWithValue("@instructions", recipe.RecipeInstructions);
+                    selectCommand.Parameters.AddWithValue("@cooktime", recipe.CookingTime);
+                    selectCommand.Parameters.AddWithValue("@nutritionID", recipe.NutritionId);
+                    selectCommand.Parameters.AddWithValue("@ethnicOriginID", recipe.EthnicId);
+                    selectCommand.Parameters.AddWithValue("@userWhoCreated", recipe.UserWhoCreated);
+                    selectCommand.Parameters.AddWithValue("@id", recipe.RecipeId);
+
+                    connection.Open();
+                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Inserts the recipe image into the database
         /// </summary>
         /// <param name="recipe">Recipe whose image to add</param>
@@ -529,68 +573,45 @@ namespace RecipeBookApp.DAL
             }
         }
 
-        /**
-    /// <summary>
-    /// Updates the Recipe details.
-    /// </summary>
-    /// <param name="oldRecipe">The old recipe.</param>
-    /// <param name="newRecipe">The new recipe.</param>
-    /// <returns></returns>
-    public static bool UpdateRecipe(Recipe oldRecipe, Recipe newRecipe)
-    {
-        string selectStatement = "UPDATE Recipe SET " +
-                                    "RecipeName = @NewRecipeName, RecipeInstructions = @NewRecipeInstructions, " +
-                                    "CookingTime = @NewCookingTime, NutritionId = @NewNutritionId, EthnicId = @NewEthnicId" +
-                                    "WHERE RecipeID = @OldRecipeID " +
-                                        "AND RecipeName = @OldRecipeName AND " +
-                                    "RecipeInstructions = @OldRecipeInstructions " +
-                                        "AND CookingTime = @OldCookingTime AND " +
-                                    "NutritionId = @OldNutritionId AND EthnicId = @OldEthnicId ";
-
-        using (SQLiteConnection connection = DBConnection.GetConnection())
+        /// <summary>
+        /// Updates the Recipe image in the database
+        /// </summary>
+        /// <param name="nutrition">Recipe to update</param>
+        /// <returns>Whether or not the recipe image updated</returns>
+        public bool UpdateImage(Recipe recipe)
         {
-            using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+            int result = -1;
+            string selectStatement = @"UPDATE image
+                                        SET image = @image
+                                        WHERE recipeID = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                // Old Recipe details Mappings
-                selectCommand.Parameters.Add("@OldRecipeName", DbType.String);
-                selectCommand.Parameters["@OldRecipeName"].Value = oldRecipe.RecipeName;
-
-                selectCommand.Parameters.Add("@OldRecipeInstructions", DbType.String);
-                selectCommand.Parameters["@OldRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
-
-                selectCommand.Parameters.Add("@OldCookingTime", DbType.Int32);
-                selectCommand.Parameters["@OldCookingTime"].Value = oldRecipe.CookingTime;
-                selectCommand.Parameters.Add("@OldNutritionId", DbType.Int32);
-                selectCommand.Parameters["@OldNutritionId"].Value = oldRecipe.NutritionId;
-                selectCommand.Parameters.Add("@OldEthnicId", DbType.Int32);
-                selectCommand.Parameters["@OldEthnicId"].Value = oldRecipe.EthnicId;
-
-                // New Recipe details Mappings
-                selectCommand.Parameters.Add("@NewRecipeName", DbType.String);
-                selectCommand.Parameters["@NewRecipeName"].Value = newRecipe.RecipeName;
-                selectCommand.Parameters.Add("@NewRecipeInstructions", DbType.String);
-                selectCommand.Parameters["@NewRecipeInstructions"].Value = oldRecipe.RecipeInstructions;
-                selectCommand.Parameters.Add("@NewCookingTime", DbType.Int32);
-                selectCommand.Parameters["@NewCookingTime"].Value = oldRecipe.CookingTime;
-                selectCommand.Parameters.Add("@NewNutritionId", DbType.Int32);
-                selectCommand.Parameters["@NewNutritionId"].Value = oldRecipe.NutritionId;
-                selectCommand.Parameters.Add("@EthnicId", DbType.Int32);
-                selectCommand.Parameters["@NewEthnicId"].Value = oldRecipe.EthnicId;
-
-                
-                int resultCount = selectCommand.ExecuteNonQuery();
-                if (resultCount > 0)
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        selectCommand.Parameters.AddWithValue("@id", recipe.RecipeId);
+                        recipe.RecipeImage.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                        byte[] data = stream.ToArray();
+                        selectCommand.Parameters.AddWithValue("@image", data);
+
+                        connection.Open();
+                        result = Convert.ToInt32(selectCommand.ExecuteScalar());
+                        connection.Close();
+                    }
                 }
             }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
-    }
-        */
+
 
         /// <summary>
         /// Adds a new row to the recipe_uses_kitchenware table
@@ -769,6 +790,41 @@ namespace RecipeBookApp.DAL
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Updates a row in recipe_has_ingredient table
+        /// <param name="recipeID">Id of the Recipe</param>
+        /// <param name="ingredientID">Id of the Ingredient</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool UpdateAmountInRecipeHasIngredient(int recipeID, int ingredientID, string amount)
+        {
+            int result = -1;
+            string selectStatement = @"UPDATE recipe_has_ingredient
+                                        SET amount = @amount
+                                        WHERE recipeID = @recipeID AND ingredientID = @ingredientID;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
+                    selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
+                    selectCommand.Parameters.AddWithValue("@amount", amount);
 
                     connection.Open();
                     result = selectCommand.ExecuteNonQuery();
