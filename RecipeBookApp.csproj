@@ -115,6 +115,11 @@
     <Compile Include="DAL\TypeOfMealDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\RecipeListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -257,9 +262,7 @@
     <None Include="Resources\login_image2.jpg" />
     <None Include="Resources\logimimage_3.jpg" />
     <None Include="Resources\login_image1.jpg" />
-    <None Include="Resources\Add_recipe_image.jpg" />
-    <None Include="Resources\Add_recipe_image1.jpg" />
-    <None Include="Resources\Add_recipe_image2.jpg" />
+    <None Include="Resources\images.jpg" />
     <Content Include="sampleimage.jpg" />
     <EmbeddedResource Include="UserControls\RecipeListItem.resx">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
@@ -291,6 +294,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Content Include="db\recipe_app.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

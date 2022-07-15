@@ -67,7 +67,7 @@ namespace RecipeBookApp.UserControls
                 this.CreateIngredientsDropDown();
                 this.CreateMealTypeDropDown();
                 this.CreateKitchenWareDropDown();
-                this.CreateFoodTypeDropDown();
+               
                 this.CreateEthnicDropDown();
                 this.recipeList = this.recipeController.GetRecipes();
             }
@@ -151,28 +151,7 @@ namespace RecipeBookApp.UserControls
             }
         }
 
-        private void CreateFoodTypeDropDown()
-        {
-            try
-            {
-                this.addFoodTypeComboBox.DataSource = null;
-                this.foodTypeList = this.foodController.GetFoodTypes();
-                this.foodTypeList.Add(new FoodType
-                {
-                    FoodId = -1,
-                    TypeOfFood = "Select the Food type"
-                });
-                this.addFoodTypeComboBox.DataSource = this.foodTypeList;
-                this.addFoodTypeComboBox.DisplayMember = "TypeOfFood";
-                this.addFoodTypeComboBox.ValueMember = "FoodId";
-                this.addFoodTypeComboBox.SelectedValue = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error occured on - Apply Filter meal type transaction -" + ex.Message,
-                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+       
         private void CreateEthnicDropDown()
         {
             try
@@ -555,7 +534,6 @@ namespace RecipeBookApp.UserControls
             this.addKitchenwareRichTextBox.Text = "";
             this.addIngredIentsRichBox.Text = "";
             this.addRecipeMealTypeComboBox.Text = "Select the MealType";
-            this.addFoodTypeComboBox.Text = "Select the Food type";
             this.addIngredientCombobox.Text = "Select the Ingredient";
             this.addKitchenWareComboBox.Text = "Select the KitchenWare";
             this.addEthnicCombobox.Text = "Select the Ethnicity";
