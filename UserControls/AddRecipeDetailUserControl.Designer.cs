@@ -183,6 +183,7 @@
             this.removeMealButton.TabIndex = 2;
             this.removeMealButton.Text = "Remove";
             this.removeMealButton.UseVisualStyleBackColor = true;
+            this.removeMealButton.Click += new System.EventHandler(this.RemoveMealButton_Click);
             // 
             // addMealTypeRichText
             // 
@@ -210,6 +211,7 @@
             this.addmealButton.TabIndex = 1;
             this.addmealButton.Text = "Add";
             this.addmealButton.UseVisualStyleBackColor = true;
+            this.addmealButton.Click += new System.EventHandler(this.AddmealButton_Click);
             // 
             // kitchenWareTableLayoutPanel
             // 
@@ -627,11 +629,13 @@
             this.imageTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.imageTextBox.Location = new System.Drawing.Point(3, 7);
             this.imageTextBox.Name = "imageTextBox";
+            this.imageTextBox.ReadOnly = true;
             this.imageTextBox.Size = new System.Drawing.Size(427, 22);
             this.imageTextBox.TabIndex = 39;
             // 
             // tableLayoutPanel2
             // 
+            this.tableLayoutPanel2.BackColor = System.Drawing.SystemColors.Info;
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.66667F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.33333F));
@@ -643,42 +647,44 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(649, 35);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(656, 35);
             this.tableLayoutPanel2.TabIndex = 31;
             // 
             // addRecipeCancelButton
             // 
             this.addRecipeCancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addRecipeCancelButton.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.addRecipeCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addRecipeCancelButton.Location = new System.Drawing.Point(173, 3);
+            this.addRecipeCancelButton.Location = new System.Drawing.Point(178, 3);
             this.addRecipeCancelButton.Name = "addRecipeCancelButton";
             this.addRecipeCancelButton.Size = new System.Drawing.Size(99, 29);
             this.addRecipeCancelButton.TabIndex = 32;
             this.addRecipeCancelButton.Text = "Reset";
-            this.addRecipeCancelButton.UseVisualStyleBackColor = true;
+            this.addRecipeCancelButton.UseVisualStyleBackColor = false;
             this.addRecipeCancelButton.Click += new System.EventHandler(this.AddRecipeResetButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(302, 0);
+            this.label1.Location = new System.Drawing.Point(309, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(299, 18);
+            this.label1.Size = new System.Drawing.Size(342, 18);
             this.label1.TabIndex = 30;
             this.label1.Text = "Please note all * marked are mandatory data";
             // 
             // addRecipeButton
             // 
             this.addRecipeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addRecipeButton.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.addRecipeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addRecipeButton.Location = new System.Drawing.Point(37, 3);
+            this.addRecipeButton.Location = new System.Drawing.Point(39, 3);
             this.addRecipeButton.Name = "addRecipeButton";
             this.addRecipeButton.Size = new System.Drawing.Size(71, 29);
             this.addRecipeButton.TabIndex = 31;
             this.addRecipeButton.Text = "Add Recipe";
-            this.addRecipeButton.UseVisualStyleBackColor = true;
+            this.addRecipeButton.UseVisualStyleBackColor = false;
             this.addRecipeButton.Click += new System.EventHandler(this.AddRecipeButton_Click);
             // 
             // erroLabel
@@ -706,10 +712,10 @@
             this.addInstructionlinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addInstructionlinkLabel.Location = new System.Drawing.Point(52, 351);
             this.addInstructionlinkLabel.Name = "addInstructionlinkLabel";
-            this.addInstructionlinkLabel.Size = new System.Drawing.Size(138, 22);
+            this.addInstructionlinkLabel.Size = new System.Drawing.Size(155, 22);
             this.addInstructionlinkLabel.TabIndex = 42;
             this.addInstructionlinkLabel.TabStop = true;
-            this.addInstructionlinkLabel.Text = "Add Instructions";
+            this.addInstructionlinkLabel.Text = "* Add Instructions ";
             this.addInstructionlinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AddInstructionlinkLabel_LinkClicked);
             // 
             // AddRecipeDetailUserControl

@@ -474,6 +474,31 @@ namespace RecipeBookApp.UserControls
           
         }
 
+        private void AddmealButton_Click(object sender, EventArgs e)
+        {
+            if (this.recipeIngredients.Contains(this.addIngredientCombobox.Text))
+            {
+                MessageBox.Show(this.addIngredientCombobox.Text + "- already added. Please select something else.",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.addIngredientCombobox.Text == "Select the Ingredient")
+            {
+                MessageBox.Show("Please select valid Ingredients to add",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeIngredients.Add(this.addIngredientCombobox.Text.ToString());
+            this.DisplayIngredients();
+
+        }
+
+        private void RemoveMealButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void AddKitchennware_Click(object sender, EventArgs e)
         {
             if (this.recipeKitchenWare.Contains(this.addKitchenWareComboBox.Text))
@@ -549,13 +574,13 @@ namespace RecipeBookApp.UserControls
             if (open.ShowDialog() == DialogResult.OK)
             {
           
-                imageTextBox.Text = open.FileName;
+                this.imageTextBox.Text = open.FileName;
             }
         }
 
         private void AddInstructionlinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using (Form instructionDialog = new View.AddRecipeInstructionDialog())
+            using (Form instructionDialog = new View.AddRecipeInstructionDialog(this.recipeInstructions.Text))
             {
                 DialogResult result = instructionDialog.ShowDialog();
                 if (result == DialogResult.OK)
@@ -567,5 +592,7 @@ namespace RecipeBookApp.UserControls
                 }
             }
         }
+
+        
     }
 }

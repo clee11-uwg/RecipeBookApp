@@ -19,6 +19,12 @@ namespace RecipeBookApp.View
             InitializeComponent();
            
         }
+        public AddRecipeInstructionDialog(string curentInstruction)
+        {
+            InitializeComponent();
+            this.addInstructtionTextBox.Text = curentInstruction;
+
+        }
 
         private void SaveInstructionButton_Click(object sender, EventArgs e)
         {
