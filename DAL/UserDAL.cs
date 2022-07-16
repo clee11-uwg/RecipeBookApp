@@ -46,17 +46,43 @@ namespace RecipeBookApp.DAL
             return users;
         }
 
+        /// <summary>
+        /// Finds if this username is all ready in use
+        /// <param name="username">Name of User</param>
+        /// <returns>If user name all ready exists</returns>
+        public bool DoesUserNameExist(string username)
+        {
+            bool doesUserExist = false;
+            string selectStatement = @"SELECT EXISTS
+	                                    (SELECT *
+	                                    FROM User
+	                                    WHERE User.name = @username);";
 
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <param name="newUser"></param>
-        public bool  RegisterUser(User newUser)
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@username", username);
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        doesUserExist = Convert.ToBoolean(selectCommand.ExecuteNonQuery());
+                    }
+                }
+            }
+            return doesUserExist;
+        }
+
+
+        /// <summary>
+        /// Registers a new user into the db
+        /// </summary>
+        /// <param name="newUser">The new user to register</param>
+        /// <returns>Whether or not the new user was registered</returns>
+        public bool RegisterUser(User newUser)
         {
             int result = -1;
-            string selectStatement = @"INSERT INTO USER (name,password,is_admin) VALUES (@username,@password,@is_admin);";
-
-         
+            string selectStatement = @"INSERT INTO USER (name, password,is_admin) 
+                                        VALUES (@username, @password, @is_admin)";
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
@@ -64,18 +90,15 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@username", newUser.Name);
                     selectCommand.Parameters.AddWithValue("@password", newUser.Password);
                     selectCommand.Parameters.AddWithValue("@is_admin", Convert.ToInt32(newUser.Is_Admin));
-
-                    result = selectCommand.ExecuteNonQuery();
-                    connection.Close();
+    
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            insertSucess = true;
+                        }
+                    }
                 }
-            }
-            if (result < 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
             }
         }
 
@@ -142,6 +165,38 @@ namespace RecipeBookApp.DAL
         }
 
         /// <summary>
+        /// Changes a user's password
+        /// <param name="user">The User whose password you're changing</param>
+        /// <param name="newPassword">The new password</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool ChangePassword(User user, string newPassword)
+        {
+            int result = -1;
+            string selectStatement = @"UPDATE User
+                                        SET amount = @password
+                                        WHERE id = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@password", newPassword);
+                    selectCommand.Parameters.AddWithValue("@id", user.ID);
+
+                    result = selectCommand.ExecuteNonQuery();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Adds a new favorite recipe for the user
         /// <param name="userID">Id of the User</param>
         /// <param name="recipeID">Id of the Recipe</param>
@@ -159,9 +214,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@userID", userID);
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
 
-                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
-                    connection.Close();
                 }
             }
             if (result < 1)
@@ -192,9 +245,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@userID", userID);
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
 
-                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
-                    connection.Close();
                 }
             }
             if (result < 1)

@@ -136,27 +136,29 @@ namespace RecipeBookApp.Controller
                 throw new NullReferenceException("User or Recipe does not exist. Please try again");
             }
         }
+
         /// <summary>
-        /// 
+        /// Registers a new User into the db
         /// </summary>
-        /// <param name="newUser"></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="NullReferenceException"></exception>
+        /// <param name="newUser">New User to register</param>
+        /// <returns>Whether or not the user was added</returns>
         public bool AddUser(User newUser)
         {
-            if (newUser is null)
-            {
-                throw new ArgumentNullException("No new user details found to registration");
-            }
-            else if (this.UserDAL.GetUser(newUser.Name) is null)
-            {
-                return this.UserDAL.RegisterUser(newUser);
-            }
-            else
-            {
-                throw new NullReferenceException("Username already exists in the database");
-            }
+           
+                if (newUser is null)
+                {
+                    throw new ArgumentNullException("No new user details found to registration");
+                }
+                if ((this.UserDAL.GetUser(newUser.Name)) is null)
+                {
+                    this.UserDAL.RegisterUser(newUser);
+                }
+                else
+                {
+                    throw new NullReferenceException("Username already exists in the database");
+                }                
+            
+            
         }
-
     }
 }
