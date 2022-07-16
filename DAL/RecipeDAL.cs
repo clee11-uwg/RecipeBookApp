@@ -246,7 +246,7 @@ namespace RecipeBookApp.DAL
                                         SELECT recipe.id AS `id`
                                         FROM recipe
 		                                    JOIN ethnic_origin ON recipe.ethnicOriginID = ethnic_origin.id
-	                                    WHERE ethnic_origin.id IN (@ethnicities);
+	                                    WHERE ethnic_origin.id NOT IN (@ethnicities);
 
                                     DROP TABLE IF EXISTS tempFilterTypeOfFood;
                                     CREATE TEMPORARY TABLE tempFilterTypeOfFood AS
@@ -255,7 +255,7 @@ namespace RecipeBookApp.DAL
 		                                    JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
 		                                    JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
 		                                    JOIN type_of_food ON type_of_food.id = ingredient.typeOfFoodID
-	                                    WHERE type_of_food.id IN (@typesOfFood);
+	                                    WHERE type_of_food.id NOT IN (@typesOfFood);
 
                                     DROP TABLE IF EXISTS tempFilterIngredient;
                                     CREATE TEMPORARY TABLE tempFilterIngredient AS
@@ -263,7 +263,7 @@ namespace RecipeBookApp.DAL
                                         FROM recipe
 		                                    JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
 		                                    JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
-	                                    WHERE ingredient.id IN (@ingredients);
+	                                    WHERE ingredient.id NOT IN (@ingredients);
 
                                     DROP TABLE IF EXISTS tempFilterKitchenware;
                                     CREATE TEMPORARY TABLE tempFilterKitchenware AS
@@ -271,7 +271,7 @@ namespace RecipeBookApp.DAL
                                         FROM recipe
 		                                    JOIN recipe_uses_kitchenware ON recipe_uses_kitchenware.recipeID = recipe.id
 		                                    JOIN kitchenware ON recipe_uses_kitchenware.kitchenwareID = kitchenware.id
-	                                    WHERE kitchenware.id IN (@kitchenware);
+	                                    WHERE kitchenware.id NOT IN (@kitchenware);
 
                                     DROP TABLE IF EXISTS tempFilterTypesOfMeal;
                                     CREATE TEMPORARY TABLE tempFilterTypesOfMeal AS
@@ -279,7 +279,7 @@ namespace RecipeBookApp.DAL
                                         FROM recipe
 		                                    JOIN recipe_is_a_type_of_meal ON recipe_is_a_type_of_meal.recipeID = recipe.id
 		                                    JOIN type_of_meal ON recipe_is_a_type_of_meal.typeOfMealID = type_of_meal.id
-	                                    WHERE type_of_meal.id IN (@typesOfMeal);
+	                                    WHERE type_of_meal.id NOT IN (@typesOfMeal);
 
                                     DROP TABLE IF EXISTS tempFilterNutrition;
                                     CREATE TEMPORARY TABLE tempFilterNutrition AS
@@ -293,21 +293,20 @@ namespace RecipeBookApp.DAL
                                     FROM recipe
                                         JOIN image on recipe.id = image.recipeID
                                     WHERE recipe.id NOT IN tempFilterAllergen
-	                                    AND recipe.id NOT IN tempFilterEthnic
-	                                    AND recipe.id NOT IN tempFilterTypeOfFood
-	                                    AND recipe.id NOT IN tempFilterIngredient
-	                                    AND recipe.id NOT IN tempFilterKitchenware
-	                                    AND recipe.id NOT IN tempFilterTypesOfMeal
+	                                    AND recipe.id IN tempFilterEthnic
+	                                    AND recipe.id IN tempFilterTypeOfFood
+	                                    AND recipe.id IN tempFilterIngredient
+	                                    AND recipe.id IN tempFilterKitchenware
+	                                    AND recipe.id IN tempFilterTypesOfMeal
 	                                    AND recipe.id NOT IN tempFilterNutrition;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                 //   @allergens,@ethnicities,@ingredients,@kitchenware,@typesOfMeal,@nutrition
                     selectCommand.Parameters.AddWithValue("@allergens", allergens[0]);
                     selectCommand.Parameters.AddWithValue("@ethnicities", ethnicities[0]);
-                  selectCommand.Parameters.AddWithValue("@typesOfFood", foodTypes[0]);
+                    selectCommand.Parameters.AddWithValue("@typesOfFood", foodTypes[0]);
                     selectCommand.Parameters.AddWithValue("@ingredients", ingredients[0]);
                     selectCommand.Parameters.AddWithValue("@kitchenware", kitchenware[0]);
                     selectCommand.Parameters.AddWithValue("@typesOfMeal", mealTypes[0]);
