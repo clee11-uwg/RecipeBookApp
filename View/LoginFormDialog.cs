@@ -78,7 +78,5 @@ namespace RecipeBookApp.View
             this.newPasswordLabel.Visible = false;
 
         }
-
-       
     }
 }

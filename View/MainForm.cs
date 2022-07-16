@@ -34,7 +34,8 @@ namespace RecipeBookApp.View
                 if (result == DialogResult.OK)
                 {
                     this.LoginDisplay();
-               
+                    this.recipeMainUserControl2.SetUser(UserController.GetLoginUser());
+                    this.recipeMainUserControl2.Reset();
                 }
             }
         }
@@ -77,6 +78,8 @@ namespace RecipeBookApp.View
             if (result == DialogResult.Yes)
             {
                 this.LogoutClear();
+                this.recipeMainUserControl2.SetUser(UserController.GetLoginUser());
+                this.recipeMainUserControl2.Reset();
             }
             
         }

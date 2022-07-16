@@ -17,12 +17,13 @@ namespace RecipeBookApp.UserControls
     {
         private RecipeController recipeController;
         private RecipeDetails recipeDetailsScreen;
+        private User currentUser;
 
         public RecipeListItem()
         {
             InitializeComponent();
             this.recipeController = new RecipeController();
-            this.recipeDetailsScreen = new RecipeDetails();
+            this.currentUser = new User();
         }
 
         #region Properties
@@ -47,12 +48,19 @@ namespace RecipeBookApp.UserControls
             set { _image = value; picBoxRecipeImage.Image = value;  }
         }
 
+        public void SetUser(User currentUser)
+        {
+            this.currentUser = currentUser;
+        }
+
 
         #endregion
 
         private void LblTile_Click(object sender, EventArgs e)
         {
             Recipe selectedRecipe = this.recipeController.GetRecipe(RecipeId);
+            this.recipeDetailsScreen = new RecipeDetails();
+            this.recipeDetailsScreen.SetUser(this.currentUser);
             this.recipeDetailsScreen.SetRecipe(selectedRecipe);
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
@@ -62,6 +70,8 @@ namespace RecipeBookApp.UserControls
         private void PicBoxRecipeImage_Click(object sender, EventArgs e)
         {
             Recipe selectedRecipe = this.recipeController.GetRecipe(RecipeId);
+            this.recipeDetailsScreen = new RecipeDetails();
+            this.recipeDetailsScreen.SetUser(this.currentUser);
             this.recipeDetailsScreen.SetRecipe(selectedRecipe);
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
