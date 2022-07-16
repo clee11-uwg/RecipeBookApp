@@ -119,7 +119,9 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@calories", nutrition.Calories);
                     selectCommand.Parameters.AddWithValue("@serving_size", nutrition.ServingSize);
 
+                    connection.Open();
                     id = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    connection.Close();
                 }
             }
             return id;
@@ -142,7 +144,9 @@ namespace RecipeBookApp.DAL
                 {
                     selectCommand.Parameters.AddWithValue("@id", id);
 
+                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
             if (result < 1)
@@ -184,7 +188,9 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@serving_size", nutrition.ServingSize);
                     selectCommand.Parameters.AddWithValue("@id", nutrition.NutritionId);
 
+                    connection.Open();
                     result = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    connection.Close();
                 }
             }
             if (result < 1)

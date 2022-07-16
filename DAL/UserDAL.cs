@@ -92,7 +92,9 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@password", newUser.Password);
                     selectCommand.Parameters.AddWithValue("@is_admin", Convert.ToInt32(newUser.Is_Admin));
 
+                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
             if (result < 1)
@@ -217,7 +219,9 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@userID", userID);
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
 
+                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
             if (result < 1)
@@ -248,7 +252,9 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@userID", userID);
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
 
+                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
             if (result < 1)
