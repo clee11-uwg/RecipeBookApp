@@ -60,6 +60,10 @@ namespace RecipeBookApp.UserControls
            
         }
 
+        /// <summary>
+        /// Method to set the current user
+        /// </summary>
+        /// <param name="currentUser">Current logged in user</param>
         public void SetUser(User currentUser)
         {
             this.currentUser = currentUser;

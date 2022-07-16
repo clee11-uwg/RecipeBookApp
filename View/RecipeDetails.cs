@@ -47,6 +47,23 @@ namespace RecipeBookApp.View
         }
 
         /// <summary>
+        /// Method to display update and delete buttons if a user is current signed in
+        /// </summary>
+        public void ShowButtons()
+        {
+            if (this.currentUser == null || string.IsNullOrEmpty(this.currentUser.Name))
+            {
+                this.updateButton.Visible = false;
+                this.deleteButton.Visible = false;
+            }
+            else
+            {
+                this.updateButton.Visible = true;
+                this.deleteButton.Visible = true;
+            }
+        }
+
+        /// <summary>
         /// Method to set the Recipe to the selected recipe
         /// </summary>
         /// <param name="userSelectedRecipe">Selected recipe from user</param>
@@ -127,6 +144,7 @@ namespace RecipeBookApp.View
             // to determine if the button should show at all. The following is assuming the user created selected recipe
             UpdateRecipeForm updateRecipeForm = new UpdateRecipeForm();
             updateRecipeForm.SetRecipe(this.selectedRecipe);
+            updateRecipeForm.SetUser(this.currentUser);
             updateRecipeForm.ShowDialog();
         }
 

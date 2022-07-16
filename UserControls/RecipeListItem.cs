@@ -48,6 +48,10 @@ namespace RecipeBookApp.UserControls
             set { _image = value; picBoxRecipeImage.Image = value;  }
         }
 
+        /// <summary>
+        /// Method to set the current user
+        /// </summary>
+        /// <param name="currentUser">Current loggin in user</param>
         public void SetUser(User currentUser)
         {
             this.currentUser = currentUser;
@@ -62,6 +66,7 @@ namespace RecipeBookApp.UserControls
             this.recipeDetailsScreen = new RecipeDetails();
             this.recipeDetailsScreen.SetUser(this.currentUser);
             this.recipeDetailsScreen.SetRecipe(selectedRecipe);
+            this.recipeDetailsScreen.ShowButtons();
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
             this.ParentForm.Show();
@@ -73,6 +78,7 @@ namespace RecipeBookApp.UserControls
             this.recipeDetailsScreen = new RecipeDetails();
             this.recipeDetailsScreen.SetUser(this.currentUser);
             this.recipeDetailsScreen.SetRecipe(selectedRecipe);
+            this.recipeDetailsScreen.ShowButtons();
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
             this.ParentForm.Show();

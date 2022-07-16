@@ -28,6 +28,7 @@ namespace RecipeBookApp.UserControls
         private List<string> recipeKitchenware;
         private List<string> recipeMealTypes;
         private List<string> recipeFoodTypes;
+        private User currentUser;
 
         public UpdateRecipeUserControl()
         {
@@ -46,6 +47,7 @@ namespace RecipeBookApp.UserControls
             this.recipeKitchenware = new List<string>();
             this.recipeMealTypes = new List<string>();
             this.recipeFoodTypes = new List<string>();
+            this.currentUser = new User();
         }
 
         /// <summary>
@@ -65,6 +67,15 @@ namespace RecipeBookApp.UserControls
             GetMealTypesForRecipe();
             GetIngredientsForRecipe();
             GetKitchenwareForRecipe();
+        }
+
+        /// <summary>
+        /// Method to set the current user
+        /// </summary>
+        /// <param name="currentUser">current logged in user</param>
+        public void SetUser(User currentUser)
+        {
+            this.currentUser = currentUser;
         }
 
         private void GetKitchenwareForRecipe()
@@ -395,7 +406,7 @@ namespace RecipeBookApp.UserControls
 
         private void UpdateRecipeButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming soon...");
+            MessageBox.Show(this.currentUser.Name);
         }
     }
 }
