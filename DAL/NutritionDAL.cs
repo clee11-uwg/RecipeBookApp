@@ -188,9 +188,9 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@serving_size", nutrition.ServingSize);
                     selectCommand.Parameters.AddWithValue("@id", nutrition.NutritionId);
 
-                    connection.Open();
+                    //connection.Open();
                     result = Convert.ToInt32(selectCommand.ExecuteScalar());
-                    connection.Close();
+                    //connection.Close();
                 }
             }
             if (result < 1)

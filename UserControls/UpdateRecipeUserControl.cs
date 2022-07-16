@@ -254,12 +254,6 @@ namespace RecipeBookApp.UserControls
             this.servingTxtBx.Text = nutritionList[0].ServingSize;
 
             this.nutrition.NutritionId = nutritionList[0].NutritionId;
-            this.nutrition.Carbohydrate = nutritionList[0].Carbohydrate;
-            this.nutrition.Protein = nutritionList[0].Protein;
-            this.nutrition.Alcohol = nutritionList[0].Alcohol;
-            this.nutrition.Fat = nutritionList[0].Fat;
-            this.nutrition.Calories = nutritionList[0].Calories;
-            this.nutrition.ServingSize = nutritionList[0].ServingSize;
         }
 
         private void DisplayIngredients()
@@ -435,6 +429,16 @@ namespace RecipeBookApp.UserControls
             {
                 newKitchenwareList.Add(new Kitchenware { KitchenwareDetails = str });
             }
+
+            this.recipe.RecipeName = this.recipeNameTxtBx.Text;
+            this.recipe.EthnicId = Convert.ToInt32(this.ethnicityCmbBx.SelectedValue);
+
+            this.nutrition.Carbohydrate = Convert.ToInt32(this.carbTxtBx.Text);
+            this.nutrition.Protein = Convert.ToInt32(this.proteinTxtBx.Text);
+            this.nutrition.Alcohol = Convert.ToInt32(this.alcoholTxtBx.Text);
+            this.nutrition.Fat = Convert.ToInt32(this.fatTxtBx.Text);
+            this.nutrition.Calories = Convert.ToInt32(this.calorieTxtBx.Text);
+            this.nutrition.ServingSize = this.servingTxtBx.Text;
 
             try
             {
