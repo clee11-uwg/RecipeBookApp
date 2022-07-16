@@ -77,7 +77,15 @@ namespace RecipeBookApp.Controller
         public List<Recipe> FilterRecipes(int[] allergens, int[] ethnicities, int[] foodTypes,
             int[] ingredients, int[] kitchenware, int[] mealTypes, int[] nutrition)
         {
-            return this.recipeDAL.FilterRecipes(allergens, ethnicities, foodTypes, ingredients, kitchenware, mealTypes, nutrition);
+            if (allergens == null) allergens = new int[0];
+            if (ethnicities == null || ethnicities.Length == 0) ethnicities = new int[1]{0};
+            if (foodTypes == null || foodTypes.Length == 0) foodTypes = new int[1]{0};
+            if (ingredients == null || ingredients.Length == 0) ingredients = new int[1]{0};
+            if (kitchenware == null || kitchenware.Length == 0) kitchenware = new int[1]{0};
+            if (mealTypes == null || mealTypes.Length == 0) mealTypes = new int[1]{0};
+            if (nutrition == null) nutrition = new int[0];
+            return this.recipeDAL.FilterRecipes(allergens, ethnicities, foodTypes, ingredients, 
+                kitchenware, mealTypes, nutrition);
         }
 
         /// <summary>

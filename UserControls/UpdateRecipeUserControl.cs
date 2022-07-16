@@ -15,6 +15,8 @@ namespace RecipeBookApp.UserControls
     public partial class UpdateRecipeUserControl : UserControl
     {
         private Recipe recipe;
+        private Nutrition nutrition;
+        private RecipeController recipeController;
         private NutritionController nutritionController;
         private TypeOfFoodController foodTypeController;
         private TypeOfMealController mealTypeController;
@@ -28,10 +30,12 @@ namespace RecipeBookApp.UserControls
         private List<string> recipeKitchenware;
         private List<string> recipeMealTypes;
         private List<string> recipeFoodTypes;
+        private User currentUser;
 
         public UpdateRecipeUserControl()
         {
             InitializeComponent();
+            this.recipeController = new RecipeController();
             this.nutritionController = new NutritionController();
             this.foodTypeController = new TypeOfFoodController();
             this.mealTypeController = new TypeOfMealController();
@@ -46,6 +50,8 @@ namespace RecipeBookApp.UserControls
             this.recipeKitchenware = new List<string>();
             this.recipeMealTypes = new List<string>();
             this.recipeFoodTypes = new List<string>();
+            this.currentUser = new User();
+            this.nutrition = new Nutrition();
         }
 
         /// <summary>
@@ -65,6 +71,15 @@ namespace RecipeBookApp.UserControls
             GetMealTypesForRecipe();
             GetIngredientsForRecipe();
             GetKitchenwareForRecipe();
+        }
+
+        /// <summary>
+        /// Method to set the current user
+        /// </summary>
+        /// <param name="currentUser">current logged in user</param>
+        public void SetUser(User currentUser)
+        {
+            this.currentUser = currentUser;
         }
 
         private void GetKitchenwareForRecipe()
@@ -237,6 +252,14 @@ namespace RecipeBookApp.UserControls
             this.fatTxtBx.Text = nutritionList[0].Fat.ToString();
             this.calorieTxtBx.Text = nutritionList[0].Calories.ToString();
             this.servingTxtBx.Text = nutritionList[0].ServingSize;
+
+            this.nutrition.NutritionId = nutritionList[0].NutritionId;
+            this.nutrition.Carbohydrate = nutritionList[0].Carbohydrate;
+            this.nutrition.Protein = nutritionList[0].Protein;
+            this.nutrition.Alcohol = nutritionList[0].Alcohol;
+            this.nutrition.Fat = nutritionList[0].Fat;
+            this.nutrition.Calories = nutritionList[0].Calories;
+            this.nutrition.ServingSize = nutritionList[0].ServingSize;
         }
 
         private void DisplayIngredients()
@@ -395,7 +418,44 @@ namespace RecipeBookApp.UserControls
 
         private void UpdateRecipeButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming soon...");
+            List<Ingredient> newIngredientList = new List<Ingredient>();
+            foreach (var str in this.recipeIngredients)
+            {
+                newIngredientList.Add(new Ingredient { IngredientName = str });
+            }
+
+            List<MealType> newMealTypeList = new List<MealType>();
+            foreach (var str in this.recipeMealTypes)
+            {
+                newMealTypeList.Add(new MealType { type = str });
+            }
+
+            List<Kitchenware> newKitchenwareList = new List<Kitchenware>();
+            foreach (var str in this.recipeKitchenware)
+            {
+                newKitchenwareList.Add(new Kitchenware { KitchenwareDetails = str });
+            }
+
+            try
+            {
+                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, newIngredientList, newMealTypeList, newKitchenwareList, this.nutrition);
+                if (result)
+                {
+                    MessageBox.Show("The recipe was updated");
+                }
+            }
+            catch (ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+            }
+            catch (UnauthorizedAccessException uae)
+            {
+                MessageBox.Show(uae.Message);
+            }
+            catch (ArgumentException ae)
+            {
+                MessageBox.Show(ae.Message);
+            }
         }
     }
 }

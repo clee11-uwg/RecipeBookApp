@@ -26,5 +26,14 @@ namespace RecipeBookApp.View
         {
             this.updateRecipeUserControl1.SetRecipe(selectedRecipe);
         }
+
+        /// <summary>
+        /// Passed the current user from the recipe details screen to the updated recipe user control
+        /// </summary>
+        /// <param name="currentUser"></param>
+        public void SetUser(User currentUser)
+        {
+            this.updateRecipeUserControl1.SetUser(currentUser);
+        }
     }
 }

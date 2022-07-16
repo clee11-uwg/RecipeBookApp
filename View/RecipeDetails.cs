@@ -15,6 +15,7 @@ namespace RecipeBookApp.View
     public partial class RecipeDetails : Form
     {
         private Recipe selectedRecipe;
+        private User currentUser;
         private RecipeController recipeController;
         private IngredientsController ingredientsController;
         private KitchenwareController kitchenwareController;
@@ -32,6 +33,7 @@ namespace RecipeBookApp.View
         {
             InitializeComponent();
             this.selectedRecipe = new Recipe();
+            this.currentUser = new User();
             this.recipeController = new RecipeController();
             this.ingredientsController = new IngredientsController();
             this.kitchenwareController = new KitchenwareController();
@@ -45,6 +47,23 @@ namespace RecipeBookApp.View
         }
 
         /// <summary>
+        /// Method to display update and delete buttons if a user is current signed in
+        /// </summary>
+        public void ShowButtons()
+        {
+            if (this.currentUser == null || string.IsNullOrEmpty(this.currentUser.Name))
+            {
+                this.updateButton.Visible = false;
+                this.deleteButton.Visible = false;
+            }
+            else
+            {
+                this.updateButton.Visible = true;
+                this.deleteButton.Visible = true;
+            }
+        }
+
+        /// <summary>
         /// Method to set the Recipe to the selected recipe
         /// </summary>
         /// <param name="userSelectedRecipe">Selected recipe from user</param>
@@ -52,10 +71,19 @@ namespace RecipeBookApp.View
         {
             this.selectedRecipe = userSelectedRecipe;
             this.titleLbl.Text = this.selectedRecipe.RecipeName;
-            GetRecipeDetails(this.selectedRecipe);
+            GetRecipeDetails();
         }
 
-        private void GetRecipeDetails(Recipe selectedRecipe)
+        /// <summary>
+        /// Method to set the User to the current user
+        /// </summary>
+        /// <param name="currentUser">Current logged in user</param>
+        public void SetUser (User currentUser)
+        {
+            this.currentUser = currentUser;            
+        }
+
+        private void GetRecipeDetails()
         {
             GetIngredients();
             GetKitchenware();
@@ -116,6 +144,7 @@ namespace RecipeBookApp.View
             // to determine if the button should show at all. The following is assuming the user created selected recipe
             UpdateRecipeForm updateRecipeForm = new UpdateRecipeForm();
             updateRecipeForm.SetRecipe(this.selectedRecipe);
+            updateRecipeForm.SetUser(this.currentUser);
             updateRecipeForm.ShowDialog();
         }
 

@@ -17,6 +17,7 @@ namespace RecipeBookApp.UserControls
     {
         
         private RecipeController recipeController;
+        private User currentUser;
         private List<Recipe> recipeList;
         private List<Allergen> allergenList;
         private List<Nutrition> nutritionList;
@@ -38,7 +39,7 @@ namespace RecipeBookApp.UserControls
         /// <summary>
         /// 0 parameter constructor for the RecipeList
         /// </summary>
-    public RecipeMainUserControl()
+        public RecipeMainUserControl()
         {
             InitializeComponent();
             this.allergenController = new AllergenController();
@@ -55,8 +56,17 @@ namespace RecipeBookApp.UserControls
             this.ingredientList = new List<Ingredient>();         
             this.recipeController = new RecipeController();
             this.recipeList = new List<Recipe>();
-            
+            this.currentUser = new User();
            
+        }
+
+        /// <summary>
+        /// Method to set the current user
+        /// </summary>
+        /// <param name="currentUser">Current logged in user</param>
+        public void SetUser(User currentUser)
+        {
+            this.currentUser = currentUser;
         }
 
         private void PopulateItems()
@@ -72,6 +82,7 @@ namespace RecipeBookApp.UserControls
                     recipeListItems[i].RecipeId = this.recipeList[i].RecipeId;
                     recipeListItems[i].RecipeName = this.recipeList[i].RecipeName;
                     recipeListItems[i].RecipeImage = this.recipeList[i].RecipeImage;
+                    recipeListItems[i].SetUser(this.currentUser);
 
                     if (flowLayoutPanel1.Controls.Count < 0)
                     {
@@ -82,7 +93,7 @@ namespace RecipeBookApp.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured on - Apply Filter Allergen transaction -" + ex.Message,
+                MessageBox.Show("Error occured on - Displaying recipe list items transaction -" + ex.Message,
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -141,7 +152,10 @@ namespace RecipeBookApp.UserControls
             }
         }
 
-        private void Reset()
+        /// <summary>
+        /// Resets GUI elements and recipe list
+        /// </summary>
+        public void Reset()
         {
             this.searchTextBox.Text = "";
             this.recipeList = this.recipeController.GetRecipes();
