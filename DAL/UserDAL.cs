@@ -52,7 +52,7 @@ namespace RecipeBookApp.DAL
         /// <returns>If user name all ready exists</returns>
         public bool DoesUserNameExist(string username)
         {
-            bool doesUserExist = false;
+            int result = -1;
             string selectStatement = @"SELECT EXISTS
 	                                    (SELECT *
 	                                    FROM User
@@ -65,11 +65,18 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@username", username);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
-                        doesUserExist = Convert.ToBoolean(selectCommand.ExecuteScalar());
+                        result = (int)(selectCommand.ExecuteScalar());
                     }
                 }
             }
-            return doesUserExist;
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
 
