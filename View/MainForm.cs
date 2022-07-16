@@ -92,7 +92,7 @@ namespace RecipeBookApp.View
             this.logoutLinkLabel.Visible = false;
             this.welcomeLabel.Text = "";
             this.welcomeLabel.Visible = false;
-            //this.tabControl1.TabPages.Remove(AddRecipetabPage);
+            this.tabControl1.TabPages.Remove(AddRecipetabPage);
         }
 
         private void LoginDisplay()
