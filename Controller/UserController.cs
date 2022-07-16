@@ -137,24 +137,49 @@ namespace RecipeBookApp.Controller
             }
         }
 
-        public void AddUser(User newUser)
+        /// <summary>
+        /// Registers a new User into the db
+        /// </summary>
+        /// <param name="newUser">New User to register</param>
+        /// <returns>Whether or not the user was added</returns>
+        public bool AddUser(User newUser)
         {
-           
-                if (newUser is null)
-                {
-                    throw new ArgumentNullException("No new user details found to registration");
-                }
-                if ((this.UserDAL.GetUser(newUser.Name)) is null)
-                {
-                    this.UserDAL.RegisterUser(newUser);
-                }
-                else
-                {
-                    throw new NullReferenceException("Username already exists in the database");
-                }                
-            
-            
+            if (newUser is null || String.IsNullOrEmpty(newUser.Name) ||
+                String.IsNullOrEmpty(newUser.Password))
+            {
+                throw new NullReferenceException("Missing user details for registration.");
+            }
+
+            if (this.UserDAL.DoesUserNameExist(newUser.Name))
+            {
+                throw new UnauthorizedAccessException("Username already exists in the database.");
+            }
+
+            newUser.Password = Crypt.SHA256_hash(newUser.Password);
+            return this.UserDAL.RegisterUser(newUser);
         }
 
+        /// <summary>
+        /// Changes a user's password
+        /// </summary>
+        /// <param name="oldPassword">Old user password</param>
+        /// <param name="newPassword">New user password</param>
+        /// <returns>Whether or not the password was changed</returns>
+        public bool ChangeUserPassword(User user, string oldPassword, string newPassword)
+        {
+            if (String.IsNullOrEmpty(oldPassword) || String.IsNullOrEmpty(newPassword) || user == null)
+            {
+                throw new NullReferenceException("Cannot use empty passwords");
+            }
+
+            string logInPassword = this.UserDAL.VerifyUser(user.Name);
+            oldPassword = Crypt.SHA256_hash(oldPassword);
+            if (!string.Equals(logInPassword, oldPassword, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new UnauthorizedAccessException("Incorrect password");
+            }
+
+            return this.UserDAL.ChangePassword(user, newPassword);
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Data.SQLite;
 using System.Configuration;
-using System.Data;
 
 namespace RecipeBookApp.DAL
 {
