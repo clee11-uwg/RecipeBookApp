@@ -52,7 +52,7 @@ namespace RecipeBookApp.DAL
         /// <returns>If user name all ready exists</returns>
         public bool DoesUserNameExist(string username)
         {
-            bool doesUserExist = false;
+            int result = -1;
             string selectStatement = @"SELECT EXISTS
 	                                    (SELECT *
 	                                    FROM User
@@ -65,11 +65,18 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@username", username);
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
-                        doesUserExist = Convert.ToBoolean(selectCommand.ExecuteNonQuery());
+                        result = (int)(selectCommand.ExecuteScalar());
                     }
                 }
             }
-            return doesUserExist;
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
 
@@ -92,9 +99,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@password", newUser.Password);
                     selectCommand.Parameters.AddWithValue("@is_admin", Convert.ToInt32(newUser.Is_Admin));
 
-                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
-                    connection.Close();
                 }
             }
             if (result < 1)
@@ -219,9 +224,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@userID", userID);
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
 
-                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
-                    connection.Close();
                 }
             }
             if (result < 1)
@@ -252,9 +255,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@userID", userID);
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
 
-                    connection.Open();
                     result = selectCommand.ExecuteNonQuery();
-                    connection.Close();
                 }
             }
             if (result < 1)
