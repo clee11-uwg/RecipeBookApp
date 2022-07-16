@@ -157,5 +157,28 @@ namespace RecipeAppTestProject.Controller
             };
             Assert.ThrowsException<UnauthorizedAccessException>(() => controller.AddUser(faker));
         }
+
+        /// <summary>
+        /// Change Passwords through exceptions if parameters are null
+        /// </summary>
+        [TestMethod]
+        public void TestChangePasswordThrowsExceptionIfParametersAreNull()
+        {
+            Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(null, "gobble", "gobble"));
+            Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, null, "gobble"));
+            Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, "gobble", null));
+
+            Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, "", "gobble"));
+            Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, "gobble", ""));
+        }
+
+        /// <summary>
+        /// Tests that Change Password throws exception if one inputs the wrong old password
+        /// </summary>
+        [TestMethod]
+        public void TestChangePasswordThrowsExceptionIfInputIncorrectOldPassword()
+        {
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.ChangeUserPassword(joe, "gobbledegook", "gobble"));
+        }
     }
 }

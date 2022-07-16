@@ -170,6 +170,38 @@ namespace RecipeBookApp.DAL
         }
 
         /// <summary>
+        /// Changes a user's password
+        /// <param name="user">The User whose password you're changing</param>
+        /// <param name="newPassword">The new password</param>
+        /// <returns>If the database was updated or not</returns>
+        public bool ChangePassword(User user, string newPassword)
+        {
+            int result = -1;
+            string selectStatement = @"UPDATE User
+                                        SET amount = @password
+                                        WHERE id = @id;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@password", newPassword);
+                    selectCommand.Parameters.AddWithValue("@id", user.ID);
+
+                    result = selectCommand.ExecuteNonQuery();
+                }
+            }
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Adds a new favorite recipe for the user
         /// <param name="userID">Id of the User</param>
         /// <param name="recipeID">Id of the Recipe</param>

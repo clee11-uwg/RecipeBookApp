@@ -159,5 +159,27 @@ namespace RecipeBookApp.Controller
             return this.UserDAL.RegisterUser(newUser);
         }
 
+        /// <summary>
+        /// Changes a user's password
+        /// </summary>
+        /// <param name="oldPassword">Old user password</param>
+        /// <param name="newPassword">New user password</param>
+        /// <returns>Whether or not the password was changed</returns>
+        public bool ChangeUserPassword(User user, string oldPassword, string newPassword)
+        {
+            if (String.IsNullOrEmpty(oldPassword) || String.IsNullOrEmpty(newPassword) || user == null)
+            {
+                throw new NullReferenceException("Cannot use empty passwords");
+            }
+
+            string logInPassword = this.UserDAL.VerifyUser(user.Name);
+            oldPassword = Crypt.SHA256_hash(oldPassword);
+            if (!string.Equals(logInPassword, oldPassword, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new UnauthorizedAccessException("Incorrect password");
+            }
+
+            return this.UserDAL.ChangePassword(user, newPassword);
+        }
     }
 }
