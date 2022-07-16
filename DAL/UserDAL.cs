@@ -46,15 +46,43 @@ namespace RecipeBookApp.DAL
             return users;
         }
 
-
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <param name="newUser"></param>
-        public bool  RegisterUser(User newUser)
+        /// <summary>
+        /// Finds if this username is all ready in use
+        /// <param name="username">Name of User</param>
+        /// <returns>If user name all ready exists</returns>
+        public bool DoesUserNameExist(string username)
         {
-            bool insertSucess = false;
-            string selectStatement = @"INSERT INTO USER (name, password,is_admin) VALUES (@username,@password,@is_admin)";
+            bool doesUserExist = false;
+            string selectStatement = @"SELECT EXISTS
+	                                    (SELECT *
+	                                    FROM User
+	                                    WHERE User.name = @username);";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@username", username);
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        doesUserExist = Convert.ToBoolean(selectCommand.ExecuteNonQuery());
+                    }
+                }
+            }
+            return doesUserExist;
+        }
+
+
+        /// <summary>
+        /// Registers a new user into the db
+        /// </summary>
+        /// <param name="newUser">The new user to register</param>
+        /// <returns>Whether or not the new user was registered</returns>
+        public bool RegisterUser(User newUser)
+        {
+            int result = -1;
+            string selectStatement = @"INSERT INTO USER (name, password,is_admin) 
+                                        VALUES (@username, @password, @is_admin)";
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
@@ -63,17 +91,20 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@username", newUser.Name);
                     selectCommand.Parameters.AddWithValue("@password", newUser.Password);
                     selectCommand.Parameters.AddWithValue("@is_admin", Convert.ToInt32(newUser.Is_Admin));
-    
-                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            insertSucess = true;
-                        }
-                    }
+
+                    connection.Open();
+                    result = selectCommand.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
-            return insertSucess; ;
+            if (result < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
