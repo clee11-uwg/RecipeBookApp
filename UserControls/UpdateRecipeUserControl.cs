@@ -295,6 +295,12 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            else if (string.IsNullOrEmpty(this.amountTxtBx.Text))
+            {
+                MessageBox.Show("Please enter an amount (i.e. 1 tbsp, 2 cups)",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             
             this.recipeIngredientList.Add(selectedIngredient);
             this.DisplayIngredients();
@@ -453,6 +459,36 @@ namespace RecipeBookApp.UserControls
             catch (ArgumentException ae)
             {
                 MessageBox.Show(ae.Message);
+            }
+        }
+
+        private void UpdateAmountBtn_Click(object sender, EventArgs e)
+        {
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByName(this.ingredientCmbBx.SelectedText);
+            if (this.recipeIngredientList.Contains(selectedIngredient))
+            {
+                if (this.amountTxtBx.Text.Trim() == selectedIngredient.Amount)
+                {
+                    MessageBox.Show("The amount entered is the same as the current saved amount", "Error!", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    try
+                    {
+                        bool result = this.recipeController.UpdateAmountOfIngredient(this.currentUser, this.recipe, selectedIngredient);
+                        if (result)
+                            MessageBox.Show("Ingredient amount was updated successfully");
+                    }
+                    catch(ArgumentNullException ane)
+                    {
+                        MessageBox.Show("Failed to update ingredient amount - " + ane.Message, ane.GetType().Name);
+                    }
+                    catch (UnauthorizedAccessException uae)
+                    {
+                        MessageBox.Show("Failed to update ingredient amount - " + uae.Message, uae.GetType().Name);
+                    }
+                }
             }
         }
     }
