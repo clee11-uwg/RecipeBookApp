@@ -53,7 +53,7 @@ namespace RecipeBookApp.DAL
         /// </summary>
         /// <param name="recipeID">ID of the recipe</param>
         /// <returns>ID of recipe</returns>
-        public List<Ingredient> GetIngredient(int recipeID)
+        public List<Ingredient> GetIngredientByRecipeID(int recipeID)
         {
             List<Ingredient> ingredientDetails = new List<Ingredient>();
             string selectStatement = @"SELECT ingredient.id, ingredient.Ingredient, ingredient.typeOfFoodID,
@@ -86,8 +86,42 @@ namespace RecipeBookApp.DAL
 
                 return ingredientDetails;
             }
+        }
 
+        /// <summary>
+        /// This method to get the Ingredients based on the ingredient name
+        /// </summary>
+        /// <param name="name">Name of the ingredient</param>
+        /// <returns>The Ingredient</returns>
+        public Ingredient GetIngredientByIngredientName(string name)
+        {
+            Ingredient ingredient = new Ingredient();
+            string selectStatement = @"SELECT ingredient.id, ingredient.ingredient, ingredient.typeOfFoodID
+                                        FROM ingredient
+                                        WHERE ingredient.ingredient = @name;";
 
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@name", name);
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ingredient = new Ingredient
+                            {
+                                IngredientId = Convert.ToInt32(reader["id"]),
+                                IngredientName = reader["ingredient"].ToString(),
+                                FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
+                                Amount = reader["amount"].ToString()
+                            };
+                        }
+                    }
+                }
+
+                return ingredient;
+            }
         }
     }
 }

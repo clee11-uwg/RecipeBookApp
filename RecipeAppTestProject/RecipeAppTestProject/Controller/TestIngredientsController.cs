@@ -45,5 +45,16 @@ namespace RecipeAppTestProject.Controller
         {
             List<Ingredient> ingredients = controller.GetIngredient(-1);
         }
+
+        /// <summary>
+        /// Get Ingredieny by Name throws exception if name is null or empty
+        /// </summary>
+        [TestMethod]
+        public void TestGetIngredientByNameThrowsExceptionIfNameIsNullOrEmpty()
+        {
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetIngredientByIngredientID(null));
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetIngredientByIngredientID(""));
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetIngredientByIngredientID("  "));
+        }
     }
 }

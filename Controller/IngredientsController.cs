@@ -44,7 +44,17 @@ namespace RecipeBookApp.Controller
             {
                 throw new ArgumentOutOfRangeException("Recipe ID cannot be less than 1");
             }
-            return this.ingredientsDAL.GetIngredient(searchRecipeID);
+            return this.ingredientsDAL.GetIngredientByRecipeID(searchRecipeID);
+        }
+
+        /// <see cref="IngredientsDAL.GetIngredientByIngredientName"/>
+        public Ingredient GetIngredientByIngredientID(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                throw new NullReferenceException("Name cannot be empty or null");
+            }
+            return this.ingredientsDAL.GetIngredientByIngredientName(name);
         }
     }
 }
