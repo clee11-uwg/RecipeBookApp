@@ -28,7 +28,7 @@ namespace RecipeBookApp.UserControls
         private List<Ingredient> ingredientList;
         private List<Ingredient> recipeIngredientList;
         private List<Kitchenware> recipeKitchenwareList;
-        private List<string> recipeMealTypes;
+        private List<MealType> recipeMealTypesList;
         private List<string> recipeFoodTypes;
         private User currentUser;
 
@@ -48,7 +48,7 @@ namespace RecipeBookApp.UserControls
             this.ingredientList = new List<Ingredient>();
             this.recipeIngredientList = new List<Ingredient>();
             this.recipeKitchenwareList = new List<Kitchenware>();
-            this.recipeMealTypes = new List<string>();
+            this.recipeMealTypesList = new List<MealType>();
             this.recipeFoodTypes = new List<string>();
             this.currentUser = new User();
             this.nutrition = new Nutrition();
@@ -147,14 +147,16 @@ namespace RecipeBookApp.UserControls
 
         private void GetMealTypesForRecipe()
         {
-            List<MealType> mealTypeList = this.mealTypeController.GetMealTypes(this.recipe.RecipeId);
+            this.recipeMealTypesList = this.mealTypeController.GetMealTypes(this.recipe.RecipeId);
             try
             {
-                for (int i = 0; i < mealTypeList.Count; i++)
+                for (int i = 0; i < this.recipeMealTypesList.Count; i++)
                 {
-                    this.recipeMealTypes.Add(mealTypeList[i].type);
+                    if (i == (this.recipeMealTypesList.Count - 1))
+                        this.mealTypeRchBx.Text += this.recipeMealTypesList[i].type;
+                    else
+                        this.mealTypeRchBx.Text += this.recipeMealTypesList[i].type + ",";
                 }
-                this.mealTypeRchBx.Text = string.Join(", ", this.recipeMealTypes);
             }
             catch (Exception ex)
             {
@@ -274,7 +276,7 @@ namespace RecipeBookApp.UserControls
 
         private void DisplayMealTypes()
         {
-            this.mealTypeRchBx.Text = string.Join(", ", this.recipeMealTypes);
+            this.mealTypeRchBx.Text = string.Join(", ", this.recipeMealTypesList);
             this.mealTypeRchBx.Refresh();
         }
 
@@ -371,7 +373,8 @@ namespace RecipeBookApp.UserControls
 
         private void AddMealTypeBtn_Click(object sender, EventArgs e)
         {
-            if (this.recipeMealTypes.Contains(this.mealTypeCmbBx.Text))
+            MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.SelectedText);
+            if (this.recipeMealTypesList.Contains(selectedMealType))
             {
                 MessageBox.Show(this.mealTypeCmbBx.Text + "- already added. Please select something else.",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -384,12 +387,13 @@ namespace RecipeBookApp.UserControls
                 return;
             }
 
-            this.recipeMealTypes.Add(this.mealTypeCmbBx.Text.ToString());
+            this.recipeMealTypesList.Add(selectedMealType);
             this.DisplayMealTypes();
         }
 
         private void RemoveMealTypeBtn_Click(object sender, EventArgs e)
         {
+            MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.SelectedText);
             if (string.IsNullOrEmpty(this.mealTypeRchBx.Text))
             {
                 MessageBox.Show("No meal types present. Please add a meal type",
@@ -402,14 +406,14 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeMealTypes.Contains(this.mealTypeCmbBx.Text))
+            else if (!this.recipeMealTypesList.Contains(selectedMealType))
             {
                 MessageBox.Show(this.mealTypeCmbBx.Text + "- Cannot be removed as it was never added",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            this.recipeMealTypes.Remove(this.mealTypeCmbBx.Text);
+            this.recipeMealTypesList.Remove(selectedMealType);
             this.DisplayMealTypes();
         }
 
@@ -420,12 +424,6 @@ namespace RecipeBookApp.UserControls
 
         private void UpdateRecipeButton_Click(object sender, EventArgs e)
         {
-            List<MealType> newMealTypeList = new List<MealType>();
-            foreach (var str in this.recipeMealTypes)
-            {
-                newMealTypeList.Add(new MealType { type = str });
-            }
-
             this.recipe.RecipeName = this.recipeNameTxtBx.Text;
             this.recipe.EthnicId = Convert.ToInt32(this.ethnicityCmbBx.SelectedValue);
 
@@ -438,7 +436,7 @@ namespace RecipeBookApp.UserControls
 
             try
             {
-                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, this.recipeIngredientList, newMealTypeList, this.recipeKitchenwareList, this.nutrition);
+                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, this.recipeIngredientList, this.recipeMealTypesList, this.recipeKitchenwareList, this.nutrition);
                 if (result)
                 {
                     MessageBox.Show("The recipe was updated");
