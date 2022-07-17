@@ -150,10 +150,10 @@ namespace RecipeBookApp.Controller
                 throw new NullReferenceException("Missing user details for registration.");
             }
 
-            if (this.UserDAL.DoesUserNameExist(newUser.Name))
+            /*if (this.UserDAL.DoesUserNameExist(newUser.Name))
             {
                 throw new UnauthorizedAccessException("Username already exists in the database.");
-            }
+            }*/
 
             newUser.Password = Crypt.SHA256_hash(newUser.Password);
             return this.UserDAL.RegisterUser(newUser);

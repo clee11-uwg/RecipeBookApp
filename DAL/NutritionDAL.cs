@@ -26,6 +26,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@sort", sort);
@@ -69,6 +70,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
@@ -110,6 +112,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@carbohydrate", nutrition.Carbohydrate);
@@ -138,6 +141,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@id", id);
@@ -162,7 +166,6 @@ namespace RecipeBookApp.DAL
         /// <returns>Whether or not the nutrition updated</returns>
         public bool UpdateNutrition(Nutrition nutrition)
         {
-            int result = -1;
             string selectStatement = @"UPDATE nutrition 
                                         SET carbohydrate = @carbohydrate, 
 	                                        fat = @fat, 
@@ -174,6 +177,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@carbohydrate", nutrition.Carbohydrate);
@@ -184,16 +188,13 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@serving_size", nutrition.ServingSize);
                     selectCommand.Parameters.AddWithValue("@id", nutrition.NutritionId);
 
-                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    int result = Convert.ToInt32(selectCommand.ExecuteNonQuery());
+                    if (result < 1)
+                        return false;
+                    else
+                        return true;
                 }
-            }
-            if (result < 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
+                
             }
         }
     }

@@ -24,6 +24,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
@@ -60,6 +61,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@username", username);
@@ -92,6 +94,7 @@ namespace RecipeBookApp.DAL
                                         VALUES (@username, @password, @is_admin)";
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
 
@@ -125,6 +128,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@username", username);
@@ -159,6 +163,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@username", username);
@@ -183,11 +188,12 @@ namespace RecipeBookApp.DAL
         {
             int result = -1;
             string selectStatement = @"UPDATE User
-                                        SET amount = @password
+                                        SET password = @password
                                         WHERE id = @id;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@password", newPassword);
@@ -219,6 +225,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@userID", userID);
@@ -250,6 +257,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@userID", userID);

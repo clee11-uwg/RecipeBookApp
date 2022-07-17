@@ -31,6 +31,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     using (SQLiteDataReader reader = selectCommand.ExecuteReader())
@@ -77,7 +78,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
 
@@ -124,6 +125,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@UserSearch", userSearch);
@@ -243,6 +245,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@allergens", allergens[0]);
@@ -301,6 +304,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@userID", userID);
@@ -347,6 +351,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@name", recipe.RecipeName);
@@ -375,6 +380,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@id", recipe.RecipeId);
@@ -407,10 +413,11 @@ namespace RecipeBookApp.DAL
 	                                        nutritionID = @nutritionID, 
 	                                        ethnicOriginID = @ethnicOriginID, 
 	                                        userWhoCreated = @userWhoCreated
-                                        WHERE id = @id;";
+                                        WHERE id = @id";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@name", recipe.RecipeName);
@@ -447,6 +454,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
                 {
                     using (MemoryStream stream = new MemoryStream())
@@ -483,6 +491,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(addRecipeStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@id", id);
@@ -514,6 +523,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     using (MemoryStream stream = new MemoryStream())
@@ -551,6 +561,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
@@ -581,6 +592,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
@@ -611,6 +623,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
@@ -641,6 +654,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
@@ -671,6 +685,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
@@ -702,6 +717,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
@@ -733,6 +749,7 @@ namespace RecipeBookApp.DAL
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
+                connection.Open();
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
