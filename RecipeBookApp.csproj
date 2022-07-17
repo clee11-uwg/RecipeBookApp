@@ -115,6 +115,11 @@
     <Compile Include="DAL\TypeOfMealDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\RecipeListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -151,6 +156,12 @@
     </Compile>
     <Compile Include="UserControls\RecipeMainUserControl.Designer.cs">
       <DependentUpon>RecipeMainUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddRecipeInstructionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddRecipeInstructionDialog.Designer.cs">
+      <DependentUpon>AddRecipeInstructionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LoginFormDialog.cs">
       <SubType>Form</SubType>
@@ -254,9 +265,10 @@
     <Content Include="Data\Digital Recipe Book Banner 2.png" />
     <Content Include="Data\Digital Recipe Book Banner.png" />
     <Content Include="Data\sampleimage.jpg" />
-    <None Include="Resources\login_image.jpg" />
     <None Include="Resources\login_image2.jpg" />
     <None Include="Resources\logimimage_3.jpg" />
+    <None Include="Resources\login_image1.jpg" />
+    <None Include="Resources\images.jpg" />
     <Content Include="sampleimage.jpg" />
     <EmbeddedResource Include="UserControls\RecipeListItem.resx">
       <DependentUpon>RecipeListItem.cs</DependentUpon>
@@ -273,6 +285,9 @@
     <EmbeddedResource Include="UserControls\UpdateRecipeUserControl.resx">
       <DependentUpon>UpdateRecipeUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\AddRecipeInstructionDialog.resx">
+      <DependentUpon>AddRecipeInstructionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LoginFormDialog.resx">
       <DependentUpon>LoginFormDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -287,14 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Content Include="db\recipe_app.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

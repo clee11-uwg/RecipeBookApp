@@ -3,6 +3,7 @@ using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -14,7 +15,7 @@ namespace RecipeBookApp.UserControls
     {
 
         private List<Recipe> recipeList;
-        private List<Nutrition> nutritionList;
+        
         private Nutrition addNutrition;
         private List<Kitchenware> kitchenWareList;
         private List<MealType> mealTypeList;
@@ -29,8 +30,12 @@ namespace RecipeBookApp.UserControls
         private readonly TypeOfMealController mealController;
         private readonly EthnicOriginController ethnicController;
         private List<string> recipeIngredients;
+        private List<string> recipeMealtype;
         private List<string> recipeKitchenWare;
         private string displayMessage;
+        private const int MaxLength = 2000;
+        private Image RecipeImage ;
+
 
         private readonly TypeOfFoodController foodController;
         public AddRecipeDetailUserControl()
@@ -50,10 +55,11 @@ namespace RecipeBookApp.UserControls
             this.ingredientList = new List<Ingredient>();
             this.recipeIngredients = new List<string>();
             this.recipeKitchenWare = new List<string>();
-
+            this.recipeMealtype = new List<string>();
 
         }
 
+       
 
         /// <summary>
         /// Loads the ComboBox for furniture category and style.
@@ -67,7 +73,7 @@ namespace RecipeBookApp.UserControls
                 this.CreateIngredientsDropDown();
                 this.CreateMealTypeDropDown();
                 this.CreateKitchenWareDropDown();
-                this.CreateFoodTypeDropDown();
+               
                 this.CreateEthnicDropDown();
                 this.recipeList = this.recipeController.GetRecipes();
             }
@@ -151,28 +157,7 @@ namespace RecipeBookApp.UserControls
             }
         }
 
-        private void CreateFoodTypeDropDown()
-        {
-            try
-            {
-                this.addFoodTypeComboBox.DataSource = null;
-                this.foodTypeList = this.foodController.GetFoodTypes();
-                this.foodTypeList.Add(new FoodType
-                {
-                    FoodId = -1,
-                    TypeOfFood = "Select the Food type"
-                });
-                this.addFoodTypeComboBox.DataSource = this.foodTypeList;
-                this.addFoodTypeComboBox.DisplayMember = "TypeOfFood";
-                this.addFoodTypeComboBox.ValueMember = "FoodId";
-                this.addFoodTypeComboBox.SelectedValue = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error occured on - Apply Filter meal type transaction -" + ex.Message,
-                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+       
         private void CreateEthnicDropDown()
         {
             try
@@ -238,6 +223,8 @@ namespace RecipeBookApp.UserControls
             this.addErrorIngredientsLabel.Visible = false;
             this.addErrorKitchenwareLabel.Visible = false;
             this.addErrorMealTypeLabel.Visible = false;
+            this.cookError.Visible = false;
+            this.instructionErrorLabel.Visible = false;
         }
         private void AddRecipeButton_Click(object sender, EventArgs e)
         {
@@ -262,6 +249,18 @@ namespace RecipeBookApp.UserControls
             {
                 isError = true;
             }
+            if (!ValidateInstructions())
+            {
+                isError = true;
+            }
+            if (!ValidateCookingTime())
+            {
+                isError = true;
+            }
+            if (!this.UploadFileImageSucess())
+            {
+                isError = true;
+            }
             if (isError)
             {
                 return;
@@ -277,8 +276,21 @@ namespace RecipeBookApp.UserControls
        
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result = MessageBox.Show(message, "New recipe", buttons);
+
+       
+        Recipe newRecipe = new Recipe
+            {
+                RecipeName = this.addRecipenameTextBox.Text,
+                RecipeInstructions= this.recipeInstructions.Text,
+
+
+            };
+
             if (result == DialogResult.OK)
             {
+
+               
+             //this.recipeController.AddRecipe(UserController.GetLoginUser(),)
                 //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
                 this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
                 this.DisplayError(false);
@@ -331,6 +343,21 @@ namespace RecipeBookApp.UserControls
             return true;
         }
 
+        private bool ValidateCookingTime()
+        {
+
+
+            if (!string.IsNullOrEmpty(this.cooktimeBox.Text) && !Regex.IsMatch(this.cooktimeBox.Text, @"^\d+$"))
+            {
+                this.cookError.ForeColor = Color.Red;
+                this.cookError.Text = "Cooking time should be a valid number !";
+                this.cookError.Visible = true;
+                return false;
+
+            }
+            return true;
+        }
+
         private bool ValidateMealType()
         {
 
@@ -350,7 +377,7 @@ namespace RecipeBookApp.UserControls
 
             string recipName = this.addRecipenameTextBox.Text;
             bool nameExists = this.recipeList.Any(name => name.RecipeName == recipName);
-            if (string.IsNullOrEmpty(recipName))
+            if (string.IsNullOrEmpty(recipName) || recipName.Trim() == "")
             {
                 this.recipeNameError.ForeColor = Color.Red;
                 this.recipeNameError.Text = "Recipe Name cannot be empty";
@@ -365,7 +392,57 @@ namespace RecipeBookApp.UserControls
                 this.recipeNameError.Visible = true;
                 return false;
             }
+          
+            else if (!Regex.IsMatch(recipName, "[a-zA-Z]"))
+            {
+               
+                this.recipeNameError.ForeColor = Color.Red;
+                this.recipeNameError.Text = this.addRecipenameTextBox.Text + " - Recipe Name should be valid text, cannot be only number or special character";
+                this.recipeNameError.Visible = true;
+                return false;
+            }
+
             return true;
+        }
+
+        private bool ValidateInstructions()
+        {
+            string recipeInstructions = this.recipeInstructions.Text;
+            if (string.IsNullOrEmpty(recipeInstructions))
+            {
+                this.instructionErrorLabel.ForeColor = Color.Red;
+                this.instructionErrorLabel.Text = "Recipe Instructions cannot be empty";
+                this.instructionErrorLabel.Visible = true;
+                return false;
+            }
+
+            else if (recipeInstructions.Length > MaxLength)
+            {
+                this.instructionErrorLabel.ForeColor = Color.Red;
+                this.instructionErrorLabel.Text = this.addRecipenameTextBox.Text + " - Recipe Instructions exceeding 2000 char limit. Cannot save this data";
+                this.instructionErrorLabel.Visible = true;
+                return false;
+            }
+            return true;
+        }
+
+        private bool UploadFileImageSucess()
+        {
+            bool fileExist = File.Exists(this.imageTextBox.Text);
+            if (fileExist)
+            {
+                this.RecipeImage = Image.FromFile(this.imageTextBox.Text);
+                return true;
+            }
+            else
+            {
+                this.imageFailureLabel.ForeColor = Color.Red;
+                this.imageFailureLabel.Text = this.imageTextBox.Text + " - File does not existis";
+                this.imageFailureLabel.Visible = true;
+                return false;
+            }
+           
+            
         }
         private bool ValidateNutritions()
         {
@@ -493,6 +570,55 @@ namespace RecipeBookApp.UserControls
           
         }
 
+        private void AddmealButton_Click(object sender, EventArgs e)
+        {
+            if (this.recipeMealtype.Contains(this.addRecipeMealTypeComboBox.Text))
+            {
+                MessageBox.Show(this.addRecipeMealTypeComboBox.Text + "- already added. Please select something else.",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.addRecipeMealTypeComboBox.Text == "Select the MealType")
+            {
+                MessageBox.Show("Please select valid Meal Type to add",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeMealtype.Add(this.addRecipeMealTypeComboBox.Text.ToString());
+            this.DisplayMeals();
+
+        }
+        private void DisplayMeals()
+        {
+            this.addMealTypeRichText.Text = string.Join(",", this.recipeMealtype);
+            this.addMealTypeRichText.Refresh();
+        }
+        private void RemoveMealButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.addRecipeMealTypeComboBox.Text))
+            {
+                MessageBox.Show("No Meal Type present. Please add Meal Type",
+                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (this.addRecipeMealTypeComboBox.Text == "Select the MealType")
+            {
+                MessageBox.Show("Please select valid Meal Type to Remove",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!this.recipeMealtype.Contains(this.addRecipeMealTypeComboBox.Text))
+            {
+                MessageBox.Show(this.addRecipeMealTypeComboBox.Text + "- Cannot be removed as it was never added",
+                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.recipeMealtype.Remove(this.addRecipeMealTypeComboBox.Text);
+            this.DisplayMeals();
+        }
+
         private void AddKitchennware_Click(object sender, EventArgs e)
         {
             if (this.recipeKitchenWare.Contains(this.addKitchenWareComboBox.Text))
@@ -555,10 +681,38 @@ namespace RecipeBookApp.UserControls
             this.addKitchenwareRichTextBox.Text = "";
             this.addIngredIentsRichBox.Text = "";
             this.addRecipeMealTypeComboBox.Text = "Select the MealType";
-            this.addFoodTypeComboBox.Text = "Select the Food type";
             this.addIngredientCombobox.Text = "Select the Ingredient";
             this.addKitchenWareComboBox.Text = "Select the KitchenWare";
             this.addEthnicCombobox.Text = "Select the Ethnicity";
         }
+
+        private void Uploadbutton_Click(object sender, EventArgs e)
+        {
+           
+            OpenFileDialog open = new OpenFileDialog();             
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+          
+                this.imageTextBox.Text = open.FileName;
+            }
+        }
+
+        private void AddInstructionlinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (Form instructionDialog = new View.AddRecipeInstructionDialog(this.recipeInstructions.Text))
+            {
+                DialogResult result = instructionDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this.recipeInstructions.Text = RecipeController.GetRecipeInstructions();
+                }else
+                {
+                    this.recipeInstructions.Text = "";
+                }
+            }
+        }
+
+        
     }
 }

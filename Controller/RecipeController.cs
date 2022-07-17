@@ -16,6 +16,7 @@ namespace RecipeBookApp.Controller
     public class RecipeController
     {
         private readonly RecipeDAL recipeDAL;
+        private static string recipeInstructions;
 
         /// <summary>
         /// Instantiate instance variables
@@ -277,6 +278,14 @@ namespace RecipeBookApp.Controller
             }
             return true;
         }
+        public static void SetRecipeInstructions(string text)
+        {
+            recipeInstructions = text;
+        }
 
+        public static string GetRecipeInstructions()
+        {
+            return recipeInstructions ;
+        }
     }
 }

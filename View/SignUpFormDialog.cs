@@ -1,13 +1,8 @@
 ﻿using RecipeBookApp.Controller;
 using RecipeBookApp.Model;
+using RecipeBookApp.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RecipeBookApp.View
@@ -21,7 +16,7 @@ namespace RecipeBookApp.View
             InitializeComponent();
             this.userController = new UserController();
             this.signupMessageLabel.Visible = false;
-            this.confirmPasswordSignUpText.Focus();
+            this.userIDSignUpText.Focus();
         }
 
         private void SignupButton_Click(object sender, EventArgs e)
@@ -55,18 +50,22 @@ namespace RecipeBookApp.View
             try
             {
                 bool isAdminChecked = isAdminCheckBox.Checked;
+                String given_password_hash = Crypt.SHA256_hash(this.passwordSignUpText.Text);
                 this.newRegisteruser = new User
                 {
                     Name = this.userIDSignUpText.Text,
-                    Password = this.passwordSignUpText.Text,
+                    Password = given_password_hash,
                     Is_Admin = isAdminChecked
 
                 };
 
-                this.userController.AddUser(newRegisteruser);
-                this.signupMessageLabel.Text = "Congratulations! You are registered, Please login using your credentials!";
-                this.signupMessageLabel.ForeColor = Color.Red;
-                this.signupMessageLabel.Visible = true;
+                if (this.userController.AddUser(newRegisteruser))
+                {
+                    this.signupMessageLabel.Text = "Congratulations! You are registered, Please login using your credentials!";
+                    this.signupMessageLabel.ForeColor = Color.Green;
+                    this.signupMessageLabel.Visible = true;
+                }
+
             }
             catch (Exception ex)
             {
@@ -75,7 +74,7 @@ namespace RecipeBookApp.View
                 this.signupMessageLabel.Visible = true;
                 this.userIDSignUpText.BackColor = Color.OrangeRed;
                 this.userIDSignUpText.Focus();
-               // throw ex;
+               
                return;
             }
 
@@ -89,7 +88,7 @@ namespace RecipeBookApp.View
             this.passwordSignUpText.BackColor = Color.White;
             this.confirmPasswordSignUpText.BackColor = Color.White;
             this.userIDSignUpText.BackColor = Color.White;
-          //  this.userIDSignUpText.Focus();
+
         }
 
 
