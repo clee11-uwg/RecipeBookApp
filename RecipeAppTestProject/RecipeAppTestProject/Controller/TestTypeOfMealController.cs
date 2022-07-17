@@ -58,5 +58,14 @@ namespace RecipeAppTestProject.Controller
         {
             List<MealType> meals = controller.GetMealTypes(-1);
         }
+
+        /// <summary>
+        /// GetMealTypeByName(string) throws exception if string is null or empty
+        /// </summary>
+        [TestMethod]
+        public void TestGetMealTypeByNameThrowsExceptionWithNullOrEmptyString()
+        {
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetMealTypeByName(null));
+        }
     }
 }

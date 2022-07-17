@@ -327,9 +327,8 @@ namespace RecipeBookApp.DAL
                         }
                     }
                 }
-
-                return favorites;
             }
+            return favorites;
         }
 
         /// <summary>

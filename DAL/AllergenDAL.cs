@@ -81,47 +81,46 @@ namespace RecipeBookApp.DAL
                         }
                     }
                 }
-
-                return allergenList;
             }
+            return allergenList;
         }
 
-            /// <summary>
-            /// Returns Allergens of an Ingredient
-            /// </summary>
-            /// <param name="ingredientID">ID of the ingredient</param>
-            /// <returns>List of Allergens of an Ingredient</returns>
-            public List<Allergen> GetAllergensOfIngredient(int ingredientID)
+        /// <summary>
+        /// Returns Allergens of an Ingredient
+        /// </summary>
+        /// <param name="ingredientID">ID of the ingredient</param>
+        /// <returns>List of Allergens of an Ingredient</returns>
+        public List<Allergen> GetAllergensOfIngredient(int ingredientID)
+        {
+            List<Allergen> allergenList = new List<Allergen>();
+            string selectStatement = @"SELECT allergen.id, allergen.allergen
+                                        FROM ingredient
+                                            JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID
+                                            JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
+                                        WHERE ingredient.id = @ingredientID; ";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
             {
-                List<Allergen> allergenList = new List<Allergen>();
-                string selectStatement = @"SELECT allergen.id, allergen.allergen
-                                            FROM ingredient
-                                                JOIN ingredient_has_allergen ON ingredient.id = ingredient_has_allergen.ingredientID
-                                                JOIN allergen ON allergen.id = ingredient_has_allergen.allergenID
-                                            WHERE ingredient.id = @ingredientID; ";
-
-                using (SQLiteConnection connection = DBConnection.GetConnection())
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
-                    using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                    selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
                     {
-                        selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
-                        using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
+                            Allergen allergen = new Allergen
                             {
-                                Allergen allergen = new Allergen
-                                {
-                                    AllergenId = Convert.ToInt32(reader["id"]),
-                                    AllergenDetails = reader["allergen"].ToString()
-                                };
+                                AllergenId = Convert.ToInt32(reader["id"]),
+                                AllergenDetails = reader["allergen"].ToString()
+                            };
 
-                                allergenList.Add(allergen);
-                            }
+                            allergenList.Add(allergen);
                         }
                     }
                 }
-
-                return allergenList;
             }
+
+            return allergenList;
+        }
     }
 }
