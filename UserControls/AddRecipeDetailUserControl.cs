@@ -30,8 +30,8 @@ namespace RecipeBookApp.UserControls
         private readonly TypeOfMealController mealController;
         private readonly EthnicOriginController ethnicController;
         private List<Ingredient> recipeIngredients;
-        private List<string> recipeMealtype;
-        private List<string> recipeKitchenWare;
+        private List<MealType> recipeMealtype;
+        private List<Kitchenware> recipeKitchenWare;
         private string displayMessage;
         private const int maxLength = 2000;
         private Image recipeImage ;
@@ -54,8 +54,8 @@ namespace RecipeBookApp.UserControls
             this.ethnicList = new List<Ethnic>();
             this.ingredientList = new List<Ingredient>();
             this.recipeIngredients = new List<Ingredient>();
-            this.recipeKitchenWare = new List<string>();
-            this.recipeMealtype = new List<string>();
+            this.recipeKitchenWare = new List<Kitchenware>();
+            this.recipeMealtype = new List<MealType>();
 
         }
 
@@ -583,7 +583,8 @@ namespace RecipeBookApp.UserControls
 
         private void AddmealButton_Click(object sender, EventArgs e)
         {
-            if (this.recipeMealtype.Contains(this.addRecipeMealTypeComboBox.Text))
+            var recipeMeal = this.recipeMealtype.FirstOrDefault(x => x.type == this.addRecipeMealTypeComboBox.Text);
+            if (recipeMeal != null)
             {
                 MessageBox.Show(this.addRecipeMealTypeComboBox.Text + "- already added. Please select something else.",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -595,18 +596,28 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            MealType selectedmeal = this.mealTypeList.SingleOrDefault(a => a.mealTypeID == int.Parse(this.addRecipeMealTypeComboBox.SelectedValue.ToString()));
+            this.recipeMealtype.Add(selectedmeal);
 
-            this.recipeMealtype.Add(this.addRecipeMealTypeComboBox.Text.ToString());
             this.DisplayMeals();
 
         }
         private void DisplayMeals()
         {
-            this.addMealTypeRichText.Text = string.Join(",", this.recipeMealtype);
+            string displayList = "";
+            foreach (MealType selectMeal in this.recipeMealtype)
+            {
+                displayList += selectMeal.type + ',';
+            }
+            displayList = displayList.Remove(displayList.Length - 1);
+           
+
+            this.addMealTypeRichText.Text = displayList;
             this.addMealTypeRichText.Refresh();
         }
         private void RemoveMealButton_Click(object sender, EventArgs e)
         {
+            var recipeMeal = this.recipeMealtype.FirstOrDefault(x => x.type == this.addRecipeMealTypeComboBox.Text);
             if (string.IsNullOrEmpty(this.addRecipeMealTypeComboBox.Text))
             {
                 MessageBox.Show("No Meal Type present. Please add Meal Type",
@@ -619,20 +630,20 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeMealtype.Contains(this.addRecipeMealTypeComboBox.Text))
+            else if (recipeMeal is null)
             {
                 MessageBox.Show(this.addRecipeMealTypeComboBox.Text + "- Cannot be removed as it was never added",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            this.recipeMealtype.Remove(this.addRecipeMealTypeComboBox.Text);
+            this.recipeMealtype.RemoveAll(x => x.type == recipeMeal.type);
             this.DisplayMeals();
         }
 
         private void AddKitchennware_Click(object sender, EventArgs e)
         {
-            if (this.recipeKitchenWare.Contains(this.addKitchenWareComboBox.Text))
+            var recipeKitchen = this.recipeKitchenWare.FirstOrDefault(x => x.KitchenwareDetails == this.addKitchenWareComboBox.Text);
+            if (recipeKitchen !=null)
             {
                 MessageBox.Show(this.addKitchenWareComboBox.Text + " - already added. Please select something else.",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -644,14 +655,16 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            this.recipeKitchenWare.Add(this.addKitchenWareComboBox.Text.ToString());
+            Kitchenware selectedkitchen = this.kitchenWareList.SingleOrDefault(a => a.KitchenwareId == int.Parse(this.addKitchenWareComboBox.SelectedValue.ToString()));
+            this.recipeKitchenWare.Add(selectedkitchen);
+           
             this.DisplayKitchenwares();
 
         }
 
         private void RemovKitchenware_Click(object sender, EventArgs e)
         {
-
+            var recipeKitchenware = this.recipeKitchenWare.FirstOrDefault(x => x.KitchenwareDetails == this.addKitchenWareComboBox.Text);
             if (string.IsNullOrEmpty(this.addKitchenWareComboBox.Text))
             {
                 MessageBox.Show("No kitchenware present. Please add kitchenware",
@@ -664,19 +677,28 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeKitchenWare.Contains(this.addKitchenWareComboBox.Text))
+            else if (recipeKitchenware is null)
             {
                 MessageBox.Show(this.addKitchenWareComboBox.Text + "- Cannot be removed as it was never added",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            this.recipeKitchenWare.RemoveAll(x => x.KitchenwareDetails == recipeKitchenware.KitchenwareDetails);
 
-            this.recipeKitchenWare.Remove(this.addKitchenWareComboBox.Text);
+      
             this.DisplayKitchenwares();
         }
         private void DisplayKitchenwares()
         {
-            this.addKitchenwareRichTextBox.Text = string.Join(",", this.recipeKitchenWare);
+            string displayList = "";
+            foreach (Kitchenware select in this.recipeKitchenWare)
+            {
+                displayList += select.KitchenwareDetails + ',';
+            }
+            displayList = displayList.Remove(displayList.Length - 1);
+
+
+            this.addKitchenwareRichTextBox.Text = displayList;
             this.addKitchenwareRichTextBox.Refresh();
         }
 
