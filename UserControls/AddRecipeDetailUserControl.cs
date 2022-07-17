@@ -29,12 +29,12 @@ namespace RecipeBookApp.UserControls
         private readonly NutritionController nutritionController;
         private readonly TypeOfMealController mealController;
         private readonly EthnicOriginController ethnicController;
-        private List<string> recipeIngredients;
+        private List<Ingredient> recipeIngredients;
         private List<string> recipeMealtype;
         private List<string> recipeKitchenWare;
         private string displayMessage;
-        private const int MaxLength = 2000;
-        private Image RecipeImage ;
+        private const int maxLength = 2000;
+        private Image recipeImage ;
 
 
         private readonly TypeOfFoodController foodController;
@@ -53,7 +53,7 @@ namespace RecipeBookApp.UserControls
             this.foodTypeList = new List<FoodType>();
             this.ethnicList = new List<Ethnic>();
             this.ingredientList = new List<Ingredient>();
-            this.recipeIngredients = new List<string>();
+            this.recipeIngredients = new List<Ingredient>();
             this.recipeKitchenWare = new List<string>();
             this.recipeMealtype = new List<string>();
 
@@ -277,13 +277,14 @@ namespace RecipeBookApp.UserControls
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result = MessageBox.Show(message, "New recipe", buttons);
 
-       
-        Recipe newRecipe = new Recipe
+
+            Recipe newRecipe = new Recipe
             {
                 RecipeName = this.addRecipenameTextBox.Text,
-                RecipeInstructions= this.recipeInstructions.Text,
-
-
+                RecipeInstructions = this.recipeInstructions.Text,
+                RecipeImage = this.recipeImage,
+                CookingTime = int.Parse(this.cooktimeBox.Text),               
+                UserWhoCreated=UserController.GetLoginUser().Name
             };
 
             if (result == DialogResult.OK)
@@ -416,7 +417,7 @@ namespace RecipeBookApp.UserControls
                 return false;
             }
 
-            else if (recipeInstructions.Length > MaxLength)
+            else if (recipeInstructions.Length > maxLength)
             {
                 this.instructionErrorLabel.ForeColor = Color.Red;
                 this.instructionErrorLabel.Text = this.addRecipenameTextBox.Text + " - Recipe Instructions exceeding 2000 char limit. Cannot save this data";
@@ -431,7 +432,7 @@ namespace RecipeBookApp.UserControls
             bool fileExist = File.Exists(this.imageTextBox.Text);
             if (fileExist)
             {
-                this.RecipeImage = Image.FromFile(this.imageTextBox.Text);
+                this.recipeImage = Image.FromFile(this.imageTextBox.Text);
                 return true;
             }
             else
@@ -521,7 +522,9 @@ namespace RecipeBookApp.UserControls
 
         private void AddIngredients_Click(object sender, EventArgs e)
         {
-            if (this.recipeIngredients.Contains(this.addIngredientCombobox.Text))
+
+            var recipeName = this.recipeIngredients.FirstOrDefault(x => x.IngredientName == this.addIngredientCombobox.Text);
+            if (recipeName != null)
             {
                 MessageBox.Show(this.addIngredientCombobox.Text + "- already added. Please select something else.",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -534,18 +537,26 @@ namespace RecipeBookApp.UserControls
                 return;
             }
 
-            this.recipeIngredients.Add(this.addIngredientCombobox.Text.ToString());
+            Ingredient selectedIngredient = this.ingredientList.SingleOrDefault(a => a.IngredientId == int.Parse(this.addIngredientCombobox.SelectedValue.ToString()));
+            this.recipeIngredients.Add(selectedIngredient);
             this.DisplayIngredients();
 
         }
         private void DisplayIngredients()
         {
-            this.addIngredIentsRichBox.Text=  string.Join(",", this.recipeIngredients);
+            string displayList = "";
+            foreach (Ingredient selectIngredient in this.recipeIngredients )
+            {
+                displayList += selectIngredient.IngredientName + ',';
+            }
+            displayList = displayList.Remove(displayList.Length - 1);
+            this.addIngredIentsRichBox.Text= displayList;
             this.addIngredIentsRichBox.Refresh();
         }
 
         private void RemoveIngrdients_Click(object sender, EventArgs e)
         {
+            var recipeName = this.recipeIngredients.FirstOrDefault(x => x.IngredientName == this.addIngredientCombobox.Text);
             if (string.IsNullOrEmpty(this.addIngredIentsRichBox.Text))
             {
                 MessageBox.Show("No Ingredient present. Please add Ingredients",
@@ -558,14 +569,14 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeIngredients.Contains(this.addIngredientCombobox.Text))
+            else if (recipeName is null)
             {
                 MessageBox.Show(this.addIngredientCombobox.Text + " - Cannot be removed as it was never added",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-                   
-            this.recipeIngredients.Remove(this.addIngredientCombobox.Text);           
+            this.recipeIngredients.RemoveAll(x => x.IngredientName == recipeName.IngredientName);
+          
             this.DisplayIngredients();
           
         }
