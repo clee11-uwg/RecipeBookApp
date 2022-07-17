@@ -272,48 +272,68 @@ namespace RecipeBookApp.UserControls
         }
         private void ProcessNewRecipe()
         {
-            string message = "Do you want to proceed adding new recipe?";
-       
-            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
-            DialogResult result = MessageBox.Show(message, "New recipe", buttons);
-
-
-            Recipe newRecipe = new Recipe
+            try
             {
-                RecipeName = this.addRecipenameTextBox.Text,
-                RecipeInstructions = this.recipeInstructions.Text,
-                RecipeImage = this.recipeImage,
-                CookingTime = int.Parse(this.cooktimeBox.Text),               
-                UserWhoCreated=UserController.GetLoginUser().Name
-            };
+                string message = "Do you want to proceed adding new recipe?";
 
-            if (result == DialogResult.OK)
-            {
+                MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+                DialogResult result = MessageBox.Show(message, "New recipe", buttons);
 
-               
-             //this.recipeController.AddRecipe(UserController.GetLoginUser(),)
-                //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
-                this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
-                this.DisplayError(false);
+
+                Recipe newRecipe = new Recipe();
+                newRecipe.RecipeName = this.addRecipenameTextBox.Text;
+                newRecipe.RecipeInstructions = this.recipeInstructions.Text;
+               if (this.recipeImage != null)
+               {
+                    newRecipe.RecipeImage = this.recipeImage;
+                }
+              
+               newRecipe.CookingTime = int.Parse(this.cooktimeBox.Text);
+              newRecipe.UserWhoCreated = UserController.GetLoginUser().Name;              
+
+
+                if (result == DialogResult.OK)
+                {
+
+
+                    this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
+                    //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
+                    this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
+                    this.DisplayError(false);
+                }
+                else
+                {
+                    return;
+                }
             }
-            else
-            {
-                return;
+             
+            catch(Exception e){
+                this.erroLabel.ForeColor = Color.Red;
+                this.erroLabel.Text = e.Message;
+                this.erroLabel.Visible = true;
             }
 
 
-        }
+}
         private void CollectNutritionData()
         {
-            this.addNutrition = new Nutrition
+            try
             {
-                Carbohydrate = int.Parse(this.calorieTextBox.Text),
-                Protein = int.Parse(this.proteinTextBox.Text),
-                Fat = int.Parse(this.fattextBox.Text),
-                Alcohol = int.Parse(this.calorieTextBox.Text),
-                Calories = int.Parse(this.calorieTextBox.Text),
-                ServingSize = this.servingtextBox.Text
-            };
+                this.addNutrition = new Nutrition
+                {
+                    Carbohydrate = int.Parse(this.calorieTextBox.Text),
+                    Protein = int.Parse(this.proteinTextBox.Text),
+                    Fat = int.Parse(this.fattextBox.Text),
+                    Alcohol = int.Parse(this.calorieTextBox.Text),
+                    Calories = int.Parse(this.calorieTextBox.Text),
+                    ServingSize = this.servingtextBox.Text
+                };
+            }
+            catch( Exception e){
+                this.addErrorNutritionLabel.ForeColor = Color.Red;
+                this.addErrorNutritionLabel.Text = e.Message;
+                this.addErrorNutritionLabel.Visible = true;
+            }
 
         }
         private bool ValidateIngredients() {
@@ -429,19 +449,23 @@ namespace RecipeBookApp.UserControls
 
         private bool UploadFileImageSucess()
         {
-            bool fileExist = File.Exists(this.imageTextBox.Text);
-            if (fileExist)
+            if (!string.IsNullOrEmpty(this.imageTextBox.Text))
             {
-                this.recipeImage = Image.FromFile(this.imageTextBox.Text);
-                return true;
+                bool fileExist = File.Exists(this.imageTextBox.Text);
+                if (fileExist)
+                {
+                    this.recipeImage = Image.FromFile(this.imageTextBox.Text);
+                    return true;
+                }
+                else
+                {
+                    this.imageFailureLabel.ForeColor = Color.Red;
+                    this.imageFailureLabel.Text = this.imageTextBox.Text + " - File does not existis";
+                    this.imageFailureLabel.Visible = true;
+                    return false;
+                }
             }
-            else
-            {
-                this.imageFailureLabel.ForeColor = Color.Red;
-                this.imageFailureLabel.Text = this.imageTextBox.Text + " - File does not existis";
-                this.imageFailureLabel.Visible = true;
-                return false;
-            }
+            return true;
            
             
         }
@@ -746,6 +770,6 @@ namespace RecipeBookApp.UserControls
             }
         }
 
-        
+       
     }
 }

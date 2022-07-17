@@ -116,7 +116,7 @@ namespace RecipeBookApp.Controller
         public bool AddRecipe(User user, Recipe recipe, List<Ingredient> ingredients, List<MealType> mealTypes,
                 List<Kitchenware> kitchenware, Nutrition nutrition)
         {
-            if (user == null || recipe == null || ingredients == null || 
+            if (user == null || recipe == null || ingredients == null ||
                     mealTypes == null || kitchenware == null || nutrition == null)
             {
                 throw new ArgumentNullException("Parameters cannot be null");
@@ -130,13 +130,15 @@ namespace RecipeBookApp.Controller
                 throw new ArgumentException("AddRecipe is not an UPDATE query. RecipeID and NutritionID should be set to 0 or negative");
             }
 
-            using (TransactionScope scope = new TransactionScope())
-            {
-                NutritionDAL nutritionDAL = new NutritionDAL();
-                recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
+            // using (TransactionScope scope = new TransactionScope())
+            //{
+            NutritionDAL nutritionDAL = new NutritionDAL();
+            recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
 
-                recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
-                this.recipeDAL.AddImage(recipe);
+            recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
+                if (recipe.RecipeImage != null) { 
+                    this.recipeDAL.AddImage(recipe);
+                }
 
                 foreach (Ingredient ingredient in ingredients)
                 {
@@ -151,8 +153,8 @@ namespace RecipeBookApp.Controller
                     this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
                 }
 
-                scope.Complete();
-            }
+               // scope.Complete();
+           // }
             return true;
         }
 
