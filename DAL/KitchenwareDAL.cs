@@ -48,7 +48,7 @@ namespace RecipeBookApp.DAL
         /// Finds all kitchenware needed to cook said recipe
         /// <param name="recipeID">Id of recipe</param>
         /// <returns>Kitchenware associated with recipe</returns>
-        public List<Kitchenware> GetKitchenware(int recipeID)
+        public List<Kitchenware> GetKitchenwareByRecipeID(int recipeID)
         {
             List<Kitchenware> cookwareList = new List<Kitchenware>();
             string selectStatement = @"SELECT kitchenware.id, kitchenware.kitchenware
@@ -79,6 +79,39 @@ namespace RecipeBookApp.DAL
                 }
             }
             return cookwareList;
+        }
+
+        /// <summary>
+        /// Finds the kitchenware by its name
+        /// <param name="name">Name of the kitchenware</param>
+        /// <returns>Kitchenware</returns>
+        public Kitchenware GetKitchenwareByName(string name)
+        {
+            Kitchenware kitchenware = null;
+            string selectStatement = @"SELECT kitchenware.id, kitchenware.kitchenware
+                                        FROM Kitchenware
+                                        WHERE kitchenware.kitchenware = @name;";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@name", name);
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            kitchenware = new Kitchenware
+                            {
+                                KitchenwareId = Convert.ToInt32(reader["id"]),
+                                KitchenwareDetails = reader["Kitchenware"].ToString(),
+                            };
+                        }
+                    }
+                }
+            }
+            return kitchenware;
         }
     }
 }

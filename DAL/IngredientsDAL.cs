@@ -44,7 +44,6 @@ namespace RecipeBookApp.DAL
                     }
                 }
             }
-
             return ingredientDetails;
         }
 
@@ -83,9 +82,8 @@ namespace RecipeBookApp.DAL
                         }
                     }
                 }
-
-                return ingredientDetails;
             }
+            return ingredientDetails;
         }
 
         /// <summary>
@@ -95,7 +93,7 @@ namespace RecipeBookApp.DAL
         /// <returns>The Ingredient</returns>
         public Ingredient GetIngredientByIngredientName(string name)
         {
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = null;
             string selectStatement = @"SELECT ingredient.id, ingredient.ingredient, ingredient.typeOfFoodID
                                         FROM ingredient
                                         WHERE ingredient.ingredient = @name;";
@@ -119,9 +117,8 @@ namespace RecipeBookApp.DAL
                         }
                     }
                 }
-
-                return ingredient;
             }
+            return ingredient;
         }
     }
 }

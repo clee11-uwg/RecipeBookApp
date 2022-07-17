@@ -42,10 +42,18 @@ namespace RecipeBookApp.Controller
             {
                 throw new ArgumentOutOfRangeException("Recipe ID must be greater than zero");
             }
-            return this.mealTypeDAL.GetMealTypes(searchRecipeID);
+            return this.mealTypeDAL.GetMealTypesByRecipe(searchRecipeID);
         }
 
-
+        /// <see cref="TypeOfMealDAL.GetMealTypeByName"/>
+        public MealType GetMealTypeByName(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                throw new NullReferenceException("Name cannot be null or empty");
+            }
+            return this.mealTypeDAL.GetMealTypeByName(name);
+        }
 
     }
 }

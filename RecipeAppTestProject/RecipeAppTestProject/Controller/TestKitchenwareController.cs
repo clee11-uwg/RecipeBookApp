@@ -45,5 +45,16 @@ namespace RecipeAppTestProject.Controller
         {
             List<Kitchenware> kitchenware = controller.GetKitchenware(-1);
         }
+
+        /// <summary>
+        /// Tests that GetKitchenwareByName throws exception if string is null or empty
+        /// </summary>
+        [TestMethod]
+        public void TestGetKitchenwareByNameThrowsExceptionIfNameIsNullOrEmpty()
+        {
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetKitchenwareByName(null));
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetKitchenwareByName(""));
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetKitchenwareByName(" "));
+        }
     }
 }
