@@ -27,7 +27,7 @@ namespace RecipeBookApp.UserControls
         private List<MealType> mealTypeList;
         private List<Ingredient> ingredientList;
         private List<Ingredient> recipeIngredientList;
-        private List<string> recipeKitchenware;
+        private List<Kitchenware> recipeKitchenwareList;
         private List<string> recipeMealTypes;
         private List<string> recipeFoodTypes;
         private User currentUser;
@@ -46,7 +46,8 @@ namespace RecipeBookApp.UserControls
             this.kitchenWareList = new List<Kitchenware>();
             this.mealTypeList = new List<MealType>();
             this.ingredientList = new List<Ingredient>();
-            this.recipeKitchenware = new List<string>();
+            this.recipeIngredientList = new List<Ingredient>();
+            this.recipeKitchenwareList = new List<Kitchenware>();
             this.recipeMealTypes = new List<string>();
             this.recipeFoodTypes = new List<string>();
             this.currentUser = new User();
@@ -83,14 +84,16 @@ namespace RecipeBookApp.UserControls
 
         private void GetKitchenwareForRecipe()
         {
-            List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(this.recipe.RecipeId);
+            this.recipeKitchenwareList = this.kitchenwareController.GetKitchenware(this.recipe.RecipeId);
             try
             {
-                for (int i = 0; i < kitchenwareList.Count; i++)
+                for (int i = 0; i < this.recipeKitchenwareList.Count; i++)
                 {
-                    this.recipeKitchenware.Add(kitchenwareList[i].KitchenwareDetails);
+                    if (i == (this.recipeKitchenwareList.Count - 1))
+                        this.kitchenwareRchBx.Text += this.recipeKitchenwareList[i].KitchenwareDetails;
+                    else
+                        this.kitchenwareRchBx.Text += this.recipeKitchenwareList[i].KitchenwareDetails + ",";
                 }
-                this.kitchenwareRchBx.Text = string.Join(", ", this.recipeKitchenware);
             }
             catch (Exception ex)
             {
@@ -101,15 +104,15 @@ namespace RecipeBookApp.UserControls
 
         private void GetIngredientsForRecipe()
         {
-            List<Ingredient> recipeIngredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
+            this.recipeIngredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
             try
             {
-                for (int i = 0; i < recipeIngredientList.Count; i++)
+                for (int i = 0; i < this.recipeIngredientList.Count; i++)
                 {
-                    if (i == (recipeIngredientList.Count - 1))
-                        this.ingredientsRchBx.Text += recipeIngredientList[i].IngredientName;
+                    if (i == (this.recipeIngredientList.Count - 1))
+                        this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName;
                     else
-                        this.ingredientsRchBx.Text += recipeIngredientList[i].IngredientName + ",";
+                        this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ",";
                 }
             }
             catch (Exception ex)
@@ -265,7 +268,7 @@ namespace RecipeBookApp.UserControls
 
         private void DisplayKitchenwares()
         {
-            this.kitchenwareRchBx.Text = string.Join(", ", this.recipeKitchenware);
+            this.kitchenwareRchBx.Text = string.Join(", ", this.recipeKitchenwareList);
             this.kitchenwareRchBx.Refresh();
         }
 
@@ -277,7 +280,7 @@ namespace RecipeBookApp.UserControls
 
         private void AddIngredientBtn_Click(object sender, EventArgs e)
         {
-            Ingredient selectedIngredient = this.ingredientsController.GetIngredentByName(this.ingredientCmbBx.SelectedText);
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByName(this.ingredientCmbBx.SelectedText);
             if (this.recipeIngredientList.Contains(selectedIngredient))
             {
                 MessageBox.Show(this.ingredientCmbBx.Text + "- already added. Please select something else.",
@@ -297,7 +300,7 @@ namespace RecipeBookApp.UserControls
 
         private void RemoveIngredientBtn_Click(object sender, EventArgs e)
         {
-            Ingredient selectedIngredient = this.ingredientsController.GetIngredentByName(this.ingredientCmbBx.SelectedText);
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByName(this.ingredientCmbBx.SelectedText);
             if (string.IsNullOrEmpty(this.ingredientsRchBx.Text))
             {
                 MessageBox.Show("No Ingredient present. Please add Ingredients",
@@ -323,7 +326,8 @@ namespace RecipeBookApp.UserControls
 
         private void AddKitchenwareBtn_Click(object sender, EventArgs e)
         {
-            if (this.recipeKitchenware.Contains(this.kitchenwareCmbBx.Text))
+            Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByKitchenware(this.kitchenwareCmbBx.SelectedText);
+            if (this.recipeKitchenwareList.Contains(selectedKitchenware))
             {
                 MessageBox.Show(this.kitchenwareCmbBx.Text + " - already added. Please select something else.",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -335,12 +339,13 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            this.recipeKitchenware.Add(this.kitchenwareCmbBx.Text.ToString());
+            this.recipeKitchenwareList.Add(selectedKitchenware);
             this.DisplayKitchenwares();
         }
 
         private void RemoveKitchenwareBtn_Click(object sender, EventArgs e)
         {
+            Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByKitchenware(this.kitchenwareCmbBx.SelectedText);
             if (string.IsNullOrEmpty(this.kitchenwareRchBx.Text))
             {
                 MessageBox.Show("No kitchenware present. Please add kitchenware",
@@ -353,14 +358,14 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeKitchenware.Contains(this.kitchenwareCmbBx.Text))
+            else if (!this.recipeKitchenwareList.Contains(selectedKitchenware))
             {
                 MessageBox.Show(this.kitchenwareCmbBx.Text + "- Cannot be removed as it was never added",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            this.recipeKitchenware.Remove(this.kitchenwareCmbBx.Text);
+            this.recipeKitchenwareList.Remove(selectedKitchenware);
             this.DisplayKitchenwares();
         }
 
@@ -421,12 +426,6 @@ namespace RecipeBookApp.UserControls
                 newMealTypeList.Add(new MealType { type = str });
             }
 
-            List<Kitchenware> newKitchenwareList = new List<Kitchenware>();
-            foreach (var str in this.recipeKitchenware)
-            {
-                newKitchenwareList.Add(new Kitchenware { KitchenwareDetails = str });
-            }
-
             this.recipe.RecipeName = this.recipeNameTxtBx.Text;
             this.recipe.EthnicId = Convert.ToInt32(this.ethnicityCmbBx.SelectedValue);
 
@@ -439,7 +438,7 @@ namespace RecipeBookApp.UserControls
 
             try
             {
-                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, this.recipeIngredientList, newMealTypeList, newKitchenwareList, this.nutrition);
+                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, this.recipeIngredientList, newMealTypeList, this.recipeKitchenwareList, this.nutrition);
                 if (result)
                 {
                     MessageBox.Show("The recipe was updated");
