@@ -3,6 +3,7 @@ using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -33,6 +34,7 @@ namespace RecipeBookApp.UserControls
         private List<string> recipeKitchenWare;
         private string displayMessage;
         private const int MaxLength = 2000;
+        private Image RecipeImage ;
 
 
         private readonly TypeOfFoodController foodController;
@@ -255,6 +257,10 @@ namespace RecipeBookApp.UserControls
             {
                 isError = true;
             }
+            if (!this.UploadFileImageSucess())
+            {
+                isError = true;
+            }
             if (isError)
             {
                 return;
@@ -418,6 +424,25 @@ namespace RecipeBookApp.UserControls
                 return false;
             }
             return true;
+        }
+
+        private bool UploadFileImageSucess()
+        {
+            bool fileExist = File.Exists(this.imageTextBox.Text);
+            if (fileExist)
+            {
+                this.RecipeImage = Image.FromFile(this.imageTextBox.Text);
+                return true;
+            }
+            else
+            {
+                this.imageFailureLabel.ForeColor = Color.Red;
+                this.imageFailureLabel.Text = this.imageTextBox.Text + " - File does not existis";
+                this.imageFailureLabel.Visible = true;
+                return false;
+            }
+           
+            
         }
         private bool ValidateNutritions()
         {
