@@ -249,8 +249,8 @@ namespace RecipeBookApp.Controller
                 throw new ArgumentException("Recipe and Nutrition must have same nutritionID");
             }
 
-            using (TransactionScope scope = new TransactionScope())
-            {
+            //using (TransactionScope scope = new TransactionScope())
+            //{
                 NutritionDAL nutritionDAL = new NutritionDAL();
                 nutritionDAL.UpdateNutrition(nutrition);
 
@@ -274,8 +274,8 @@ namespace RecipeBookApp.Controller
                     this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
                 }
 
-                scope.Complete();
-            }
+                //scope.Complete();
+            //}
             return true;
         }
         public static void SetRecipeInstructions(string text)

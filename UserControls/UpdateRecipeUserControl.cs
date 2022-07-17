@@ -26,7 +26,7 @@ namespace RecipeBookApp.UserControls
         private List<Kitchenware> kitchenWareList;
         private List<MealType> mealTypeList;
         private List<Ingredient> ingredientList;
-        private List<string> recipeIngredients;
+        private List<Ingredient> recipeIngredientList;
         private List<string> recipeKitchenware;
         private List<string> recipeMealTypes;
         private List<string> recipeFoodTypes;
@@ -46,7 +46,6 @@ namespace RecipeBookApp.UserControls
             this.kitchenWareList = new List<Kitchenware>();
             this.mealTypeList = new List<MealType>();
             this.ingredientList = new List<Ingredient>();
-            this.recipeIngredients = new List<string>();
             this.recipeKitchenware = new List<string>();
             this.recipeMealTypes = new List<string>();
             this.recipeFoodTypes = new List<string>();
@@ -102,14 +101,16 @@ namespace RecipeBookApp.UserControls
 
         private void GetIngredientsForRecipe()
         {
-            List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
+            List<Ingredient> recipeIngredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
             try
             {
-                for (int i = 0; i < ingredientList.Count; i++)
+                for (int i = 0; i < recipeIngredientList.Count; i++)
                 {
-                    this.recipeIngredients.Add(ingredientList[i].IngredientName);
+                    if (i == (recipeIngredientList.Count - 1))
+                        this.ingredientsRchBx.Text += recipeIngredientList[i].IngredientName;
+                    else
+                        this.ingredientsRchBx.Text += recipeIngredientList[i].IngredientName + ",";
                 }
-                this.ingredientsRchBx.Text = string.Join(", ", this.recipeIngredients);
             }
             catch (Exception ex)
             {
@@ -258,7 +259,7 @@ namespace RecipeBookApp.UserControls
 
         private void DisplayIngredients()
         {
-            this.ingredientsRchBx.Text = string.Join(", ", this.recipeIngredients);
+            this.ingredientsRchBx.Text = string.Join(", ", this.recipeIngredientList);
             this.ingredientsRchBx.Refresh();
         }
 
@@ -276,7 +277,8 @@ namespace RecipeBookApp.UserControls
 
         private void AddIngredientBtn_Click(object sender, EventArgs e)
         {
-            if (this.recipeIngredients.Contains(this.ingredientCmbBx.Text))
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredentByName(this.ingredientCmbBx.SelectedText);
+            if (this.recipeIngredientList.Contains(selectedIngredient))
             {
                 MessageBox.Show(this.ingredientCmbBx.Text + "- already added. Please select something else.",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -288,13 +290,14 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            this.recipeIngredients.Add(this.ingredientCmbBx.Text.ToString());
+            
+            this.recipeIngredientList.Add(selectedIngredient);
             this.DisplayIngredients();
         }
 
         private void RemoveIngredientBtn_Click(object sender, EventArgs e)
         {
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredentByName(this.ingredientCmbBx.SelectedText);
             if (string.IsNullOrEmpty(this.ingredientsRchBx.Text))
             {
                 MessageBox.Show("No Ingredient present. Please add Ingredients",
@@ -307,14 +310,14 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeIngredients.Contains(this.ingredientCmbBx.Text))
+            else if (!this.recipeIngredientList.Contains(selectedIngredient))
             {
                 MessageBox.Show(this.ingredientCmbBx.Text + " - Cannot be removed as it was never added",
                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            this.recipeIngredients.Remove(this.ingredientCmbBx.Text);
+            this.recipeIngredientList.Remove(selectedIngredient);
             this.DisplayIngredients();
         }
 
@@ -412,12 +415,6 @@ namespace RecipeBookApp.UserControls
 
         private void UpdateRecipeButton_Click(object sender, EventArgs e)
         {
-            List<Ingredient> newIngredientList = new List<Ingredient>();
-            foreach (var str in this.recipeIngredients)
-            {
-                newIngredientList.Add(new Ingredient { IngredientName = str });
-            }
-
             List<MealType> newMealTypeList = new List<MealType>();
             foreach (var str in this.recipeMealTypes)
             {
@@ -442,7 +439,7 @@ namespace RecipeBookApp.UserControls
 
             try
             {
-                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, newIngredientList, newMealTypeList, newKitchenwareList, this.nutrition);
+                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, this.recipeIngredientList, newMealTypeList, newKitchenwareList, this.nutrition);
                 if (result)
                 {
                     MessageBox.Show("The recipe was updated");
