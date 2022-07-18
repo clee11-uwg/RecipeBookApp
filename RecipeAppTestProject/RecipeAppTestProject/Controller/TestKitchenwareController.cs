@@ -25,7 +25,7 @@ namespace RecipeAppTestProject.Controller
         /// Tests that GetKitchenware(int) throws errors if int is less than one
         /// </summary>
         [TestMethod]
-        public void TestGetKitchenwareByRecipeIDThrowsExceptionIfZero()
+        public void TestGetKitchenwareByRecipeIDThrowsExceptionIfLessThanOne()
         {
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetKitchenware(0));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetKitchenware(-1));

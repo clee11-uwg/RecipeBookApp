@@ -25,14 +25,14 @@ namespace RecipeAppTestProject.Controller
         /// Tests that GetIngredients(int) throws errors if int is less than one
         /// </summary>
         [TestMethod]
-        public void TestGetIngredientsByRecipeIDThrowsExceptionIfZero()
+        public void TestGetIngredientsByRecipeIDThrowsExceptionIfLessThanOne()
         {
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetIngredient(0));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetIngredient(-1));
         }
 
         /// <summary>
-        /// Get Ingredieny by Name throws exception if name is null or empty
+        /// Get Ingredient by Name throws exception if name is null or empty
         /// </summary>
         [TestMethod]
         public void TestGetIngredientByNameThrowsExceptionIfNameIsNullOrEmpty()
