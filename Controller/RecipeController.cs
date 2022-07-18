@@ -109,8 +109,8 @@ namespace RecipeBookApp.Controller
                 throw new ArgumentException("AddRecipe is not an UPDATE query. RecipeID and NutritionID should be set to 0 or negative");
             }
 
-            // using (TransactionScope scope = new TransactionScope())
-            //{
+            using (TransactionScope scope = new TransactionScope())
+            {
             NutritionDAL nutritionDAL = new NutritionDAL();
             recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
 
@@ -132,8 +132,8 @@ namespace RecipeBookApp.Controller
                     this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
                 }
 
-               // scope.Complete();
-           // }
+               scope.Complete();
+            } 
             return true;
         }
 
@@ -231,8 +231,8 @@ namespace RecipeBookApp.Controller
                 throw new ArgumentException("Recipe and Nutrition must have same nutritionID");
             }
 
-            //using (TransactionScope scope = new TransactionScope())
-            //{
+            using (TransactionScope scope = new TransactionScope())
+            {
                 NutritionDAL nutritionDAL = new NutritionDAL();
                 nutritionDAL.UpdateNutrition(nutrition);
 
@@ -256,8 +256,8 @@ namespace RecipeBookApp.Controller
                     this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
                 }
 
-                //scope.Complete();
-            //}
+                scope.Complete();
+            }
             return true;
         }
 
