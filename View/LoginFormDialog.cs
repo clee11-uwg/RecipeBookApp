@@ -24,12 +24,46 @@ namespace RecipeBookApp.View
             this.loginErrorLabelText.Visible = false;
             this.welcomeLabel.Visible = false;
             this.welcomeUser = new User();
+            this.currentPasswordTextBox.PasswordChar = '*';
+            this.newPassowrdTextBox.PasswordChar = '*';
+            this.newPassowrdTextBox.MaxLength = 8;
+            this.changePasswordButton.Visible = false;
+
+
         }
         private void ChangePasswordButton_Click(object sender, EventArgs e)
         {
+
+            if (this.changePasswordButton.Text == "Submit")
+
+            {
+                this.ProcessNewPassword();
+            }
             Reset();
             this.newPassowrdTextBox.Visible = true;
             this.newPasswordLabel.Visible = true;
+            this.loginButton.Visible = false;
+            this.changePasswordButton.Text = "Submit";
+           
+        }
+
+        private void ProcessNewPassword()
+        {
+            if (string.IsNullOrEmpty(this.userNameTextBox.Text.Trim()) || string.IsNullOrEmpty(this.currentPasswordTextBox.Text.Trim()) || string.IsNullOrEmpty(this.newPassowrdTextBox.Text.Trim()))
+            {
+                loginErrorLabelText.Text = "User Name and password cannot be empty!";
+                loginErrorLabelText.ForeColor = Color.Red;
+                loginErrorLabelText.Visible = true;
+                return;
+            }
+            if (this.newPassowrdTextBox.MaxLength > 8)
+            {
+                loginErrorLabelText.Text = "Passsword cannot be exceed 8 char length!";
+                loginErrorLabelText.ForeColor = Color.Red;
+                loginErrorLabelText.Visible = true;
+                return;
+            }
+           this.userController.ChangeUserPassword(UserController.GetLoginUser(), this.currentPasswordTextBox.Text, this.newPassowrdTextBox.Text);
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -46,6 +80,7 @@ namespace RecipeBookApp.View
                 loginErrorLabelText.Visible = true;
                 return;
             }
+           
             try
             {
                 this.welcomeUser = this.userController.Login(this.userNameTextBox.Text, this.currentPasswordTextBox.Text);
@@ -59,7 +94,8 @@ namespace RecipeBookApp.View
               
                 this.welcomeLabel.Visible = true;
                 UserController.SetLoginUser(this.welcomeUser);
-               
+                this.changePasswordButton.Visible = true;
+
 
             }
             catch (Exception ex)
