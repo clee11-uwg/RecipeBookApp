@@ -18,6 +18,10 @@ namespace RecipeBookApp.UserControls
         private RecipeController recipeController;
         private RecipeDetails recipeDetailsScreen;
         private User currentUser;
+        private TabControl tabControl;
+        private TabPage homeTabPage;
+        private RecipeMainUserControl recipeMainUserControl;
+
 
         public RecipeListItem()
         {
@@ -70,6 +74,8 @@ namespace RecipeBookApp.UserControls
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
             this.ParentForm.Show();
+            /*GetRecipeMainUserControl();
+            recipeMainUserControl.Reset();*/
         }
 
         private void PicBoxRecipeImage_Click(object sender, EventArgs e)
@@ -82,6 +88,15 @@ namespace RecipeBookApp.UserControls
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
             this.ParentForm.Show();
+            /*GetRecipeMainUserControl();
+            recipeMainUserControl.Reset();*/
+        }
+
+        private void GetRecipeMainUserControl()
+        {
+            this.tabControl = this.ParentForm.Controls["tabControl1"] as TabControl;
+            this.homeTabPage = tabControl.Controls["hometabPage"] as TabPage;
+            this.recipeMainUserControl = homeTabPage.Controls["recipeMainUserControl2"] as RecipeMainUserControl;
         }
     }
 }

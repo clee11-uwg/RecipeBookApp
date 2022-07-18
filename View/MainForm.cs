@@ -1,4 +1,5 @@
 ﻿using RecipeBookApp.Controller;
+using RecipeBookApp.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 namespace RecipeBookApp.View
 {
     public partial class MainForm : Form
-    {
+    { 
         public MainForm()
         {
             InitializeComponent();
@@ -38,6 +39,11 @@ namespace RecipeBookApp.View
                     this.recipeMainUserControl2.Reset();
                 }
             }
+        }
+
+        public void ResetList()
+        {
+            this.recipeMainUserControl2.Reset();
         }
 
         private void DisplayUserDetails()
@@ -101,9 +107,5 @@ namespace RecipeBookApp.View
             
         }
 
-        private void recipeMainUserControl2_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
