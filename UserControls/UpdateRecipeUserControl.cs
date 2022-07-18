@@ -326,7 +326,8 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             */
-            
+
+            selectedIngredient.Amount = this.amountTxtBx.Text;
             this.recipeIngredientList.Add(selectedIngredient);
             this.DisplayIngredients();
         }
