@@ -14,9 +14,13 @@ namespace RecipeBookApp.View
         public SignUpFormDialog()
         {
             InitializeComponent();
+            this.userIDSignUpText.Focus();
             this.userController = new UserController();
             this.signupMessageLabel.Visible = false;
-            this.userIDSignUpText.Focus();
+          //  this.userIDSignUpText.Focus();
+            this.confirmPasswordSignUpText.PasswordChar = '*';
+            this.passwordSignUpText.PasswordChar = '*';
+          
         }
 
         private void SignupButton_Click(object sender, EventArgs e)
@@ -42,19 +46,28 @@ namespace RecipeBookApp.View
                 this.signupMessageLabel.ForeColor = Color.Red;
                 this.passwordSignUpText.BackColor = Color.OrangeRed;
                 this.confirmPasswordSignUpText.BackColor = Color.OrangeRed;
-                this.confirmPasswordSignUpText.Focus();
+                
                 this.signupMessageLabel.Visible = true;
                 return;
 
             }
+            else if (this.passwordSignUpText.Text.Length > 8  || this.confirmPasswordSignUpText.Text.Length > 8)
+            {
+                signupMessageLabel.Text = "Passsword cannot be exceed 8 char length!";
+                signupMessageLabel.ForeColor = Color.Red;
+                signupMessageLabel.Visible = true;
+                this.signupMessageLabel.ForeColor = Color.Red;
+                this.passwordSignUpText.BackColor = Color.OrangeRed;
+                return;
+            }
             try
             {
                 bool isAdminChecked = isAdminCheckBox.Checked;
-                String given_password_hash = Crypt.SHA256_hash(this.passwordSignUpText.Text);
+          
                 this.newRegisteruser = new User
                 {
                     Name = this.userIDSignUpText.Text,
-                    Password = given_password_hash,
+                    Password = this.passwordSignUpText.Text,
                     Is_Admin = isAdminChecked
 
                 };
@@ -106,6 +119,11 @@ namespace RecipeBookApp.View
         private void UserIDSignUpText_TextChanged(object sender, EventArgs e)
         {
             this.Reset();
+        }
+
+        private void SignUpFormDialog_Load(object sender, EventArgs e)
+        {
+            this.userIDSignUpText.Focus();
         }
     }   
 }

@@ -52,20 +52,19 @@ namespace RecipeBookApp.DAL
         public bool DoesUserNameExist(string username)
         {
             int result = -1;
-            string selectStatement = @"SELECT EXISTS
-	                                    (SELECT *
+            string selectStatement = @"SELECT *
 	                                    FROM User
-	                                    WHERE User.name = @username);";
+	                                    WHERE User.name = @username;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
                 using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
                 {
                     selectCommand.Parameters.AddWithValue("@username", username);
-                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
-                    {
+                  // using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                   // {
                         result = (int)(selectCommand.ExecuteScalar());
-                    }
+                   // }
                 }
             }
             if (result < 1)

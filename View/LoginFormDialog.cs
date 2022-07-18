@@ -26,7 +26,7 @@ namespace RecipeBookApp.View
             this.welcomeUser = new User();
             this.currentPasswordTextBox.PasswordChar = '*';
             this.newPassowrdTextBox.PasswordChar = '*';
-            this.newPassowrdTextBox.MaxLength = 8;
+         
             this.changePasswordButton.Visible = false;
 
 
@@ -58,7 +58,7 @@ namespace RecipeBookApp.View
                     loginErrorLabelText.Visible = true;
                     return;
                 }
-                if (this.newPassowrdTextBox.MaxLength > 8)
+                if (this.newPassowrdTextBox.Text.Length > 8)
                 {
                     loginErrorLabelText.Text = "Passsword cannot be exceed 8 char length!";
                     loginErrorLabelText.ForeColor = Color.Red;
