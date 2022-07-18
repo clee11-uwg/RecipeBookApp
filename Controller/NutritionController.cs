@@ -26,7 +26,7 @@ namespace RecipeBookApp.Controller
         /// <exception cref="ArgumentException">If string does not equal one of the attributes of Nutrition</exception>
         public List<Nutrition> GetNutritions(string sort)
         {
-            if (string.IsNullOrEmpty(sort))
+            if (string.IsNullOrWhiteSpace(sort))
             {
                 throw new ArgumentNullException("sort must be an attribute of Nutrition");
             }
@@ -38,7 +38,7 @@ namespace RecipeBookApp.Controller
             return this.nutritionDAL.GetNutritions(sort);
         }
 
-        /// <see cref="NutritionDAL.GetNutritions(string)"/>
+        /// <see cref="NutritionDAL.GetNutrition(int)"/>
         /// <exception cref="ArgumentOutOfRangeException">If recipeID is less than 1</exception>
         public List<Nutrition> GetNutrition(int searchRecipeID)
         {
