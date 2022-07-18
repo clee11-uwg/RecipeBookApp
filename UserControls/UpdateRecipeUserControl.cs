@@ -416,12 +416,16 @@ namespace RecipeBookApp.UserControls
         private void AddMealTypeBtn_Click(object sender, EventArgs e)
         {
             MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.Text);
-            if (this.recipeMealTypesList.Contains(selectedMealType))
+            if (selectedMealType != null)
             {
-                MessageBox.Show(this.mealTypeCmbBx.Text + "- already added. Please select something else.",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = this.recipeMealTypesList.FindIndex(mealType => mealType.type == selectedMealType.type);
+                if (index > 0)
+                {
+                    MessageBox.Show(this.mealTypeCmbBx.Text + "- already added. Please select something else.",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }            
             else if (this.mealTypeCmbBx.Text == "-- Select the Meal Type --")
             {
                 MessageBox.Show("Please select valid Meal Type to add",
