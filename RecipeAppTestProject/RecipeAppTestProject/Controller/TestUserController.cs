@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecipeBookApp.Controller;
 using RecipeBookApp.Model;
@@ -41,10 +40,9 @@ namespace RecipeAppTestProject.Controller
         /// Tests that GetUsers throws errors if User is not an admin
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(UnauthorizedAccessException))]
         public void TestGetUsersThrowsExceptionIfUserIsNotAnAdmin()
         {
-            List<User> users = controller.GetUsers(joe);
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.GetUsers(joe));
         }
 
         /// <summary>
@@ -57,6 +55,8 @@ namespace RecipeAppTestProject.Controller
             Assert.ThrowsException<UnauthorizedAccessException>(() => controller.Login("user", ""));
             Assert.ThrowsException<UnauthorizedAccessException>(() => controller.Login(null, "password"));
             Assert.ThrowsException<UnauthorizedAccessException>(() => controller.Login("user", null));
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.Login("  ", "password"));
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.Login("user", "  "));
         }
 
         /// <summary>
@@ -75,15 +75,6 @@ namespace RecipeAppTestProject.Controller
         public void TestLoginThrowsExceptionIfBadUsernameAndPasswordCombination()
         {
             Assert.ThrowsException<UnauthorizedAccessException>(() => controller.Login(joe.Name, "incorrect"));
-        }
-
-        /// <summary>
-        /// Tests that Login works with valid username and password
-        /// </summary>
-        [TestMethod]
-        public void TestLoginWorksWithValidUsernameAndPassword()
-        {
-            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.Login(joe.Name, "bob"));
         }
 
         /// <summary>
@@ -119,10 +110,10 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests that Register User throws exceptions when given data is null
+        /// Tests that Register User throws exceptions when given data is null or empty
         /// </summary>
         [TestMethod]
-        public void TestRegisterUserThrowsExceptionIfDataIsNull()
+        public void TestRegisterUserThrowsExceptionIfDataIsNullOrEmpty()
         {
             User newUser = new User();
             Assert.ThrowsException<NullReferenceException>(() => controller.AddUser(newUser));
@@ -137,11 +128,19 @@ namespace RecipeAppTestProject.Controller
             newUser.Name = "";
             Assert.ThrowsException<NullReferenceException>(() => controller.AddUser(newUser));
 
+            newUser.Name = "  ";
+            Assert.ThrowsException<NullReferenceException>(() => controller.AddUser(newUser));
+
             newUser.Name = "bob";
             newUser.Password = "";
             Assert.ThrowsException<NullReferenceException>(() => controller.AddUser(newUser));
+
+            newUser.Name = "bob";
+            newUser.Password = "  ";
+            Assert.ThrowsException<NullReferenceException>(() => controller.AddUser(newUser));
         }
 
+        /**
         /// <summary>
         /// Tests the RegisterUser throws exception if user all ready exists
         /// </summary>
@@ -155,14 +154,15 @@ namespace RecipeAppTestProject.Controller
                 Password = "faker",
                 Is_Admin = false
             };
-            //Assert.ThrowsException<UnauthorizedAccessException>(() => controller.AddUser(faker));
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.AddUser(faker));
         }
+        */
 
         /// <summary>
-        /// Change Passwords through exceptions if parameters are null
+        /// Change Passwords through exceptions if parameters are null or empty
         /// </summary>
         [TestMethod]
-        public void TestChangePasswordThrowsExceptionIfParametersAreNull()
+        public void TestChangePasswordThrowsExceptionIfParametersAreNullOrEmpty()
         {
             Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(null, "gobble", "gobble"));
             Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, null, "gobble"));
@@ -170,15 +170,20 @@ namespace RecipeAppTestProject.Controller
 
             Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, "", "gobble"));
             Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, "gobble", ""));
+
+            Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, "  ", "gobble"));
+            Assert.ThrowsException<NullReferenceException>(() => controller.ChangeUserPassword(joe, "gobble", "  "));
         }
 
+        /**
         /// <summary>
         /// Tests that Change Password throws exception if one inputs the wrong old password
         /// </summary>
         [TestMethod]
         public void TestChangePasswordThrowsExceptionIfInputIncorrectOldPassword()
         {
-            //Assert.ThrowsException<UnauthorizedAccessException>(() => controller.ChangeUserPassword(joe, "gobbledegook", "gobble"));
+            Assert.ThrowsException<UnauthorizedAccessException>(() => controller.ChangeUserPassword(joe, "gobbledegook", "gobble"));
         }
+        */
     }
 }

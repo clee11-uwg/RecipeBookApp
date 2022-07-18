@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecipeBookApp.Controller;
-using RecipeBookApp.Model;
 
 namespace RecipeAppTestProject.Controller
 {
@@ -27,23 +22,13 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests that GetEthnicOrigin(int) throws errors if int is 0
+        /// Tests that GetEthnicOrigin(int) throws errors if int is less than 1
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetEthnicitiesByRecipeIDThrowsExceptionIfZero()
+        public void TestGetEthnicitiesByRecipeIDThrowsExceptionIfLessThanOne()
         {
-            List<Ethnic> ingredients = controller.GetEthnicOrigin(0);
-        }
-
-        /// <summary>
-        /// Tests that GetEthnicOrigin(int) throws errors if int is negative
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetEthnicitiesByRecipeIDThrowsExceptionIfNegative()
-        {
-            List<Ethnic> ingredients = controller.GetEthnicOrigin(-1);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetEthnicOrigin(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetEthnicOrigin(-1));
         }
     }
 }
