@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Transactions;
-using System.IO;
 using System.Linq;
 using RecipeBookApp.DAL;
 using RecipeBookApp.Model;
@@ -26,20 +25,14 @@ namespace RecipeBookApp.Controller
             this.recipeDAL = new RecipeDAL();
         }
 
-        /// <summary>
-        /// Gets all Recipe  Recipe table.
-        /// </summary>
-        /// <returns>List of all Recipes from database </returns>
+        /// <see cref="RecipeDAL.GetRecipes"/>
         public  List<Recipe> GetRecipes()
         {
             return this.recipeDAL.GetRecipes();
         }
 
-        /// <summary>
-        /// Gets the recipe for the search ID.
-        /// </summary>
-        /// <param name="searchRecipeID">ID of the recipe</param>
-        /// <returns>Recipe found in the database</returns>
+        /// <see cref="RecipeDAL.GetRecipe(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If searchRecipeID is less than 1</exception>
         public  Recipe GetRecipe(int searchRecipeID)
         {
             if (searchRecipeID < 1)
@@ -49,31 +42,18 @@ namespace RecipeBookApp.Controller
             return this.recipeDAL.GetRecipe(searchRecipeID);
         }
 
-        /// <summary>
-        /// Gets the recipes matching the search input.
-        /// </summary>
-        /// <param name="searchUserInput">Search stirng to find recipes by</param>
-        /// <returns>Recipes found in the database</returns>
+        /// <see cref="RecipeDAL.GetSearchRecipe(string)"/>
+        /// <exception cref="ArgumentNullException">If search string is null or empty</exception>
         public List<Recipe> GetRecipeSearch(string searchUserInput)
         {
-            if (string.IsNullOrEmpty(searchUserInput))
+            if (string.IsNullOrWhiteSpace(searchUserInput))
             {
                 throw new ArgumentNullException("Search string cannot be null or empty");
             }
             return this.recipeDAL.GetSearchRecipe(searchUserInput);
         }
 
-        /// <summary>
-        /// Returns list of filtered recipes
-        /// </summary>
-        /// <param name="allergens">Undesired allergens</param>
-        /// <param name="ethnicities">Undesired ethnicities</param>
-        /// <param name="foodTypes">Undesired types of food</param>
-        /// <param name="ingredients">Undesired ingredients</param>
-        /// <param name="kitchenware">Undesired kitchenware</param>
-        /// <param name="mealTypes">Undesired types of meal</param>
-        /// <param name="nutrition">Undesired nutrition</param>
-        /// <returns>List of recipes</returns>
+        /// <see cref="RecipeDAL.FilterRecipes(int[], int[], int[], int[], int[], int[], int[])"/>
         public List<Recipe> FilterRecipes(int[] allergens, int[] ethnicities, int[] foodTypes,
             int[] ingredients, int[] kitchenware, int[] mealTypes, int[] nutrition)
         {
@@ -88,11 +68,8 @@ namespace RecipeBookApp.Controller
                 kitchenware, mealTypes, nutrition);
         }
 
-        /// <summary>
-        /// Returns a list of the user's favorite recipes
-        /// </summary>
-        /// <param name="userID">User ID of the user</param>
-        /// <returns>List of favorite recipes</returns>
+        /// <see cref="RecipeDAL.GetFavoriteRecipes(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If userID is less than 1</exception>
         public List<Recipe> GetFavoriteRecipes(int userID)
         {
             if (userID < 1)
@@ -113,6 +90,8 @@ namespace RecipeBookApp.Controller
         /// <param name="kitchenware">Kitchenware used by the recipe</param>
         /// <param name="nutrition">Nutrition of the recipe</param>
         /// <returns>Whether or not the recipe was inserted</returns>
+        /// <exception cref="ArgumentNullException">If data is null or empty</exception>
+        /// <exception cref="ArgumentException">If recipeID or nutritionID are all ready set</exception>
         public bool AddRecipe(User user, Recipe recipe, List<Ingredient> ingredients, List<MealType> mealTypes,
                 List<Kitchenware> kitchenware, Nutrition nutrition)
         {
@@ -123,7 +102,7 @@ namespace RecipeBookApp.Controller
             }
             if (!ingredients.Any() || !mealTypes.Any() || !kitchenware.Any())
             {
-                throw new ArgumentException("Ingredients, Meal Types, and Kitchenware cannot be empty");
+                throw new ArgumentNullException("Ingredients, Meal Types, and Kitchenware cannot be empty");
             }
             if (recipe.RecipeId > 0 || recipe.NutritionId > 0 || nutrition.NutritionId > 0)
             {
@@ -162,6 +141,8 @@ namespace RecipeBookApp.Controller
         /// <param name="user">User who is calling</param>
         /// <param name="recipe">Recipe to delete</param>
         /// <returns>Whether or not the recipe was deleted</returns>
+        /// <exception cref="UnauthorizedAccessException">If user is not the creator or an admin</exception>
+        /// <exception cref="ArgumentException">If recipeID is less than 1</exception>
         public bool DeleteRecipe(User user, Recipe recipe)
         {
             if (user == null || recipe == null)
@@ -193,13 +174,9 @@ namespace RecipeBookApp.Controller
             return true;
         }
 
-        /// <summary>
-        /// Updates the recipe into the database
-        /// </summary>
-        /// <param name="user">User who is calling</param>
-        /// <param name="recipe">Recipe to update</param>
-        /// <param name="ingredients">Ingredients of the recipe</param>
-        /// <returns>Whether or not the recipe was updated</returns>
+        /// <see cref="RecipeDAL.UpdateAmountInRecipeHasIngredient(int, int, string)"/>
+        /// <exception cref="ArgumentNullException">If parameters are null</exception>
+        /// <exception cref="UnauthorizedAccessException">If user is not the creator or an admin</exception>
         public bool UpdateAmountOfIngredient(User user, Recipe recipe, Ingredient ingredient)
         {
             if (user == null || recipe == null || ingredient == null)
@@ -224,6 +201,9 @@ namespace RecipeBookApp.Controller
         /// <param name="kitchenware">Kitchenware used by the recipe</param>
         /// <param name="nutrition">Nutrition of the recipe</param>
         /// <returns>Whether or not the recipe was updated</returns>
+        /// <exception cref="UnauthorizedAccessException">If user is not the creator or an admin</exception>
+        /// <exception cref="ArgumentNullException">If parameters are null or empty</exception>
+        /// <exception cref="ArgumentException">If nutrition or recipe ID are less than 1 or mismatched</exception>
         public bool UpdateRecipe(User user, Recipe recipe, List<Ingredient> ingredients, List<MealType> mealTypes,
                 List<Kitchenware> kitchenware, Nutrition nutrition)
         {
@@ -238,7 +218,7 @@ namespace RecipeBookApp.Controller
             }
             if (!ingredients.Any() || !mealTypes.Any() || !kitchenware.Any())
             {
-                throw new ArgumentException("Ingredients, Meal Types, and Kitchenware cannot be empty");
+                throw new ArgumentNullException("Ingredients, Meal Types, and Kitchenware cannot be empty");
             }
             if (recipe.RecipeId < 1 || recipe.NutritionId < 1 || nutrition.NutritionId < 1)
             {
@@ -278,6 +258,7 @@ namespace RecipeBookApp.Controller
             //}
             return true;
         }
+
         public static void SetRecipeInstructions(string text)
         {
             recipeInstructions = text;
@@ -285,7 +266,7 @@ namespace RecipeBookApp.Controller
 
         public static string GetRecipeInstructions()
         {
-            return recipeInstructions ;
+            return recipeInstructions;
         }
     }
 }

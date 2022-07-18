@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecipeBookApp.Controller;
-using RecipeBookApp.Model;
 
 
 namespace RecipeAppTestProject.Controller
@@ -28,23 +23,27 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests that GetNutrition(int) throws errors if int is 0
+        /// Tests that GetNutrition(int) throws errors if int is less than one
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetNutritionByRecipeIDThrowsExceptionIfZero()
+        public void TestGetNutritionByRecipeIDThrowsExceptionIfLessThanOne()
         {
-            List<Nutrition> nutritions = controller.GetNutrition(0);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetNutrition(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetNutrition(-1));
         }
 
         /// <summary>
-        /// Tests that GetNutrition(int) throws errors if int is negative
+        /// Tests that GetNutritions throws exception if the sort parameter is null or not a nutrition attribute
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetNutritionByRecipeIDThrowsExceptionIfNegative()
+        public void TestGetNutritionThrowsExceptionIfAttributeIsNullOrInvalid()
         {
-            List<Nutrition> nutritions = controller.GetNutrition(-1);
+            Assert.ThrowsException<ArgumentNullException>(() => controller.GetNutritions(null));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.GetNutritions(""));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.GetNutritions("  "));
+
+            Assert.ThrowsException<ArgumentException>(() => controller.GetNutritions("fake"));
+            Assert.ThrowsException<ArgumentException>(() => controller.GetNutritions("another fake"));
         }
     }
 }
