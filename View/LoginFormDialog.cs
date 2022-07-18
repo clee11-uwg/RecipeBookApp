@@ -112,11 +112,12 @@ namespace RecipeBookApp.View
                 this.welcomeLabel.ForeColor = Color.White;
                 this.welcomeLabel.BackColor = Color.Orange;
                 this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
-                this.welcomeLabel.Text = "Welcome " + this.welcomeUser.Name.ToUpper() + " to the Recipe App !";
+                
               
                 this.welcomeLabel.Visible = true;
                 UserController.SetLoginUser(this.welcomeUser);
                 this.changePasswordButton.Visible = true;
+                this.welcomeLabel.Text = "Welcome " + this.welcomeUser.Name.ToUpper() + " to the Recipe App !";
 
 
             }
