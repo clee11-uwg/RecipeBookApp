@@ -343,7 +343,7 @@ namespace RecipeBookApp.DAL
             string addRecipeStatement = @"INSERT INTO recipe (Name, Instructions, cooktime, nutritionID, 
                                             ethnicOriginID, userWhoCreated)
                                         VALUES(@name, @instructions, @cooktime, @nutritionID, 
-                                            @ethnicOriginID, @userWhoCreated); ";
+                                            @ethnicOriginID, @userWhoCreated); SELECT last_insert_rowid();";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -357,6 +357,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@userWhoCreated", recipe.UserWhoCreated);
 
                     id = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    connection.Close();
                 }
             }
             return id;

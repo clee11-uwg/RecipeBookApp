@@ -75,6 +75,7 @@
             this.recipeMainUserControl2.Name = "recipeMainUserControl2";
             this.recipeMainUserControl2.Size = new System.Drawing.Size(1295, 614);
             this.recipeMainUserControl2.TabIndex = 0;
+            this.recipeMainUserControl2.Load += new System.EventHandler(this.recipeMainUserControl2_Load);
             // 
             // AddRecipetabPage
             // 
