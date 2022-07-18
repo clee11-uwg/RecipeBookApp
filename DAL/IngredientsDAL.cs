@@ -111,8 +111,8 @@ namespace RecipeBookApp.DAL
                             {
                                 IngredientId = Convert.ToInt32(reader["id"]),
                                 IngredientName = reader["ingredient"].ToString(),
-                                FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
-                                Amount = reader["amount"].ToString()
+                                FoodId = Convert.ToInt32(reader["typeOfFoodID"])
+                                //Amount = reader["amount"].ToString()
                             };
                         }
                     }

@@ -264,7 +264,14 @@ namespace RecipeBookApp.UserControls
 
         private void DisplayIngredients()
         {
-            this.ingredientsRchBx.Text = string.Join(", ", this.recipeIngredientList);
+            this.ingredientsRchBx.Text = null;
+            for (int i = 0; i < this.recipeIngredientList.Count; i++)
+            {
+                if (i == (this.recipeIngredientList.Count - 1))
+                    this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName;
+                else
+                    this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ",";
+            }
             this.ingredientsRchBx.Refresh();
         }
 
@@ -282,25 +289,29 @@ namespace RecipeBookApp.UserControls
 
         private void AddIngredientBtn_Click(object sender, EventArgs e)
         {
-            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByName(this.ingredientCmbBx.SelectedText);
-            if (this.recipeIngredientList.Contains(selectedIngredient))
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.Text);
+            if (selectedIngredient != null)
             {
-                MessageBox.Show(this.ingredientCmbBx.Text + "- already added. Please select something else.",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = this.recipeIngredientList.FindIndex(ingredient => ingredient.IngredientName == selectedIngredient.IngredientName);
+                if (index > 0)
+                {
+                    MessageBox.Show(this.ingredientCmbBx.Text + "- already added. Please select something else.",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }            
             else if (this.ingredientCmbBx.Text == "-- Select the Ingredient --")
             {
                 MessageBox.Show("Please select valid Ingredients to add",
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (string.IsNullOrEmpty(this.amountTxtBx.Text))
+            /*else if (string.IsNullOrEmpty(this.amountTxtBx.Text))
             {
                 MessageBox.Show("Please enter an amount (i.e. 1 tbsp, 2 cups)",
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
+            */
             
             this.recipeIngredientList.Add(selectedIngredient);
             this.DisplayIngredients();
@@ -308,7 +319,7 @@ namespace RecipeBookApp.UserControls
 
         private void RemoveIngredientBtn_Click(object sender, EventArgs e)
         {
-            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByName(this.ingredientCmbBx.SelectedText);
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.Text);
             if (string.IsNullOrEmpty(this.ingredientsRchBx.Text))
             {
                 MessageBox.Show("No Ingredient present. Please add Ingredients",
@@ -334,7 +345,7 @@ namespace RecipeBookApp.UserControls
 
         private void AddKitchenwareBtn_Click(object sender, EventArgs e)
         {
-            Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByKitchenware(this.kitchenwareCmbBx.SelectedText);
+            Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByName(this.kitchenwareCmbBx.Text);
             if (this.recipeKitchenwareList.Contains(selectedKitchenware))
             {
                 MessageBox.Show(this.kitchenwareCmbBx.Text + " - already added. Please select something else.",
@@ -353,7 +364,7 @@ namespace RecipeBookApp.UserControls
 
         private void RemoveKitchenwareBtn_Click(object sender, EventArgs e)
         {
-            Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByKitchenware(this.kitchenwareCmbBx.SelectedText);
+            Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByName(this.kitchenwareCmbBx.Text);
             if (string.IsNullOrEmpty(this.kitchenwareRchBx.Text))
             {
                 MessageBox.Show("No kitchenware present. Please add kitchenware",
@@ -379,7 +390,7 @@ namespace RecipeBookApp.UserControls
 
         private void AddMealTypeBtn_Click(object sender, EventArgs e)
         {
-            MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.SelectedText);
+            MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.Text);
             if (this.recipeMealTypesList.Contains(selectedMealType))
             {
                 MessageBox.Show(this.mealTypeCmbBx.Text + "- already added. Please select something else.",
@@ -399,7 +410,7 @@ namespace RecipeBookApp.UserControls
 
         private void RemoveMealTypeBtn_Click(object sender, EventArgs e)
         {
-            MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.SelectedText);
+            MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.Text);
             if (string.IsNullOrEmpty(this.mealTypeRchBx.Text))
             {
                 MessageBox.Show("No meal types present. Please add a meal type",
@@ -464,7 +475,7 @@ namespace RecipeBookApp.UserControls
 
         private void UpdateAmountBtn_Click(object sender, EventArgs e)
         {
-            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByName(this.ingredientCmbBx.SelectedText);
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.SelectedText);
             if (this.recipeIngredientList.Contains(selectedIngredient))
             {
                 if (this.amountTxtBx.Text.Trim() == selectedIngredient.Amount)
