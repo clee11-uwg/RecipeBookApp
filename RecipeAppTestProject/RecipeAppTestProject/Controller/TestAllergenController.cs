@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecipeBookApp.Controller;
-using RecipeBookApp.Model;
 
 namespace RecipeAppTestProject.Controller
 {
@@ -24,43 +22,23 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests that GetAllergen(int) throws errors if int is 0
+        /// Tests that GetAllergen(int) throws errors if int is less than 1
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetAllergenByRecipeIDThrowsExceptionIfZero()
+        public void TestGetAllergenByRecipeIDThrowsExceptionIfLessThanOne()
         {
-            List<Allergen> allergens = controller.GetAllergen(0);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetAllergen(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetAllergen(-1));
         }
 
         /// <summary>
-        /// Tests that GetAllergen(int) throws errors if int is negative
+        /// Tests that GetAllergensOfIngredient(int) throws errors if int is less than 1
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetAllergenByRecipeIDThrowsExceptionIfNegative()
+        public void TestGetAllergensOfIngredientByRecipeIDThrowsExceptionIfLessThanOne()
         {
-            List<Allergen> allergens = controller.GetAllergen(-1);
-        }
-
-        /// <summary>
-        /// Tests that GetAllergensOfIngredient(int) throws errors if int is 0
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetAllergensOfIngredientByRecipeIDThrowsExceptionIfZero()
-        {
-            List<Allergen> allergens = controller.getAllergensOfIngredient(0);
-        }
-
-        /// <summary>
-        /// Tests that GetAllergensOfIngredient(int) throws errors if int is negative
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetAllergensOfIngredientByRecipeIDThrowsExceptionIfNegative()
-        {
-            List<Allergen> allergens = controller.getAllergensOfIngredient(-1);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.getAllergensOfIngredient(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.getAllergensOfIngredient(-1));
         }
     }
 }
