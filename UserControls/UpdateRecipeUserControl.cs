@@ -110,9 +110,9 @@ namespace RecipeBookApp.UserControls
                 for (int i = 0; i < this.recipeIngredientList.Count; i++)
                 {
                     if (i == (this.recipeIngredientList.Count - 1))
-                        this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName;
+                        this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ": " + this.recipeIngredientList[i].Amount;
                     else
-                        this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ",";
+                        this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ": " + this.recipeIngredientList[i].Amount + "\n";
                 }
             }
             catch (Exception ex)
@@ -268,9 +268,9 @@ namespace RecipeBookApp.UserControls
             for (int i = 0; i < this.recipeIngredientList.Count; i++)
             {
                 if (i == (this.recipeIngredientList.Count - 1))
-                    this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName;
+                    this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ": " + this.recipeIngredientList[i].Amount;
                 else
-                    this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ",";
+                    this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ": " + this.recipeIngredientList[i].Amount + "\n";
             }
             this.ingredientsRchBx.Refresh();
         }
@@ -520,32 +520,57 @@ namespace RecipeBookApp.UserControls
 
         private void UpdateAmountBtn_Click(object sender, EventArgs e)
         {
-            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.SelectedText);
-            if (this.recipeIngredientList.Contains(selectedIngredient))
+            try
             {
-                if (this.amountTxtBx.Text.Trim() == selectedIngredient.Amount)
+                Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.Text);
+                int index = this.recipeIngredientList.FindIndex(ingredient => ingredient.IngredientName == selectedIngredient.IngredientName);
+                if (index >= 0)
                 {
-                    MessageBox.Show("The amount entered is the same as the current saved amount", "Error!", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (this.amountTxtBx.Text.Trim() == selectedIngredient.Amount)
+                    {
+                        MessageBox.Show("The amount entered is the same as the current saved amount", "Error!",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        selectedIngredient.Amount = this.amountTxtBx.Text.Trim();
+                        try
+                        {
+                            bool result = this.recipeController.UpdateAmountOfIngredient(this.currentUser, this.recipe, selectedIngredient);
+                            if (result)
+                            {
+                                MessageBox.Show("Ingredient amount was updated successfully");
+                                this.recipeIngredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
+                                DisplayIngredients();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to updated the ingredient amount");
+                            }
+                                
+                        }
+                        catch (ArgumentNullException ane)
+                        {
+                            MessageBox.Show("Failed to update ingredient amount - " + ane.Message, ane.GetType().Name);
+                        }
+                        catch (UnauthorizedAccessException uae)
+                        {
+                            MessageBox.Show("Failed to update ingredient amount - " + uae.Message, uae.GetType().Name);
+                        }
+                    }
                 }
                 else
                 {
-                    try
-                    {
-                        bool result = this.recipeController.UpdateAmountOfIngredient(this.currentUser, this.recipe, selectedIngredient);
-                        if (result)
-                            MessageBox.Show("Ingredient amount was updated successfully");
-                    }
-                    catch(ArgumentNullException ane)
-                    {
-                        MessageBox.Show("Failed to update ingredient amount - " + ane.Message, ane.GetType().Name);
-                    }
-                    catch (UnauthorizedAccessException uae)
-                    {
-                        MessageBox.Show("Failed to update ingredient amount - " + uae.Message, uae.GetType().Name);
-                    }
+                    MessageBox.Show(this.ingredientCmbBx.Text + "- Cannot be updated as it was never added",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
             }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show(nre.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }   
+            
         }
     }
 }
