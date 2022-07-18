@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecipeBookApp.Controller;
-using RecipeBookApp.Model;
 
 namespace RecipeAppTestProject.Controller
 {
@@ -27,23 +22,24 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests that GetKitchenware(int) throws errors if int is 0
+        /// Tests that GetKitchenware(int) throws errors if int is less than one
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetKitchenwareByRecipeIDThrowsExceptionIfZero()
+        public void TestGetKitchenwareByRecipeIDThrowsExceptionIfLessThanOne()
         {
-            List<Kitchenware> kitchenware = controller.GetKitchenware(0);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetKitchenware(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetKitchenware(-1));
         }
 
         /// <summary>
-        /// Tests that GetKitchenware(int) throws errors if int is negative
+        /// Tests that GetKitchenwareByName throws exception if string is null or empty
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetKitchenwareByRecipeIDThrowsExceptionIfNegative()
+        public void TestGetKitchenwareByNameThrowsExceptionIfNameIsNullOrEmpty()
         {
-            List<Kitchenware> kitchenware = controller.GetKitchenware(-1);
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetKitchenwareByName(null));
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetKitchenwareByName(""));
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetKitchenwareByName(" "));
         }
     }
 }

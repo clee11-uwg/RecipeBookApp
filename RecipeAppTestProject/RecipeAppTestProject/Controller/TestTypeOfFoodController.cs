@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using RecipeBookApp.Controller;
-using RecipeBookApp.Model;
-using System.Collections.Generic;
 
 namespace RecipeAppTestProject.Controller
 {
@@ -24,23 +22,13 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests that GetFoodTypes(int) throws errors if int is 0
+        /// Tests that GetFoodTypes(int) throws errors if int is less than one
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetFoodTypesByRecipeIDThrowsExceptionIfZero()
+        public void TestGetFoodTypesByRecipeIDThrowsExceptionIfLessThanOne()
         {
-            List<FoodType> foods = controller.GetFoodTypes(0);
-        }
-
-        /// <summary>
-        /// Tests that GetFoodTypes(int) throws errors if int is negative
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetFoodTypesByRecipeIDThrowsExceptionIfNegative()
-        {
-            List<FoodType> foods = controller.GetFoodTypes(-1);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetFoodTypes(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetFoodTypes(-1));
         }
     }
 }

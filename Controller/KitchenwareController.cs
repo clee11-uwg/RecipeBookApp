@@ -2,7 +2,6 @@
 using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RecipeBookApp.Controller
 {
@@ -21,27 +20,31 @@ namespace RecipeBookApp.Controller
             this.kitchenwareDAL = new KitchenwareDAL();
         }
 
-        /// <summary>
-        /// Gets all kitchenware.
-        /// </summary>
-        /// <returns>List of all kitchenware from database </returns>
+        /// <see cref="KitchenwareDAL.GetKitchenwares"/>
         public List<Kitchenware> GetKitchenware()
         {
             return kitchenwareDAL.GetKitchenwares();
         }
 
-        /// <summary>
-        /// Finds all kitchenware needed to cook said recipe
-        /// <param name="recipeID">Id of recipe</param>
-        /// <returns>Kitchenware associated with recipe</returns>
+        /// <see cref="KitchenwareDAL.GetKitchenwareByRecipeID(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If searchRecipeID is less than 1</exception>
         public List<Kitchenware> GetKitchenware(int searchRecipeID)
         {
             if (searchRecipeID < 1)
             {
                 throw new ArgumentOutOfRangeException("Recipe ID must be greater than zero");
             }
-            return this.kitchenwareDAL.GetKitchenware(searchRecipeID);
+            return this.kitchenwareDAL.GetKitchenwareByRecipeID(searchRecipeID);
         }
 
+        /// <see cref="KitchenwareDAL.GetKitchenwareByName(string)"
+        public Kitchenware GetKitchenwareByName(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                throw new NullReferenceException("Name cannot be null or empty");
+            }
+            return this.kitchenwareDAL.GetKitchenwareByName(name);
+        }
     }
 }

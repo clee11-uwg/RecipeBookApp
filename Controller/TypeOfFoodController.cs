@@ -2,7 +2,6 @@ using RecipeBookApp.DAL;
 using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RecipeBookApp.Controller
 {
@@ -22,20 +21,14 @@ namespace RecipeBookApp.Controller
             this.foodTypeDAL = new TypeOfFoodDAL();
         }
 
-        /// <summary>
-        /// Gets all Food Types from the database table.
-        /// </summary>
-        /// <returns>List of all Food Types from database </returns>
+        /// <see cref="TypeOfFoodDAL.GetFoodTypes"/>
         public List<FoodType> GetFoodTypes()
         {
             return this.foodTypeDAL.GetFoodTypes();
         }
 
-        /// <summary>
-        /// Gets the food type data for the search ID.
-        /// </summary>
-        /// <param name="searchRecipeID">ID of the recipe</param>
-        /// <returns>Food type data found in the database</returns>
+        /// <see cref="TypeOfFoodDAL.GetFoodTypes(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If searchRecipeID is less than 1</exception>
         public List<FoodType> GetFoodTypes(int searchRecipeID)
         {
             if (searchRecipeID < 1)

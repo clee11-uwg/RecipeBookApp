@@ -49,7 +49,7 @@ namespace RecipeBookApp.DAL
         /// Finds all meal types of said recipe
         /// <param name="recipeID">Id of recipe</param>
         /// <returns>Meal types of said recipe</returns>
-        public List<MealType> GetMealTypes(int recipeID)
+        public List<MealType> GetMealTypesByRecipe(int recipeID)
         {
             List<MealType> mealTypesList = new List<MealType>();
             string selectStatement = @"SELECT type_of_meal.id, type_of_meal.Type
@@ -78,8 +78,41 @@ namespace RecipeBookApp.DAL
                         }
                     }
                 }
-                return mealTypesList;
             }
+            return mealTypesList;
+        }
+
+        /// <summary>
+        /// Finds the given meal type
+        /// <param name="name">Name of meal type</param>
+        /// <returns>Meal type</returns>
+        public MealType GetMealTypeByName(string name)
+        {
+            MealType mealType = null;
+            string selectStatement = @"SELECT type_of_meal.id, type_of_meal.type
+                                        FROM type_of_meal
+                                        WHERE type = @name";
+
+            using (SQLiteConnection connection = DBConnection.GetConnection())
+            {
+                using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                {
+                    selectCommand.Parameters.AddWithValue("@name", name);
+                    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            mealType = new MealType
+                            {
+                                mealTypeID = Convert.ToInt32(reader["id"]),
+                                type = reader["Type"].ToString(),
+                            };
+                        }
+                    }
+                }
+            }
+            return mealType;
         }
     }
 }

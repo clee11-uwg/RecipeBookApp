@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecipeBookApp.Controller;
-using RecipeBookApp.Model;
 
 namespace RecipeAppTestProject.Controller
 {
@@ -27,36 +22,24 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests GetMealTypes
+        /// Tests that GetMealTypes(int) throws errors if int is less than one
         /// </summary>
         [TestMethod]
-        public void TestGetMealTypes()
+        public void TestGetMealTypesByRecipeIDThrowsExceptionIfLessThanOne()
         {
-            /**
-            TypeOfMealController controller = new TypeOfMealController();
-            List<MealType> meals = controller.GetMealTypes();
-            List<MealType> expected = new List<MealType>();
-            */
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetMealTypes(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetMealTypes(-1));
         }
 
         /// <summary>
-        /// Tests that GetMealTypes(int) throws errors if int is 0
+        /// GetMealTypeByName(string) throws exception if string is null or empty
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetMealTypesByRecipeIDThrowsExceptionIfZero()
+        public void TestGetMealTypeByNameThrowsExceptionWithNullOrEmptyString()
         {
-            List<MealType> meals = controller.GetMealTypes(0);
-        }
-
-        /// <summary>
-        /// Tests that GetMealTypes(int) throws errors if int is negative
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetMealTypesByRecipeIDThrowsExceptionIfNegative()
-        {
-            List<MealType> meals = controller.GetMealTypes(-1);
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetMealTypeByName(null));
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetMealTypeByName(""));
+            Assert.ThrowsException<NullReferenceException>(() => controller.GetMealTypeByName("  "));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
@@ -327,9 +326,8 @@ namespace RecipeBookApp.DAL
                         }
                     }
                 }
-
-                return favorites;
             }
+            return favorites;
         }
 
         /// <summary>

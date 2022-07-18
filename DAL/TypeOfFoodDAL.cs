@@ -79,8 +79,8 @@ namespace RecipeBookApp.DAL
                         }
                     }
                 }
-                return foodTypesList;
             }
+            return foodTypesList;
         }
     }
 }

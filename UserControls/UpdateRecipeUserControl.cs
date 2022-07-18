@@ -26,9 +26,9 @@ namespace RecipeBookApp.UserControls
         private List<Kitchenware> kitchenWareList;
         private List<MealType> mealTypeList;
         private List<Ingredient> ingredientList;
-        private List<string> recipeIngredients;
-        private List<string> recipeKitchenware;
-        private List<string> recipeMealTypes;
+        private List<Ingredient> recipeIngredientList;
+        private List<Kitchenware> recipeKitchenwareList;
+        private List<MealType> recipeMealTypesList;
         private List<string> recipeFoodTypes;
         private User currentUser;
 
@@ -46,9 +46,9 @@ namespace RecipeBookApp.UserControls
             this.kitchenWareList = new List<Kitchenware>();
             this.mealTypeList = new List<MealType>();
             this.ingredientList = new List<Ingredient>();
-            this.recipeIngredients = new List<string>();
-            this.recipeKitchenware = new List<string>();
-            this.recipeMealTypes = new List<string>();
+            this.recipeIngredientList = new List<Ingredient>();
+            this.recipeKitchenwareList = new List<Kitchenware>();
+            this.recipeMealTypesList = new List<MealType>();
             this.recipeFoodTypes = new List<string>();
             this.currentUser = new User();
             this.nutrition = new Nutrition();
@@ -84,14 +84,16 @@ namespace RecipeBookApp.UserControls
 
         private void GetKitchenwareForRecipe()
         {
-            List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(this.recipe.RecipeId);
+            this.recipeKitchenwareList = this.kitchenwareController.GetKitchenware(this.recipe.RecipeId);
             try
             {
-                for (int i = 0; i < kitchenwareList.Count; i++)
+                for (int i = 0; i < this.recipeKitchenwareList.Count; i++)
                 {
-                    this.recipeKitchenware.Add(kitchenwareList[i].KitchenwareDetails);
+                    if (i == (this.recipeKitchenwareList.Count - 1))
+                        this.kitchenwareRchBx.Text += this.recipeKitchenwareList[i].KitchenwareDetails;
+                    else
+                        this.kitchenwareRchBx.Text += this.recipeKitchenwareList[i].KitchenwareDetails + ",";
                 }
-                this.kitchenwareRchBx.Text = string.Join(", ", this.recipeKitchenware);
             }
             catch (Exception ex)
             {
@@ -102,14 +104,16 @@ namespace RecipeBookApp.UserControls
 
         private void GetIngredientsForRecipe()
         {
-            List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
+            this.recipeIngredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
             try
             {
-                for (int i = 0; i < ingredientList.Count; i++)
+                for (int i = 0; i < this.recipeIngredientList.Count; i++)
                 {
-                    this.recipeIngredients.Add(ingredientList[i].IngredientName);
+                    if (i == (this.recipeIngredientList.Count - 1))
+                        this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ": " + this.recipeIngredientList[i].Amount;
+                    else
+                        this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ": " + this.recipeIngredientList[i].Amount + "\n";
                 }
-                this.ingredientsRchBx.Text = string.Join(", ", this.recipeIngredients);
             }
             catch (Exception ex)
             {
@@ -143,14 +147,16 @@ namespace RecipeBookApp.UserControls
 
         private void GetMealTypesForRecipe()
         {
-            List<MealType> mealTypeList = this.mealTypeController.GetMealTypes(this.recipe.RecipeId);
+            this.recipeMealTypesList = this.mealTypeController.GetMealTypes(this.recipe.RecipeId);
             try
             {
-                for (int i = 0; i < mealTypeList.Count; i++)
+                for (int i = 0; i < this.recipeMealTypesList.Count; i++)
                 {
-                    this.recipeMealTypes.Add(mealTypeList[i].type);
+                    if (i == (this.recipeMealTypesList.Count - 1))
+                        this.mealTypeRchBx.Text += this.recipeMealTypesList[i].type;
+                    else
+                        this.mealTypeRchBx.Text += this.recipeMealTypesList[i].type + ",";
                 }
-                this.mealTypeRchBx.Text = string.Join(", ", this.recipeMealTypes);
             }
             catch (Exception ex)
             {
@@ -254,97 +260,151 @@ namespace RecipeBookApp.UserControls
             this.servingTxtBx.Text = nutritionList[0].ServingSize;
 
             this.nutrition.NutritionId = nutritionList[0].NutritionId;
-            this.nutrition.Carbohydrate = nutritionList[0].Carbohydrate;
-            this.nutrition.Protein = nutritionList[0].Protein;
-            this.nutrition.Alcohol = nutritionList[0].Alcohol;
-            this.nutrition.Fat = nutritionList[0].Fat;
-            this.nutrition.Calories = nutritionList[0].Calories;
-            this.nutrition.ServingSize = nutritionList[0].ServingSize;
         }
 
         private void DisplayIngredients()
         {
-            this.ingredientsRchBx.Text = string.Join(", ", this.recipeIngredients);
+            this.ingredientsRchBx.Text = null;
+            for (int i = 0; i < this.recipeIngredientList.Count; i++)
+            {
+                if (i == (this.recipeIngredientList.Count - 1))
+                    this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ": " + this.recipeIngredientList[i].Amount;
+                else
+                    this.ingredientsRchBx.Text += this.recipeIngredientList[i].IngredientName + ": " + this.recipeIngredientList[i].Amount + "\n";
+            }
             this.ingredientsRchBx.Refresh();
         }
 
         private void DisplayKitchenwares()
         {
-            this.kitchenwareRchBx.Text = string.Join(", ", this.recipeKitchenware);
+            this.kitchenwareRchBx.Text = null;
+            for (int i = 0; i < this.recipeKitchenwareList.Count; i++)
+            {
+                if (i == (this.recipeKitchenwareList.Count - 1))
+                    this.kitchenwareRchBx.Text += this.recipeKitchenwareList[i].KitchenwareDetails;
+                else
+                    this.kitchenwareRchBx.Text += this.recipeKitchenwareList[i].KitchenwareDetails + ",";
+            }
             this.kitchenwareRchBx.Refresh();
         }
 
         private void DisplayMealTypes()
         {
-            this.mealTypeRchBx.Text = string.Join(", ", this.recipeMealTypes);
+            this.mealTypeRchBx.Text = null;
+            for (int i = 0; i < this.recipeMealTypesList.Count; i++)
+            {
+                if (i == (this.recipeMealTypesList.Count - 1))
+                    this.mealTypeRchBx.Text += this.recipeMealTypesList[i].type;
+                else
+                    this.mealTypeRchBx.Text += this.recipeMealTypesList[i].type + ",";
+            }
             this.mealTypeRchBx.Refresh();
         }
 
         private void AddIngredientBtn_Click(object sender, EventArgs e)
         {
-            if (this.recipeIngredients.Contains(this.ingredientCmbBx.Text))
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.Text);
+            if (selectedIngredient != null)
             {
-                MessageBox.Show(this.ingredientCmbBx.Text + "- already added. Please select something else.",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = this.recipeIngredientList.FindIndex(ingredient => ingredient.IngredientName == selectedIngredient.IngredientName);
+                if (index >= 0)
+                {
+                    MessageBox.Show(this.ingredientCmbBx.Text + "- already added. Please select something else.",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }            
             else if (this.ingredientCmbBx.Text == "-- Select the Ingredient --")
             {
                 MessageBox.Show("Please select valid Ingredients to add",
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            this.recipeIngredients.Add(this.ingredientCmbBx.Text.ToString());
+            /*else if (string.IsNullOrEmpty(this.amountTxtBx.Text))
+            {
+                MessageBox.Show("Please enter an amount (i.e. 1 tbsp, 2 cups)",
+                 "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            */
+            
+            this.recipeIngredientList.Add(selectedIngredient);
             this.DisplayIngredients();
         }
 
         private void RemoveIngredientBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.ingredientsRchBx.Text))
+            Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.Text);
+            if (selectedIngredient != null)
             {
-                MessageBox.Show("No Ingredient present. Please add Ingredients",
-                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = this.recipeIngredientList.FindIndex(ingredient => ingredient.IngredientName == selectedIngredient.IngredientName);
+                if (index < 0)
+                {
+                    MessageBox.Show(this.ingredientCmbBx.Text + " - Cannot be removed as it was never added",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    this.recipeIngredientList.RemoveAt(index);
+                }
+            }            
             else if (this.ingredientCmbBx.Text == "-- Select the Ingredient --")
             {
                 MessageBox.Show("Please select valid Ingredients to Remove",
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeIngredients.Contains(this.ingredientCmbBx.Text))
+            else if (string.IsNullOrEmpty(this.ingredientsRchBx.Text))
             {
-                MessageBox.Show(this.ingredientCmbBx.Text + " - Cannot be removed as it was never added",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No Ingredient present. Please add Ingredients",
+                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            this.recipeIngredients.Remove(this.ingredientCmbBx.Text);
+            
             this.DisplayIngredients();
         }
 
         private void AddKitchenwareBtn_Click(object sender, EventArgs e)
         {
-            if (this.recipeKitchenware.Contains(this.kitchenwareCmbBx.Text))
+            Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByName(this.kitchenwareCmbBx.Text);
+            if (selectedKitchenware != null)
             {
-                MessageBox.Show(this.kitchenwareCmbBx.Text + " - already added. Please select something else.",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = this.recipeKitchenwareList.FindIndex(kitchenware => kitchenware.KitchenwareDetails == selectedKitchenware.KitchenwareDetails);
+                if (index >= 0)
+                {
+                    MessageBox.Show(this.kitchenwareCmbBx.Text + " - already added. Please select something else.",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }            
             else if (this.kitchenwareCmbBx.Text == "-- Select the Kitchenware --")
             {
                 MessageBox.Show("Please select valid kitchenware to add",
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            this.recipeKitchenware.Add(this.kitchenwareCmbBx.Text.ToString());
+            this.recipeKitchenwareList.Add(selectedKitchenware);
             this.DisplayKitchenwares();
         }
 
         private void RemoveKitchenwareBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.kitchenwareRchBx.Text))
+            Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByName(this.kitchenwareCmbBx.Text);
+            if (selectedKitchenware != null)
+            {
+                int index = this.recipeKitchenwareList.FindIndex(kitchenware => kitchenware.KitchenwareDetails == selectedKitchenware.KitchenwareDetails);
+                if (index < 0)
+                {
+                    MessageBox.Show(this.kitchenwareCmbBx.Text + "- Cannot be removed as it was never added",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    this.recipeKitchenwareList.RemoveAt(index);
+                }
+            }
+            else if (string.IsNullOrEmpty(this.kitchenwareRchBx.Text))
             {
                 MessageBox.Show("No kitchenware present. Please add kitchenware",
                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -356,25 +416,23 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeKitchenware.Contains(this.kitchenwareCmbBx.Text))
-            {
-                MessageBox.Show(this.kitchenwareCmbBx.Text + "- Cannot be removed as it was never added",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            this.recipeKitchenware.Remove(this.kitchenwareCmbBx.Text);
+            
             this.DisplayKitchenwares();
         }
 
         private void AddMealTypeBtn_Click(object sender, EventArgs e)
         {
-            if (this.recipeMealTypes.Contains(this.mealTypeCmbBx.Text))
+            MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.Text);
+            if (selectedMealType != null)
             {
-                MessageBox.Show(this.mealTypeCmbBx.Text + "- already added. Please select something else.",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = this.recipeMealTypesList.FindIndex(mealType => mealType.type == selectedMealType.type);
+                if (index >= 0)
+                {
+                    MessageBox.Show(this.mealTypeCmbBx.Text + "- already added. Please select something else.",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }            
             else if (this.mealTypeCmbBx.Text == "-- Select the Meal Type --")
             {
                 MessageBox.Show("Please select valid Meal Type to add",
@@ -382,13 +440,28 @@ namespace RecipeBookApp.UserControls
                 return;
             }
 
-            this.recipeMealTypes.Add(this.mealTypeCmbBx.Text.ToString());
+            this.recipeMealTypesList.Add(selectedMealType);
             this.DisplayMealTypes();
         }
 
         private void RemoveMealTypeBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.mealTypeRchBx.Text))
+            MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.Text);
+            if (selectedMealType != null)
+            {
+                int index = this.recipeMealTypesList.FindIndex(mealType => mealType.type == selectedMealType.type);
+                if (index < 0)
+                {
+                    MessageBox.Show(this.mealTypeCmbBx.Text + "- Cannot be removed as it was never added",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    this.recipeMealTypesList.RemoveAt(index);
+                }
+            }
+            else if (string.IsNullOrEmpty(this.mealTypeRchBx.Text))
             {
                 MessageBox.Show("No meal types present. Please add a meal type",
                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -400,14 +473,7 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeMealTypes.Contains(this.mealTypeCmbBx.Text))
-            {
-                MessageBox.Show(this.mealTypeCmbBx.Text + "- Cannot be removed as it was never added",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            this.recipeMealTypes.Remove(this.mealTypeCmbBx.Text);
+            
             this.DisplayMealTypes();
         }
 
@@ -418,30 +484,24 @@ namespace RecipeBookApp.UserControls
 
         private void UpdateRecipeButton_Click(object sender, EventArgs e)
         {
-            List<Ingredient> newIngredientList = new List<Ingredient>();
-            foreach (var str in this.recipeIngredients)
-            {
-                newIngredientList.Add(new Ingredient { IngredientName = str });
-            }
+            this.recipe.RecipeName = this.recipeNameTxtBx.Text;
+            this.recipe.EthnicId = Convert.ToInt32(this.ethnicityCmbBx.SelectedValue);
 
-            List<MealType> newMealTypeList = new List<MealType>();
-            foreach (var str in this.recipeMealTypes)
-            {
-                newMealTypeList.Add(new MealType { type = str });
-            }
-
-            List<Kitchenware> newKitchenwareList = new List<Kitchenware>();
-            foreach (var str in this.recipeKitchenware)
-            {
-                newKitchenwareList.Add(new Kitchenware { KitchenwareDetails = str });
-            }
+            this.nutrition.Carbohydrate = Convert.ToInt32(this.carbTxtBx.Text);
+            this.nutrition.Protein = Convert.ToInt32(this.proteinTxtBx.Text);
+            this.nutrition.Alcohol = Convert.ToInt32(this.alcoholTxtBx.Text);
+            this.nutrition.Fat = Convert.ToInt32(this.fatTxtBx.Text);
+            this.nutrition.Calories = Convert.ToInt32(this.calorieTxtBx.Text);
+            this.nutrition.ServingSize = this.servingTxtBx.Text;
 
             try
             {
-                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, newIngredientList, newMealTypeList, newKitchenwareList, this.nutrition);
+                bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, this.recipeIngredientList, this.recipeMealTypesList, this.recipeKitchenwareList, this.nutrition);
                 if (result)
                 {
-                    MessageBox.Show("The recipe was updated");
+                    DialogResult response = MessageBox.Show("The recipe was updated", "Recipe Updated", MessageBoxButtons.OK);
+                    if (response == DialogResult.OK)
+                        ParentForm.Close();
                 }
             }
             catch (ArgumentNullException ane)
@@ -456,6 +516,61 @@ namespace RecipeBookApp.UserControls
             {
                 MessageBox.Show(ae.Message);
             }
+        }
+
+        private void UpdateAmountBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.Text);
+                int index = this.recipeIngredientList.FindIndex(ingredient => ingredient.IngredientName == selectedIngredient.IngredientName);
+                if (index >= 0)
+                {
+                    if (this.amountTxtBx.Text.Trim() == selectedIngredient.Amount)
+                    {
+                        MessageBox.Show("The amount entered is the same as the current saved amount", "Error!",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        selectedIngredient.Amount = this.amountTxtBx.Text.Trim();
+                        try
+                        {
+                            bool result = this.recipeController.UpdateAmountOfIngredient(this.currentUser, this.recipe, selectedIngredient);
+                            if (result)
+                            {
+                                MessageBox.Show("Ingredient amount was updated successfully");
+                                this.recipeIngredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
+                                DisplayIngredients();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to updated the ingredient amount");
+                            }
+                                
+                        }
+                        catch (ArgumentNullException ane)
+                        {
+                            MessageBox.Show("Failed to update ingredient amount - " + ane.Message, ane.GetType().Name);
+                        }
+                        catch (UnauthorizedAccessException uae)
+                        {
+                            MessageBox.Show("Failed to update ingredient amount - " + uae.Message, uae.GetType().Name);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(this.ingredientCmbBx.Text + "- Cannot be updated as it was never added",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show(nre.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }   
+            
         }
     }
 }
