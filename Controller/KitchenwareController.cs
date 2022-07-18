@@ -40,8 +40,17 @@ namespace RecipeBookApp.Controller
             {
                 throw new ArgumentOutOfRangeException("Recipe ID must be greater than zero");
             }
-            return this.kitchenwareDAL.GetKitchenware(searchRecipeID);
+            return this.kitchenwareDAL.GetKitchenwareByRecipeID(searchRecipeID);
         }
 
+        /// <see cref="KitchenwareDAL.GetKitchenwareByName(string)"
+        public Kitchenware GetKitchenwareByName(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                throw new NullReferenceException("Name cannot be null or empty");
+            }
+            return this.kitchenwareDAL.GetKitchenwareByName(name);
+        }
     }
 }
