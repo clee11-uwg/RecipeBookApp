@@ -163,7 +163,7 @@ namespace RecipeBookApp.Controller
                 {
                     throw new UnauthorizedAccessException("Incorrect password");
                 }
-
+                newPassword = Crypt.SHA256_hash(newPassword);
                 return this.UserDAL.ChangePassword(user, newPassword);
             }
             catch (NullReferenceException)

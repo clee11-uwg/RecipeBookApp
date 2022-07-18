@@ -39,7 +39,7 @@ namespace RecipeBookApp.View
             {
                 this.ProcessNewPassword();
             }
-            Reset();
+        
             this.newPassowrdTextBox.Visible = true;
             this.newPasswordLabel.Visible = true;
             this.loginButton.Visible = false;
@@ -49,21 +49,43 @@ namespace RecipeBookApp.View
 
         private void ProcessNewPassword()
         {
-            if (string.IsNullOrEmpty(this.userNameTextBox.Text.Trim()) || string.IsNullOrEmpty(this.currentPasswordTextBox.Text.Trim()) || string.IsNullOrEmpty(this.newPassowrdTextBox.Text.Trim()))
+            try
             {
-                loginErrorLabelText.Text = "User Name and password cannot be empty!";
-                loginErrorLabelText.ForeColor = Color.Red;
-                loginErrorLabelText.Visible = true;
-                return;
+                if (string.IsNullOrEmpty(this.userNameTextBox.Text.Trim()) || string.IsNullOrEmpty(this.currentPasswordTextBox.Text.Trim()) || string.IsNullOrEmpty(this.newPassowrdTextBox.Text.Trim()))
+                {
+                    loginErrorLabelText.Text = "User Name and password cannot be empty!";
+                    loginErrorLabelText.ForeColor = Color.Red;
+                    loginErrorLabelText.Visible = true;
+                    return;
+                }
+                if (this.newPassowrdTextBox.MaxLength > 8)
+                {
+                    loginErrorLabelText.Text = "Passsword cannot be exceed 8 char length!";
+                    loginErrorLabelText.ForeColor = Color.Red;
+                    loginErrorLabelText.Visible = true;
+                    return;
+                }
+                bool isSucess = this.userController.ChangeUserPassword(UserController.GetLoginUser(), this.currentPasswordTextBox.Text, this.newPassowrdTextBox.Text);
+                if (isSucess)
+                {
+                    loginErrorLabelText.Text = "New Password has been updated!";
+                    loginErrorLabelText.ForeColor = Color.Green;
+                    loginErrorLabelText.Visible = true;
+                }
+                else
+                {
+                    loginErrorLabelText.Text = "Failed to update - New Password !";
+                    loginErrorLabelText.ForeColor = Color.Red;
+                    loginErrorLabelText.Visible = true;
+                }
             }
-            if (this.newPassowrdTextBox.MaxLength > 8)
+            catch(Exception ex)
             {
-                loginErrorLabelText.Text = "Passsword cannot be exceed 8 char length!";
-                loginErrorLabelText.ForeColor = Color.Red;
-                loginErrorLabelText.Visible = true;
-                return;
+                this.loginErrorLabelText.Text = "Failed to update - New Password , "+ex.Message;
+                this.loginErrorLabelText.ForeColor = Color.Red;
+                this.loginErrorLabelText.Visible = true;
+            
             }
-           this.userController.ChangeUserPassword(UserController.GetLoginUser(), this.currentPasswordTextBox.Text, this.newPassowrdTextBox.Text);
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

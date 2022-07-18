@@ -181,7 +181,7 @@ namespace RecipeBookApp.DAL
         {
             int result = -1;
             string selectStatement = @"UPDATE User
-                                        SET amount = @password
+                                        SET password = @password
                                         WHERE id = @id;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
