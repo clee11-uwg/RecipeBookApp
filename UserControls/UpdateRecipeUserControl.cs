@@ -326,7 +326,8 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             */
-            
+
+            selectedIngredient.Amount = this.amountTxtBx.Text;
             this.recipeIngredientList.Add(selectedIngredient);
             this.DisplayIngredients();
         }
@@ -533,30 +534,8 @@ namespace RecipeBookApp.UserControls
                     }
                     else
                     {
-                        selectedIngredient.Amount = this.amountTxtBx.Text.Trim();
-                        try
-                        {
-                            bool result = this.recipeController.UpdateAmountOfIngredient(this.currentUser, this.recipe, selectedIngredient);
-                            if (result)
-                            {
-                                MessageBox.Show("Ingredient amount was updated successfully");
-                                this.recipeIngredientList = this.ingredientsController.GetIngredient(this.recipe.RecipeId);
-                                DisplayIngredients();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Failed to updated the ingredient amount");
-                            }
-                                
-                        }
-                        catch (ArgumentNullException ane)
-                        {
-                            MessageBox.Show("Failed to update ingredient amount - " + ane.Message, ane.GetType().Name);
-                        }
-                        catch (UnauthorizedAccessException uae)
-                        {
-                            MessageBox.Show("Failed to update ingredient amount - " + uae.Message, uae.GetType().Name);
-                        }
+                        this.recipeIngredientList[index].Amount = this.amountTxtBx.Text.Trim();
+                        DisplayIngredients();
                     }
                 }
                 else

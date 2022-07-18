@@ -40,10 +40,10 @@ namespace RecipeBookApp.View
             this.typeOfMealController = new TypeOfMealController();
             this.allergenController = new AllergenController();
 
-            this.recipeIngredients = new List<string>();
-            this.recipeKitchenware = new List<string>();
-            this.recipeAllergens = new List<string>();
-            this.recipeMealTypes = new List<string>();
+            //this.recipeIngredients = new List<string>();
+            //this.recipeKitchenware = new List<string>();
+            //this.recipeAllergens = new List<string>();
+            //this.recipeMealTypes = new List<string>();
         }
 
         /// <summary>
@@ -70,7 +70,6 @@ namespace RecipeBookApp.View
         public void SetRecipe(Recipe userSelectedRecipe)
         {
             this.selectedRecipe = userSelectedRecipe;
-            this.titleLbl.Text = this.selectedRecipe.RecipeName;
             GetRecipeDetails();
         }
 
@@ -85,6 +84,8 @@ namespace RecipeBookApp.View
 
         private void GetRecipeDetails()
         {
+            Recipe updatedRecipe = this.recipeController.GetRecipe(this.selectedRecipe.RecipeId);
+            this.titleLbl.Text = updatedRecipe.RecipeName;
             GetIngredients();
             GetKitchenware();
             GetInstructions();
@@ -94,6 +95,7 @@ namespace RecipeBookApp.View
 
         private void GetIngredients()
         {
+            this.recipeIngredients = new List<string>();
             List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(selectedRecipe.RecipeId);
             for (int i = 0; i < ingredientList.Count; i++)
             {
@@ -104,6 +106,7 @@ namespace RecipeBookApp.View
 
         private void GetKitchenware()
         {
+            this.recipeKitchenware = new List<string>();
             List<Kitchenware> kitchenwareList = this.kitchenwareController.GetKitchenware(selectedRecipe.RecipeId);
             for (int i = 0; i < kitchenwareList.Count; i++)
             {
@@ -120,7 +123,8 @@ namespace RecipeBookApp.View
 
         private void GetMealTypes()
         {
-            List<MealType> mealTypeList = this.typeOfMealController.GetMealTypes(selectedRecipe.RecipeId);
+            this.recipeMealTypes = new List<string>();
+            List <MealType> mealTypeList = this.typeOfMealController.GetMealTypes(selectedRecipe.RecipeId);
             for (int i = 0; i < mealTypeList.Count; i++)
             {
                 this.recipeMealTypes.Add(mealTypeList[i].type);
@@ -130,7 +134,8 @@ namespace RecipeBookApp.View
 
         private void GetAllergens()
         {
-            List<Allergen> allergenList = this.allergenController.GetAllergen(selectedRecipe.RecipeId);
+            this.recipeAllergens = new List<string>();
+            List <Allergen> allergenList = this.allergenController.GetAllergen(selectedRecipe.RecipeId);
             for (int i = 0; i < allergenList.Count; i++)
             {
                 this.recipeAllergens.Add(allergenList[i].AllergenDetails);                
@@ -146,6 +151,7 @@ namespace RecipeBookApp.View
             updateRecipeForm.SetRecipe(this.selectedRecipe);
             updateRecipeForm.SetUser(this.currentUser);
             updateRecipeForm.ShowDialog();
+            SetRecipe(this.selectedRecipe);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
