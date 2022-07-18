@@ -290,7 +290,14 @@ namespace RecipeBookApp.UserControls
 
         private void DisplayMealTypes()
         {
-            this.mealTypeRchBx.Text = string.Join(", ", this.recipeMealTypesList);
+            this.mealTypeRchBx.Text = null;
+            for (int i = 0; i < this.recipeMealTypesList.Count; i++)
+            {
+                if (i == (this.recipeMealTypesList.Count - 1))
+                    this.mealTypeRchBx.Text += this.recipeMealTypesList[i].type;
+                else
+                    this.mealTypeRchBx.Text += this.recipeMealTypesList[i].type + ",";
+            }
             this.mealTypeRchBx.Refresh();
         }
 
