@@ -421,7 +421,13 @@ namespace RecipeBookApp.UserControls
            
         }
 
-        
+     //   private void RecipeMainUserControl_VisibleChanged(object sender, EventArgs e)
+       // {
+         //   this.Reset();
+          //  this.LoadComboBox();
+
+         //   this.PopulateItems();
+       // }
     }
 
 
