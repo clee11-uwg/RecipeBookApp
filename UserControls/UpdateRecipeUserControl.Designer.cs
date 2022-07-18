@@ -449,12 +449,12 @@
             // 
             this.ingredientsRchBx.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ingredientsRchBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ingredientsRchBx.Location = new System.Drawing.Point(2, 8);
+            this.ingredientsRchBx.Location = new System.Drawing.Point(2, 4);
             this.ingredientsRchBx.Margin = new System.Windows.Forms.Padding(2);
             this.ingredientsRchBx.Name = "ingredientsRchBx";
             this.ingredientsRchBx.ReadOnly = true;
             this.ingredientsTableLayoutPanel.SetRowSpan(this.ingredientsRchBx, 2);
-            this.ingredientsRchBx.Size = new System.Drawing.Size(263, 68);
+            this.ingredientsRchBx.Size = new System.Drawing.Size(263, 77);
             this.ingredientsRchBx.TabIndex = 14;
             this.ingredientsRchBx.Text = "";
             // 

@@ -320,26 +320,33 @@ namespace RecipeBookApp.UserControls
         private void RemoveIngredientBtn_Click(object sender, EventArgs e)
         {
             Ingredient selectedIngredient = this.ingredientsController.GetIngredientByIngredientID(this.ingredientCmbBx.Text);
-            if (string.IsNullOrEmpty(this.ingredientsRchBx.Text))
+            if (selectedIngredient != null)
             {
-                MessageBox.Show("No Ingredient present. Please add Ingredients",
-                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = this.recipeIngredientList.FindIndex(ingredient => ingredient.IngredientName == selectedIngredient.IngredientName);
+                if (index < 0)
+                {
+                    MessageBox.Show(this.ingredientCmbBx.Text + " - Cannot be removed as it was never added",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    this.recipeIngredientList.RemoveAt(index);
+                }
+            }            
             else if (this.ingredientCmbBx.Text == "-- Select the Ingredient --")
             {
                 MessageBox.Show("Please select valid Ingredients to Remove",
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeIngredientList.Contains(selectedIngredient))
+            else if (string.IsNullOrEmpty(this.ingredientsRchBx.Text))
             {
-                MessageBox.Show(this.ingredientCmbBx.Text + " - Cannot be removed as it was never added",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No Ingredient present. Please add Ingredients",
+                   "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            this.recipeIngredientList.Remove(selectedIngredient);
+            
             this.DisplayIngredients();
         }
 
