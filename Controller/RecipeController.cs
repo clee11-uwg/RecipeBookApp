@@ -46,7 +46,7 @@ namespace RecipeBookApp.Controller
         /// <exception cref="ArgumentNullException">If search string is null or empty</exception>
         public List<Recipe> GetRecipeSearch(string searchUserInput)
         {
-            if (string.IsNullOrEmpty(searchUserInput))
+            if (string.IsNullOrWhiteSpace(searchUserInput))
             {
                 throw new ArgumentNullException("Search string cannot be null or empty");
             }

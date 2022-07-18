@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecipeBookApp.Controller;
 using RecipeBookApp.Model;
@@ -71,43 +68,24 @@ namespace RecipeAppTestProject.Controller
         }
 
         /// <summary>
-        /// Tests that GetRecipe(int) throws errors if int is 0
+        /// Tests that GetRecipe(int) throws errors if int is less than 1
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetRecipeByRecipeIDThrowsExceptionIfZero()
+        public void TestGetRecipeByRecipeIDThrowsExceptionIfLessThanOne()
         {
-            Recipe recipe = controller.GetRecipe(0);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetRecipe(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => controller.GetRecipe(-1));
         }
 
         /// <summary>
-        /// Tests that GetRecipe(int) throws errors if int is negative
+        /// Tests that GetRecipeSearch(string) throws error if string is null or empty
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestGetRecipeByRecipeIDThrowsExceptionIfNegative()
+        public void TestGetRecipeSearchThrowsExceptionIfNullOrEmpty()
         {
-            Recipe recipe = controller.GetRecipe(-1);
-        }
-
-        /// <summary>
-        /// Tests that GetRecipeSearch(string) throws error if string is null
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestGetRecipeSearchThrowsExceptionIfNull()
-        {
-            List<Recipe> recipes = controller.GetRecipeSearch(null);
-        }
-
-        /// <summary>
-        /// Tests that GetRecipeSearch(string) throws error if string is empty
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestGetRecipeSearchThrowsExceptionIfEmpty()
-        {
-            List<Recipe> recipes = controller.GetRecipeSearch("");
+            Assert.ThrowsException<ArgumentNullException>(() => controller.GetRecipeSearch(null));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.GetRecipeSearch(""));
+            Assert.ThrowsException<ArgumentNullException>(() => controller.GetRecipeSearch("  "));
         }
 
         /// <summary>
