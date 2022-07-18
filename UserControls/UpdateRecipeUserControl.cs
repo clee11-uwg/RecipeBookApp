@@ -277,7 +277,14 @@ namespace RecipeBookApp.UserControls
 
         private void DisplayKitchenwares()
         {
-            this.kitchenwareRchBx.Text = string.Join(", ", this.recipeKitchenwareList);
+            this.kitchenwareRchBx.Text = null;
+            for (int i = 0; i < this.recipeKitchenwareList.Count; i++)
+            {
+                if (i == (this.recipeKitchenwareList.Count - 1))
+                    this.kitchenwareRchBx.Text += this.recipeKitchenwareList[i].KitchenwareDetails;
+                else
+                    this.kitchenwareRchBx.Text += this.recipeKitchenwareList[i].KitchenwareDetails + ",";
+            }
             this.kitchenwareRchBx.Refresh();
         }
 
@@ -353,12 +360,16 @@ namespace RecipeBookApp.UserControls
         private void AddKitchenwareBtn_Click(object sender, EventArgs e)
         {
             Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByName(this.kitchenwareCmbBx.Text);
-            if (this.recipeKitchenwareList.Contains(selectedKitchenware))
+            if (selectedKitchenware != null)
             {
-                MessageBox.Show(this.kitchenwareCmbBx.Text + " - already added. Please select something else.",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = this.recipeKitchenwareList.FindIndex(kitchenware => kitchenware.KitchenwareDetails == selectedKitchenware.KitchenwareDetails);
+                if (index > 0)
+                {
+                    MessageBox.Show(this.kitchenwareCmbBx.Text + " - already added. Please select something else.",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }            
             else if (this.kitchenwareCmbBx.Text == "-- Select the Kitchenware --")
             {
                 MessageBox.Show("Please select valid kitchenware to add",
