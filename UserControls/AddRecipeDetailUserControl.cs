@@ -294,12 +294,18 @@ namespace RecipeBookApp.UserControls
 
                 if (result == DialogResult.OK)
                 {
-
-
-                    this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
-                    //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
-                    this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
-                    this.DisplayError(false);
+                    try
+                    {
+                        this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
+                        //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
+                        this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
+                        this.DisplayError(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error occured on - adding recipe -" + ex.Message,
+                            "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {

@@ -505,17 +505,10 @@ namespace RecipeBookApp.UserControls
                         ParentForm.Close();
                 }
             }
-            catch (ArgumentNullException ane)
+            catch (Exception ex)
             {
-                MessageBox.Show(ane.Message);
-            }
-            catch (UnauthorizedAccessException uae)
-            {
-                MessageBox.Show(uae.Message);
-            }
-            catch (ArgumentException ae)
-            {
-                MessageBox.Show(ae.Message);
+                MessageBox.Show("Error occured on - updating recipes -" + ex.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
