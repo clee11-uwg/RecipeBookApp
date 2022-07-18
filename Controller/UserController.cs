@@ -3,7 +3,6 @@ using RecipeBookApp.Model;
 using RecipeBookApp.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RecipeBookApp.Controller
 {
@@ -27,7 +26,7 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Set the user login details
         /// </summary>
-        /// <param name="currentUser"></param>
+        /// <param name="currentUser">User to set the currentUser to</param>
         public static void SetLoginUser(User currentUser)
         {
             currentLoginUser = currentUser;
@@ -36,16 +35,14 @@ namespace RecipeBookApp.Controller
         /// <summary>
         /// Get the user login detsila
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The currentUser</returns>
         public static User GetLoginUser()
         {
             return currentLoginUser;
         }
 
-        /// <summary>
-        /// Gets all Users from the database table.
-        /// </summary>
-        /// <returns>List of all Users from database </returns>
+        /// <see cref="UserDAL.GetUsers"/>
+        /// <exception cref="UnauthorizedAccessException">If User is not an admin</exception>
         public List<User> GetUsers(User admin)
         {
             if (admin.Is_Admin == false)
@@ -61,6 +58,7 @@ namespace RecipeBookApp.Controller
         /// <param name="username">Name of User</param>
         /// <param name="password">Password of User</param>
         /// <returns>The User</returns>
+        /// <exception cref="UnauthorizedAccessException">If incorrect username and password</exception>
         public User Login(string username, string password)
         {
             if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username))
@@ -93,12 +91,9 @@ namespace RecipeBookApp.Controller
             }
         }
 
-        /// <summary>
-        /// Adds a new favorite recipe for the user
-        /// </summary>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="recipeID">ID of the recipe</param>
-        /// <returns>Whether or not the recipe was added as a favorite</returns>
+        /// <see cref="UserDAL.AddNewFavoriteRecipe(int, int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If user or recipe are less than 1</exception>
+        /// <exception cref="NullReferenceException">If user or recipe otherwise do not exist</exception>
         public bool AddNewFavoriteRecipe(int userID, int recipeID)
         {
             if (userID < 1 || recipeID < 1)
@@ -115,12 +110,9 @@ namespace RecipeBookApp.Controller
             }
         }
 
-        /// <summary>
-        /// Deletes a favorite recipe for the user
-        /// </summary>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="recipeID">ID of the recipe</param>
-        /// <returns>Whether or not the recipe was deleted as a favorite</returns>
+        /// <see cref="UserDAL.DeleteFavoriteRecipe(int, int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If user or recipe are less than 1</exception>
+        /// <exception cref="NullReferenceException">If user or recipe otherwise do not exist</exception>
         public bool DeleteFavoriteRecipe(int userID, int recipeID)
         {
             if (userID < 1 || recipeID < 1)
@@ -137,11 +129,9 @@ namespace RecipeBookApp.Controller
             }
         }
 
-        /// <summary>
-        /// Registers a new User into the db
-        /// </summary>
-        /// <param name="newUser">New User to register</param>
-        /// <returns>Whether or not the user was added</returns>
+        /// <see cref="UserDAL.RegisterUser(User)"/>
+        /// <exception cref="NullReferenceException">If the new user or its properties are null</exception>
+        /// <exception cref="UnauthorizedAccessException">If the username all ready exists</exception>
         public bool AddUser(User newUser)
         {
             if (newUser is null || String.IsNullOrEmpty(newUser.Name) ||
@@ -159,12 +149,9 @@ namespace RecipeBookApp.Controller
             return this.UserDAL.RegisterUser(newUser);
         }
 
-        /// <summary>
-        /// Changes a user's password
-        /// </summary>
-        /// <param name="oldPassword">Old user password</param>
-        /// <param name="newPassword">New user password</param>
-        /// <returns>Whether or not the password was changed</returns>
+        /// <see cref="UserDAL.ChangePassword(User, string)"/>
+        /// <exception cref="NullReferenceException">If the passwords are null or empty</exception>
+        /// <exception cref="UnauthorizedAccessException">If old password is incorrect</exception>
         public bool ChangeUserPassword(User user, string oldPassword, string newPassword)
         {
             if (String.IsNullOrEmpty(oldPassword) || String.IsNullOrEmpty(newPassword) || user == null)

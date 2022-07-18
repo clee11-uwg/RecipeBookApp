@@ -21,19 +21,14 @@ namespace RecipeBookApp.Controller
             this.kitchenwareDAL = new KitchenwareDAL();
         }
 
-        /// <summary>
-        /// Gets all kitchenware.
-        /// </summary>
-        /// <returns>List of all kitchenware from database </returns>
+        /// <see cref="KitchenwareDAL.GetKitchenwares"/>
         public List<Kitchenware> GetKitchenware()
         {
             return kitchenwareDAL.GetKitchenwares();
         }
 
-        /// <summary>
-        /// Finds all kitchenware needed to cook said recipe
-        /// <param name="recipeID">Id of recipe</param>
-        /// <returns>Kitchenware associated with recipe</returns>
+        /// <see cref="KitchenwareDAL.GetKitchenwareByRecipeID(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If searchRecipeID is less than 1</exception>
         public List<Kitchenware> GetKitchenware(int searchRecipeID)
         {
             if (searchRecipeID < 1)

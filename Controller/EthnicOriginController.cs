@@ -23,20 +23,14 @@ namespace RecipeBookApp.Controller
             this.ethnicOriginDAL = new EthnicOriginDAL();
         }
 
-        /// <summary>
-        /// Gets all Ethnic Origins known to the database
-        /// </summary>
-        /// <returns>List of all ethnic origins from database </returns>
+        /// <see cref="EthnicOriginDAL.GetEthnicOrigins"/>
         public List<Ethnic> GetEthnicOrigins()
         {
             return this.ethnicOriginDAL.GetEthnicOrigins();
         }
 
-        /// <summary>
-        /// Gets all Ethnic Origins associated with said recipe
-        /// </summary>
-        /// <param name="recipeID">ID of recipe</param>
-        /// <returns>Ethnicities associated with said recipe</returns>
+        /// <see cref="EthnicOriginDAL.GetEthnicOrigin(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If recipeID is less than 1</exception>
         public List<Ethnic> GetEthnicOrigin(int recipeID)
         {
             if (recipeID < 1)

@@ -23,20 +23,14 @@ namespace RecipeBookApp.Controller
             this.allergenDAL = new AllergenDAL();
         }
 
-        /// <summary>
-        /// Gets all Allergens for the Recipes .
-        /// </summary>
-        /// <returns>List of all allergens from database </returns>
+        /// <see cref="AllergenDAL.GetAllergens"/>
         public List<Allergen> GetAllergens()
         {
             return this.allergenDAL.GetAllergens();
         }
 
-        /// <summary>
-        /// Gets the Allergen for the search ID.
-        /// </summary>
-        /// <param name="searchRecipeID">ID of the recipe</param>
-        /// <returns>Allergen found in the database</returns>
+        /// <see cref="AllergenDAL.GetRecipeAllergen(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If searchRecipeID is less than 1</exception>
         public List<Allergen> GetAllergen(int searchRecipeID)
         {
             if (searchRecipeID < 1)
@@ -46,11 +40,8 @@ namespace RecipeBookApp.Controller
             return this.allergenDAL.GetRecipeAllergen(searchRecipeID);
         }
 
-        /// <summary>
-        /// Gets all Allergens for this ingredient ID
-        /// </summary>
-        /// <param name="ingredientID">ID of the ingredient</param>
-        /// <returns>List of Allergens for this ingredient</returns>
+        /// <see cref="AllergenDAL.GetAllergensOfIngredient(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If ingredientID is less than 1</exception>
         public List<Allergen> getAllergensOfIngredient(int ingredientID)
         {
             if (ingredientID < 1)

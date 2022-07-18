@@ -22,11 +22,9 @@ namespace RecipeBookApp.Controller
             this.nutritionDAL = new NutritionDAL();
         }
 
-        /// <summary>
-        /// Gets all Nutrition from the database table.
-        /// </summary>
-        /// <param name="sort">What parameter of Nutrition to order by</param>
-        /// <returns>List of all Nutritions from database </returns>
+        /// <see cref="NutritionDAL.GetNutritions(string)"/>
+        /// <exception cref="ArgumentNullException">If string is null or empty</exception>
+        /// <exception cref="ArgumentException">If string does not equal one of the attributes of Nutrition</exception>
         public List<Nutrition> GetNutritions(string sort)
         {
             if (string.IsNullOrEmpty(sort))
@@ -41,11 +39,8 @@ namespace RecipeBookApp.Controller
             return this.nutritionDAL.GetNutritions(sort);
         }
 
-        /// <summary>
-        /// Gets the Nutrition data for the search ID.
-        /// </summary>
-        /// <param name="searchRecipeID">ID of the recipe</param>
-        /// <returns>Nutrition data found in the database</returns>
+        /// <see cref="NutritionDAL.GetNutritions(string)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If recipeID is less than 1</exception>
         public List<Nutrition> GetNutrition(int searchRecipeID)
         {
             if (searchRecipeID < 1)

@@ -2,7 +2,6 @@ using RecipeBookApp.DAL;
 using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RecipeBookApp.Controller
 {
@@ -22,20 +21,14 @@ namespace RecipeBookApp.Controller
             this.mealTypeDAL = new TypeOfMealDAL();
         }
 
-        /// <summary>
-        /// Gets all Meal Types from the database table.
-        /// </summary>
-        /// <returns>List of all Meal Types from database </returns>
+        /// <see cref="TypeOfMealDAL.GetMealTypes"/>
         public List<MealType> GetMealTypes()
         {
             return this.mealTypeDAL.GetMealTypes();
         }
 
-        /// <summary>
-        /// Gets the meal type data for the search ID.
-        /// </summary>
-        /// <param name="searchRecipeID">ID of the recipe</param>
-        /// <returns>Meal type data found in the database</returns>
+        /// <see cref="TypeOfMealDAL.GetMealTypesByRecipe(int)"/>
+        /// <exception cref="ArgumentOutOfRangeException">If searchRecipeID is less than 1</exception>
         public List<MealType> GetMealTypes(int searchRecipeID)
         {
             if (searchRecipeID < 1)
@@ -45,7 +38,8 @@ namespace RecipeBookApp.Controller
             return this.mealTypeDAL.GetMealTypesByRecipe(searchRecipeID);
         }
 
-        /// <see cref="TypeOfMealDAL.GetMealTypeByName"/>
+        /// <see cref="TypeOfMealDAL.GetMealTypeByName(string)"/>
+        /// <exception cref="NullReferenceException">If name is null or empty</exception>
         public MealType GetMealTypeByName(string name)
         {
             if (String.IsNullOrWhiteSpace(name))

@@ -144,11 +144,11 @@ namespace RecipeAppTestProject.Controller
             Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes, kitchenware, null));
 
-            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients_empty,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, recipe, ingredients_empty,
                 mealTypes, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes_empty, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentException>(() => controller.AddRecipe(joe, recipe, ingredients,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, recipe, ingredients,
                 mealTypes, kitchenware_empty, nutrition));
 
             nutrition = new Nutrition
@@ -303,11 +303,11 @@ namespace RecipeAppTestProject.Controller
             {
                 UserWhoCreated = "joe"
             };
-            Assert.ThrowsException<ArgumentException>(() => controller.UpdateRecipe(joe, recipe, ingredients_empty,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(joe, recipe, ingredients_empty,
                 mealTypes, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
                 mealTypes_empty, kitchenware, nutrition));
-            Assert.ThrowsException<ArgumentException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
+            Assert.ThrowsException<ArgumentNullException>(() => controller.UpdateRecipe(joe, recipe, ingredients,
                 mealTypes, kitchenware_empty, nutrition));
 
             nutrition = new Nutrition
