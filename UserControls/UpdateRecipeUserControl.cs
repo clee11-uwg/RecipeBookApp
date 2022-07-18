@@ -383,7 +383,21 @@ namespace RecipeBookApp.UserControls
         private void RemoveKitchenwareBtn_Click(object sender, EventArgs e)
         {
             Kitchenware selectedKitchenware = this.kitchenwareController.GetKitchenwareByName(this.kitchenwareCmbBx.Text);
-            if (string.IsNullOrEmpty(this.kitchenwareRchBx.Text))
+            if (selectedKitchenware != null)
+            {
+                int index = this.recipeKitchenwareList.FindIndex(kitchenware => kitchenware.KitchenwareDetails == selectedKitchenware.KitchenwareDetails);
+                if (index < 0)
+                {
+                    MessageBox.Show(this.kitchenwareCmbBx.Text + "- Cannot be removed as it was never added",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    this.recipeKitchenwareList.RemoveAt(index);
+                }
+            }
+            else if (string.IsNullOrEmpty(this.kitchenwareRchBx.Text))
             {
                 MessageBox.Show("No kitchenware present. Please add kitchenware",
                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -395,14 +409,7 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeKitchenwareList.Contains(selectedKitchenware))
-            {
-                MessageBox.Show(this.kitchenwareCmbBx.Text + "- Cannot be removed as it was never added",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            this.recipeKitchenwareList.Remove(selectedKitchenware);
+            
             this.DisplayKitchenwares();
         }
 
