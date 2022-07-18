@@ -108,32 +108,38 @@ namespace RecipeBookApp.Controller
             {
                 throw new ArgumentException("AddRecipe is not an UPDATE query. RecipeID and NutritionID should be set to 0 or negative");
             }
-
-            using (TransactionScope scope = new TransactionScope())
+            try
             {
-            NutritionDAL nutritionDAL = new NutritionDAL();
-            recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
-
-            recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
-                if (recipe.RecipeImage != null) { 
-                    this.recipeDAL.AddImage(recipe);
-                }
-
-                foreach (Ingredient ingredient in ingredients)
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
-                }
-                foreach (MealType mealType in mealTypes)
-                {
-                    this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
-                }
-                foreach (Kitchenware pots in kitchenware)
-                {
-                    this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
-                }
+                    NutritionDAL nutritionDAL = new NutritionDAL();
+                    recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
 
-               scope.Complete();
-            } 
+                    recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
+                    if (recipe.RecipeImage != null)
+                    {
+                        this.recipeDAL.AddImage(recipe);
+                    }
+
+                    foreach (Ingredient ingredient in ingredients)
+                    {
+                        this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
+                    }
+                    foreach (MealType mealType in mealTypes)
+                    {
+                        this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
+                    }
+                    foreach (Kitchenware pots in kitchenware)
+                    {
+                        this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
+                    }
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException ex)
+            {
+                throw new TransactionAbortedException(ex.Message);
+            }
             return true;
         }
 
@@ -159,19 +165,25 @@ namespace RecipeBookApp.Controller
             {
                 throw new ArgumentException("RecipeID must be valid");
             }
-
-            using (TransactionScope scope = new TransactionScope())
+            try
             {
-                NutritionDAL nutritionDAL = new NutritionDAL();
-                nutritionDAL.DeleteNutrition(recipe.NutritionId);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    NutritionDAL nutritionDAL = new NutritionDAL();
+                    nutritionDAL.DeleteNutrition(recipe.NutritionId);
 
-                this.recipeDAL.DeleteImage(recipe.RecipeId);
-                this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
-                this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
-                this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
+                    this.recipeDAL.DeleteImage(recipe.RecipeId);
+                    this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
+                    this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
+                    this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
 
-                recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
-                scope.Complete();
+                    recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException ex)
+            {
+                throw new TransactionAbortedException(ex.Message);
             }
             return true;
         }
@@ -231,33 +243,41 @@ namespace RecipeBookApp.Controller
                 throw new ArgumentException("Recipe and Nutrition must have same nutritionID");
             }
 
-            using (TransactionScope scope = new TransactionScope())
+            try 
             {
-                NutritionDAL nutritionDAL = new NutritionDAL();
-                nutritionDAL.UpdateNutrition(nutrition);
-
-                this.recipeDAL.UpdateRecipe(recipe);
-                this.recipeDAL.UpdateImage(recipe);
-
-                this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
-                this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
-                this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
-
-                foreach (Ingredient ingredient in ingredients)
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
-                }
-                foreach (MealType mealType in mealTypes)
-                {
-                    this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
-                }
-                foreach (Kitchenware pots in kitchenware)
-                {
-                    this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
-                }
+                    NutritionDAL nutritionDAL = new NutritionDAL();
+                    nutritionDAL.UpdateNutrition(nutrition);
 
-                scope.Complete();
+                    this.recipeDAL.UpdateRecipe(recipe);
+                    this.recipeDAL.UpdateImage(recipe);
+
+                    this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
+                    this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
+                    this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
+
+                    foreach (Ingredient ingredient in ingredients)
+                    {
+                        this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
+                    }
+                    foreach (MealType mealType in mealTypes)
+                    {
+                        this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
+                    }
+                    foreach (Kitchenware pots in kitchenware)
+                    {
+                        this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
+                    }
+
+                    scope.Complete();
+                }
             }
+            catch (TransactionAbortedException ex)
+            {
+                throw new TransactionAbortedException(ex.Message);
+            }
+
             return true;
         }
 
