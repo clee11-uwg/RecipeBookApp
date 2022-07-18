@@ -447,7 +447,21 @@ namespace RecipeBookApp.UserControls
         private void RemoveMealTypeBtn_Click(object sender, EventArgs e)
         {
             MealType selectedMealType = this.mealTypeController.GetMealTypeByName(this.mealTypeCmbBx.Text);
-            if (string.IsNullOrEmpty(this.mealTypeRchBx.Text))
+            if (selectedMealType != null)
+            {
+                int index = this.recipeMealTypesList.FindIndex(mealType => mealType.type == selectedMealType.type);
+                if (index < 0)
+                {
+                    MessageBox.Show(this.mealTypeCmbBx.Text + "- Cannot be removed as it was never added",
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    this.recipeMealTypesList.RemoveAt(index);
+                }
+            }
+            else if (string.IsNullOrEmpty(this.mealTypeRchBx.Text))
             {
                 MessageBox.Show("No meal types present. Please add a meal type",
                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -459,14 +473,7 @@ namespace RecipeBookApp.UserControls
                  "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!this.recipeMealTypesList.Contains(selectedMealType))
-            {
-                MessageBox.Show(this.mealTypeCmbBx.Text + "- Cannot be removed as it was never added",
-                "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            this.recipeMealTypesList.Remove(selectedMealType);
+            
             this.DisplayMealTypes();
         }
 
@@ -492,7 +499,9 @@ namespace RecipeBookApp.UserControls
                 bool result = this.recipeController.UpdateRecipe(this.currentUser, this.recipe, this.recipeIngredientList, this.recipeMealTypesList, this.recipeKitchenwareList, this.nutrition);
                 if (result)
                 {
-                    MessageBox.Show("The recipe was updated");
+                    DialogResult response = MessageBox.Show("The recipe was updated", "Recipe Updated", MessageBoxButtons.OK);
+                    if (response == DialogResult.OK)
+                        ParentForm.Close();
                 }
             }
             catch (ArgumentNullException ane)
