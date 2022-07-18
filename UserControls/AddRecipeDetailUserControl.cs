@@ -383,7 +383,7 @@ namespace RecipeBookApp.UserControls
         {
 
 
-            if (this.addRecipeMealTypeComboBox.Text == "Select the MealType")
+            if (string.IsNullOrEmpty(this.addMealTypeRichText.Text))
             {
                 this.addErrorMealTypeLabel.ForeColor = Color.Red;
                 this.addErrorMealTypeLabel.Text = "Meal Type is Mandatory";
