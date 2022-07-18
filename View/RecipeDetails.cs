@@ -162,7 +162,27 @@ namespace RecipeBookApp.View
             if (result == DialogResult.Yes)
             {
                 // Add code to call delete recipe method from RecipeController once available
-                MessageBox.Show("Coming soon......");
+                try
+                {
+                    bool isRecipeDeleted = this.recipeController.DeleteRecipe(this.currentUser, this.selectedRecipe);
+                    if (isRecipeDeleted)
+                    {
+                        MessageBox.Show(this.selectedRecipe.RecipeName + " has been successfully deleted");
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Could not delete recipe");
+                    }
+                }
+                catch (UnauthorizedAccessException uae)
+                {
+                    MessageBox.Show(uae.Message);
+                }
+                catch (ArgumentException ae)
+                {
+                    MessageBox.Show(ae.Message);
+                }
             }
         }
     }

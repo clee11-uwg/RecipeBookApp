@@ -160,8 +160,8 @@ namespace RecipeBookApp.Controller
                 throw new ArgumentException("RecipeID must be valid");
             }
 
-            using (TransactionScope scope = new TransactionScope())
-            {
+            //using (TransactionScope scope = new TransactionScope())
+            //{
                 NutritionDAL nutritionDAL = new NutritionDAL();
                 nutritionDAL.DeleteNutrition(recipe.NutritionId);
 
@@ -171,8 +171,8 @@ namespace RecipeBookApp.Controller
                 this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
 
                 recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
-                scope.Complete();
-            }
+                //scope.Complete();
+            //}
             return true;
         }
 
