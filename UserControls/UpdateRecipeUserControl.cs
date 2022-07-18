@@ -307,7 +307,7 @@ namespace RecipeBookApp.UserControls
             if (selectedIngredient != null)
             {
                 int index = this.recipeIngredientList.FindIndex(ingredient => ingredient.IngredientName == selectedIngredient.IngredientName);
-                if (index > 0)
+                if (index >= 0)
                 {
                     MessageBox.Show(this.ingredientCmbBx.Text + "- already added. Please select something else.",
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -370,7 +370,7 @@ namespace RecipeBookApp.UserControls
             if (selectedKitchenware != null)
             {
                 int index = this.recipeKitchenwareList.FindIndex(kitchenware => kitchenware.KitchenwareDetails == selectedKitchenware.KitchenwareDetails);
-                if (index > 0)
+                if (index >= 0)
                 {
                     MessageBox.Show(this.kitchenwareCmbBx.Text + " - already added. Please select something else.",
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -426,7 +426,7 @@ namespace RecipeBookApp.UserControls
             if (selectedMealType != null)
             {
                 int index = this.recipeMealTypesList.FindIndex(mealType => mealType.type == selectedMealType.type);
-                if (index > 0)
+                if (index >= 0)
                 {
                     MessageBox.Show(this.mealTypeCmbBx.Text + "- already added. Please select something else.",
                     "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
