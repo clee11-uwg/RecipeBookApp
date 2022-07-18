@@ -61,7 +61,7 @@ namespace RecipeBookApp.Controller
         /// <exception cref="UnauthorizedAccessException">If incorrect username and password</exception>
         public User Login(string username, string password)
         {
-            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(username))
             {
                 throw new UnauthorizedAccessException("Failed to login");
             }
@@ -71,23 +71,18 @@ namespace RecipeBookApp.Controller
             try
             {
                 expected_password_hash = this.UserDAL.VerifyUser(username);
-                if (expected_password_hash is null)
+                if (string.Equals(given_password_hash, expected_password_hash, StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new UnauthorizedAccessException("Failed to login- User Name does not exists");
+                    return this.UserDAL.GetUser(username);
+                }
+                else
+                {
+                    throw new UnauthorizedAccessException("Failed to login-Password is incorrect.");
                 }
             }
             catch (NullReferenceException)
             {
                 throw new UnauthorizedAccessException("Failed to login");
-            }
-
-            if (string.Equals(given_password_hash, expected_password_hash, StringComparison.OrdinalIgnoreCase))
-            {
-                return this.UserDAL.GetUser(username);
-            }
-            else
-            {
-                throw new UnauthorizedAccessException("Failed to login-Password is incorrect.");
             }
         }
 
@@ -134,8 +129,8 @@ namespace RecipeBookApp.Controller
         /// <exception cref="UnauthorizedAccessException">If the username all ready exists</exception>
         public bool AddUser(User newUser)
         {
-            if (newUser is null || String.IsNullOrEmpty(newUser.Name) ||
-                String.IsNullOrEmpty(newUser.Password))
+            if (newUser is null || String.IsNullOrWhiteSpace(newUser.Name) ||
+                String.IsNullOrWhiteSpace(newUser.Password))
             {
                 throw new NullReferenceException("Missing user details for registration.");
             }
@@ -154,19 +149,27 @@ namespace RecipeBookApp.Controller
         /// <exception cref="UnauthorizedAccessException">If old password is incorrect</exception>
         public bool ChangeUserPassword(User user, string oldPassword, string newPassword)
         {
-            if (String.IsNullOrEmpty(oldPassword) || String.IsNullOrEmpty(newPassword) || user == null)
+            if (String.IsNullOrWhiteSpace(oldPassword) || String.IsNullOrWhiteSpace(newPassword) || user == null)
             {
                 throw new NullReferenceException("Cannot use empty passwords");
             }
 
-            string logInPassword = this.UserDAL.VerifyUser(user.Name);
-            oldPassword = Crypt.SHA256_hash(oldPassword);
-            if (!string.Equals(logInPassword, oldPassword, StringComparison.OrdinalIgnoreCase))
+            try
             {
-                throw new UnauthorizedAccessException("Incorrect password");
-            }
+                oldPassword = Crypt.SHA256_hash(oldPassword);
+                string logInPassword = this.UserDAL.VerifyUser(user.Name);
+                
+                if (!string.Equals(logInPassword, oldPassword, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new UnauthorizedAccessException("Incorrect password");
+                }
 
-            return this.UserDAL.ChangePassword(user, newPassword);
+                return this.UserDAL.ChangePassword(user, newPassword);
+            }
+            catch (NullReferenceException)
+            {
+                throw new NullReferenceException("Database error. Please try again.");
+            }
         }
     }
 }
