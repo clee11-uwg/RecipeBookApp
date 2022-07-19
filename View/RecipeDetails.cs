@@ -102,12 +102,19 @@ namespace RecipeBookApp.View
         private void GetNutrition()
         {
             this.recipeNutrition = this.nutritionController.GetNutrition(this.selectedRecipe.RecipeId);
-            this.calorieLbl.Text += this.recipeNutrition[0].Calories;
-            this.carbLbl.Text += this.recipeNutrition[0].Carbohydrate;
-            this.proteinLbl.Text += this.recipeNutrition[0].Protein;
-            this.fatLbl.Text += this.recipeNutrition[0].Fat;
-            this.alcoholLbl.Text += this.recipeNutrition[0].Alcohol;
-            this.servingSizeLbl.Text += this.recipeNutrition[0].ServingSize;
+            this.calorieLbl.Text = null;
+            this.carbLbl.Text = null;
+            this.proteinLbl.Text = null;
+            this.fatLbl.Text = null;
+            this.alcoholLbl.Text = null;
+            this.servingSizeLbl.Text = null;
+
+            this.calorieLbl.Text = "Calories: " + this.recipeNutrition[0].Calories;
+            this.carbLbl.Text = "Carbs: " + this.recipeNutrition[0].Carbohydrate;
+            this.proteinLbl.Text = "Protein: " + this.recipeNutrition[0].Protein;
+            this.fatLbl.Text = "Fat: " + this.recipeNutrition[0].Fat;
+            this.alcoholLbl.Text = "Acohol: " + this.recipeNutrition[0].Alcohol;
+            this.servingSizeLbl.Text = "Serving Size: " + this.recipeNutrition[0].ServingSize;
         }
 
         private void GetIngredients()
