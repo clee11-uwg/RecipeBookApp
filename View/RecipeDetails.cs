@@ -114,11 +114,15 @@ namespace RecipeBookApp.View
         {
             this.recipeIngredients = new List<string>();
             List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(selectedRecipe.RecipeId);
+            this.ingredientsRchBx.Text = null;
             for (int i = 0; i < ingredientList.Count; i++)
             {
-                this.recipeIngredients.Add(ingredientList[i].IngredientName);
+                if (i == (ingredientList.Count - 1))
+                    this.ingredientsRchBx.Text += ingredientList[i].IngredientName + ": " + ingredientList[i].Amount;
+                else
+                    this.ingredientsRchBx.Text += ingredientList[i].IngredientName + ": " + ingredientList[i].Amount + "\n";
             }
-            this.ingredientsLbl.Text = string.Join(" | ", this.recipeIngredients);
+            this.ingredientsRchBx.Refresh();
         }
 
         private void GetKitchenware()

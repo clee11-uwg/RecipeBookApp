@@ -35,7 +35,6 @@
             this.kitchenwareHeadingLbl = new System.Windows.Forms.Label();
             this.instructionsTxtBx = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ingredientsLbl = new System.Windows.Forms.Label();
             this.kitchenwareLbl = new System.Windows.Forms.Label();
             this.typeOfMealLbl = new System.Windows.Forms.Label();
             this.allergenHeadingLbl = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@
             this.fatLbl = new System.Windows.Forms.Label();
             this.alcoholLbl = new System.Windows.Forms.Label();
             this.servingSizeLbl = new System.Windows.Forms.Label();
+            this.ingredientsRchBx = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +81,7 @@
             // ingredientsHeadingLbl
             // 
             this.ingredientsHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ingredientsHeadingLbl.Location = new System.Drawing.Point(25, 225);
+            this.ingredientsHeadingLbl.Location = new System.Drawing.Point(12, 225);
             this.ingredientsHeadingLbl.Name = "ingredientsHeadingLbl";
             this.ingredientsHeadingLbl.Size = new System.Drawing.Size(224, 33);
             this.ingredientsHeadingLbl.TabIndex = 2;
@@ -124,16 +124,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Steps";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // ingredientsLbl
-            // 
-            this.ingredientsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ingredientsLbl.Location = new System.Drawing.Point(35, 258);
-            this.ingredientsLbl.MinimumSize = new System.Drawing.Size(200, 100);
-            this.ingredientsLbl.Name = "ingredientsLbl";
-            this.ingredientsLbl.Size = new System.Drawing.Size(200, 100);
-            this.ingredientsLbl.TabIndex = 8;
-            this.ingredientsLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // kitchenwareLbl
             // 
@@ -300,12 +290,22 @@
             this.servingSizeLbl.TabIndex = 24;
             this.servingSizeLbl.Text = "Serving Size:";
             // 
+            // ingredientsRchBx
+            // 
+            this.ingredientsRchBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ingredientsRchBx.Location = new System.Drawing.Point(17, 253);
+            this.ingredientsRchBx.Name = "ingredientsRchBx";
+            this.ingredientsRchBx.Size = new System.Drawing.Size(203, 189);
+            this.ingredientsRchBx.TabIndex = 25;
+            this.ingredientsRchBx.Text = "";
+            // 
             // RecipeDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(869, 806);
+            this.Controls.Add(this.ingredientsRchBx);
             this.Controls.Add(this.servingSizeLbl);
             this.Controls.Add(this.alcoholLbl);
             this.Controls.Add(this.fatLbl);
@@ -322,7 +322,6 @@
             this.Controls.Add(this.allergenHeadingLbl);
             this.Controls.Add(this.typeOfMealLbl);
             this.Controls.Add(this.kitchenwareLbl);
-            this.Controls.Add(this.ingredientsLbl);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.instructionsTxtBx);
             this.Controls.Add(this.kitchenwareHeadingLbl);
@@ -347,7 +346,6 @@
         private System.Windows.Forms.Label kitchenwareHeadingLbl;
         private System.Windows.Forms.TextBox instructionsTxtBx;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label ingredientsLbl;
         private System.Windows.Forms.Label kitchenwareLbl;
         private System.Windows.Forms.Label typeOfMealLbl;
         private System.Windows.Forms.Label allergenHeadingLbl;
@@ -364,5 +362,6 @@
         private System.Windows.Forms.Label fatLbl;
         private System.Windows.Forms.Label alcoholLbl;
         private System.Windows.Forms.Label servingSizeLbl;
+        private System.Windows.Forms.RichTextBox ingredientsRchBx;
     }
 }
