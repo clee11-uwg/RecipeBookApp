@@ -71,7 +71,12 @@ namespace RecipeBookApp.Controller
             try
             {
                 expected_password_hash = this.UserDAL.VerifyUser(username);
-                if (string.Equals(given_password_hash, expected_password_hash, StringComparison.OrdinalIgnoreCase))
+               
+                if (string.IsNullOrEmpty(expected_password_hash))
+                {
+                    throw new UnauthorizedAccessException("Failed to login-User name does not exists.");
+                }
+                else if (string.Equals(given_password_hash, expected_password_hash, StringComparison.OrdinalIgnoreCase))
                 {
                     return this.UserDAL.GetUser(username);
                 }
