@@ -555,7 +555,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
                     selectCommand.Parameters.AddWithValue("@kitchenwareID", kitchenwareID);
 
-                    id = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
                 }
             }
             if (result < 1)
@@ -615,7 +615,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
                     selectCommand.Parameters.AddWithValue("@typeOfMealID", typeOfMealID);
 
-                    id = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
                 }
             }
             if (result < 1)
@@ -676,7 +676,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
                     selectCommand.Parameters.AddWithValue("@amount", amount);
 
-                    id = Convert.ToInt32(selectCommand.ExecuteScalar());
+                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
                 }
             }
             if (result < 1)
