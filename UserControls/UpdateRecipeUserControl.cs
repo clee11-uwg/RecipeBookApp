@@ -62,6 +62,8 @@ namespace RecipeBookApp.UserControls
         {
             this.recipe = selectedRecipe;
             this.recipeNameTxtBx.Text = this.recipe.RecipeName;
+            this.cookingTimeTxtBx.Text = this.recipe.CookingTime.ToString();
+            this.instructionsRchBx.Text = this.recipe.RecipeInstructions;
             GetIngredientListForDropdown();
             GetKitchenwareListForDropdown();
             GetMealTypesListForDropdown();
@@ -487,7 +489,8 @@ namespace RecipeBookApp.UserControls
         {
             this.recipe.RecipeName = this.recipeNameTxtBx.Text;
             this.recipe.EthnicId = Convert.ToInt32(this.ethnicityCmbBx.SelectedValue);
-
+            this.recipe.RecipeInstructions = this.instructionsRchBx.Text.Replace("\n", "\r\n");
+            this.recipe.CookingTime = Convert.ToInt32(this.cookingTimeTxtBx.Text);
             this.nutrition.Carbohydrate = Convert.ToInt32(this.carbTxtBx.Text);
             this.nutrition.Protein = Convert.ToInt32(this.proteinTxtBx.Text);
             this.nutrition.Alcohol = Convert.ToInt32(this.alcoholTxtBx.Text);
@@ -548,6 +551,22 @@ namespace RecipeBookApp.UserControls
         private void UpdateRecipeTableLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (Form instructionDialog = new View.AddRecipeInstructionDialog(this.instructionsRchBx.Text))
+            {
+                DialogResult result = instructionDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this.instructionsRchBx.Text = RecipeController.GetRecipeInstructions();
+                }
+                else
+                {
+                    this.instructionsRchBx.Text = "";
+                }
+            }
         }
     }
 }

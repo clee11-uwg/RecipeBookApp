@@ -35,7 +35,7 @@
             // 
             this.updateRecipeUserControl1.Location = new System.Drawing.Point(3, 5);
             this.updateRecipeUserControl1.Name = "updateRecipeUserControl1";
-            this.updateRecipeUserControl1.Size = new System.Drawing.Size(796, 591);
+            this.updateRecipeUserControl1.Size = new System.Drawing.Size(862, 692);
             this.updateRecipeUserControl1.TabIndex = 0;
             // 
             // UpdateRecipeForm
@@ -43,7 +43,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(873, 700);
             this.Controls.Add(this.updateRecipeUserControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "UpdateRecipeForm";

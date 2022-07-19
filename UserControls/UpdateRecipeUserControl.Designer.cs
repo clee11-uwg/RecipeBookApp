@@ -76,7 +76,7 @@
             this.mealTypeRchBx = new System.Windows.Forms.RichTextBox();
             this.foodTypeTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.foodTypeRchBx = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.instructionsRchBx = new System.Windows.Forms.RichTextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.cookingTimeLbl = new System.Windows.Forms.Label();
             this.cookingTimeTxtBx = new System.Windows.Forms.TextBox();
@@ -309,7 +309,7 @@
             this.updateRecipeTableLayoutPanel.Controls.Add(this.erroLabel, 1, 8);
             this.updateRecipeTableLayoutPanel.Controls.Add(this.mealTypeTableLayout, 1, 4);
             this.updateRecipeTableLayoutPanel.Controls.Add(this.foodTypeTableLayout, 1, 5);
-            this.updateRecipeTableLayoutPanel.Controls.Add(this.richTextBox1, 1, 7);
+            this.updateRecipeTableLayoutPanel.Controls.Add(this.instructionsRchBx, 1, 7);
             this.updateRecipeTableLayoutPanel.Controls.Add(this.linkLabel1, 0, 7);
             this.updateRecipeTableLayoutPanel.Location = new System.Drawing.Point(2, 43);
             this.updateRecipeTableLayoutPanel.Margin = new System.Windows.Forms.Padding(2);
@@ -731,13 +731,14 @@
             this.foodTypeRchBx.TabIndex = 16;
             this.foodTypeRchBx.Text = "";
             // 
-            // richTextBox1
+            // instructionsRchBx
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(152, 454);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(407, 131);
-            this.richTextBox1.TabIndex = 35;
-            this.richTextBox1.Text = "";
+            this.instructionsRchBx.Location = new System.Drawing.Point(152, 454);
+            this.instructionsRchBx.Name = "instructionsRchBx";
+            this.instructionsRchBx.ReadOnly = true;
+            this.instructionsRchBx.Size = new System.Drawing.Size(407, 131);
+            this.instructionsRchBx.TabIndex = 35;
+            this.instructionsRchBx.Text = "";
             // 
             // linkLabel1
             // 
@@ -750,6 +751,7 @@
             this.linkLabel1.TabIndex = 36;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Update Instructions:";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // cookingTimeLbl
             // 
@@ -844,7 +846,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox amountTxtBx;
         private System.Windows.Forms.Button updateAmountBtn;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox instructionsRchBx;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.TextBox cookingTimeTxtBx;
         private System.Windows.Forms.Label cookingTimeLbl;
