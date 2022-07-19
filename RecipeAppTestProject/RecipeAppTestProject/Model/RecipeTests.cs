@@ -175,5 +175,26 @@ namespace RecipeAppTestProject.Model
             Assert.AreEqual("Tomato Soup", RecipeList[0].RecipeName);
             Assert.AreEqual(8, RecipeList[1].NutritionId);
         }
+
+        /// <summary>
+        /// Test that recipe can be instantiated even if image is null
+        /// </summary>
+        [TestMethod]
+        public void TestRecipeImageCanBeNull()
+        {
+            Recipe recipe = new Recipe
+            {
+                RecipeId = 1,
+                RecipeName = "lol",
+                RecipeInstructions = "lol",
+                CookingTime = 1,
+                NutritionId = 1,
+                EthnicId = 1,
+
+                RecipeImage = null,
+                UserWhoCreated = "greg"
+            };
+            Assert.AreNotEqual(recipe, null);
+        }
     }
 }
