@@ -304,7 +304,7 @@ namespace RecipeBookApp.UserControls
                     catch (Exception ex)
                     {
                         MessageBox.Show("Error occured on - adding recipe -" + ex.Message,
-                            "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
