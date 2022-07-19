@@ -294,12 +294,17 @@ namespace RecipeBookApp.UserControls
 
                 if (result == DialogResult.OK)
                 {
-
-
-                    this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
-                    //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
-                    this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
-                    this.DisplayError(false);
+                   bool recipeAdded= this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
+                    if (recipeAdded)
+                    {
+                       List<Recipe> recipeFoundList= this.recipeController.GetRecipeSearch(newRecipe.RecipeName);
+                        if (recipeFoundList.Any() && recipeFoundList[0].RecipeName.Equals(newRecipe.RecipeName))
+                        {
+                            this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
+                            this.DisplayError(false);
+                        }
+                       
+                    }
                 }
                 else
                 {
