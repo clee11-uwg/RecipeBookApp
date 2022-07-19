@@ -57,7 +57,8 @@ namespace RecipeBookApp.UserControls
             this.recipeController = new RecipeController();
             this.recipeList = new List<Recipe>();
             this.currentUser = new User();
-           
+            this.LoadComboBox();
+            this.Reset();
         }
 
         /// <summary>
@@ -414,13 +415,13 @@ namespace RecipeBookApp.UserControls
             this.searchTextBox.Text = "";
         }
 
-        private void RecipeMainUserControl_Load(object sender, EventArgs e)
+       /* private void RecipeMainUserControl_Load(object sender, EventArgs e)
         {
             this.LoadComboBox();
           
             this.PopulateItems();
            
-        }
+        }*/
 
         private void RecipeMainUserControl_VisibleChanged(object sender, EventArgs e)
         {

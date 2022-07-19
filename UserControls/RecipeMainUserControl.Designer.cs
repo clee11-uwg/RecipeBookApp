@@ -262,7 +262,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RecipeMainUserControl";
             this.Size = new System.Drawing.Size(1295, 614);
-            this.Load += new System.EventHandler(this.RecipeMainUserControl_Load);
+            //this.Load += new System.EventHandler(this.RecipeMainUserControl_Load);
         //    this.VisibleChanged += new System.EventHandler(this.RecipeMainUserControl_VisibleChanged);
             this.applyFiltertableLayoutPanel.ResumeLayout(false);
             this.applyFiltertableLayoutPanel.PerformLayout();

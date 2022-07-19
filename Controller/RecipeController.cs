@@ -16,6 +16,7 @@ namespace RecipeBookApp.Controller
     {
         private readonly RecipeDAL recipeDAL;
         private static string recipeInstructions;
+        TransactionOptions options;
 
         /// <summary>
         /// Instantiate instance variables
@@ -23,6 +24,7 @@ namespace RecipeBookApp.Controller
         public RecipeController()
         {
             this.recipeDAL = new RecipeDAL();
+            options = new TransactionOptions() { IsolationLevel = IsolationLevel.RepeatableRead };
         }
 
         /// <see cref="RecipeDAL.GetRecipes"/>
@@ -110,8 +112,8 @@ namespace RecipeBookApp.Controller
             }
             try
             {
-           //     using (TransactionScope scope = new TransactionScope())
-              //  {
+                //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
+                //{
                     NutritionDAL nutritionDAL = new NutritionDAL();
                     recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
 
@@ -133,8 +135,8 @@ namespace RecipeBookApp.Controller
                     {
                         this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
                     }
-                //    scope.Complete();
-               // }
+                    //scope.Complete();
+                //}
             }
             catch (TransactionAbortedException ex)
             {
@@ -142,49 +144,6 @@ namespace RecipeBookApp.Controller
             }
             return true;
         }
-
-        /// <summary>
-        /// Inserts the recipe into the database
-        /// </summary>
-        /// <param name="user">User who is calling</param>
-        /// <param name="recipe">Recipe to add</param>
-        /// <param name="ingredients">Ingredients of the recipe</param>
-        /// <param name="mealTypes">Types of Meal for the Recipe</param>
-        /// <param name="kitchenware">Kitchenware used by the recipe</param>
-        /// <param name="nutrition">Nutrition of the recipe</param>
-        /// <returns>Whether or not the recipe was inserted</returns>
-        /// <exception cref="ArgumentNullException">If data is null or empty</exception>
-        /// <exception cref="ArgumentException">If recipeID or nutritionID are all ready set</exception>
-        public bool AddNewRecipe(User user, Recipe recipe, List<Ingredient> ingredients, List<MealType> mealTypes,
-                List<Kitchenware> kitchenware, Nutrition nutrition)
-        {
-            if (user == null || recipe == null || ingredients == null ||
-                    mealTypes == null || kitchenware == null || nutrition == null)
-            {
-                throw new ArgumentNullException("Parameters cannot be null");
-            }
-            if (!ingredients.Any() || !mealTypes.Any() || !kitchenware.Any())
-            {
-                throw new ArgumentNullException("Ingredients, Meal Types, and Kitchenware cannot be empty");
-            }
-            if (recipe.RecipeId > 0 || recipe.NutritionId > 0 || nutrition.NutritionId > 0)
-            {
-                throw new ArgumentException("AddRecipe is not an UPDATE query. RecipeID and NutritionID should be set to 0 or negative");
-            }
-            try
-            {
-
-                this.recipeDAL.AddNewRecipeEntry(recipe, nutrition, ingredients, mealTypes, kitchenware);
-                  
-               
-            }
-            catch (TransactionAbortedException ex)
-            {
-                throw new TransactionAbortedException(ex.Message);
-            }
-            return true;
-        }
-
 
         /// <summary>
         /// Deletes the recipe from the database
@@ -210,8 +169,8 @@ namespace RecipeBookApp.Controller
             }
             try
             {
-                using (TransactionScope scope = new TransactionScope())
-                {
+                //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
+                //{
                     NutritionDAL nutritionDAL = new NutritionDAL();
                     nutritionDAL.DeleteNutrition(recipe.NutritionId);
 
@@ -220,9 +179,9 @@ namespace RecipeBookApp.Controller
                     this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
                     this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
 
-                    recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
-                    scope.Complete();
-                }
+                    this.recipeDAL.DeleteRecipe(recipe);
+                    //scope.Complete();
+                //} 
             }
             catch (TransactionAbortedException ex)
             {
@@ -288,33 +247,36 @@ namespace RecipeBookApp.Controller
 
             try 
             {
-                using (TransactionScope scope = new TransactionScope())
+                //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
+                //{
+                NutritionDAL nutritionDAL = new NutritionDAL();
+                nutritionDAL.UpdateNutrition(nutrition);
+
+                this.recipeDAL.UpdateRecipe(recipe);
+                if (recipe.RecipeImage != null)
                 {
-                    NutritionDAL nutritionDAL = new NutritionDAL();
-                    nutritionDAL.UpdateNutrition(nutrition);
-
-                    this.recipeDAL.UpdateRecipe(recipe);
                     this.recipeDAL.UpdateImage(recipe);
+                }                
 
-                    this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
-                    this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
-                    this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
 
-                    foreach (Ingredient ingredient in ingredients)
-                    {
-                        this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
-                    }
-                    foreach (MealType mealType in mealTypes)
-                    {
-                        this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
-                    }
-                    foreach (Kitchenware pots in kitchenware)
-                    {
-                        this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
-                    }
-
-                    scope.Complete();
+                foreach (Ingredient ingredient in ingredients)
+                {
+                    this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
                 }
+                foreach (MealType mealType in mealTypes)
+                {
+                    this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
+                }
+                foreach (Kitchenware pots in kitchenware)
+                {
+                    this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
+                }
+
+                    //scope.Complete();
+                //}
             }
             catch (TransactionAbortedException ex)
             {

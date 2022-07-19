@@ -16,11 +16,13 @@ namespace RecipeBookApp.View
     {
         private Recipe selectedRecipe;
         private User currentUser;
+        private List<Nutrition> recipeNutrition;
         private RecipeController recipeController;
         private IngredientsController ingredientsController;
         private KitchenwareController kitchenwareController;
         private TypeOfMealController typeOfMealController;
         private AllergenController allergenController;
+        private NutritionController nutritionController;
         private List<string> recipeIngredients;
         private List<string> recipeKitchenware;
         private List<string> recipeAllergens;
@@ -34,11 +36,13 @@ namespace RecipeBookApp.View
             InitializeComponent();
             this.selectedRecipe = new Recipe();
             this.currentUser = new User();
+            this.recipeNutrition = new List<Nutrition>();
             this.recipeController = new RecipeController();
             this.ingredientsController = new IngredientsController();
             this.kitchenwareController = new KitchenwareController();
             this.typeOfMealController = new TypeOfMealController();
             this.allergenController = new AllergenController();
+            this.nutritionController = new NutritionController();
 
             //this.recipeIngredients = new List<string>();
             //this.recipeKitchenware = new List<string>();
@@ -86,6 +90,8 @@ namespace RecipeBookApp.View
         {
             Recipe updatedRecipe = this.recipeController.GetRecipe(this.selectedRecipe.RecipeId);
             this.titleLbl.Text = updatedRecipe.RecipeName;
+            this.cookingTimeLbl.Text = updatedRecipe.CookingTime.ToString() + " min";
+            GetNutrition();
             GetIngredients();
             GetKitchenware();
             GetInstructions();
@@ -93,15 +99,37 @@ namespace RecipeBookApp.View
             GetAllergens();
         }
 
+        private void GetNutrition()
+        {
+            this.recipeNutrition = this.nutritionController.GetNutrition(this.selectedRecipe.RecipeId);
+            this.calorieLbl.Text = null;
+            this.carbLbl.Text = null;
+            this.proteinLbl.Text = null;
+            this.fatLbl.Text = null;
+            this.alcoholLbl.Text = null;
+            this.servingSizeLbl.Text = null;
+
+            this.calorieLbl.Text = "Calories: " + this.recipeNutrition[0].Calories;
+            this.carbLbl.Text = "Carbs: " + this.recipeNutrition[0].Carbohydrate;
+            this.proteinLbl.Text = "Protein: " + this.recipeNutrition[0].Protein;
+            this.fatLbl.Text = "Fat: " + this.recipeNutrition[0].Fat;
+            this.alcoholLbl.Text = "Acohol: " + this.recipeNutrition[0].Alcohol;
+            this.servingSizeLbl.Text = "Serving Size: " + this.recipeNutrition[0].ServingSize;
+        }
+
         private void GetIngredients()
         {
             this.recipeIngredients = new List<string>();
             List<Ingredient> ingredientList = this.ingredientsController.GetIngredient(selectedRecipe.RecipeId);
+            this.ingredientsRchBx.Text = null;
             for (int i = 0; i < ingredientList.Count; i++)
             {
-                this.recipeIngredients.Add(ingredientList[i].IngredientName);
+                if (i == (ingredientList.Count - 1))
+                    this.ingredientsRchBx.Text += ingredientList[i].IngredientName + ": " + ingredientList[i].Amount;
+                else
+                    this.ingredientsRchBx.Text += ingredientList[i].IngredientName + ": " + ingredientList[i].Amount + "\n";
             }
-            this.ingredientsLbl.Text = string.Join(" | ", this.recipeIngredients);
+            this.ingredientsRchBx.Refresh();
         }
 
         private void GetKitchenware()
@@ -145,8 +173,6 @@ namespace RecipeBookApp.View
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            // Add check if this current recipe was created by this user. This can be done either here or
-            // to determine if the button should show at all. The following is assuming the user created selected recipe
             UpdateRecipeForm updateRecipeForm = new UpdateRecipeForm();
             updateRecipeForm.SetRecipe(this.selectedRecipe);
             updateRecipeForm.SetUser(this.currentUser);
@@ -156,13 +182,31 @@ namespace RecipeBookApp.View
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            // Add check if this current recipe was created by this user. This can be done either here or
-            // to determine if the button should show at all. The following is assuming the user created selected recipe
             DialogResult result = MessageBox.Show("Are you sure you want to delete this recipe?", "Delete Recipe", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 // Add code to call delete recipe method from RecipeController once available
-                MessageBox.Show("Coming soon......");
+                try
+                {
+                    bool isRecipeDeleted = this.recipeController.DeleteRecipe(this.currentUser, this.selectedRecipe);
+                    if (isRecipeDeleted)
+                    {
+                        MessageBox.Show(this.selectedRecipe.RecipeName + " has been successfully deleted");                        
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Could not delete recipe");
+                    }
+                }
+                catch (UnauthorizedAccessException uae)
+                {
+                    MessageBox.Show(uae.Message);
+                }
+                catch (ArgumentException ae)
+                {
+                    MessageBox.Show(ae.Message);
+                }
             }
         }
     }

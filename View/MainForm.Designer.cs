@@ -50,7 +50,7 @@
             this.tabControl1.Controls.Add(this.hometabPage);
             this.tabControl1.Controls.Add(this.AddRecipetabPage);
             this.tabControl1.Location = new System.Drawing.Point(0, 173);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(985, 537);
@@ -60,9 +60,9 @@
             // 
             this.hometabPage.Controls.Add(this.recipeMainUserControl2);
             this.hometabPage.Location = new System.Drawing.Point(4, 22);
-            this.hometabPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hometabPage.Margin = new System.Windows.Forms.Padding(2);
             this.hometabPage.Name = "hometabPage";
-            this.hometabPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hometabPage.Padding = new System.Windows.Forms.Padding(2);
             this.hometabPage.Size = new System.Drawing.Size(977, 511);
             this.hometabPage.TabIndex = 0;
             this.hometabPage.Text = "Home";
@@ -75,16 +75,15 @@
             this.recipeMainUserControl2.Name = "recipeMainUserControl2";
             this.recipeMainUserControl2.Size = new System.Drawing.Size(971, 499);
             this.recipeMainUserControl2.TabIndex = 0;
-            this.recipeMainUserControl2.Load += new System.EventHandler(this.recipeMainUserControl2_Load);
             // 
             // AddRecipetabPage
             // 
             this.AddRecipetabPage.Controls.Add(this.addRecipeDetailUserControl2);
             this.AddRecipetabPage.Location = new System.Drawing.Point(4, 22);
-            this.AddRecipetabPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddRecipetabPage.Margin = new System.Windows.Forms.Padding(2);
             this.AddRecipetabPage.Name = "AddRecipetabPage";
-            this.AddRecipetabPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.AddRecipetabPage.Size = new System.Drawing.Size(977, 525);
+            this.AddRecipetabPage.Padding = new System.Windows.Forms.Padding(2);
+            this.AddRecipetabPage.Size = new System.Drawing.Size(977, 511);
             this.AddRecipetabPage.TabIndex = 1;
             this.AddRecipetabPage.Text = "Add Recipe";
             this.AddRecipetabPage.UseVisualStyleBackColor = true;
@@ -95,7 +94,7 @@
             this.addRecipeDetailUserControl2.Location = new System.Drawing.Point(2, 2);
             this.addRecipeDetailUserControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addRecipeDetailUserControl2.Name = "addRecipeDetailUserControl2";
-            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(973, 521);
+            this.addRecipeDetailUserControl2.Size = new System.Drawing.Size(973, 507);
             this.addRecipeDetailUserControl2.TabIndex = 0;
             // 
             // pictureBox1
@@ -174,7 +173,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";

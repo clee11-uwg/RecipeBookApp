@@ -72,9 +72,10 @@ namespace RecipeBookApp.UserControls
                 this.CreateMealTypeDropDown();
                 this.CreateIngredientsDropDown();
                 this.CreateMealTypeDropDown();
-                this.CreateKitchenWareDropDown();               
+                this.CreateKitchenWareDropDown();
+               
                 this.CreateEthnicDropDown();
-            
+                this.recipeList = this.recipeController.GetRecipes();
             }
             catch (Exception ex)
             {
@@ -228,7 +229,6 @@ namespace RecipeBookApp.UserControls
         private void AddRecipeButton_Click(object sender, EventArgs e)
         {
             this.ErrorReset();
-            this.recipeList = this.recipeController.GetRecipes();
             bool isError = false;
             if (!ValidateRecipeName())
             {
@@ -275,7 +275,7 @@ namespace RecipeBookApp.UserControls
             try
             {
                 string message = "Do you want to proceed adding new recipe?";
-               
+
                 MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
                 DialogResult result = MessageBox.Show(message, "New recipe", buttons);
 
@@ -294,17 +294,17 @@ namespace RecipeBookApp.UserControls
 
                 if (result == DialogResult.OK)
                 {
-                    bool recipeAdded= this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
-
-                       if (recipeAdded)
+                    try
                     {
-                       List<Recipe> recipeFoundList= this.recipeController.GetRecipeSearch(newRecipe.RecipeName);
-                        if (recipeFoundList.Any() && recipeFoundList[0].RecipeName.Equals(newRecipe.RecipeName))
-                        {
-                            this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
-                            this.DisplayError(false);
-                        }
-                       
+                        this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
+                        //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
+                        this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
+                        this.DisplayError(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error occured on - adding recipe -" + ex.Message,
+                            "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
