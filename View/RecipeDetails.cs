@@ -16,11 +16,13 @@ namespace RecipeBookApp.View
     {
         private Recipe selectedRecipe;
         private User currentUser;
+        private List<Nutrition> recipeNutrition;
         private RecipeController recipeController;
         private IngredientsController ingredientsController;
         private KitchenwareController kitchenwareController;
         private TypeOfMealController typeOfMealController;
         private AllergenController allergenController;
+        private NutritionController nutritionController;
         private List<string> recipeIngredients;
         private List<string> recipeKitchenware;
         private List<string> recipeAllergens;
@@ -34,11 +36,13 @@ namespace RecipeBookApp.View
             InitializeComponent();
             this.selectedRecipe = new Recipe();
             this.currentUser = new User();
+            this.recipeNutrition = new List<Nutrition>();
             this.recipeController = new RecipeController();
             this.ingredientsController = new IngredientsController();
             this.kitchenwareController = new KitchenwareController();
             this.typeOfMealController = new TypeOfMealController();
             this.allergenController = new AllergenController();
+            this.nutritionController = new NutritionController();
 
             //this.recipeIngredients = new List<string>();
             //this.recipeKitchenware = new List<string>();
@@ -86,11 +90,24 @@ namespace RecipeBookApp.View
         {
             Recipe updatedRecipe = this.recipeController.GetRecipe(this.selectedRecipe.RecipeId);
             this.titleLbl.Text = updatedRecipe.RecipeName;
+            this.cookingTimeLbl.Text = updatedRecipe.CookingTime.ToString() + " min";
+            GetNutrition();
             GetIngredients();
             GetKitchenware();
             GetInstructions();
             GetMealTypes();
             GetAllergens();
+        }
+
+        private void GetNutrition()
+        {
+            this.recipeNutrition = this.nutritionController.GetNutrition(this.selectedRecipe.RecipeId);
+            this.calorieLbl.Text += this.recipeNutrition[0].Calories;
+            this.carbLbl.Text += this.recipeNutrition[0].Carbohydrate;
+            this.proteinLbl.Text += this.recipeNutrition[0].Protein;
+            this.fatLbl.Text += this.recipeNutrition[0].Fat;
+            this.alcoholLbl.Text += this.recipeNutrition[0].Alcohol;
+            this.servingSizeLbl.Text += this.recipeNutrition[0].ServingSize;
         }
 
         private void GetIngredients()
