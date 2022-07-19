@@ -179,7 +179,7 @@ namespace RecipeBookApp.Controller
                     this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
                     this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
 
-                    recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
+                    this.recipeDAL.DeleteRecipe(recipe);
                     //scope.Complete();
                 //} 
             }
@@ -249,28 +249,31 @@ namespace RecipeBookApp.Controller
             {
                 //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
                 //{
-                    NutritionDAL nutritionDAL = new NutritionDAL();
-                    nutritionDAL.UpdateNutrition(nutrition);
+                NutritionDAL nutritionDAL = new NutritionDAL();
+                nutritionDAL.UpdateNutrition(nutrition);
 
-                    this.recipeDAL.UpdateRecipe(recipe);
+                this.recipeDAL.UpdateRecipe(recipe);
+                if (recipe.RecipeImage != null)
+                {
                     this.recipeDAL.UpdateImage(recipe);
+                }                
 
-                    this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
-                    this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
-                    this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeHasIngredient(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeIsATypeOfMeal(recipe.RecipeId);
+                this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
 
-                    foreach (Ingredient ingredient in ingredients)
-                    {
-                        this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
-                    }
-                    foreach (MealType mealType in mealTypes)
-                    {
-                        this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
-                    }
-                    foreach (Kitchenware pots in kitchenware)
-                    {
-                        this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
-                    }
+                foreach (Ingredient ingredient in ingredients)
+                {
+                    this.recipeDAL.AddRecipeHasIngredient(recipe.RecipeId, ingredient.IngredientId, ingredient.Amount);
+                }
+                foreach (MealType mealType in mealTypes)
+                {
+                    this.recipeDAL.AddRecipeIsATypeOfMeal(recipe.RecipeId, mealType.mealTypeID);
+                }
+                foreach (Kitchenware pots in kitchenware)
+                {
+                    this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
+                }
 
                     //scope.Complete();
                 //}
