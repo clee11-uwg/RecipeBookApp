@@ -145,8 +145,6 @@ namespace RecipeBookApp.View
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            // Add check if this current recipe was created by this user. This can be done either here or
-            // to determine if the button should show at all. The following is assuming the user created selected recipe
             UpdateRecipeForm updateRecipeForm = new UpdateRecipeForm();
             updateRecipeForm.SetRecipe(this.selectedRecipe);
             updateRecipeForm.SetUser(this.currentUser);
@@ -156,8 +154,6 @@ namespace RecipeBookApp.View
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            // Add check if this current recipe was created by this user. This can be done either here or
-            // to determine if the button should show at all. The following is assuming the user created selected recipe
             DialogResult result = MessageBox.Show("Are you sure you want to delete this recipe?", "Delete Recipe", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {

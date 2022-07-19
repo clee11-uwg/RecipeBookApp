@@ -110,8 +110,8 @@ namespace RecipeBookApp.Controller
             }
             try
             {
-                using (TransactionScope scope = new TransactionScope())
-                {
+                //using (TransactionScope scope = new TransactionScope())
+                //{
                     NutritionDAL nutritionDAL = new NutritionDAL();
                     recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
 
@@ -133,8 +133,8 @@ namespace RecipeBookApp.Controller
                     {
                         this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
                     }
-                    scope.Complete();
-                }
+                   // scope.Complete();
+                //}
             }
             catch (TransactionAbortedException ex)
             {
