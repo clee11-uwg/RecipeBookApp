@@ -48,7 +48,7 @@
             // 
             // tableLayoutPanel1
             // 
-           // this.tableLayoutPanel1.BackgroundImage = global::RecipeBookApp.Properties.Resources.logimimage_3;
+            this.tableLayoutPanel1.BackgroundImage = global::RecipeBookApp.Properties.Resources.logimimage_3;
             this.tableLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.42542F));
@@ -222,6 +222,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SignUpFormDialog";
             this.Text = "SignUpFormDialog";
+            this.Load += new System.EventHandler(this.SignUpFormDialog_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

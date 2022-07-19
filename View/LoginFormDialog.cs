@@ -24,12 +24,68 @@ namespace RecipeBookApp.View
             this.loginErrorLabelText.Visible = false;
             this.welcomeLabel.Visible = false;
             this.welcomeUser = new User();
+            this.currentPasswordTextBox.PasswordChar = '*';
+            this.newPassowrdTextBox.PasswordChar = '*';
+         
+            this.changePasswordButton.Visible = false;
+
+
         }
         private void ChangePasswordButton_Click(object sender, EventArgs e)
         {
-            Reset();
+            this.currentPasswordTextBox.ReadOnly = true;
+            if (this.changePasswordButton.Text == "Submit")
+
+            {
+                this.ProcessNewPassword();
+            }
+           
             this.newPassowrdTextBox.Visible = true;
             this.newPasswordLabel.Visible = true;
+            this.loginButton.Visible = false;
+            this.changePasswordButton.Text = "Submit";
+           
+        }
+
+        private void ProcessNewPassword()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(this.userNameTextBox.Text.Trim()) || string.IsNullOrEmpty(this.currentPasswordTextBox.Text.Trim()) || string.IsNullOrEmpty(this.newPassowrdTextBox.Text.Trim()))
+                {
+                    loginErrorLabelText.Text = "User Name and password cannot be empty!";
+                    loginErrorLabelText.ForeColor = Color.Red;
+                    loginErrorLabelText.Visible = true;
+                    return;
+                }
+                if (this.newPassowrdTextBox.Text.Length > 8)
+                {
+                    loginErrorLabelText.Text = "Passsword cannot be exceed 8 char length!";
+                    loginErrorLabelText.ForeColor = Color.Red;
+                    loginErrorLabelText.Visible = true;
+                    return;
+                }
+                bool isSucess = this.userController.ChangeUserPassword(UserController.GetLoginUser(), this.currentPasswordTextBox.Text, this.newPassowrdTextBox.Text);
+                if (isSucess)
+                {
+                    loginErrorLabelText.Text = "New Password has been updated!";
+                    loginErrorLabelText.ForeColor = Color.Green;
+                    loginErrorLabelText.Visible = true;
+                }
+                else
+                {
+                    loginErrorLabelText.Text = "Failed to update - New Password !";
+                    loginErrorLabelText.ForeColor = Color.Red;
+                    loginErrorLabelText.Visible = true;
+                }
+            }
+            catch(Exception ex)
+            {
+                this.loginErrorLabelText.Text = "Failed to update - New Password , "+ex.Message;
+                this.loginErrorLabelText.ForeColor = Color.Red;
+                this.loginErrorLabelText.Visible = true;
+            
+            }
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -46,6 +102,7 @@ namespace RecipeBookApp.View
                 loginErrorLabelText.Visible = true;
                 return;
             }
+           
             try
             {
                 this.welcomeUser = this.userController.Login(this.userNameTextBox.Text, this.currentPasswordTextBox.Text);
@@ -55,11 +112,13 @@ namespace RecipeBookApp.View
                 this.welcomeLabel.ForeColor = Color.White;
                 this.welcomeLabel.BackColor = Color.Orange;
                 this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))); ;
-                this.welcomeLabel.Text = "Welcome " + this.welcomeUser.Name.ToUpper() + " to the Recipe App !";
+                
               
                 this.welcomeLabel.Visible = true;
                 UserController.SetLoginUser(this.welcomeUser);
-               
+                this.changePasswordButton.Visible = true;
+                this.welcomeLabel.Text = "Welcome " + this.welcomeUser.Name.ToUpper() + " to the Recipe App !";
+
 
             }
             catch (Exception ex)

@@ -341,7 +341,7 @@ namespace RecipeBookApp.DAL
             string addRecipeStatement = @"INSERT INTO recipe (Name, Instructions, cooktime, nutritionID, 
                                             ethnicOriginID, userWhoCreated)
                                         VALUES(@name, @instructions, @cooktime, @nutritionID, 
-                                            @ethnicOriginID, @userWhoCreated); SELECT last_insert_rowid();";
+                                            @ethnicOriginID, @userWhoCreated); ";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -355,7 +355,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@userWhoCreated", recipe.UserWhoCreated);
 
                     id = Convert.ToInt32(selectCommand.ExecuteScalar());
-                    connection.Close();
+                    
                 }
             }
             return id;
@@ -454,8 +454,8 @@ namespace RecipeBookApp.DAL
                         recipe.RecipeImage.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
                         byte[] data = stream.ToArray();
                         selectCommand.Parameters.AddWithValue("@image", data);
-
                         result = Convert.ToInt32(selectCommand.ExecuteScalar());
+
                     }
                 }
             }
@@ -555,7 +555,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
                     selectCommand.Parameters.AddWithValue("@kitchenwareID", kitchenwareID);
 
-                    result = selectCommand.ExecuteNonQuery();
+                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
                 }
             }
             if (result < 1)
@@ -615,7 +615,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@recipeID", recipeID);
                     selectCommand.Parameters.AddWithValue("@typeOfMealID", typeOfMealID);
 
-                    result = selectCommand.ExecuteNonQuery();
+                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
                 }
             }
             if (result < 1)
@@ -676,7 +676,7 @@ namespace RecipeBookApp.DAL
                     selectCommand.Parameters.AddWithValue("@ingredientID", ingredientID);
                     selectCommand.Parameters.AddWithValue("@amount", amount);
 
-                    result = selectCommand.ExecuteNonQuery();
+                    result = Convert.ToInt32(selectCommand.ExecuteScalar());
                 }
             }
             if (result < 1)

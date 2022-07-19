@@ -71,7 +71,12 @@ namespace RecipeBookApp.Controller
             try
             {
                 expected_password_hash = this.UserDAL.VerifyUser(username);
-                if (string.Equals(given_password_hash, expected_password_hash, StringComparison.OrdinalIgnoreCase))
+               
+                if (string.IsNullOrEmpty(expected_password_hash))
+                {
+                    throw new UnauthorizedAccessException("Failed to login-User name does not exists.");
+                }
+                else if (string.Equals(given_password_hash, expected_password_hash, StringComparison.OrdinalIgnoreCase))
                 {
                     return this.UserDAL.GetUser(username);
                 }
@@ -135,7 +140,7 @@ namespace RecipeBookApp.Controller
                 throw new NullReferenceException("Missing user details for registration.");
             }
 
-            if (this.UserDAL.DoesUserNameExist(newUser.Name))
+            if (this.UserDAL.GetUser(newUser.Name) !=null)
             {
                 throw new UnauthorizedAccessException("Username already exists in the database.");
             }
@@ -163,7 +168,7 @@ namespace RecipeBookApp.Controller
                 {
                     throw new UnauthorizedAccessException("Incorrect password");
                 }
-
+                newPassword = Crypt.SHA256_hash(newPassword);
                 return this.UserDAL.ChangePassword(user, newPassword);
             }
             catch (NullReferenceException)
