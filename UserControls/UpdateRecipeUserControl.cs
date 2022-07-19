@@ -544,5 +544,10 @@ namespace RecipeBookApp.UserControls
             }   
             
         }
+
+        private void UpdateRecipeTableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
