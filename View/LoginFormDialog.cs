@@ -33,13 +33,13 @@ namespace RecipeBookApp.View
         }
         private void ChangePasswordButton_Click(object sender, EventArgs e)
         {
-
+            this.currentPasswordTextBox.ReadOnly = true;
             if (this.changePasswordButton.Text == "Submit")
 
             {
                 this.ProcessNewPassword();
             }
-        
+           
             this.newPassowrdTextBox.Visible = true;
             this.newPasswordLabel.Visible = true;
             this.loginButton.Visible = false;
