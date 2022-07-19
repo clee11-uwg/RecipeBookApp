@@ -16,6 +16,7 @@ namespace RecipeBookApp.Controller
     {
         private readonly RecipeDAL recipeDAL;
         private static string recipeInstructions;
+        TransactionOptions options;
 
         /// <summary>
         /// Instantiate instance variables
@@ -23,6 +24,7 @@ namespace RecipeBookApp.Controller
         public RecipeController()
         {
             this.recipeDAL = new RecipeDAL();
+            options = new TransactionOptions() { IsolationLevel = IsolationLevel.RepeatableRead };
         }
 
         /// <see cref="RecipeDAL.GetRecipes"/>
@@ -110,8 +112,8 @@ namespace RecipeBookApp.Controller
             }
             try
             {
-                //using (TransactionScope scope = new TransactionScope())
-                //{
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
+                {
                     NutritionDAL nutritionDAL = new NutritionDAL();
                     recipe.NutritionId = nutritionDAL.AddNutrition(nutrition);
 
@@ -133,8 +135,8 @@ namespace RecipeBookApp.Controller
                     {
                         this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
                     }
-                    //scope.Complete();
-                //}
+                    scope.Complete();
+                }
             }
             catch (TransactionAbortedException ex)
             {
@@ -167,8 +169,8 @@ namespace RecipeBookApp.Controller
             }
             try
             {
-                //using (TransactionScope scope = new TransactionScope())
-                //{
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
+                {
                     NutritionDAL nutritionDAL = new NutritionDAL();
                     nutritionDAL.DeleteNutrition(recipe.NutritionId);
 
@@ -178,8 +180,8 @@ namespace RecipeBookApp.Controller
                     this.recipeDAL.DeleteRecipeUsesKitchenware(recipe.RecipeId);
 
                     recipe.RecipeId = this.recipeDAL.AddRecipe(recipe);
-                    //scope.Complete();
-                //}
+                    scope.Complete();
+                } 
             }
             catch (TransactionAbortedException ex)
             {
@@ -245,8 +247,8 @@ namespace RecipeBookApp.Controller
 
             try 
             {
-                //using (TransactionScope scope = new TransactionScope())
-                //{
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
+                {
                     NutritionDAL nutritionDAL = new NutritionDAL();
                     nutritionDAL.UpdateNutrition(nutrition);
 
@@ -270,8 +272,8 @@ namespace RecipeBookApp.Controller
                         this.recipeDAL.AddRecipeUsesKitchenware(recipe.RecipeId, pots.KitchenwareId);
                     }
 
-                    //scope.Complete();
-                //}
+                    scope.Complete();
+                }
             }
             catch (TransactionAbortedException ex)
             {

@@ -19,14 +19,6 @@ namespace RecipeBookApp.DAL
             SQLiteConnection conn;
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             conn = new SQLiteConnection(connectionString);
-            try
-            {
-                conn.Open();
-            }
-            catch (SQLiteException sle)
-            {
-
-            }
             return conn;
         }
     }
