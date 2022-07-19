@@ -148,7 +148,7 @@
             // typeOfMealLbl
             // 
             this.typeOfMealLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeOfMealLbl.Location = new System.Drawing.Point(542, 367);
+            this.typeOfMealLbl.Location = new System.Drawing.Point(631, 367);
             this.typeOfMealLbl.MinimumSize = new System.Drawing.Size(200, 75);
             this.typeOfMealLbl.Name = "typeOfMealLbl";
             this.typeOfMealLbl.Size = new System.Drawing.Size(200, 75);
@@ -158,7 +158,7 @@
             // allergenHeadingLbl
             // 
             this.allergenHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.allergenHeadingLbl.Location = new System.Drawing.Point(557, 229);
+            this.allergenHeadingLbl.Location = new System.Drawing.Point(646, 229);
             this.allergenHeadingLbl.Name = "allergenHeadingLbl";
             this.allergenHeadingLbl.Size = new System.Drawing.Size(169, 24);
             this.allergenHeadingLbl.TabIndex = 11;
@@ -168,7 +168,7 @@
             // allergenListLbl
             // 
             this.allergenListLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.allergenListLbl.Location = new System.Drawing.Point(542, 258);
+            this.allergenListLbl.Location = new System.Drawing.Point(631, 258);
             this.allergenListLbl.MinimumSize = new System.Drawing.Size(200, 40);
             this.allergenListLbl.Name = "allergenListLbl";
             this.allergenListLbl.Size = new System.Drawing.Size(200, 75);
@@ -178,7 +178,7 @@
             // mealTypeHeadingLbl
             // 
             this.mealTypeHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mealTypeHeadingLbl.Location = new System.Drawing.Point(557, 343);
+            this.mealTypeHeadingLbl.Location = new System.Drawing.Point(646, 343);
             this.mealTypeHeadingLbl.Name = "mealTypeHeadingLbl";
             this.mealTypeHeadingLbl.Size = new System.Drawing.Size(169, 24);
             this.mealTypeHeadingLbl.TabIndex = 13;
@@ -189,7 +189,7 @@
             // 
             this.updateButton.BackColor = System.Drawing.Color.Tan;
             this.updateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateButton.Location = new System.Drawing.Point(692, 172);
+            this.updateButton.Location = new System.Drawing.Point(634, 172);
             this.updateButton.Margin = new System.Windows.Forms.Padding(2);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(80, 33);
@@ -202,7 +202,7 @@
             // 
             this.deleteButton.BackColor = System.Drawing.Color.Tan;
             this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButton.Location = new System.Drawing.Point(790, 172);
+            this.deleteButton.Location = new System.Drawing.Point(732, 172);
             this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(68, 33);
@@ -214,7 +214,7 @@
             // cookingTimeHeadingLbl
             // 
             this.cookingTimeHeadingLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cookingTimeHeadingLbl.Location = new System.Drawing.Point(267, 172);
+            this.cookingTimeHeadingLbl.Location = new System.Drawing.Point(300, 172);
             this.cookingTimeHeadingLbl.Name = "cookingTimeHeadingLbl";
             this.cookingTimeHeadingLbl.Size = new System.Drawing.Size(143, 33);
             this.cookingTimeHeadingLbl.TabIndex = 16;
@@ -225,7 +225,7 @@
             // 
             this.cookingTimeLbl.AutoSize = true;
             this.cookingTimeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cookingTimeLbl.Location = new System.Drawing.Point(425, 180);
+            this.cookingTimeLbl.Location = new System.Drawing.Point(458, 180);
             this.cookingTimeLbl.Name = "cookingTimeLbl";
             this.cookingTimeLbl.Size = new System.Drawing.Size(0, 17);
             this.cookingTimeLbl.TabIndex = 17;
