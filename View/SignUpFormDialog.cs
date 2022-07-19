@@ -3,6 +3,7 @@ using RecipeBookApp.Model;
 using RecipeBookApp.Utility;
 using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace RecipeBookApp.View
@@ -39,7 +40,27 @@ namespace RecipeBookApp.View
                 this.signupMessageLabel.Visible = true;
                 return;
             }
-
+            else if (!Regex.IsMatch(this.userIDSignUpText.Text, "[a-zA-Z]"))
+            {
+                this.signupMessageLabel.Text = "User Name should be a valid string!";
+                this.signupMessageLabel.ForeColor = Color.Red;
+                this.signupMessageLabel.Visible = true;
+                return;
+            }
+            else if (this.userIDSignUpText.Text.Length < 5 || this.userIDSignUpText.Text.Length > 10)
+            {
+                this.signupMessageLabel.Text = "User Name should not be less than 5 or greater than 10 char!";
+                this.signupMessageLabel.ForeColor = Color.Red;
+                this.signupMessageLabel.Visible = true;
+                return;
+            }
+            else if (this.passwordSignUpText.Text.Length < 5 || this.passwordSignUpText.Text.Length > 8)
+            {
+                this.signupMessageLabel.Text = "Passsword cannot exceed 8 char length or should not be less than 5 char!";
+                this.signupMessageLabel.ForeColor = Color.Red;
+                this.signupMessageLabel.Visible = true;
+                return;
+            }
             else if (!this.passwordSignUpText.Text.Equals(this.confirmPasswordSignUpText.Text))
             {
                 this.signupMessageLabel.Text = "Password is not matching reenter your password again!";

@@ -106,7 +106,7 @@ namespace RecipeBookApp.DAL
         {
             int id = -1;
             string selectStatement = @"INSERT INTO nutrition (carbohydrate, fat, protein, alcohol, calories, serving_size)
-                                    VALUES (@carbohydrate, @fat, @protein, @alcohol, @calories, @serving_size);";
+                                    VALUES (@carbohydrate, @fat, @protein, @alcohol, @calories, @serving_size);SELECT last_insert_rowid();";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {

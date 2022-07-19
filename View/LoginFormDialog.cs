@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -58,9 +59,10 @@ namespace RecipeBookApp.View
                     loginErrorLabelText.Visible = true;
                     return;
                 }
-                if (this.newPassowrdTextBox.Text.Length > 8)
+               
+                else if (this.newPassowrdTextBox.Text.Length < 5 || this.newPassowrdTextBox.Text.Length > 8)
                 {
-                    loginErrorLabelText.Text = "Passsword cannot be exceed 8 char length!";
+                    loginErrorLabelText.Text = "Passsword cannot exceed 8 char length or should not be less than 5 char!";
                     loginErrorLabelText.ForeColor = Color.Red;
                     loginErrorLabelText.Visible = true;
                     return;

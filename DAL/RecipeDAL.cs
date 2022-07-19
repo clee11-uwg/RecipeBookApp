@@ -25,7 +25,7 @@ namespace RecipeBookApp.DAL
             string selectStatement = @"SELECT r.id, r.`Name`, r.Instructions,
                                             r.cooktime, r.nutritionID, r.ethnicOriginID, r.userWhoCreated, i.image 
                                         FROM recipe r 
-                                            JOIN image i ON r.ID = i.recipeID;";
+                                            left JOIN image i ON r.ID = i.recipeID;";
                 
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
@@ -37,8 +37,8 @@ namespace RecipeBookApp.DAL
                         while (reader.Read())
                         {
                             // Set up byte array and stream to convert BLOB image from db into something readable and can be displayed
-                            byte[] image_byte = (byte[])reader["image"];
-                            MemoryStream ms = new MemoryStream(image_byte);
+                          //  byte[] image_byte = (byte[])reader["image"];
+                          //  MemoryStream ms = new MemoryStream(image_byte);
                             Recipe recipe = new Recipe
                             {
                                 RecipeId = Convert.ToInt32(reader["id"]),
@@ -48,9 +48,14 @@ namespace RecipeBookApp.DAL
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
                                 EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
                                 UserWhoCreated = reader["userWhoCreated"].ToString(),
-                                RecipeImage = Image.FromStream(ms)
+                                RecipeImage = null
                             };
-
+                            if (reader["image"] != System.DBNull.Value)
+                            {
+                                byte[] image_byte = (byte[])reader["image"];
+                                MemoryStream ms = new MemoryStream(image_byte);
+                                recipe.RecipeImage = Image.FromStream(ms);
+                            }
                             recipes.Add(recipe);
                         }
                     }
@@ -71,7 +76,7 @@ namespace RecipeBookApp.DAL
             string selectStatement = @"SELECT recipe.id, recipe.`Name`, recipe.Instructions, recipe.cooktime, 
                                         recipe.nutritionID, recipe.ethnicOriginID, recipe.userWhoCreated, image.image
                                     FROM recipe    
-                                        JOIN image ON recipe.id = image.recipeID
+                                       LEFT JOIN image ON recipe.id = image.recipeID
                                     WHERE recipe.id = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
@@ -86,8 +91,8 @@ namespace RecipeBookApp.DAL
                         
                         while (reader.Read())
                         {
-                            byte[] image_byte = (byte[])reader["image"];
-                            MemoryStream ms = new MemoryStream(image_byte);
+                          //  byte[] image_byte = (byte[])reader["image"];
+                           // MemoryStream ms = new MemoryStream(image_byte);
                             {
                                 recipe.RecipeId = Convert.ToInt32(reader["id"]);
                                 recipe.RecipeName = reader["Name"].ToString();
@@ -96,8 +101,14 @@ namespace RecipeBookApp.DAL
                                 recipe.NutritionId = Convert.ToInt32(reader["nutritionID"]);
                                 recipe.EthnicId = Convert.ToInt32(reader["ethnicOriginID"]);
                                 recipe.UserWhoCreated = reader["userWhoCreated"].ToString();
-                                recipe.RecipeImage = Image.FromStream(ms);
+                                recipe.RecipeImage =null;
                             };
+                            if (reader["image"] != System.DBNull.Value)
+                            {
+                                byte[] image_byte = (byte[])reader["image"];
+                                MemoryStream ms = new MemoryStream(image_byte);
+                                recipe.RecipeImage = Image.FromStream(ms);
+                            }
                         }
                     }
                 }
@@ -118,7 +129,7 @@ namespace RecipeBookApp.DAL
             string selectStatement = @"SELECT r.id, r.`Name`, r.Instructions,
                                             r.cooktime, r.nutritionID, r.ethnicOriginID, r.userWhoCreated, i.image 
                                         FROM recipe r 
-                                            JOIN image i ON r.ID = i.recipeID 
+                                        LEFT    JOIN image i ON r.ID = i.recipeID 
                                         WHERE r.Name LIKE '%'|| @UserSearch ||'%'";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
@@ -131,8 +142,8 @@ namespace RecipeBookApp.DAL
                         while (reader.Read())
                         {
                             // Set up byte array and stream to convert BLOB image from db into something readable and can be displayed
-                            byte[] image_byte = (byte[])reader["image"];
-                            MemoryStream ms = new MemoryStream(image_byte);
+                           // byte[] image_byte = (byte[])reader["image"];
+                            //MemoryStream ms = new MemoryStream(image_byte);
                             Recipe recipe = new Recipe
                             {
                                 RecipeId = Convert.ToInt32(reader["id"]),
@@ -142,9 +153,14 @@ namespace RecipeBookApp.DAL
                                 NutritionId = Convert.ToInt32(reader["nutritionID"]),
                                 EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
                                 UserWhoCreated = reader["userWhoCreated"].ToString(),
-                                RecipeImage = Image.FromStream(ms)
+                                RecipeImage = null
                             };
-
+                            if (reader["image"] != System.DBNull.Value)
+                            {
+                                byte[] image_byte = (byte[])reader["image"];
+                                MemoryStream ms = new MemoryStream(image_byte);
+                                recipe.RecipeImage = Image.FromStream(ms);
+                            }
                             recipes.Add(recipe);
                         }
                     }
@@ -341,7 +357,7 @@ namespace RecipeBookApp.DAL
             string addRecipeStatement = @"INSERT INTO recipe (Name, Instructions, cooktime, nutritionID, 
                                             ethnicOriginID, userWhoCreated)
                                         VALUES(@name, @instructions, @cooktime, @nutritionID, 
-                                            @ethnicOriginID, @userWhoCreated); ";
+                                            @ethnicOriginID, @userWhoCreated); SELECT last_insert_rowid();";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {
@@ -359,6 +375,78 @@ namespace RecipeBookApp.DAL
                 }
             }
             return id;
+        }
+
+        public bool AddNewRecipeEntry(Recipe recipe, Nutrition nutrition, List<Ingredient> ingredients, List<MealType> mealTypes,
+               List<Kitchenware> kitchenware)
+        {
+
+            try {
+                int result = -1;
+                string selectStatement = @"INSERT INTO recipe (Name, Instructions, cooktime, nutritionID, 
+                                            ethnicOriginID, userWhoCreated)
+                                        VALUES(@name, @instructions, @cooktime, @nutritionID, 
+                                            @ethnicOriginID, @userWhoCreated); commit; select * from recipe where Name=@name";
+                using (SQLiteConnection connection = DBConnection.GetConnection())
+                {
+                    using (SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, connection))
+                    {
+                        selectCommand.Parameters.AddWithValue("@name", recipe.RecipeName);
+                        selectCommand.Parameters.AddWithValue("@instructions", recipe.RecipeInstructions);
+                        selectCommand.Parameters.AddWithValue("@cooktime", 2);
+                        selectCommand.Parameters.AddWithValue("@nutritionID", 1);
+                        selectCommand.Parameters.AddWithValue("@ethnicOriginID", 1);
+                        selectCommand.Parameters.AddWithValue("@userWhoCreated", "bharti");
+
+
+                        //  result = selectCommand.ExecuteNonQuery();
+                        SQLiteDataReader reader = selectCommand.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+
+                            // Set up byte array and stream to convert BLOB image from db into something readable and can be displayed
+                           // byte[] image_byte = (byte[])reader["image"];
+                            //MemoryStream ms = new MemoryStream(image_byte);
+                            Recipe recipe1 = new Recipe
+                            {
+                                RecipeId = Convert.ToInt32(reader["id"]),
+                                RecipeName = reader["Name"].ToString(),
+                                RecipeInstructions = reader["Instructions"].ToString(),
+                                CookingTime = Convert.ToInt32(reader["cooktime"]),
+                                NutritionId = Convert.ToInt32(reader["nutritionID"]),
+                                EthnicId = Convert.ToInt32(reader["ethnicOriginID"]),
+                                UserWhoCreated = reader["userWhoCreated"].ToString(),
+                                RecipeImage = null
+                            };
+                            if (reader["image"] != System.DBNull.Value)
+                            {
+                                byte[] image_byte = (byte[])reader["image"];
+                                MemoryStream ms = new MemoryStream(image_byte);
+                                recipe1.RecipeImage = Image.FromStream(ms);
+                            }
+
+                        }
+                    }
+
+                    
+
+                }
+                if (result < 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            
+            }
+             catch(Exception e)
+            {
+                throw e;
+               // return false;
+            }
         }
 
         /// <summary>
