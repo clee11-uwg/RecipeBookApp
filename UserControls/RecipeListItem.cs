@@ -74,8 +74,8 @@ namespace RecipeBookApp.UserControls
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
             this.ParentForm.Show();
-            /*GetRecipeMainUserControl();
-            recipeMainUserControl.Reset();*/
+            GetRecipeMainUserControl();
+            recipeMainUserControl.Reset();
         }
 
         private void PicBoxRecipeImage_Click(object sender, EventArgs e)
@@ -88,8 +88,8 @@ namespace RecipeBookApp.UserControls
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
             this.ParentForm.Show();
-            /*GetRecipeMainUserControl();
-            recipeMainUserControl.Reset();*/
+            GetRecipeMainUserControl();
+            recipeMainUserControl.Reset();
         }
 
         private void GetRecipeMainUserControl()

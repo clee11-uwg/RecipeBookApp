@@ -163,7 +163,7 @@ namespace RecipeBookApp.View
                     bool isRecipeDeleted = this.recipeController.DeleteRecipe(this.currentUser, this.selectedRecipe);
                     if (isRecipeDeleted)
                     {
-                        MessageBox.Show(this.selectedRecipe.RecipeName + " has been successfully deleted");
+                        MessageBox.Show(this.selectedRecipe.RecipeName + " has been successfully deleted");                        
                         this.Close();
                     }
                     else
