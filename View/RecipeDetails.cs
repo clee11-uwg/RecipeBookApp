@@ -61,11 +61,17 @@ namespace RecipeBookApp.View
             {
                 this.updateButton.Visible = false;
                 this.deleteButton.Visible = false;
+
+                this.addToFavoritesLnkLbl.Visible = false;
+                this.removeFromFavoritesLnkLbl.Visible = false;
             }
             else
             {
                 this.updateButton.Visible = true;
                 this.deleteButton.Visible = true;
+
+                this.addToFavoritesLnkLbl.Visible = true;
+                this.removeFromFavoritesLnkLbl.Visible = true;
             }
         }
 
