@@ -96,8 +96,10 @@ namespace RecipeBookApp.DAL
         public Ingredient GetIngredientByIngredientName(string name)
         {
             Ingredient ingredient = null;
-            string selectStatement = @"SELECT ingredient.id, ingredient.ingredient, ingredient.typeOfFoodID
-                                        FROM ingredient
+            string selectStatement = @"SELECT ingredient.id, ingredient.Ingredient, ingredient.typeOfFoodID,
+                                            recipe_has_ingredient.amount
+                                         FROM recipe JOIN recipe_has_ingredient ON recipe_has_ingredient.recipeID = recipe.id
+                                            JOIN ingredient ON recipe_has_ingredient.ingredientID = ingredient.id
                                         WHERE ingredient.ingredient = @name;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
@@ -114,8 +116,8 @@ namespace RecipeBookApp.DAL
                             {
                                 IngredientId = Convert.ToInt32(reader["id"]),
                                 IngredientName = reader["ingredient"].ToString(),
-                                FoodId = Convert.ToInt32(reader["typeOfFoodID"])
-                                //Amount = reader["amount"].ToString()
+                                FoodId = Convert.ToInt32(reader["typeOfFoodID"]),
+                                Amount = reader["amount"].ToString()
                             };
                         }
                     }
