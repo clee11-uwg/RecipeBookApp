@@ -297,6 +297,7 @@
             this.ingredientsRchBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ingredientsRchBx.Location = new System.Drawing.Point(17, 253);
             this.ingredientsRchBx.Name = "ingredientsRchBx";
+            this.ingredientsRchBx.ReadOnly = true;
             this.ingredientsRchBx.Size = new System.Drawing.Size(203, 189);
             this.ingredientsRchBx.TabIndex = 25;
             this.ingredientsRchBx.Text = "";
