@@ -20,8 +20,7 @@ namespace RecipeBookApp.UserControls
         
         private Nutrition addNutrition;
         private List<Kitchenware> kitchenWareList;
-        private List<MealType> mealTypeList;
-        
+        private List<MealType> mealTypeList;        
         private List<Ethnic> ethnicList;
         private List<Ingredient> ingredientList;
         private RecipeController recipeController;        
@@ -271,6 +270,7 @@ namespace RecipeBookApp.UserControls
             {
                 return;
             }
+            
                 this.CollectNutritionData();
                 this.ProcessNewRecipe();
             
@@ -294,6 +294,10 @@ namespace RecipeBookApp.UserControls
                     newRecipe.RecipeImage = this.recipeImage;
                 }
               
+                if (string.IsNullOrEmpty(this.cooktimeBox.Text.Trim()))
+                {
+                    this.cooktimeBox.Text = "0";
+                }
                 newRecipe.CookingTime = int.Parse(this.cooktimeBox.Text);
                 newRecipe.UserWhoCreated = UserController.GetLoginUser().Name;              
 
@@ -304,7 +308,6 @@ namespace RecipeBookApp.UserControls
                     {
                         this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, 
                             recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
-                            //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
                         this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
                         this.DisplayError(false);
                     }
@@ -601,7 +604,10 @@ namespace RecipeBookApp.UserControls
             {
                 displayList += selectIngredient.IngredientName + ',';
             }
-            displayList = displayList.Remove(displayList.Length - 1);
+            if (displayList.Length > 1)
+            {
+                displayList = displayList.Remove(displayList.Length - 1);
+            }
             this.addIngredIentsRichBox.Text= displayList;
             this.addIngredIentsRichBox.Refresh();
         }
@@ -661,7 +667,9 @@ namespace RecipeBookApp.UserControls
             {
                 displayList += selectMeal.type + ',';
             }
-            displayList = displayList.Remove(displayList.Length - 1);
+            if (displayList.Length>1) {
+                displayList = displayList.Remove(displayList.Length - 1);
+            }
            
 
             this.addMealTypeRichText.Text = displayList;
@@ -747,7 +755,10 @@ namespace RecipeBookApp.UserControls
             {
                 displayList += select.KitchenwareDetails + ',';
             }
-            displayList = displayList.Remove(displayList.Length - 1);
+            if (displayList.Length > 1)
+            {
+                displayList = displayList.Remove(displayList.Length - 1);
+            }
 
 
             this.addKitchenwareRichTextBox.Text = displayList;

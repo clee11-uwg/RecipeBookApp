@@ -241,7 +241,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.23129F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 148F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.Controls.Add(this.servingtextBox, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.fattextBox, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.calorieTextBox, 5, 0);
@@ -265,7 +265,7 @@
             // 
             // servingtextBox
             // 
-            this.servingtextBox.Location = new System.Drawing.Point(509, 54);
+            this.servingtextBox.Location = new System.Drawing.Point(507, 54);
             this.servingtextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.servingtextBox.Name = "servingtextBox";
             this.servingtextBox.Size = new System.Drawing.Size(93, 22);
@@ -273,7 +273,7 @@
             // 
             // fattextBox
             // 
-            this.fattextBox.Location = new System.Drawing.Point(355, 54);
+            this.fattextBox.Location = new System.Drawing.Point(353, 54);
             this.fattextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.fattextBox.Name = "fattextBox";
             this.fattextBox.Size = new System.Drawing.Size(49, 22);
@@ -281,7 +281,7 @@
             // 
             // calorieTextBox
             // 
-            this.calorieTextBox.Location = new System.Drawing.Point(509, 2);
+            this.calorieTextBox.Location = new System.Drawing.Point(507, 2);
             this.calorieTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.calorieTextBox.Name = "calorieTextBox";
             this.calorieTextBox.Size = new System.Drawing.Size(93, 22);
@@ -289,7 +289,7 @@
             // 
             // alchoholTextBox
             // 
-            this.alchoholTextBox.Location = new System.Drawing.Point(355, 2);
+            this.alchoholTextBox.Location = new System.Drawing.Point(353, 2);
             this.alchoholTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.alchoholTextBox.Name = "alchoholTextBox";
             this.alchoholTextBox.Size = new System.Drawing.Size(49, 22);
@@ -299,7 +299,7 @@
             // 
             this.carbLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.carbLabel.AutoSize = true;
-            this.carbLabel.Location = new System.Drawing.Point(16, 18);
+            this.carbLabel.Location = new System.Drawing.Point(15, 18);
             this.carbLabel.Name = "carbLabel";
             this.carbLabel.Size = new System.Drawing.Size(95, 16);
             this.carbLabel.TabIndex = 0;
@@ -309,7 +309,7 @@
             // 
             this.proteinLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.proteinLabel.AutoSize = true;
-            this.proteinLabel.Location = new System.Drawing.Point(36, 61);
+            this.proteinLabel.Location = new System.Drawing.Point(35, 61);
             this.proteinLabel.Name = "proteinLabel";
             this.proteinLabel.Size = new System.Drawing.Size(55, 16);
             this.proteinLabel.TabIndex = 1;
@@ -319,7 +319,7 @@
             // 
             this.calorisLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.calorisLabel.AutoSize = true;
-            this.calorisLabel.Location = new System.Drawing.Point(431, 18);
+            this.calorisLabel.Location = new System.Drawing.Point(429, 18);
             this.calorisLabel.Name = "calorisLabel";
             this.calorisLabel.Size = new System.Drawing.Size(63, 16);
             this.calorisLabel.TabIndex = 4;
@@ -329,7 +329,7 @@
             // 
             this.servingLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.servingLabel.AutoSize = true;
-            this.servingLabel.Location = new System.Drawing.Point(434, 53);
+            this.servingLabel.Location = new System.Drawing.Point(432, 53);
             this.servingLabel.Name = "servingLabel";
             this.servingLabel.Size = new System.Drawing.Size(56, 32);
             this.servingLabel.TabIndex = 5;
@@ -339,7 +339,7 @@
             // 
             this.alcoholLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.alcoholLabel.AutoSize = true;
-            this.alcoholLabel.Location = new System.Drawing.Point(273, 18);
+            this.alcoholLabel.Location = new System.Drawing.Point(271, 18);
             this.alcoholLabel.Name = "alcoholLabel";
             this.alcoholLabel.Size = new System.Drawing.Size(58, 16);
             this.alcoholLabel.TabIndex = 3;
@@ -349,7 +349,7 @@
             // 
             this.fatLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fatLabel.AutoSize = true;
-            this.fatLabel.Location = new System.Drawing.Point(283, 61);
+            this.fatLabel.Location = new System.Drawing.Point(281, 61);
             this.fatLabel.Name = "fatLabel";
             this.fatLabel.Size = new System.Drawing.Size(39, 16);
             this.fatLabel.TabIndex = 2;
@@ -357,7 +357,7 @@
             // 
             // carbTextBox
             // 
-            this.carbTextBox.Location = new System.Drawing.Point(130, 2);
+            this.carbTextBox.Location = new System.Drawing.Point(129, 2);
             this.carbTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.carbTextBox.Name = "carbTextBox";
             this.carbTextBox.Size = new System.Drawing.Size(85, 22);
@@ -365,7 +365,7 @@
             // 
             // proteinTextBox
             // 
-            this.proteinTextBox.Location = new System.Drawing.Point(130, 54);
+            this.proteinTextBox.Location = new System.Drawing.Point(129, 54);
             this.proteinTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.proteinTextBox.Name = "proteinTextBox";
             this.proteinTextBox.Size = new System.Drawing.Size(85, 22);
@@ -549,7 +549,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.66667F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 363F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 364F));
             this.tableLayoutPanel2.Controls.Add(this.addRecipeCancelButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.addRecipeButton, 0, 0);
@@ -580,7 +580,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(295, 0);
+            this.label1.Location = new System.Drawing.Point(294, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(342, 18);
             this.label1.TabIndex = 30;
@@ -642,7 +642,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.25229F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.07341F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.59706F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel5.Controls.Add(this.addEthnicCombobox, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.cooktimeBox, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.label2, 3, 0);
@@ -661,14 +661,14 @@
             this.addEthnicCombobox.Location = new System.Drawing.Point(3, 2);
             this.addEthnicCombobox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addEthnicCombobox.Name = "addEthnicCombobox";
-            this.addEthnicCombobox.Size = new System.Drawing.Size(270, 24);
+            this.addEthnicCombobox.Size = new System.Drawing.Size(269, 24);
             this.addEthnicCombobox.TabIndex = 25;
             this.addEthnicCombobox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddEthnicCombobox_KeyPress);
             // 
             // cooktimeBox
             // 
             this.cooktimeBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.cooktimeBox.Location = new System.Drawing.Point(489, 8);
+            this.cooktimeBox.Location = new System.Drawing.Point(487, 8);
             this.cooktimeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cooktimeBox.Name = "cooktimeBox";
             this.cooktimeBox.Size = new System.Drawing.Size(104, 22);
@@ -679,7 +679,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(599, 11);
+            this.label2.Location = new System.Drawing.Point(597, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 16);
             this.label2.TabIndex = 28;
@@ -690,7 +690,7 @@
             this.cookTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.cookTime.AutoSize = true;
             this.cookTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cookTime.Location = new System.Drawing.Point(359, 9);
+            this.cookTime.Location = new System.Drawing.Point(358, 9);
             this.cookTime.Name = "cookTime";
             this.cookTime.Size = new System.Drawing.Size(123, 20);
             this.cookTime.TabIndex = 26;
@@ -785,7 +785,7 @@
             this.ingredientsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.58277F));
             this.ingredientsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.41723F));
             this.ingredientsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.ingredientsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.ingredientsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
             this.ingredientsTableLayoutPanel.Controls.Add(this.removeIngrdients, 3, 0);
             this.ingredientsTableLayoutPanel.Controls.Add(this.addIngredIentsRichBox, 0, 0);
             this.ingredientsTableLayoutPanel.Controls.Add(this.addIngredients, 2, 0);
@@ -801,7 +801,7 @@
             // 
             // removeIngrdients
             // 
-            this.removeIngrdients.Location = new System.Drawing.Point(867, 2);
+            this.removeIngrdients.Location = new System.Drawing.Point(866, 2);
             this.removeIngrdients.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.removeIngrdients.Name = "removeIngrdients";
             this.removeIngrdients.Size = new System.Drawing.Size(91, 42);
@@ -822,7 +822,7 @@
             // 
             // addIngredients
             // 
-            this.addIngredients.Location = new System.Drawing.Point(742, 2);
+            this.addIngredients.Location = new System.Drawing.Point(741, 2);
             this.addIngredients.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addIngredients.Name = "addIngredients";
             this.addIngredients.Size = new System.Drawing.Size(119, 44);
@@ -837,7 +837,7 @@
             this.addIngredientCombobox.Location = new System.Drawing.Point(517, 2);
             this.addIngredientCombobox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addIngredientCombobox.Name = "addIngredientCombobox";
-            this.addIngredientCombobox.Size = new System.Drawing.Size(219, 24);
+            this.addIngredientCombobox.Size = new System.Drawing.Size(218, 24);
             this.addIngredientCombobox.TabIndex = 10;
             this.addIngredientCombobox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddIngredientCombobox_KeyPress);
             // 
