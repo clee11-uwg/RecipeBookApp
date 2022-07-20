@@ -75,6 +75,21 @@ namespace RecipeBookApp.View
             }
         }
 
+        public void ShowAppropriateLinkLabel()
+        {
+            List<Recipe> favoritesList = this.recipeController.GetFavoriteRecipes(this.currentUser.ID);
+            if (favoritesList.Contains(this.selectedRecipe))
+            {
+                this.removeFromFavoritesLnkLbl.Visible = true;
+                this.addToFavoritesLnkLbl.Visible = false;
+            }
+            else
+            {
+                this.removeFromFavoritesLnkLbl.Visible = false;
+                this.addToFavoritesLnkLbl.Visible = true;
+            }
+        }
+
         /// <summary>
         /// Method to set the Recipe to the selected recipe
         /// </summary>
