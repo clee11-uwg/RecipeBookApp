@@ -10,7 +10,9 @@ using System.Windows.Forms;
 
 namespace RecipeBookApp.UserControls
 {
-
+    /// <summary>
+    /// Add Recipe  page which help interacting with recipe controller and GUI request
+    /// </summary>
     public partial class AddRecipeDetailUserControl : UserControl
     {
 
@@ -38,6 +40,10 @@ namespace RecipeBookApp.UserControls
 
 
         private readonly TypeOfFoodController foodController;
+        /// <summary>
+        /// Constructor to intialize components
+        /// </summary>
+        
         public AddRecipeDetailUserControl()
         {
             InitializeComponent();

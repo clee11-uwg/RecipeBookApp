@@ -7,6 +7,9 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 namespace RecipeBookApp.UserControls
 {
+    /// <summary>
+    /// Recipe home page which help interacting with recipe controller and GUI request
+    /// </summary>
     public partial class RecipeMainUserControl : UserControl
     {
         

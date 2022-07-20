@@ -1,21 +1,24 @@
 ﻿using RecipeBookApp.Controller;
 using RecipeBookApp.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 namespace RecipeBookApp.View
 {
+    /// <summary>
+    /// The is lgin form for user to login
+    /// </summary>
     public partial class LoginFormDialog : Form
     {
         private readonly UserController userController;
         private User welcomeUser;
+
+        /// <summary>
+        /// Constructor to initialize the login
+        /// </summary>
         public LoginFormDialog()
         {
             InitializeComponent();

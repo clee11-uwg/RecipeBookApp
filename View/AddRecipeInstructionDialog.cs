@@ -11,14 +11,23 @@ using System.Windows.Forms;
 
 namespace RecipeBookApp.View
 {
+    /// <summary>
+    /// This will help user adding the instruction on recipe
+    /// </summary>
     public partial class AddRecipeInstructionDialog : Form
     {
-        
+        /// <summary>
+        /// Constructor to intialize the components
+        /// </summary>
         public AddRecipeInstructionDialog()
         {
             InitializeComponent();
            
         }
+        /// <summary>
+        /// Constructor to intialize the components
+        /// </summary>
+        /// <param name="curentInstruction"></param>
         public AddRecipeInstructionDialog(string curentInstruction)
         {
             InitializeComponent();

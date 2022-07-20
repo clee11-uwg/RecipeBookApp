@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace RecipeBookApp.View
 {
+    /// <summary>
+    /// Main form to interact with Recipe application and user controllers
+    /// </summary>
     public partial class MainForm : Form
     { 
         public MainForm()
@@ -43,7 +46,9 @@ namespace RecipeBookApp.View
                 }
             }
         }
-
+        /// <summary>
+        /// This method will help reseting the Recpe home page
+        /// </summary>
         public void ResetList()
         {
             this.recipeMainUserControl2.Reset();

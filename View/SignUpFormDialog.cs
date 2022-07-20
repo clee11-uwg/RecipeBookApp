@@ -7,10 +7,17 @@ using System.Windows.Forms;
 
 namespace RecipeBookApp.View
 {
+    /// <summary>
+    /// The sign up form to user registration
+    /// </summary>
     public partial class SignUpFormDialog : Form
     {
         private readonly UserController userController;
         private User newRegisteruser;
+
+        /// <summary>
+        /// The contructor to intialize the user registeration form
+        /// </summary>
         public SignUpFormDialog()
         {
             InitializeComponent();
