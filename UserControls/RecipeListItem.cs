@@ -71,7 +71,7 @@ namespace RecipeBookApp.UserControls
             this.recipeDetailsScreen.SetUser(this.currentUser);
             this.recipeDetailsScreen.SetRecipe(selectedRecipe);
             this.recipeDetailsScreen.ShowButtons();
-            if (this.currentUser != null || this.currentUser.Name != null)
+            if (this.currentUser != null && this.currentUser.Name != null)
                 this.recipeDetailsScreen.ShowAppropriateLinkLabel();
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
@@ -85,7 +85,7 @@ namespace RecipeBookApp.UserControls
             this.recipeDetailsScreen.SetUser(this.currentUser);
             this.recipeDetailsScreen.SetRecipe(selectedRecipe);
             this.recipeDetailsScreen.ShowButtons();
-            if (this.currentUser != null || this.currentUser.Name != null)
+            if (this.currentUser != null && this.currentUser.Name != null)
                 this.recipeDetailsScreen.ShowAppropriateLinkLabel();
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
