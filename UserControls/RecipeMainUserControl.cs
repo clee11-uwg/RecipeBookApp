@@ -63,7 +63,6 @@ namespace RecipeBookApp.UserControls
             {
             
                 RecipeListItem[] recipeListItems = new RecipeListItem[this.recipeList.Count];
-
                 // Create new list item and add to the flow layout panel
                 for (int i = 0; i < recipeListItems.Length; i++)
                 {
@@ -410,11 +409,35 @@ namespace RecipeBookApp.UserControls
             this.PopulateItems();           
         }
 
-       private void RecipeMainUserControl_VisibleChanged(object sender, EventArgs e)
-       {
-           this.Reset();
-           //this.recipeList = this.recipeController.GetRecipes();
+        private void RecipeMainUserControl_VisibleChanged(object sender, EventArgs e)
+        {
+            this.Reset();
+            if (UserController.GetLoginUser() != null)
+            {
+                this.favLabel.Visible = true;
 
+            }
+        }
+
+        private void FavLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (UserController.GetLoginUser() != null) { 
+                List <Recipe> favList =this.recipeController.GetFavoriteRecipes(UserController.GetLoginUser().ID);
+                if (favList.Any())
+                {
+                    this.recipeList = favList;
+                    this.flowLayoutPanel1.Controls.Clear();
+                    this.PopulateItems();
+                }
+                else
+                {
+                    MessageBox.Show("You have no favorites recipe, please add some");
+                    this.Reset();
+                    return;
+                }
+                
+            }
+            
         }
     }
 

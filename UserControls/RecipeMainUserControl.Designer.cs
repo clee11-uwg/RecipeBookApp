@@ -44,6 +44,7 @@
             this.searchLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.favLabel = new System.Windows.Forms.LinkLabel();
             this.applyFiltertableLayoutPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -179,7 +180,7 @@
             this.searchButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.searchButton.BackColor = System.Drawing.Color.DarkSalmon;
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(969, 6);
+            this.searchButton.Location = new System.Drawing.Point(796, 6);
             this.searchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(109, 34);
@@ -193,10 +194,10 @@
             this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.clearButton.BackColor = System.Drawing.Color.DarkSalmon;
             this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.Location = new System.Drawing.Point(1105, 4);
+            this.clearButton.Location = new System.Drawing.Point(919, 4);
             this.clearButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(153, 38);
+            this.clearButton.Size = new System.Drawing.Size(126, 38);
             this.clearButton.TabIndex = 20;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = false;
@@ -206,10 +207,10 @@
             // 
             this.searchTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.searchTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchTextBox.Location = new System.Drawing.Point(250, 9);
+            this.searchTextBox.Location = new System.Drawing.Point(208, 9);
             this.searchTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(691, 28);
+            this.searchTextBox.Size = new System.Drawing.Size(574, 28);
             this.searchTextBox.TabIndex = 18;
             // 
             // searchLabel
@@ -217,7 +218,7 @@
             this.searchLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.searchLabel.AutoSize = true;
             this.searchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLabel.Location = new System.Drawing.Point(30, 10);
+            this.searchLabel.Location = new System.Drawing.Point(9, 10);
             this.searchLabel.Name = "searchLabel";
             this.searchLabel.Size = new System.Drawing.Size(186, 25);
             this.searchLabel.TabIndex = 17;
@@ -244,18 +245,33 @@
             this.tableLayoutPanel1.Controls.Add(this.searchButton, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.searchTextBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.searchLabel, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(27, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1261, 46);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1048, 46);
             this.tableLayoutPanel1.TabIndex = 22;
+            // 
+            // favLabel
+            // 
+            this.favLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.favLabel.AutoSize = true;
+            this.favLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.favLabel.Location = new System.Drawing.Point(1077, 14);
+            this.favLabel.Name = "favLabel";
+            this.favLabel.Size = new System.Drawing.Size(117, 25);
+            this.favLabel.TabIndex = 23;
+            this.favLabel.TabStop = true;
+            this.favLabel.Text = "My favorites";
+            this.favLabel.Visible = false;
+            this.favLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FavLabel_LinkClicked);
             // 
             // RecipeMainUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.favLabel);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.applyFiltertableLayoutPanel);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -268,6 +284,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -289,5 +306,6 @@
         private System.Windows.Forms.Label searchLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.LinkLabel favLabel;
     }
 }

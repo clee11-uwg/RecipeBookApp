@@ -38,9 +38,9 @@
             this.loginButton = new System.Windows.Forms.Button();
             this.changePasswordButton = new System.Windows.Forms.Button();
             this.backHomeButton = new System.Windows.Forms.Button();
-            this.welcomeLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.userlabel = new System.Windows.Forms.Label();
+            this.welcomeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +52,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.83709F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.16291F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 305F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 306F));
             this.tableLayoutPanel1.Controls.Add(this.loginErrorLabelText, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.newPassowrdTextBox, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.currentPasswordTextBox, 1, 2);
@@ -191,15 +191,6 @@
             this.backHomeButton.Text = "Go Back To Home Page";
             this.backHomeButton.UseVisualStyleBackColor = false;
             // 
-            // welcomeLabel
-            // 
-            this.welcomeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.welcomeLabel.Location = new System.Drawing.Point(369, 22);
-            this.welcomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.welcomeLabel.Name = "welcomeLabel";
-            this.welcomeLabel.Size = new System.Drawing.Size(454, 40);
-            this.welcomeLabel.TabIndex = 11;
-            // 
             // passwordLabel
             // 
             this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -221,6 +212,15 @@
             this.userlabel.Size = new System.Drawing.Size(173, 32);
             this.userlabel.TabIndex = 12;
             this.userlabel.Text = "User Name:";
+            // 
+            // welcomeLabel
+            // 
+            this.welcomeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.welcomeLabel.Location = new System.Drawing.Point(368, 22);
+            this.welcomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.welcomeLabel.Name = "welcomeLabel";
+            this.welcomeLabel.Size = new System.Drawing.Size(454, 40);
+            this.welcomeLabel.TabIndex = 11;
             // 
             // LoginFormDialog
             // 

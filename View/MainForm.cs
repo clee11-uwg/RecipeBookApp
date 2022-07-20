@@ -35,8 +35,11 @@ namespace RecipeBookApp.View
                 if (result == DialogResult.OK)
                 {
                     this.LoginDisplay();
+                   
                     this.recipeMainUserControl2.SetUser(UserController.GetLoginUser());
                     this.recipeMainUserControl2.Reset();
+                    this.tabControl1.SelectedIndex = 1;
+                    this.tabControl1.SelectedIndex = 0;
                 }
             }
         }
@@ -70,6 +73,7 @@ namespace RecipeBookApp.View
                 DialogResult result = signUpDialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
+
                     return;
                 }
             }
