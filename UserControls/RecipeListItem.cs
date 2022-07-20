@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RecipeBookApp.Controller;
 using RecipeBookApp.Model;
@@ -18,10 +13,6 @@ namespace RecipeBookApp.UserControls
         private RecipeController recipeController;
         private RecipeDetails recipeDetailsScreen;
         private User currentUser;
-        private TabControl tabControl;
-        private TabPage homeTabPage;
-        private RecipeMainUserControl recipeMainUserControl;
-
 
         public RecipeListItem()
         {
@@ -71,6 +62,8 @@ namespace RecipeBookApp.UserControls
             this.recipeDetailsScreen.SetUser(this.currentUser);
             this.recipeDetailsScreen.SetRecipe(selectedRecipe);
             this.recipeDetailsScreen.ShowButtons();
+            if (this.currentUser != null && this.currentUser.Name != null)
+                this.recipeDetailsScreen.ShowAppropriateLinkLabel();
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
             this.ParentForm.Show();
@@ -83,6 +76,8 @@ namespace RecipeBookApp.UserControls
             this.recipeDetailsScreen.SetUser(this.currentUser);
             this.recipeDetailsScreen.SetRecipe(selectedRecipe);
             this.recipeDetailsScreen.ShowButtons();
+            if (this.currentUser != null && this.currentUser.Name != null)
+                this.recipeDetailsScreen.ShowAppropriateLinkLabel();
             this.ParentForm.Hide();
             this.recipeDetailsScreen.ShowDialog();
             this.ParentForm.Show();

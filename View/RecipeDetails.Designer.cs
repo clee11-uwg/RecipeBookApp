@@ -52,6 +52,8 @@
             this.alcoholLbl = new System.Windows.Forms.Label();
             this.servingSizeLbl = new System.Windows.Forms.Label();
             this.ingredientsRchBx = new System.Windows.Forms.RichTextBox();
+            this.addToFavoritesLnkLbl = new System.Windows.Forms.LinkLabel();
+            this.removeFromFavoritesLnkLbl = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -295,9 +297,34 @@
             this.ingredientsRchBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ingredientsRchBx.Location = new System.Drawing.Point(17, 253);
             this.ingredientsRchBx.Name = "ingredientsRchBx";
+            this.ingredientsRchBx.ReadOnly = true;
             this.ingredientsRchBx.Size = new System.Drawing.Size(203, 189);
             this.ingredientsRchBx.TabIndex = 25;
             this.ingredientsRchBx.Text = "";
+            // 
+            // addToFavoritesLnkLbl
+            // 
+            this.addToFavoritesLnkLbl.AutoSize = true;
+            this.addToFavoritesLnkLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addToFavoritesLnkLbl.Location = new System.Drawing.Point(17, 172);
+            this.addToFavoritesLnkLbl.Name = "addToFavoritesLnkLbl";
+            this.addToFavoritesLnkLbl.Size = new System.Drawing.Size(106, 16);
+            this.addToFavoritesLnkLbl.TabIndex = 26;
+            this.addToFavoritesLnkLbl.TabStop = true;
+            this.addToFavoritesLnkLbl.Text = "Add to Favorites";
+            this.addToFavoritesLnkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AddToFavoritesLnkLbl_LinkClicked);
+            // 
+            // removeFromFavoritesLnkLbl
+            // 
+            this.removeFromFavoritesLnkLbl.AutoSize = true;
+            this.removeFromFavoritesLnkLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeFromFavoritesLnkLbl.Location = new System.Drawing.Point(17, 189);
+            this.removeFromFavoritesLnkLbl.Name = "removeFromFavoritesLnkLbl";
+            this.removeFromFavoritesLnkLbl.Size = new System.Drawing.Size(153, 16);
+            this.removeFromFavoritesLnkLbl.TabIndex = 27;
+            this.removeFromFavoritesLnkLbl.TabStop = true;
+            this.removeFromFavoritesLnkLbl.Text = "Remove From Favorites";
+            this.removeFromFavoritesLnkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RemoveFromFavoritesLnkLbl_LinkClicked);
             // 
             // RecipeDetails
             // 
@@ -305,6 +332,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(869, 806);
+            this.Controls.Add(this.removeFromFavoritesLnkLbl);
+            this.Controls.Add(this.addToFavoritesLnkLbl);
             this.Controls.Add(this.ingredientsRchBx);
             this.Controls.Add(this.servingSizeLbl);
             this.Controls.Add(this.alcoholLbl);
@@ -363,5 +392,7 @@
         private System.Windows.Forms.Label alcoholLbl;
         private System.Windows.Forms.Label servingSizeLbl;
         private System.Windows.Forms.RichTextBox ingredientsRchBx;
+        private System.Windows.Forms.LinkLabel addToFavoritesLnkLbl;
+        private System.Windows.Forms.LinkLabel removeFromFavoritesLnkLbl;
     }
 }

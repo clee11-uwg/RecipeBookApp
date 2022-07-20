@@ -23,6 +23,7 @@ namespace RecipeBookApp.View
         private TypeOfMealController typeOfMealController;
         private AllergenController allergenController;
         private NutritionController nutritionController;
+        private UserController userController;
         private List<string> recipeIngredients;
         private List<string> recipeKitchenware;
         private List<string> recipeAllergens;
@@ -43,6 +44,7 @@ namespace RecipeBookApp.View
             this.typeOfMealController = new TypeOfMealController();
             this.allergenController = new AllergenController();
             this.nutritionController = new NutritionController();
+            this.userController = new UserController();
 
             //this.recipeIngredients = new List<string>();
             //this.recipeKitchenware = new List<string>();
@@ -59,12 +61,34 @@ namespace RecipeBookApp.View
             {
                 this.updateButton.Visible = false;
                 this.deleteButton.Visible = false;
+
+                this.addToFavoritesLnkLbl.Visible = false;
+                this.removeFromFavoritesLnkLbl.Visible = false;
             }
             else
             {
                 this.updateButton.Visible = true;
                 this.deleteButton.Visible = true;
+
+                this.addToFavoritesLnkLbl.Visible = true;
+                this.removeFromFavoritesLnkLbl.Visible = true;
             }
+        }
+
+        public void ShowAppropriateLinkLabel()
+        {
+            List<Recipe> favoritesList = this.recipeController.GetFavoriteRecipes(this.currentUser.ID);
+            int index = favoritesList.FindIndex(recipe => recipe.RecipeName == this.selectedRecipe.RecipeName);
+            if (index >= 0)
+            {
+                this.removeFromFavoritesLnkLbl.Visible = true;
+                this.addToFavoritesLnkLbl.Visible = false;
+            }
+            else
+            {
+                this.removeFromFavoritesLnkLbl.Visible = false;
+                this.addToFavoritesLnkLbl.Visible = true;
+            }            
         }
 
         /// <summary>
@@ -207,6 +231,58 @@ namespace RecipeBookApp.View
                 {
                     MessageBox.Show(ae.Message);
                 }
+            }
+        }
+
+        private void AddToFavoritesLnkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                bool isAddedToFavorites = this.userController.AddNewFavoriteRecipe(this.currentUser.ID, this.selectedRecipe.RecipeId);
+                if (isAddedToFavorites)
+                {
+                    MessageBox.Show(this.selectedRecipe.RecipeName + " has been added to your favorites list");
+                    this.removeFromFavoritesLnkLbl.Visible = true;
+                    this.addToFavoritesLnkLbl.Visible = false;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to add this recipe to your favorites list");
+                }
+            }
+            catch (ArgumentOutOfRangeException aoore)
+            {
+                MessageBox.Show(aoore.Message);
+            }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show(nre.Message);
+            }
+        }
+
+        private void RemoveFromFavoritesLnkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                bool isRemovedFromFavorites = this.userController.DeleteFavoriteRecipe(this.currentUser.ID, this.selectedRecipe.RecipeId);
+                if (isRemovedFromFavorites)
+                {
+                    MessageBox.Show(this.selectedRecipe.RecipeName + " has been removed from your favorites list");
+                    this.removeFromFavoritesLnkLbl.Visible = false;
+                    this.addToFavoritesLnkLbl.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to remove this recipe to your favorites list");
+                }
+            }
+            catch (ArgumentOutOfRangeException aoore)
+            {
+                MessageBox.Show(aoore.Message);
+            }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show(nre.Message);
             }
         }
     }
