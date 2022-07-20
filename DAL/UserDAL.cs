@@ -250,7 +250,7 @@ namespace RecipeBookApp.DAL
         {
             int result = -1;
             string selectStatement = @"DELETE FROM User_has_favorite_Recipes
-                                        WHERE userID = @userID AND recipeID = @userID;";
+                                        WHERE userID = @userID AND recipeID = @recipeID;";
 
             using (SQLiteConnection connection = DBConnection.GetConnection())
             {

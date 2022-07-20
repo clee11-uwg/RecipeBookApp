@@ -88,7 +88,7 @@ namespace RecipeBookApp.View
             {
                 this.removeFromFavoritesLnkLbl.Visible = false;
                 this.addToFavoritesLnkLbl.Visible = true;
-            }
+            }            
         }
 
         /// <summary>
