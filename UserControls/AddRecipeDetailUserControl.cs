@@ -56,7 +56,7 @@ namespace RecipeBookApp.UserControls
             this.recipeIngredients = new List<Ingredient>();
             this.recipeKitchenWare = new List<Kitchenware>();
             this.recipeMealtype = new List<MealType>();
-
+            this.recipeImage = null;
         }
 
        
@@ -285,21 +285,22 @@ namespace RecipeBookApp.UserControls
                 Recipe newRecipe = new Recipe();
                 newRecipe.RecipeName = this.addRecipenameTextBox.Text;
                 newRecipe.RecipeInstructions = this.recipeInstructions.Text;
-               if (this.recipeImage != null)
-               {
+                if (this.recipeImage != null)
+                {
                     newRecipe.RecipeImage = this.recipeImage;
                 }
               
-               newRecipe.CookingTime = int.Parse(this.cooktimeBox.Text);
-              newRecipe.UserWhoCreated = UserController.GetLoginUser().Name;              
+                newRecipe.CookingTime = int.Parse(this.cooktimeBox.Text);
+                newRecipe.UserWhoCreated = UserController.GetLoginUser().Name;              
 
 
                 if (result == DialogResult.OK)
                 {
                     try
                     {
-                        this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
-                        //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
+                        this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, 
+                            recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
+                            //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
                         this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
                         this.DisplayError(false);
                     }
