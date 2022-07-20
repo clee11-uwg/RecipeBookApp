@@ -74,6 +74,7 @@ namespace RecipeBookApp.UserControls
         {
             try
             {
+                this.recipeList = this.recipeController.GetRecipes();
                 RecipeListItem[] recipeListItems = new RecipeListItem[this.recipeList.Count];
 
                 // Create new list item and add to the flow layout panel
@@ -159,7 +160,7 @@ namespace RecipeBookApp.UserControls
         public void Reset()
         {
             this.searchTextBox.Text = "";
-            this.recipeList = this.recipeController.GetRecipes();
+            
             this.allergenComboBox.SelectedValue = -1;
             this.ingredientsComboBox.SelectedValue = -1;
             this.ethnicComboBox.SelectedValue = -1;
@@ -187,7 +188,7 @@ namespace RecipeBookApp.UserControls
                 this.CreateIngredientsDropDown();
                 this.CreateMealTypeDropDown();
                 this.CreateEthnicDropDown();
-                this.recipeList = this.recipeController.GetRecipes();
+              
             }
             catch (Exception ex)
             {
@@ -414,21 +415,17 @@ namespace RecipeBookApp.UserControls
             this.searchTextBox.Text = "";
         }
 
-       /* private void RecipeMainUserControl_Load(object sender, EventArgs e)
+      private void RecipeMainUserControl_Load(object sender, EventArgs e)
         {
-            this.LoadComboBox();
+            this.LoadComboBox();          
+            this.PopulateItems();           
+        }
+
+       private void RecipeMainUserControl_VisibleChanged(object sender, EventArgs e)
+       {
+            this.Reset();
           
-            this.PopulateItems();
-           
-        }*/
-
-     //   private void RecipeMainUserControl_VisibleChanged(object sender, EventArgs e)
-       // {
-         //   this.Reset();
-          //  this.LoadComboBox();
-
-         //   this.PopulateItems();
-       // }
+      }
     }
 
 
