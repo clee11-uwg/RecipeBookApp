@@ -323,6 +323,7 @@
             this.removeFromFavoritesLnkLbl.TabIndex = 27;
             this.removeFromFavoritesLnkLbl.TabStop = true;
             this.removeFromFavoritesLnkLbl.Text = "Remove From Favorites";
+            this.removeFromFavoritesLnkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RemoveFromFavoritesLnkLbl_LinkClicked);
             // 
             // RecipeDetails
             // 

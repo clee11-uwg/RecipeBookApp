@@ -237,5 +237,31 @@ namespace RecipeBookApp.View
                 MessageBox.Show(nre.Message);
             }
         }
+
+        private void RemoveFromFavoritesLnkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                bool isRemovedFromFavorites = this.userController.DeleteFavoriteRecipe(this.currentUser.ID, this.selectedRecipe.RecipeId);
+                if (isRemovedFromFavorites)
+                {
+                    MessageBox.Show(this.selectedRecipe.RecipeName + " has been removed from your favorites list");
+                    this.removeFromFavoritesLnkLbl.Visible = false;
+                    this.addToFavoritesLnkLbl.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to remove this recipe to your favorites list");
+                }
+            }
+            catch (ArgumentOutOfRangeException aoore)
+            {
+                MessageBox.Show(aoore.Message);
+            }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show(nre.Message);
+            }
+        }
     }
 }
