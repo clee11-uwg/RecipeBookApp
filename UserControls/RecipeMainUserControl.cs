@@ -2,15 +2,9 @@
 using RecipeBookApp.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace RecipeBookApp.UserControls
 {
     public partial class RecipeMainUserControl : UserControl
@@ -19,18 +13,13 @@ namespace RecipeBookApp.UserControls
         private RecipeController recipeController;
         private User currentUser;
         private List<Recipe> recipeList;
-        private List<Allergen> allergenList;
-        private List<Nutrition> nutritionList;
-        private List<Kitchenware> kitchenWareList;
+        private List<Allergen> allergenList;    
         private List<MealType> mealTypeList;
         private List<FoodType> foodTypeList;
         private List<Ethnic> ethnicList;
         private List<Ingredient> ingredientList;
-
         private readonly AllergenController allergenController;
-        private readonly IngredientsController ingredientsController;
-        private readonly KitchenwareController kitchenController;
-        private readonly NutritionController nutritionController;
+        private readonly IngredientsController ingredientsController;        
         private readonly TypeOfMealController mealController;
         private readonly EthnicOriginController ethnicController;
 
@@ -43,13 +32,11 @@ namespace RecipeBookApp.UserControls
         {
             InitializeComponent();
             this.allergenController = new AllergenController();
-            this.ingredientsController = new IngredientsController();
-            this.kitchenController = new KitchenwareController();
+            this.ingredientsController = new IngredientsController();         
             this.mealController = new TypeOfMealController();
             this.foodController = new TypeOfFoodController();
             this.ethnicController = new EthnicOriginController();
-            this.allergenList = new List<Allergen>();
-            this.kitchenWareList = new List<Kitchenware>();
+            this.allergenList = new List<Allergen>();      
             this.mealTypeList = new List<MealType>();
             this.foodTypeList = new List<FoodType>();
             this.ethnicList = new List<Ethnic>();
@@ -74,7 +61,7 @@ namespace RecipeBookApp.UserControls
         {
             try
             {
-                this.recipeList = this.recipeController.GetRecipes();
+            
                 RecipeListItem[] recipeListItems = new RecipeListItem[this.recipeList.Count];
 
                 // Create new list item and add to the flow layout panel
@@ -134,15 +121,16 @@ namespace RecipeBookApp.UserControls
         {
             try
             {
-                this.recipeList = this.recipeController.GetRecipeSearch(recipeUserInput);
-                if (!this.recipeList.Any())
+               List<Recipe> recipeListSearch = this.recipeController.GetRecipeSearch(recipeUserInput);
+                if (!recipeListSearch.Any())
                 {
+                    
                     MessageBox.Show("No Recipe found on the database");
                     this.Reset();
                     return;
 
                 }
-
+                this.recipeList = recipeListSearch;
                 this.flowLayoutPanel1.Controls.Clear();
                 this.PopulateItems();
             }
@@ -167,6 +155,7 @@ namespace RecipeBookApp.UserControls
 
             this.mealTypeComboBox.SelectedValue = -1;
             this.flowLayoutPanel1.Controls.Clear();
+            this.recipeList = this.recipeController.GetRecipes();
             this.PopulateItems();
 
 
@@ -188,7 +177,7 @@ namespace RecipeBookApp.UserControls
                 this.CreateIngredientsDropDown();
                 this.CreateMealTypeDropDown();
                 this.CreateEthnicDropDown();
-              
+                this.recipeList = this.recipeController.GetRecipes();
             }
             catch (Exception ex)
             {
@@ -423,9 +412,10 @@ namespace RecipeBookApp.UserControls
 
        private void RecipeMainUserControl_VisibleChanged(object sender, EventArgs e)
        {
-            this.Reset();
-          
-      }
+           this.Reset();
+           //this.recipeList = this.recipeController.GetRecipes();
+
+        }
     }
 
 
