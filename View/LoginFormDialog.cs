@@ -37,6 +37,7 @@ namespace RecipeBookApp.View
         private void ChangePasswordButton_Click(object sender, EventArgs e)
         {
             this.currentPasswordTextBox.ReadOnly = true;
+            this.userNameTextBox.ReadOnly = true;
             if (this.changePasswordButton.Text == "Submit")
 
             {
@@ -61,9 +62,9 @@ namespace RecipeBookApp.View
                     loginErrorLabelText.Visible = true;
                     return;
                 }
-                if (this.newPassowrdTextBox.Text.Length > 8)
+                if (this.newPassowrdTextBox.Text.Length > 8 || this.newPassowrdTextBox.Text.Length < 5)
                 {
-                    loginErrorLabelText.Text = "Passsword cannot be exceed 8 char length!";
+                    loginErrorLabelText.Text = "Passsword cannot be less than 5 char or more than 8 char length!";
                     loginErrorLabelText.ForeColor = Color.Red;
                     loginErrorLabelText.Visible = true;
                     return;
