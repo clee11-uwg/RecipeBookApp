@@ -78,7 +78,8 @@ namespace RecipeBookApp.View
         public void ShowAppropriateLinkLabel()
         {
             List<Recipe> favoritesList = this.recipeController.GetFavoriteRecipes(this.currentUser.ID);
-            if (favoritesList.Contains(this.selectedRecipe))
+            int index = favoritesList.FindIndex(recipe => recipe.RecipeName == this.selectedRecipe.RecipeName);
+            if (index >= 0)
             {
                 this.removeFromFavoritesLnkLbl.Visible = true;
                 this.addToFavoritesLnkLbl.Visible = false;
