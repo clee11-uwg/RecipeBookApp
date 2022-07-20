@@ -21,14 +21,12 @@ namespace RecipeBookApp.UserControls
         private Nutrition addNutrition;
         private List<Kitchenware> kitchenWareList;
         private List<MealType> mealTypeList;
-        private List<FoodType> foodTypeList;
+        
         private List<Ethnic> ethnicList;
         private List<Ingredient> ingredientList;
-        private RecipeController recipeController;
-        private readonly AllergenController allergenController;
+        private RecipeController recipeController;        
         private readonly IngredientsController ingredientsController;
         private readonly KitchenwareController kitchenController;
-        private readonly NutritionController nutritionController;
         private readonly TypeOfMealController mealController;
         private readonly EthnicOriginController ethnicController;
         private List<Ingredient> recipeIngredients;
@@ -47,7 +45,7 @@ namespace RecipeBookApp.UserControls
         public AddRecipeDetailUserControl()
         {
             InitializeComponent();
-            this.allergenController = new AllergenController();
+            
             this.ingredientsController = new IngredientsController();
             this.kitchenController = new KitchenwareController();
             this.mealController = new TypeOfMealController();
@@ -56,7 +54,7 @@ namespace RecipeBookApp.UserControls
             this.recipeController = new RecipeController(); ;
             this.kitchenWareList = new List<Kitchenware>();
             this.mealTypeList = new List<MealType>();
-            this.foodTypeList = new List<FoodType>();
+            
             this.ethnicList = new List<Ethnic>();
             this.ingredientList = new List<Ingredient>();
             this.recipeIngredients = new List<Ingredient>();
