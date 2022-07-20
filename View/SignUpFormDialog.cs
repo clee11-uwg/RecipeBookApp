@@ -37,11 +37,19 @@ namespace RecipeBookApp.View
 
         private void CreateUser()
         {
-            if (string.IsNullOrEmpty(this.userIDSignUpText.Text.Trim()) ||
+            if (string.IsNullOrEmpty(this.userIDSignUpText.Text) ||
                 string.IsNullOrEmpty(this.passwordSignUpText.Text.Trim()) ||
                 string.IsNullOrEmpty(this.confirmPasswordSignUpText.Text.Trim()))
             {
                 this.signupMessageLabel.Text = "User Name and password cannot be empty!";
+                this.signupMessageLabel.ForeColor = Color.Red;
+                this.signupMessageLabel.Visible = true;
+                return;
+            }
+
+            else if (this.userIDSignUpText.Text.Trim().Length < 5 || this.userIDSignUpText.Text.Trim().Length > 8)
+            {
+                this.signupMessageLabel.Text = "User name cannot be less than 5 or exceed 8 char length!";
                 this.signupMessageLabel.ForeColor = Color.Red;
                 this.signupMessageLabel.Visible = true;
                 return;
@@ -52,15 +60,14 @@ namespace RecipeBookApp.View
                 this.signupMessageLabel.Text = "Password is not matching reenter your password again!";
                 this.signupMessageLabel.ForeColor = Color.Red;
                 this.passwordSignUpText.BackColor = Color.OrangeRed;
-                this.confirmPasswordSignUpText.BackColor = Color.OrangeRed;
-                
+                this.confirmPasswordSignUpText.BackColor = Color.OrangeRed;                
                 this.signupMessageLabel.Visible = true;
                 return;
 
             }
-            else if (this.passwordSignUpText.Text.Length > 8  || this.confirmPasswordSignUpText.Text.Length > 8)
+            else if (this.passwordSignUpText.Text.Trim().Length < 5  || this.passwordSignUpText.Text.Trim().Length > 8  || this.confirmPasswordSignUpText.Text.Trim().Length < 5 || this.confirmPasswordSignUpText.Text.Length > 8)
             {
-                signupMessageLabel.Text = "Passsword cannot be exceed 8 char length!";
+                signupMessageLabel.Text = "Passsword cannot be less than 5 or exceed 8 char length!";
                 signupMessageLabel.ForeColor = Color.Red;
                 signupMessageLabel.Visible = true;
                 this.signupMessageLabel.ForeColor = Color.Red;
@@ -69,8 +76,7 @@ namespace RecipeBookApp.View
             }
             try
             {
-                bool isAdminChecked = isAdminCheckBox.Checked;
-          
+                bool isAdminChecked = isAdminCheckBox.Checked;          
                 this.newRegisteruser = new User
                 {
                     Name = this.userIDSignUpText.Text,
