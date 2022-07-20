@@ -311,6 +311,7 @@
             this.addToFavoritesLnkLbl.TabIndex = 26;
             this.addToFavoritesLnkLbl.TabStop = true;
             this.addToFavoritesLnkLbl.Text = "Add to Favorites";
+            this.addToFavoritesLnkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AddToFavoritesLnkLbl_LinkClicked);
             // 
             // removeFromFavoritesLnkLbl
             // 
