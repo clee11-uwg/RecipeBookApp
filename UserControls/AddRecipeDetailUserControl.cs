@@ -56,7 +56,7 @@ namespace RecipeBookApp.UserControls
             this.recipeIngredients = new List<Ingredient>();
             this.recipeKitchenWare = new List<Kitchenware>();
             this.recipeMealtype = new List<MealType>();
-
+            this.recipeImage = null;
         }
 
        
@@ -225,11 +225,13 @@ namespace RecipeBookApp.UserControls
             this.addErrorMealTypeLabel.Visible = false;
             this.cookError.Visible = false;
             this.instructionErrorLabel.Visible = false;
+            this.imageFailureLabel.Visible = false;
         }
         private void AddRecipeButton_Click(object sender, EventArgs e)
         {
             this.ErrorReset();
             bool isError = false;
+            this.recipeList = this.recipeController.GetRecipes();
             if (!ValidateRecipeName())
             {
                 isError=true;
@@ -283,21 +285,22 @@ namespace RecipeBookApp.UserControls
                 Recipe newRecipe = new Recipe();
                 newRecipe.RecipeName = this.addRecipenameTextBox.Text;
                 newRecipe.RecipeInstructions = this.recipeInstructions.Text;
-               if (this.recipeImage != null)
-               {
+                if (this.recipeImage != null)
+                {
                     newRecipe.RecipeImage = this.recipeImage;
                 }
               
-               newRecipe.CookingTime = int.Parse(this.cooktimeBox.Text);
-              newRecipe.UserWhoCreated = UserController.GetLoginUser().Name;              
+                newRecipe.CookingTime = int.Parse(this.cooktimeBox.Text);
+                newRecipe.UserWhoCreated = UserController.GetLoginUser().Name;              
 
 
                 if (result == DialogResult.OK)
                 {
                     try
                     {
-                        this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
-                        //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
+                        this.recipeController.AddRecipe(UserController.GetLoginUser(), newRecipe, 
+                            recipeIngredients, recipeMealtype, recipeKitchenWare, this.addNutrition);
+                            //  this.recipeController.AddRecipe(this.addRecipenameTextBox.Text, this.addNutrition,this.recipeIngredients,this.mealTypeList,this.nutritionList);
                         this.displayMessage = "Congratulations..! You have succeessfully added new Recipe!!";
                         this.DisplayError(false);
                     }
@@ -455,7 +458,15 @@ namespace RecipeBookApp.UserControls
 
         private bool UploadFileImageSucess()
         {
-            if (!string.IsNullOrEmpty(this.imageTextBox.Text))
+
+            if (string.IsNullOrEmpty(this.imageTextBox.Text))
+            {
+                this.imageFailureLabel.ForeColor = Color.Red;
+                this.imageFailureLabel.Text = "Please upload the image file";
+                this.imageFailureLabel.Visible = true;
+                return false;
+            }
+            else 
             {
                 bool fileExist = File.Exists(this.imageTextBox.Text);
                 if (fileExist)
@@ -471,7 +482,7 @@ namespace RecipeBookApp.UserControls
                     return false;
                 }
             }
-            return true;
+         
            
             
         }
@@ -480,22 +491,22 @@ namespace RecipeBookApp.UserControls
             this.displayMessage = "Carbohydrate,Protein,Fats,Alcohol,Calorie should be a valid number !";
             if (string.IsNullOrEmpty(this.carbTextBox.Text) || string.IsNullOrEmpty(this.proteinTextBox.Text) || 
                 string.IsNullOrEmpty(this.fattextBox.Text) || string.IsNullOrEmpty(this.alchoholTextBox.Text) 
-                || string.IsNullOrEmpty(this.calorieTextBox.Text))
+                || string.IsNullOrEmpty(this.calorieTextBox.Text) ||  string.IsNullOrEmpty(this.servingtextBox.Text))
             {
-                this.displayMessage = "Carbohydrate,Protein,Fat,Alcohol,Calories - should be a valid number or cannot be empty";
+                this.displayMessage = "Carbohydrate,Protein,Fat,Alcohol,Calories, Serving Size - should be a valid number or cannot be empty";
                 this.addErrorNutritionLabel.ForeColor = Color.Red;
                 this.addErrorNutritionLabel.Text = this.displayMessage;
                 this.addErrorNutritionLabel.Visible = true;
                 return false;
             }
 
-            else if (!Regex.IsMatch(this.carbTextBox.Text, @"^\d+$"))
+             if (!Regex.IsMatch(this.carbTextBox.Text, @"^\d+$"))
             {
               
                 this.addErrorNutritionLabel.ForeColor = Color.Red;
                 this.addErrorNutritionLabel.Text = this.displayMessage;
                 this.addErrorNutritionLabel.Visible = true;
-                this.carbTextBox.Focus();
+               
               
             }
              if(!Regex.IsMatch(this.proteinTextBox.Text, @"^\d+$"))
@@ -503,7 +514,7 @@ namespace RecipeBookApp.UserControls
                 this.addErrorNutritionLabel.ForeColor = Color.Red;
                 this.addErrorNutritionLabel.Text = this.displayMessage;
                 this.addErrorNutritionLabel.Visible = true;
-                this.proteinTextBox.Focus();
+               
             
             }
              if(!Regex.IsMatch(this.fattextBox.Text, @"^\d+$"))
@@ -519,7 +530,7 @@ namespace RecipeBookApp.UserControls
                 this.addErrorNutritionLabel.ForeColor = Color.Red;
                 this.addErrorNutritionLabel.Text = this.displayMessage;
                 this.addErrorNutritionLabel.Visible = true;
-                this.alchoholTextBox.Focus();
+               
             
             }
              if(!Regex.IsMatch(this.calorieTextBox.Text, @"^\d+$"))
@@ -527,9 +538,16 @@ namespace RecipeBookApp.UserControls
                 this.addErrorNutritionLabel.ForeColor = Color.Red;
                 this.addErrorNutritionLabel.Text = this.displayMessage;
                 this.addErrorNutritionLabel.Visible = true;
-                this.calorieTextBox.Focus();
+               
            
-            }           
+            } 
+             if (this.servingtextBox.Text.Length > 15)
+            {
+                this.addErrorNutritionLabel.ForeColor = Color.Red;
+                this.addErrorNutritionLabel.Text =  "Serving size cannot exceed length of 15 char)";
+                this.addErrorNutritionLabel.Visible = true;
+             
+            }
             return true;
         }
         private void DisplayError( bool isError)
@@ -743,10 +761,15 @@ namespace RecipeBookApp.UserControls
             this.alchoholTextBox.Clear();
             this.addKitchenwareRichTextBox.Text = "";
             this.addIngredIentsRichBox.Text = "";
+            this.addMealTypeRichText.Text = "";
+            this.recipeInstructions.Text = "";
+            this.imageTextBox.Text = "";
             this.addRecipeMealTypeComboBox.Text = "Select the MealType";
             this.addIngredientCombobox.Text = "Select the Ingredient";
             this.addKitchenWareComboBox.Text = "Select the KitchenWare";
             this.addEthnicCombobox.Text = "Select the Ethnicity";
+            this.servingtextBox.Text = "";
+            this.cooktimeBox.Text = "";
         }
 
         private void Uploadbutton_Click(object sender, EventArgs e)
@@ -776,6 +799,26 @@ namespace RecipeBookApp.UserControls
             }
         }
 
-       
+        private void AddRecipeDetailUserControl_VisibleChanged(object sender, EventArgs e)
+        {
+            this.ErrorReset();
+            this.addRecipenameTextBox.Clear();
+            this.carbTextBox.Clear();
+            this.proteinTextBox.Clear();
+            this.fattextBox.Clear();
+            this.calorieTextBox.Clear();
+            this.alchoholTextBox.Clear();
+            this.addKitchenwareRichTextBox.Text = "";
+            this.addIngredIentsRichBox.Text = "";
+            this.addMealTypeRichText.Text = "";
+            this.recipeInstructions.Text = "";
+            this.imageTextBox.Text = "";
+            this.addRecipeMealTypeComboBox.Text = "Select the MealType";
+            this.addIngredientCombobox.Text = "Select the Ingredient";
+            this.addKitchenWareComboBox.Text = "Select the KitchenWare";
+            this.servingtextBox.Text = "";
+            this.cooktimeBox.Text = "";
+            this.addEthnicCombobox.Text = "Select the Ethnicity";
+        }
     }
 }
