@@ -161,7 +161,7 @@ namespace RecipeAppTestProject.Controller
         [TestMethod]
         public void TestAddRecipeReturnsErrorWithBadlyFormedData()
         {
-            Assert.ThrowsException<NullReferenceException>(() => controller.AddRecipe(joe, 
+            Assert.ThrowsException<ArgumentNullException>(() => controller.AddRecipe(joe, 
                 recipe, ingredients, mealTypes, kitchenware, nutrition));
 
             nutrition = new Nutrition
