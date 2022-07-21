@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecipeBookApp.Controller;
 using RecipeBookApp.Model;
@@ -146,7 +147,7 @@ namespace RecipeAppTestProject.Controller
                 UserWhoCreated = "greg",
                 RecipeName = "recipe",
                 RecipeInstructions = "instructions",
-                RecipeImage = null,
+                RecipeImage = new Bitmap(50,50),
                 CookingTime = 1,
                 EthnicId = 1
             };
@@ -175,7 +176,7 @@ namespace RecipeAppTestProject.Controller
             };
             recipe = new Recipe
             {
-
+                RecipeImage = new Bitmap(50, 50)
             };
             Assert.ThrowsException<NullReferenceException>(() => controller.AddRecipe(joe,
                 recipe, ingredients, mealTypes, kitchenware, nutrition));
