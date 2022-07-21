@@ -137,7 +137,7 @@ namespace RecipeBookApp.View
             this.carbLbl.Text = "Carbs: " + this.recipeNutrition[0].Carbohydrate;
             this.proteinLbl.Text = "Protein: " + this.recipeNutrition[0].Protein;
             this.fatLbl.Text = "Fat: " + this.recipeNutrition[0].Fat;
-            this.alcoholLbl.Text = "Acohol: " + this.recipeNutrition[0].Alcohol;
+            this.alcoholLbl.Text = "Alcohol: " + this.recipeNutrition[0].Alcohol;
             this.servingSizeLbl.Text = "Serving Size: " + this.recipeNutrition[0].ServingSize;
         }
 
